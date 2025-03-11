@@ -1,0 +1,75 @@
+<html>
+    <head>
+        <title>LOGIN</title>
+        <style>
+
+          
+.u
+       { 
+         padding:10px ;
+          border: 1px solid;
+           width: 400px; height:476px; 
+           border-radius: 25px;  ;
+          position: absolute; 
+          top: 50%;
+          left:50%;
+          transform: translate(-50%,-50%);
+          background:none;
+          background: rgba(0,0,0,0.5);
+          font-size:30px ;
+         color: #fff;
+
+        }
+
+ input::placeholder{
+       color: aliceblue;}
+.in{
+     border:none;
+    width:300px; height:60px;  margin-top: 20px;
+    font-size: 19px;  
+    background: transparent;
+   
+    color: aliceblue;
+    border-bottom:1px  solid #fff;
+    outline: none;
+
+}
+
+img{opacity:0.2 ; position: relative;}
+
+.t:hover{ transform:scale(1.1) ; background-color: #fff; color: black;}
+.g{text-decoration:none; color: #fff; font-size: 23;}
+.g:hover{color: red;
+font-size:25 ;}
+
+        </style>
+    </head>
+    <body style="background-image: url(car.png);  background-repeat: no-repeat;background-size:101% 100% ; position: relative;">
+        <form>
+
+<div  align="center" class="u"  >
+    <!--<img class="tl" src="IMAGE/yt.png" width="60px" height="60px"/><br/>-->
+<p>SMART FUEL STATION</p><hr/>
+   
+    <input  class="in l" type="text"  placeholder=" User Name" required  /><br/>
+    
+    <input  class="in l" type="password"  placeholder=" password " required  /><br/>
+    
+    <input   class="in l"type="tel"  placeholder=" Phone Number" size="10"required  /><br>
+     
+    <div style="text-align: left;  font-size: 20px; padding:0px; margin-top: 10px; color: aliceblue;">
+        <a  class="g"   href="#">Forget password ?</a>
+    </div>
+
+      <a href="home.html">  <input   style="border:1px solid #fff ; border-radius:30px ; font-size:25 ; transition: .5s ease;" class="in t"style="" type="button" value="LOGIN"/>
+        </a></div>
+
+
+
+
+
+
+        </form>
+    </body>
+    </html>
+
