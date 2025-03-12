@@ -44,7 +44,7 @@ font-size:25 ;}
 
         </style>
     </head>
-    <body style=background-image: url("C:\Users\dell\OneDrive\Documenti\GitHub\Smart-Fuel-Station\car.png ");  background-repeat: no-repeat;background-size:101% 100% ; position: relative;>
+    <body style="background-image: url(car.png);  background-repeat: no-repeat;background-size:101% 100% ; position: relative;">
         <form>
 
 <div  align="center" class="u"  >
