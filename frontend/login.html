@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: Arial, sans-serif;
+        }
+
+        .blur-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('img1.jpg');
+            background-size: cover;
+            background-position: center;
+            filter: blur(2px); /* جعل الصورة بلورية */
+            z-index: -1;
+        }
+
+        .login-box {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 25vw; /* العرض 25% */
+            height: 66vh; /* الطول 66% */
+            padding: 40px; /* تقليل التباعد داخل المربع */
+            border-radius: 25px;
+            background: rgba(255, 255, 255, 0.5); /* خلفية بلورية خفيفة وأكثر وضوحًا */
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            backdrop-filter: blur(5px); /* تخفيف البلور ليكون أوضح */
+            -webkit-backdrop-filter: blur(5px); /* التوافق مع المتصفحات القديمة */
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            color: black; /* جعل النص باللون الأسود */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .login-box h2 {
+            text-align: center;
+            margin-bottom: 20px; /* تقليل المسافة أسفل العنوان */
+            font-size: 48px;
+        }
+
+        .input-group {
+            position: relative;
+            margin-bottom: 20px; /* تقليل التباعد بين الحقول */
+            margin-left: 0px; /* تقليل المسافة الأفقية */
+            margin-right: 0px; /* تقليل المسافة الأفقية */
+        }
+
+        .input-group input {
+            width: 100%; /* عرض الصندوق كامل */
+            height: 60px;
+            padding: 20px 20px;
+            background: transparent;
+            border: none;
+            border-bottom: 2px solid black; /* تغيير حدود الحقل إلى الأسود */
+            color: black; /* تغيير لون النص إلى الأسود */
+            font-size: 40px; /* حجم الخط ملائم مع شكل المربع */
+        }
+
+        .input-group input::placeholder {
+            color: #666; /* تغيير لون النص البديل إلى لون مناسب */
+            font-size: 22px;
+        }
+
+        .forgot {
+            font-size: 22px;
+            text-align: right;
+            margin-top: -15px;
+            color: #333; /* تغيير لون النص إلى الأسود */
+        }
+
+        .password-group {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .password-group input {
+            flex-grow: 1;
+        }
+
+        .show-password {
+            position: absolute;
+            right: 15px;
+            cursor: pointer;
+            font-size: 24px;
+            color: black; /* تغيير لون الأيقونة إلى الأسود */
+        }
+
+        /* تعديل زر أيقونة المستخدم ليكون عاديًا وغير دائري */
+        .login-box button.icon-btn {
+            width: 80px; /* حجم الأيقونة */
+            height: 80px; /* حجم الأيقونة */
+            padding: 0;
+            margin-top: 20px;
+            background: transparent;
+            border: 2px solid black; /* تغيير لون الحدود إلى الأسود */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px; /* تكبير الأيقونة */
+            cursor: pointer;
+            border-radius: 10px; /* إزالة الشكل الدائري */
+        }
+
+        .login-box button {
+            width: 100%;
+            padding: 20px;
+            margin-top: 20px; /* تقليل المسافة بين الحقول وزر الدخول */
+            background: transparent;
+            border: 2px solid black; /* تغيير لون الحدود إلى الأسود */
+            color: black; /* جعل النص باللون الأسود */
+            font-size: 28px;
+            border-radius: 30px;
+            cursor: pointer;
+        }
+
+        .login-box button:hover {
+            background: rgba(0, 0, 0, 0.15);
+        }
+
+        /* تكبير الأيقونة */
+        .login-box h1.icon-btn i {
+            font-size: 80px; /* تكبير الأيقونة */
+            margin-bottom: -15px; /* تقليل المسافة بين الأيقونة واسم المستخدم */
+        }
+
+        /* إزالة السلوك عند الضغط على الحقول */
+        .input-group input:focus {
+            outline: none; /* إزالة الخط المحيط عند التركيز */
+            border-color: black; /* الحفاظ على نفس اللون عند التركيز */
+        }
+
+        /* إزالة المسافة الأفقية بين الأيقونة والمربع */
+        .login-box h1.icon-btn {
+            margin: 0; /* إزالة المسافة */
+            padding: 0; /* إزالة المسافة */
+        }
+
+    </style>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    <div class="blur-background"></div>
+
+    <div class="login-box">
+        <!-- الأيقونة غير دائرية -->
+        <h1 class="icon-btn">
+            <i class='bx bx-user'></i>
+        </h1>
+
+        <div class="input-group">
+            <input type="text" placeholder="User Name">
+        </div>
+
+        <div class="input-group password-group">
+            <input type="password" id="password" placeholder="Password">
+            <span class="show-password" onclick="togglePassword()">👁️</span>
+        </div>
+
+        <!-- رابط فارغ للنص Forget password -->
+        <a href="#" class="forgot">Forget password?</a>
+
+        <button>
+            LOGIN
+        </button>
+    </div>
+
+    <script>
+        function togglePassword() {
+            var passwordField = document.getElementById('password');
+            var passwordIcon = document.querySelector('.show-password');
+            if (passwordField.type === "password") {
+                passwordField.type = "text";
+                passwordIcon.innerHTML = "🙈";
+            } else {
+                passwordField.type = "password";
+                passwordIcon.innerHTML = "👁️";
+            }
+        }
+    </script>
+</body>
+</html>
