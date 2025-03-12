@@ -1,75 +1,47 @@
 <html>
     <head>
-        <title>LOGIN</title>
-        <style>
-
-          
-.u
-       { 
-         padding:10px ;
-          border: 1px solid;
-           width: 400px; height:476px; 
-           border-radius: 25px;  ;
-          position: absolute; 
-          top: 50%;
-          left:50%;
-          transform: translate(-50%,-50%);
-          background:none;
-          background: rgba(0,0,0,0.5);
-          font-size:30px ;
-         color: #fff;
-
-        }
-
- input::placeholder{
-       color: aliceblue;}
-.in{
-     border:none;
-    width:300px; height:60px;  margin-top: 20px;
-    font-size: 19px;  
-    background: transparent;
-   
-    color: aliceblue;
-    border-bottom:1px  solid #fff;
-    outline: none;
-
-}
-
-img{opacity:0.2 ; position: relative;}
-
-.t:hover{ transform:scale(1.1) ; background-color: #fff; color: black;}
-.g{text-decoration:none; color: #fff; font-size: 23;}
-.g:hover{color: red;
-font-size:25 ;}
-
-        </style>
+        <title>LOGIN&Registration</title>
+      <link rel="stylesheet" href="index.css">
+      <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     </head>
-    <body style=background-image: url("C:\Users\dell\OneDrive\Documenti\GitHub\Smart-Fuel-Station\car.png ");  background-repeat: no-repeat;background-size:101% 100% ; position: relative;>
-        <form>
-
-<div  align="center" class="u"  >
-    <!--<img class="tl" src="IMAGE/yt.png" width="60px" height="60px"/><br/>-->
-<p>SMART FUEL STATION</p><hr/>
-   
-    <input  class="in l" type="text"  placeholder=" User Name" required  /><br/>
-    
-    <input  class="in l" type="password"  placeholder=" password " required  /><br/>
-    
-    <input   class="in l"type="tel"  placeholder=" Phone Number" size="10"required  /><br>
-     
-    <div style="text-align: left;  font-size: 20px; padding:0px; margin-top: 10px; color: aliceblue;">
-        <a  class="g"   href="#">Forget password ?</a>
-    </div>
-
-      <a href="home.html">  <input   style="border:1px solid #fff ; border-radius:30px ; font-size:25 ; transition: .5s ease;" class="in t"style="" type="button" value="LOGIN"/>
-        </a></div>
-
-
-
-
-
-
+    <body>
+       <div class="wrapper">
+        <form action="">
+            <h1>Create an account</h1>
+            <p> Already have an account? <a href="C:\Users\dell\OneDrive\Documenti\GitHub\Smart-Fuel-Station\frontend\login.html" class="Login"> Login </a></p>
+            <div class="input-box">
+                <input type="text" placeholder="Username" required>
+                <i class='bx bxs-user'></i>
+            </div>
+            <div class="input-box">
+                <input type="email" placeholder="Email" required>
+                <i class='bx bxs-envelope'></i>
+            </div>
+            <div class="input-box">
+                <input type="password" placeholder="Password" required>
+                <i class='bx bxs-lock-alt'></i>
+            </div>
+            <div class="remember">
+                <label> <input type="checkbox">Remember me</label>
+               
+            </div>
+            <button type="submit"  class="btn">Create account</button>
+            <div class="register">
+          <span> Or register with</span>
+            </div>
+            <div class="but-con">
+                <button class="google">
+                    <img src="google.png">
+                    Google
+                </button>
+                <button class="apple">
+                    <img src="apple1.png">
+                    Apple
+                </button>
+            </div>
+            </div>
         </form>
+       </div>
+    </body>
     </body>
     </html>
-
