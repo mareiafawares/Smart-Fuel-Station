@@ -134,6 +134,8 @@ margin: 30px 0;
 .apple{
     display: flex;
     align-items: center;
+   position: absolute;
+   right: 90;
     gap: 10px;
     padding: 12px 20px;
     border: 2px solid #494545;
