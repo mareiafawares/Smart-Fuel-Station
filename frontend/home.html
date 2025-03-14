@@ -1,189 +1,178 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smart Fuel Station</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Smart Fuel Station</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
 
-        body {
-            background-image: url('img2.jpg');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            color: #222;
-            height: 100vh;
-        }
+    body {
+      background-image: url('img2.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      color: #fff;
+    }
 
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 40px;
-            background-color: rgba(255, 255, 255, 0); /* شفافية صفر */
-            border-bottom: 2px solid #00bcd4;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-        }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 30px;
+      background-color: transparent; /* شفافية الهيدر */
+    }
 
-        .logo {
-            font-size: 36px; /* تكبير حجم الخط */
-            font-weight: 700;
-            color: #00bcd4;
-        }
+    .logo {
+      font-size: 26px;
+      font-weight: 700;
+      color: #00bcd4;
+      background-color: rgba(0, 0, 0, 0.3); /* خلفية شفافة فقط للنص */
+      padding: 6px 12px;
+      border-radius: 8px;
+    }
 
-        nav a {
-            margin-left: 30px;
-            text-decoration: none;
-            color: #ffffff;
-            font-weight: 700; /* تكبير الخط */
-            font-size: 22px;  /* تكبير حجم الخط */
-            transition: color 0.3s ease;
-        }
+    nav {
+      display: flex;
+      gap: 12px;
+    }
 
-        nav a:hover {
-            color: #00bcd4;
-        }
+    nav a {
+      padding: 8px 14px;
+      text-decoration: none;
+      color: #fff;
+      background-color: rgba(0, 188, 212, 0.3);
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: bold;
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
 
-        .hero {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            padding: 120px 30px 60px; /* رفع النص للأعلى */
-            background-color: rgba(255, 255, 255, 0); /* شفافية صفر */
-            border-radius: 12px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-            max-height: 60vh;
-        }
+    nav a:hover {
+      background-color: rgba(0, 188, 212, 0.6);
+      transform: scale(1.05);
+    }
 
-        .hero-content {
-            padding: 40px;
-            max-width: 700px;
-            text-align: center;
-            border-radius: 12px;
-            background-color: transparent;
-        }
+    .hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 60px 20px 40px;
+      min-height: 60vh;
+    }
 
-        .hero-content h1 {
-            font-size: 56px; /* تكبير حجم الخط */
-            color: #ffffff;
-            margin-bottom: 16px;
-        }
+    .hero-content {
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 30px;
+      border-radius: 15px;
+      max-width: 650px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+    }
 
-        .hero-content p {
-            font-size: 22px; /* تكبير حجم الخط */
-            color: #ffffff;
-            margin-bottom: 30px;
-        }
+    .hero-content h1 {
+      font-size: 42px;
+      color: #00bcd4;
+      margin-bottom: 18px;
+    }
 
-        .cta-btn {
-            background-color: #00bcd4;
-            color: #fff;
-            padding: 18px 40px;
-            font-size: 20px; /* تكبير حجم الخط */
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background 0.3s ease;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-        }
+    .hero-content p {
+      font-size: 18px;
+      color: #f0f0f0;
+      margin-bottom: 20px;
+    }
 
-        .cta-btn:hover {
-            background-color: #0097a7;
-        }
+    .cta-btn {
+      background-color: #00bcd4;
+      color: #fff;
+      padding: 6px 18px;
+      font-size: 14px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
 
-        .services-section {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            padding: 50px 20px;
-            background-color: rgba(255, 255, 255, 0); /* شفافية صفر */
-            border-radius: 12px;
-        }
+    .cta-btn:hover {
+      background-color: #0097a7;
+    }
 
-        .service-box {
-            background: rgba(255, 255, 255, 0); /* شفافية صفر */
-            padding: 30px;
-            border-radius: 12px;
-            text-align: center;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
-        }
+    .services-section {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      padding: 40px 20px;
+    }
 
-        .service-box:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
-        }
+    .service-box {
+      background: rgba(0, 0, 0, 0.5);
+      padding: 20px;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+      transition: transform 0.3s ease;
+    }
 
-        .service-box h3 {
-            font-size: 28px; /* تكبير حجم الخط */
-            margin-bottom: 12px;
-            color: #00bcd4;
-        }
+    .service-box:hover {
+      transform: translateY(-5px);
+    }
 
-        .service-box p {
-            font-size: 18px; /* تكبير حجم الخط */
-            color: #333;
-        }
+    .service-box h3 {
+      font-size: 18px;
+      margin-bottom: 10px;
+      color: #00bcd4;
+    }
 
-        footer {
-            background: rgba(255, 255, 255, 0); /* شفافية صفر */
-            text-align: center;
-            padding: 20px;
-            color: #777;
-            font-size: 16px;
-            border-radius: 10px;
-        }
-    </style>
+    .service-box p {
+      font-size: 14px;
+      color: #f0f0f0;
+    }
+
+    /* حذف الفوتر */
+  </style>
 </head>
 <body>
-    <header>
-        <div class="logo">SMART FUEL STATION</div>
-        <nav>
-            <a href="#home">HOME</a>
-            <a href="#services">SERVICES</a>
-            <a href="#about">ABOUT US</a>
-            <a href="#contact">CONTACT</a>
-        </nav>
-    </header>
+  <header>
+    <div class="logo">SMART FUEL STATION</div>
+    <nav>
+      <a href="#home">HOME</a>
+      <a href="#services">SERVICES</a>
+      <a href="#about">ABOUT US</a>
+      <a href="#contact">CONTACT</a>
+    </nav>
+  </header>
 
-    <section class="hero" id="home">
-        <div class="hero-content">
-            <h1>SMART FUEL STATIONS</h1>
-            <p>Providing futuristic mobile fuel delivery solutions directly to your vehicle, ensuring fast, efficient, and smart refueling.</p>
-            <button class="cta-btn">Request Service</button>
-        </div>
-    </section>
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <h1>SMART FUEL STATIONS</h1>
+      <p>Providing futuristic mobile fuel delivery solutions directly to your vehicle, ensuring fast, efficient, and smart refueling.</p>
+      <button class="cta-btn">Request Service</button>
+    </div>
+  </section>
 
-    <section class="services-section" id="services">
-        <div class="service-box">
-            <h3>HOME DELIVERY</h3>
-            <p>Fuel delivered to your home on demand with ease and safety.</p>
-        </div>
-        <div class="service-box">
-            <h3>EV CHARGING</h3>
-            <p>Electric vehicle charging support wherever you are.</p>
-        </div>
-        <div class="service-box">
-            <h3>FLEET SERVICES</h3>
-            <p>Efficient fueling for commercial fleets and large-scale operations.</p>
-        </div>
-        <div class="service-box">
-            <h3>EMERGENCY SUPPORT</h3>
-            <p>Rapid response fuel delivery in emergency situations.</p>
-        </div>
-    </section>
-
-    <footer>
-        &copy; 2025 Smart Fuel Station. All rights reserved.
-    </footer>
+  <section class="services-section" id="services">
+    <div class="service-box">
+      <h3>HOME DELIVERY</h3>
+      <p>Fuel delivered to your home on demand with ease and safety.</p>
+    </div>
+    <div class="service-box">
+      <h3>EV CHARGING</h3>
+      <p>Electric vehicle charging support wherever you are.</p>
+    </div>
+    <div class="service-box">
+      <h3>FLEET SERVICES</h3>
+      <p>Efficient fueling for commercial fleets and large-scale operations.</p>
+    </div>
+    <div class="service-box">
+      <h3>EMERGENCY SUPPORT</h3>
+      <p>Rapid response fuel delivery in emergency situations.</p>
+    </div>
+  </section>
 </body>
 </html>
