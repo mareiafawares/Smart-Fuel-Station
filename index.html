@@ -29,4 +29,78 @@
         </form>
        </div>
     </body>
+<script>
+    document.getElementById("loginForm").addEventListener("submit", async function(event) {
+    event.preventDefault(); // منع إعادة تحميل الصفحة
+
+    // جلب القيم المدخلة
+    let email = document.getElementById("email").value.trim();
+    let password = document.getElementById("password").value.trim();
+    let paymentMethod = document.getElementById("paymentMethod").value;
+    let message = document.getElementById("message");
+
+    // التحقق من صحة البيانات
+    if (!email.includes("@")) {
+        message.textContent = "يرجى إدخال بريد إلكتروني صحيح!";
+        message.style.color = "red";
+        return;
+    }
+    if (password.length < 6) {
+        message.textContent = "يجب أن تكون كلمة المرور 6 أحرف على الأقل!";
+        message.style.color = "red";
+        return;
+    }
+    if (paymentMethod === "") {
+        message.textContent = "يرجى اختيار طريقة الدفع!";
+        message.style.color = "red";
+        return;
+    }
+
+    // إنشاء كائن بيانات المستخدم
+    let userData = {
+        email: email,
+        password: password,
+        paymentMethod: paymentMethod
+    };
+
+    // رابط API الحقيقي (استبدله بالرابط الصحيح الخاص بك)
+    const apiUrl = "https://your-api.com/auth/login";
+
+    try {
+        // إرسال الطلب إلى API
+        let response = await fetch(apiUrl, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(userData)
+        });
+
+        let data = await response.json(); // تحويل الرد إلى JSON
+
+        if (response.ok) {
+            // نجاح تسجيل الدخول
+            message.textContent = "تم تسجيل الدخول بنجاح!";
+            message.style.color = "green";
+
+            // حفظ التوكن في Local Storage (إذا كان API يعيد توكن)
+            if (data.token) {
+                localStorage.setItem("authToken", data.token);
+            }
+
+            // إعادة توجيه المستخدم إلى الصفحة الرئيسية
+            window.location.href = "dashboard.html";
+        } else {
+            // فشل تسجيل الدخول (خطأ في البيانات)
+            message.textContent = data.message || "فشل تسجيل الدخول! تحقق من البيانات.";
+            message.style.color = "red";
+        }
+    } catch (error) {
+        // خطأ في الاتصال بالخادم
+        message.textContent = "حدث خطأ أثناء الاتصال بالخادم!";
+        message.style.color = "red";
+        console.error("Error:", error);
+    }
+});
+</script>
 </html>
