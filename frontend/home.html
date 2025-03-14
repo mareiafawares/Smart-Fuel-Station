@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Smart Fuel Station</title>
@@ -26,14 +27,15 @@
       justify-content: space-between;
       align-items: center;
       padding: 10px 30px;
-      background-color: transparent; /* شفافية الهيدر */
+      background-color: rgba(0, 0, 0, 0.5);
+      border-radius: 8px;
+      backdrop-filter: blur(8px);
     }
 
     .logo {
       font-size: 26px;
       font-weight: 700;
       color: #00bcd4;
-      background-color: rgba(0, 0, 0, 0.3); /* خلفية شفافة فقط للنص */
       padding: 6px 12px;
       border-radius: 8px;
     }
@@ -47,7 +49,7 @@
       padding: 8px 14px;
       text-decoration: none;
       color: #fff;
-      background-color: rgba(0, 188, 212, 0.3);
+      background-color: rgba(0, 188, 212, 0.6);
       border-radius: 10px;
       font-size: 15px;
       font-weight: bold;
@@ -55,8 +57,17 @@
     }
 
     nav a:hover {
-      background-color: rgba(0, 188, 212, 0.6);
+      background-color: rgba(0, 188, 212, 0.8);
       transform: scale(1.05);
+    }
+
+    nav a#home-link {
+      background-color: #fff;
+      color: #00bcd4;
+    }
+
+    nav a#home-link:hover {
+      background-color: #f1f1f1;
     }
 
     .hero {
@@ -134,17 +145,24 @@
       color: #f0f0f0;
     }
 
-    /* حذف الفوتر */
+    .bx-user {
+      font-size: 30px;
+      background-color: transparent !important;
+      padding: 0 !important;
+      border: none !important;
+    }
+
   </style>
 </head>
 <body>
   <header>
     <div class="logo">SMART FUEL STATION</div>
     <nav>
-      <a href="#home">HOME</a>
-      <a href="#services">SERVICES</a>
-      <a href="#about">ABOUT US</a>
+      <a href="home.html" id="home-link">HOME</a>
+      <a href="services.html">SERVICES</a>
+      <a href="about.html">ABOUT US</a>
       <a href="#contact">CONTACT</a>
+      <a href="your profile.html"><i class='bx bx-user bx-tada'></i></a>
     </nav>
   </header>
 
