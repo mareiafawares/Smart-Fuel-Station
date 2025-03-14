@@ -24,7 +24,7 @@
             <div class="remember">
                 <label><input type="checkbox"> Remember me</label>
             </div>
-            <button type="submit"  class="btn" onclick="window.location.href='frontend/login.html'">Create account</button>
+            <button type="submit"  class="btn" onclick="window.location.href='frontend/home.html'">Create account</button>
 
         </form>
        </div>
@@ -50,17 +50,13 @@
         message.style.color = "red";
         return;
     }
-    if (paymentMethod === "") {
-        message.textContent = "يرجى اختيار طريقة الدفع!";
-        message.style.color = "red";
-        return;
-    }
+    
 
     // إنشاء كائن بيانات المستخدم
     let userData = {
         email: email,
         password: password,
-        paymentMethod: paymentMethod
+        
     };
 
     // رابط API الحقيقي (استبدله بالرابط الصحيح الخاص بك)
@@ -89,7 +85,7 @@
             }
 
             // إعادة توجيه المستخدم إلى الصفحة الرئيسية
-            window.location.href = "dashboard.html";
+            window.location.href = "frontend/home.html";
         } else {
             // فشل تسجيل الدخول (خطأ في البيانات)
             message.textContent = data.message || "فشل تسجيل الدخول! تحقق من البيانات.";
