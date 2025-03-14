@@ -70,6 +70,15 @@
       background-color: #f1f1f1;
     }
 
+    nav a#about-link {
+      background-color: #00bcd4;
+      color: #fff;
+    }
+
+    nav a#about-link:hover {
+      background-color: #0097a7;
+    }
+
     .hero {
       display: flex;
       flex-direction: column;
@@ -87,18 +96,6 @@
       box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
     }
 
-    .hero-content h1 {
-      font-size: 42px;
-      color: #00bcd4;
-      margin-bottom: 18px;
-    }
-
-    .hero-content p {
-      font-size: 18px;
-      color: #f0f0f0;
-      margin-bottom: 20px;
-    }
-
     .cta-btn {
       background-color: #00bcd4;
       color: #fff;
@@ -112,37 +109,6 @@
 
     .cta-btn:hover {
       background-color: #0097a7;
-    }
-
-    .services-section {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 20px;
-      padding: 40px 20px;
-    }
-
-    .service-box {
-      background: rgba(0, 0, 0, 0.5);
-      padding: 20px;
-      border-radius: 12px;
-      text-align: center;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
-      transition: transform 0.3s ease;
-    }
-
-    .service-box:hover {
-      transform: translateY(-5px);
-    }
-
-    .service-box h3 {
-      font-size: 18px;
-      margin-bottom: 10px;
-      color: #00bcd4;
-    }
-
-    .service-box p {
-      font-size: 14px;
-      color: #f0f0f0;
     }
 
     .bx-user {
@@ -160,37 +126,10 @@
     <nav>
       <a href="home.html" id="home-link">HOME</a>
       <a href="services.html">SERVICES</a>
-      <a href="about.html">ABOUT US</a>
-      <a href="#contact">CONTACT</a>
+      <a href="about.html" id="about-link">ABOUT US</a>
+      <a href="contact.html">CONTACT</a>
       <a href="your profile.html"><i class='bx bx-user bx-tada'></i></a>
     </nav>
   </header>
-
-  <section class="hero" id="home">
-    <div class="hero-content">
-      <h1>SMART FUEL STATIONS</h1>
-      <p>Providing futuristic mobile fuel delivery solutions directly to your vehicle, ensuring fast, efficient, and smart refueling.</p>
-      <button class="cta-btn">Request Service</button>
-    </div>
-  </section>
-
-  <section class="services-section" id="services">
-    <div class="service-box">
-      <h3>HOME DELIVERY</h3>
-      <p>Fuel delivered to your home on demand with ease and safety.</p>
-    </div>
-    <div class="service-box">
-      <h3>EV CHARGING</h3>
-      <p>Electric vehicle charging support wherever you are.</p>
-    </div>
-    <div class="service-box">
-      <h3>FLEET SERVICES</h3>
-      <p>Efficient fueling for commercial fleets and large-scale operations.</p>
-    </div>
-    <div class="service-box">
-      <h3>EMERGENCY SUPPORT</h3>
-      <p>Rapid response fuel delivery in emergency situations.</p>
-    </div>
-  </section>
 </body>
 </html>
