@@ -1,10 +1,10 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-  
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>About Us - Smart Fuel Station</title>
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
   <style>
     * {
@@ -22,6 +22,9 @@
       background-attachment: fixed;
       color: #fff;
       height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
 
     header {
@@ -90,9 +93,79 @@
       font-size: 32px;
       color: #fff;
     }
+
     nav a.icon-link:hover i {
       font-size: 36px;
-      color:rgba(0, 188, 212, 0.8); ;
+      color: rgba(0, 188, 212, 0.8);
+    }
+
+    .about-section {
+      display: flex;
+      justify-content: space-between;
+      padding: 20px;
+      background-color: rgba(0, 0, 0, 0.6);
+      margin: 40px auto;
+      border-radius: 12px;
+      gap: 30px;
+      max-width: 1200px;
+      flex-wrap: wrap;
+    }
+
+    .about-text {
+      flex: 1;
+      max-width: 550px;
+      margin-bottom: 20px;
+    }
+
+    .about-text h1 {
+      font-size: 26px;
+      color: #00bcd4;
+      margin-bottom: 15px;
+    }
+
+    .about-text p {
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .team-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 20px;
+    }
+
+    .team-section h2 {
+      font-size: 24px;
+      color: #00bcd4;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .team-members {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      max-width: 800px;
+      text-align: center;
+    }
+
+    .team-member {
+      background-color: rgba(255, 255, 255, 0.1);
+      padding: 10px;
+      border-radius: 8px;
+    }
+
+    .team-member h4 {
+      margin: 0;
+      font-size: 16px;
+      color: #fff;
+    }
+
+    .team-member p {
+      margin: 4px 0 0;
+      font-size: 14px;
+      color: #ccc;
     }
   </style>
 </head>
@@ -100,28 +173,58 @@
   <header>
     <div class="logo">SMART FUEL STATION</div>
     <nav>
-      <a href="home.html" >HOME</a>
-      <a href="services.html" >SERVICES</a>
+      <a href="home.html">HOME</a>
+      <a href="services1.html">SERVICES</a>
       <a href="about.html" id="about-link">ABOUT US</a>
       <a href="contact.html">CONTACT</a>
       <a href="your profile.html" class="icon-link"><i class='bx bx-user bx-tada'></i></a>
     </nav>
   </header>
+
+  <div class="about-section">
+    <div class="about-text">
+      <h1>About Us</h1>
+      <p>
+        At Smart Fuel Station, we are revolutionizing the way you refuel your vehicles. 
+        Founded with a vision to bring convenience, efficiency, and sustainability to fuel delivery, 
+        we provide state-of-the-art mobile fuel solutions right to your doorstep.
+        Our mission is to eliminate the need for traditional gas station visits, offering a smarter, safer, and faster alternative for both individual users and commercial fleets.
+      </p>
+      <p>
+        We believe in harnessing technology to create eco-friendly solutions that not only meet the demands of today’s fast-paced lifestyle but also contribute to a cleaner and smarter future. 
+        With a team of experts in logistics, energy, and customer service, we strive to deliver an unmatched experience to our clients wherever they are.
+      </p>
+    </div>
+
+    <div class="team-section">
+      <h2>Our Team</h2>
+      <div class="team-members">
+        <div class="team-member">
+          <h4>Alaa Al-Shorman</h4>
+          <p>Frontend Developer</p>
+        </div>
+        <div class="team-member">
+          <h4>Maria Fawars</h4>
+          <p>Frontend Developer</p>
+        </div>
+        <div class="team-member">
+          <h4>Sarah Hayasat</h4>
+          <p>React Developer</p>
+        </div>
+        <div class="team-member">
+          <h4>Amena Jawabreh</h4>
+          <p>React Developer</p>
+        </div>
+        <div class="team-member">
+          <h4>Mais Abu Al-Heija</h4>
+          <p>Backend Developer</p>
+        </div>
+        <div class="team-member">
+          <h4>Farah Al-Hawari</h4>
+          <p>Backend Developer</p>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
-</html>  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+</html>
