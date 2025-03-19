@@ -1,0 +1,117 @@
+<html>
+    <head>
+        <title>Sign Up</title>
+        <link rel="stylesheet" href="index.css">
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    </head>
+    <body>
+        <div style="display: flex; justify-content: center; align-items: center; height: 100vh; background: linear-gradient(135deg, #ffffff, #d0f0f3, #99e6ff, #003d4d); animation: gradientBackground 10s infinite alternate;">
+            <form id="loginForm" style="background-color: white; padding: 50px; border-radius: 25px; box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2); width: 450px; position: relative; overflow: hidden; transform: scale(1); transition: transform 0.3s;">
+                <div style="position: absolute; top: -70px; right: -70px; width: 140px; height: 140px; background-color: #003d4d; border-radius: 50%; opacity: 0.1; animation: bubble 6s infinite;"></div>
+                <div style="position: absolute; bottom: -70px; left: -70px; width: 160px; height: 160px; background-color: #003d4d; border-radius: 50%; opacity: 0.1; animation: bubble 8s infinite;"></div>
+                <h2 style="text-align: center; color: #003d4d; font-family: 'Arial', sans-serif; font-size: 30px; margin-bottom: 30px;">Sign Up</h2>
+                
+                <div style="margin-bottom: 25px;">
+                    <label for="username" style="display: block; color: #003d4d; font-weight: bold; font-size: 18px; font-family: 'Arial', sans-serif;">Username:</label>
+                    <input type="text" id="username" name="username" style="width: 100%; padding: 14px; font-size: 16px; border: 1px solid #bbb; border-radius: 10px; font-family: 'Arial', sans-serif;" required>
+                </div>
+
+                <div style="margin-bottom: 25px;">
+                    <label for="email" style="display: block; color: #003d4d; font-weight: bold; font-size: 18px; font-family: 'Arial', sans-serif;">Email:</label>
+                    <input type="email" id="email" name="email" style="width: 100%; padding: 14px; font-size: 16px; border: 1px solid #bbb; border-radius: 10px; font-family: 'Arial', sans-serif;" required>
+                </div>
+
+                <div style="margin-bottom: 25px;">
+                    <label for="password" style="display: block; color: #003d4d; font-weight: bold; font-size: 18px; font-family: 'Arial', sans-serif;">Password:</label>
+                    <input type="password" id="password" name="password" style="width: 100%; padding: 14px; font-size: 16px; border: 1px solid #bbb; border-radius: 10px; font-family: 'Arial', sans-serif;" required>
+                </div>
+
+                <div id="message" style="margin-bottom: 20px; text-align: center; font-size: 16px;"></div>
+
+                <div style="text-align: center; margin-top: 20px;">
+                    <a href="#" id="loginLink" style="display: inline-block; padding: 16px 50px; background-color: #003d4d; color: white; border-radius: 10px; font-size: 18px; font-weight: bold; font-family: 'Arial', sans-serif; text-decoration: none; transition: background-color 0.3s;">Sign Up</a>
+                </div>
+
+                <p style="text-align: center; margin-top: 20px; color: #003d4d; font-size: 16px; font-family: 'Arial', sans-serif;">
+                    Don't have an account? <a href="login.html" style="color: #003d4d; font-weight: bold; text-decoration: none;">Register here</a>
+                </p>
+            </form>
+        </div>
+
+        <style>
+            @keyframes gradientBackground {
+                0% { background: linear-gradient(135deg, #ffffff, #d0f0f3, #99e6ff, #003d4d); }
+                100% { background: linear-gradient(135deg, #003d4d, #99e6ff, #d0f0f3, #ffffff); }
+            }
+
+            @keyframes bubble {
+                0% { transform: scale(1); opacity: 0.1; }
+                50% { transform: scale(1.5); opacity: 0.05; }
+                100% { transform: scale(1); opacity: 0.1; }
+            }
+
+            a:hover {
+                background-color: #002b36;
+            }
+        </style>
+
+        <script>
+            document.getElementById("loginLink").addEventListener("click", async function(event) {
+                event.preventDefault();
+
+                let username = document.getElementById("username").value.trim();
+                let email = document.getElementById("email").value.trim();
+                let password = document.getElementById("password").value.trim();
+                let message = document.getElementById("message");
+
+                if (username.length < 3) {
+                    message.textContent = "Username must be at least 3 characters!";
+                    message.style.color = "red";
+                    return;
+                }
+                if (!email.includes("@")) {
+                    message.textContent = "Please enter a valid email!";
+                    message.style.color = "red";
+                    return;
+                }
+                if (password.length < 6) {
+                    message.textContent = "Password must be at least 6 characters!";
+                    message.style.color = "red";
+                    return;
+                }
+
+                let userData = {
+                    username: username,
+                    email: email,
+                    password: password
+                };
+
+                const apiUrl = "https://your-api.com/auth/login";
+
+                try {
+                    let response = await fetch(apiUrl, {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify(userData)
+                    });
+
+                    let data = await response.json();
+
+                    if (response.ok) {
+                        message.textContent = "Login successful!";
+                        message.style.color = "green";
+                        if (data.token) localStorage.setItem("authToken", data.token);
+                        window.location.href = "frontend/home.html";
+                    } else {
+                        message.textContent = data.message || "Login failed! Please check your credentials.";
+                        message.style.color = "red";
+                    }
+                } catch (error) {
+                    message.textContent = "An error occurred while connecting to the server!";
+                    message.style.color = "red";
+                    console.error("Error:", error);
+                }
+            });
+        </script>
+    </body>
+</html>

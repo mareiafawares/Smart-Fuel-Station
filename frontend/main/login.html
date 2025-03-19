@@ -1,0 +1,36 @@
+<html>
+    <head>
+        <title>Login</title>
+        <link rel="stylesheet" href="index.css">
+    </head>
+    <body>
+        <div style="display: flex; justify-content: center; align-items: center; height: 100vh; background: linear-gradient(135deg, #ffffff, #d0f0f3, #99e6ff, #003d4d); animation: gradientBackground 10s infinite alternate;">
+            <form action="your-backend-endpoint" method="POST" style="background-color: white; padding: 50px; border-radius: 25px; box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2); width: 450px; position: relative; overflow: hidden; transform: scale(1); transition: transform 0.3s;">
+                <h2 style="text-align: center; color: #003d4d; font-family: 'Arial', sans-serif; font-size: 30px; margin-bottom: 30px;">Login</h2>
+                
+                <div style="margin-bottom: 25px;">
+                    <label for="username" style="display: block; color: #003d4d; font-weight: bold; font-size: 18px; font-family: 'Arial', sans-serif;">Username:</label>
+                    <input type="text" id="username" name="username" style="width: 100%; padding: 14px; font-size: 16px; border: 1px solid #bbb; border-radius: 10px; font-family: 'Arial', sans-serif;" required>
+                </div>
+
+                <div style="margin-bottom: 25px;">
+                    <label for="password" style="display: block; color: #003d4d; font-weight: bold; font-size: 18px; font-family: 'Arial', sans-serif;">Password:</label>
+                    <input type="password" id="password" name="password" style="width: 100%; padding: 14px; font-size: 16px; border: 1px solid #bbb; border-radius: 10px; font-family: 'Arial', sans-serif;" required>
+                </div>
+
+                <button type="submit" style="width: 100%; padding: 16px; background-color: #003d4d; color: white; border: none; border-radius: 10px; font-size: 18px; font-weight: bold; font-family: 'Arial', sans-serif; cursor: pointer; transition: background-color 0.3s;">Login</button>
+            </form>
+        </div>
+
+        <style>
+            @keyframes gradientBackground {
+                0% { background: linear-gradient(135deg, #ffffff, #d0f0f3, #99e6ff, #003d4d); }
+                100% { background: linear-gradient(135deg, #003d4d, #99e6ff, #d0f0f3, #ffffff); }
+            }
+
+            button:hover {
+                background-color: #002b36;
+            }
+        </style>
+    </body>
+</html>
