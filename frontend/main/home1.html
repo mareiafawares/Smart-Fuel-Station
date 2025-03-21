@@ -120,7 +120,71 @@
       .sidebar {
         width: 200px;
       }
-    }
+    }.video-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.video-container video {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    filter: brightness(40%); /* تقليل السطوع ليصبح مائلًا للسواد */
+    opacity: 0.8; /* زيادة التأثير الداكن */
+}
+
+/* طبقة شفافة سوداء فوق الفيديو */
+.video-container::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* طبقة شفافة سوداء */
+}
+        /* تصميم النصوص */
+        .content {
+            text-align: center;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+            color: #a6e0f5;
+        }
+
+        .main-text {
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .sub-text {
+            font-size: 24px;
+            margin-bottom: 30px;
+        }
+
+        /* تصميم الزر */
+        .btn {
+            padding: 15px 30px;
+            font-size: 18px;
+            background-color:  rgba(0, 77, 102, 0.9);
+            color: rgb(255, 234, 234);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+
+        .btn:hover {
+          background-color: #00aabb;
+        }
   </style>
 </head>
 <body>
@@ -147,6 +211,27 @@
   </div>
 
   <!-- Sections -->
+   <section>
+   <div class="video-container">
+    <video autoplay muted loop>
+        <source src="vedio.mp4" type="video/mp4">
+        <!-- إذا كان الفيديو غير متاح للمتصفح -->
+        متصفحك لا يدعم تشغيل الفيديو.
+    </video>
+</div>
+
+<!-- النصوص والزر -->
+<div class="content">
+    <div class="main-text">Convenience on the move</div>
+    <div class="sub-text">Smart Fuel Station is the worlds leading fuel delivery<br>
+    and vehicle service platform. we are all <br>
+  about fulling innovation through <br>
+Convenience,and giving you back the time </div>
+    <button class="btn">Order now </button>
+</div>
+
+
+</section>
   <section id="services">
     <h2>Service</h2>
     <p>We are revolutionizing the way you refuel your vehicles...</p>
@@ -178,4 +263,4 @@
   </script>
 
 </body>
-</html>
+</html
