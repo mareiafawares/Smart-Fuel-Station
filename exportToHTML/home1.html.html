@@ -1,0 +1,622 @@
+<html>
+<head>
+<title>home1.html</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #d5b778;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bababa;}
+.s3 { color: #6aab73;}
+.s4 { color: #7a7e85;}
+.s5 { color: #56a8f5;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+home1.html</font>
+</center></td></tr></table>
+<pre><span class="s0">&lt;!DOCTYPE </span><span class="s2">html</span><span class="s0">&gt;</span>
+<span class="s0">&lt;html </span><span class="s2">lang</span><span class="s3">=&quot;en&quot;</span><span class="s0">&gt;</span>
+<span class="s0">&lt;head&gt;</span>
+  <span class="s0">&lt;meta </span><span class="s2">charset</span><span class="s3">=&quot;UTF-8&quot;</span><span class="s0">&gt;</span>
+  <span class="s0">&lt;meta </span><span class="s2">name</span><span class="s3">=&quot;viewport&quot; </span><span class="s2">content</span><span class="s3">=&quot;width=device-width, initial-scale=1.0&quot;</span><span class="s0">&gt;</span>
+  <span class="s0">&lt;title&gt;</span><span class="s1">Smart Fuel Station</span><span class="s0">&lt;/title&gt;</span>
+  <span class="s0">&lt;link </span><span class="s2">href</span><span class="s3">='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' </span><span class="s2">rel</span><span class="s3">='stylesheet'</span><span class="s0">&gt;</span>
+  <span class="s0">&lt;style&gt;</span>
+    <span class="s1">* {</span>
+      <span class="s1">margin: 0;</span>
+      <span class="s1">padding: 0;</span>
+      <span class="s1">box-sizing: border-box;</span>
+      <span class="s1">scroll-behavior: smooth;</span>
+      <span class="s1">font-family: 'Poppins', sans-serif;</span>
+    <span class="s1">}</span>
+
+    <span class="s1">body {</span>
+      <span class="s1">background-color: #f5f5f5;</span>
+      <span class="s1">color: #333;</span>
+     
+    <span class="s1">}</span>
+
+    <span class="s1">/* === Navigation Bar === */</span>
+    <span class="s1">header {</span>
+      <span class="s1">position: fixed;</span>
+      <span class="s1">top: 0;</span>
+      <span class="s1">width: 100%;</span>
+      <span class="s1">background-color: #004d66;</span>
+      <span class="s1">color: white;</span>
+      <span class="s1">display: flex;</span>
+      <span class="s1">justify-content: space-between;</span>
+      <span class="s1">align-items: center;</span>
+      <span class="s1">padding: 10px 30px;</span>
+      <span class="s1">z-index: 1000;</span>
+    <span class="s1">}</span>
+
+    <span class="s1">.logo {</span>
+      <span class="s1">font-size: 24px;</span>
+      <span class="s1">font-weight: bold;</span>
+      <span class="s1">color: #00e6e6;</span>
+    <span class="s1">}</span>
+
+    <span class="s1">nav {</span>
+      <span class="s1">display: flex;</span>
+      <span class="s1">gap: 15px;</span>
+      <span class="s1">align-items: center;</span>
+    <span class="s1">}</span>
+
+    <span class="s1">nav a {</span>
+      <span class="s1">color: white;</span>
+      <span class="s1">text-decoration: none;</span>
+      <span class="s1">padding: 8px 14px;</span>
+      <span class="s1">border-radius: 8px;</span>
+      <span class="s1">background-color: #007b8a;</span>
+      <span class="s1">transition: background 0.3s;</span>
+      <span class="s1">font-weight: bold;</span>
+    <span class="s1">}</span>
+
+    <span class="s1">nav a:hover {</span>
+      <span class="s1">background-color: #00aabb;</span>
+    <span class="s1">}</span>
+
+    <span class="s1">.icon-link {</span>
+    <span class="s1">font-size: 30px;</span>
+    <span class="s1">cursor: pointer;</span>
+    <span class="s1">transition: transform 0.3s;</span>
+    <span class="s1">z-index: 1200; /* تأكد من أنها فوق كل شيء */</span>
+<span class="s1">}</span>
+
+
+    <span class="s1">/* === Sidebar (User Menu) === */</span>
+    <span class="s1">.sidebar {</span>
+    <span class="s1">position: fixed;</span>
+    <span class="s1">top: 0;</span>
+    <span class="s1">right: -250px; /* تبدأ خارج الشاشة */</span>
+    <span class="s1">width: 250px;</span>
+    <span class="s1">height: 100%;</span>
+    <span class="s1">background: rgba(0, 77, 102, 0.9);</span>
+    <span class="s1">backdrop-filter: blur(10px);</span>
+    <span class="s1">padding: 80px 20px;</span>
+    <span class="s1">display: flex;</span>
+    <span class="s1">flex-direction: column;</span>
+    <span class="s1">gap: 20px;</span>
+    <span class="s1">transition: right 0.4s ease-in-out;</span>
+    <span class="s1">z-index: 1100; /* تأكد من أن القائمة فوق كل شيء */</span>
+<span class="s1">}</span>
+
+
+
+
+
+
+    <span class="s1">.sidebar a {</span>
+      <span class="s1">color: white;</span>
+      <span class="s1">text-decoration: none;</span>
+      <span class="s1">font-size: 20px;</span>
+      <span class="s1">padding: 10px;</span>
+      <span class="s1">transition: opacity 0.3s, transform 0.3s;</span>
+      <span class="s1">display: flex;</span>
+      <span class="s1">align-items: center;</span>
+      <span class="s1">gap: 10px;</span>
+    <span class="s1">}</span>
+
+    <span class="s1">.sidebar a:hover {</span>
+      <span class="s1">opacity: 1;</span>
+      <span class="s1">transform: translateX(10px);</span>
+    <span class="s1">}</span>
+
+    <span class="s1">/* Active Sidebar */</span>
+    <span class="s1">.sidebar.active {</span>
+    <span class="s1">right: 0;</span>
+    <span class="s1">z-index: 1100;</span>
+<span class="s1">}</span>
+
+    <span class="s1">/* Sections */</span>
+    <span class="s1">section {</span>
+      <span class="s1">padding: 120px 30px;</span>
+      <span class="s1">min-height: 100vh;</span>
+      <span class="s1">text-align: center;</span>
+    <span class="s1">}</span>
+
+    <span class="s1">h2 {</span>
+      <span class="s1">font-size: 28px;</span>
+      <span class="s1">margin-bottom: 20px;</span>
+      <span class="s1">color: #004d66;</span>
+    <span class="s1">}</span>
+
+    <span class="s1">/* Responsive */</span>
+    <span class="s1">@media (max-width: 600px) {</span>
+      <span class="s1">.sidebar {</span>
+        <span class="s1">width: 200px;</span>
+      <span class="s1">}</span>
+    <span class="s1">}.video-container {</span>
+    <span class="s1">position: absolute;</span>
+    <span class="s1">top: 0;</span>
+    <span class="s1">left: 0;</span>
+    <span class="s1">width: 100%;</span>
+    <span class="s1">height: 100%;</span>
+    <span class="s1">z-index: -1; /* التأكد من أن الفيديو يبقى في الخلف */</span>
+<span class="s1">}</span>
+
+
+
+<span class="s1">.video-container video {</span>
+    <span class="s1">object-fit: cover;</span>
+    <span class="s1">width: 100%;</span>
+    <span class="s1">height: 100%;</span>
+    <span class="s1">filter: brightness(40%); /* تقليل السطوع ليصبح مائلًا للسواد */</span>
+    <span class="s1">opacity: 0.8; /* زيادة التأثير الداكن */</span>
+<span class="s1">}</span>
+
+<span class="s1">/* طبقة شفافة سوداء فوق الفيديو */</span>
+<span class="s1">.video-container::after {</span>
+    <span class="s1">content: &quot;&quot;;</span>
+    <span class="s1">position: absolute;</span>
+    <span class="s1">top: 0;</span>
+    <span class="s1">left: 0;</span>
+    <span class="s1">width: 100%;</span>
+    <span class="s1">height: 100%;</span>
+    <span class="s1">background: rgba(0, 0, 0, 0.5); /* طبقة شفافة سوداء */</span>
+    <span class="s1">z-index: 0;</span>
+<span class="s1">}</span>
+        <span class="s1">/* تصميم النصوص */</span>
+        <span class="s1">.content {</span>
+            <span class="s1">text-align: center;</span>
+            <span class="s1">position: absolute;</span>
+            <span class="s1">top: 50%;</span>
+            <span class="s1">left: 50%;</span>
+            <span class="s1">transform: translate(-50%, -50%);</span>
+            <span class="s1">z-index: 1;</span>
+            <span class="s1">color: #a6e0f5;</span>
+        <span class="s1">}</span>
+
+        <span class="s1">.main-text {</span>
+            <span class="s1">font-size: 48px;</span>
+            <span class="s1">font-weight: bold;</span>
+            <span class="s1">margin-bottom: 20px;</span>
+        <span class="s1">}</span>
+
+        <span class="s1">.sub-text {</span>
+            <span class="s1">font-size: 24px;</span>
+            <span class="s1">margin-bottom: 30px;</span>
+        <span class="s1">}</span>
+
+        <span class="s1">/* تصميم الزر */</span>
+        <span class="s1">.btn {</span>
+            <span class="s1">padding: 15px 30px;</span>
+            <span class="s1">font-size: 18px;</span>
+            <span class="s1">background-color:  rgba(0, 77, 102, 0.9);</span>
+            <span class="s1">color: rgb(255, 234, 234);</span>
+            <span class="s1">border: none;</span>
+            <span class="s1">border-radius: 5px;</span>
+            <span class="s1">cursor: pointer;</span>
+            <span class="s1">text-transform: uppercase;</span>
+        <span class="s1">}</span>
+
+        <span class="s1">.btn:hover {</span>
+          <span class="s1">background-color: #00aabb;</span>
+        <span class="s1">}</span>
+        <span class="s1">#services {</span>
+        <span class="s1">text-align: center;</span>
+        <span class="s1">padding: 100px 20px;</span>
+        <span class="s1">background: linear-gradient(135deg, #004d66, #006d8f, #0099cc);</span>
+        <span class="s1">color: white;</span>
+    <span class="s1">}</span>
+
+    <span class="s1">.services-wrapper {</span>
+        <span class="s1">overflow-x: auto; /* تمكين التمرير الجانبي */</span>
+        <span class="s1">white-space: nowrap; /* منع التفاف البطاقات */</span>
+        <span class="s1">padding: 20px;</span>
+        <span class="s1">scrollbar-width: none; /* إخفاء شريط التمرير */</span>
+    <span class="s1">}</span>
+
+    <span class="s1">.services-wrapper::-webkit-scrollbar {</span>
+        <span class="s1">display: none; /* إخفاء شريط التمرير لمتصفح كروم */</span>
+    <span class="s1">}</span>
+
+    <span class="s1">.cards-container {</span>
+        <span class="s1">display: flex;</span>
+        <span class="s1">gap: 20px;</span>
+        <span class="s1">width: max-content; /* يجعل الحاوية تتكيف مع المحتوى */</span>
+        <span class="s1">scroll-snap-type: x mandatory;</span>
+    <span class="s1">}</span>
+
+    <span class="s1">.card {</span>
+        <span class="s1">flex: 0 0 auto;</span>
+        <span class="s1">width: 400px;</span>
+        <span class="s1">height: 500px;</span>
+        <span class="s1">perspective: 1000px;</span>
+        <span class="s1">cursor: pointer;</span>
+        <span class="s1">position: relative;</span>
+        <span class="s1">scroll-snap-align: center; /* يجعل البطاقات تلتصق بالمركز عند السحب */</span>
+    <span class="s1">}</span>
+
+    <span class="s1">.card .front,</span>
+    <span class="s1">.card .back {</span>
+        <span class="s1">width: 100%;</span>
+        <span class="s1">height: 100%;</span>
+        <span class="s1">position: absolute;</span>
+        <span class="s1">border-radius: 10px;</span>
+        <span class="s1">backface-visibility: hidden;</span>
+        <span class="s1">overflow: hidden;</span>
+        <span class="s1">transition: transform 0.6s;</span>
+        <span class="s1">display: flex;</span>
+        <span class="s1">flex-direction: column;</span>
+        <span class="s1">align-items: center;</span>
+        <span class="s1">justify-content: center;</span>
+        <span class="s1">text-align: center;</span>
+        <span class="s1">padding: 20px;</span>
+    <span class="s1">}</span>
+
+    <span class="s1">.card .front {</span>
+        <span class="s1">transform: rotateY(0deg);</span>
+    <span class="s1">}</span>
+
+    <span class="s1">.card .back {</span>
+        <span class="s1">transform: rotateY(180deg);</span>
+        <span class="s1">background: linear-gradient(135deg, #004d66, #007b8a);</span>
+        <span class="s1">color: white;</span>
+    <span class="s1">}</span>
+
+    <span class="s1">.card.flip .front {</span>
+        <span class="s1">transform: rotateY(180deg);</span>
+    <span class="s1">}</span>
+
+    <span class="s1">.card.flip .back {</span>
+        <span class="s1">transform: rotateY(0deg);</span>
+    <span class="s1">}</span>
+
+    <span class="s1">.btn {</span>
+        <span class="s1">margin-top: 15px;</span>
+        <span class="s1">padding: 10px 20px;</span>
+        <span class="s1">font-size: 16px;</span>
+        <span class="s1">background-color: #00aabb;</span>
+        <span class="s1">color: white;</span>
+        <span class="s1">border: none;</span>
+        <span class="s1">border-radius: 5px;</span>
+        <span class="s1">text-decoration: none;</span>
+        <span class="s1">font-weight: bold;</span>
+        <span class="s1">transition: background-color 0.3s;</span>
+    <span class="s1">}</span>
+
+    <span class="s1">.btn:hover {</span>
+        <span class="s1">background-color: #007b8a;</span>
+    <span class="s1">}</span>
+
+    <span class="s1">video {</span>
+        <span class="s1">width: 100%;</span>
+        <span class="s1">height: 100%;</span>
+        <span class="s1">object-fit: cover;</span>
+    <span class="s1">}</span>
+    <span class="s1">#services {</span>
+        <span class="s1">text-align: center;</span>
+        <span class="s1">padding: 100px 20px;</span>
+        <span class="s1">background: rgb(199, 197, 197);</span>
+        <span class="s1">color: white;</span>
+        <span class="s1">position: relative;</span>
+    <span class="s1">}</span>
+
+    <span class="s1">.services-container {</span>
+        <span class="s1">display: flex;</span>
+        <span class="s1">align-items: center;</span>
+        <span class="s1">position: relative;</span>
+    <span class="s1">}</span>
+
+    <span class="s1">.services-wrapper {</span>
+        <span class="s1">overflow-x: auto;</span>
+        <span class="s1">white-space: nowrap;</span>
+        <span class="s1">scroll-behavior: smooth;</span>
+        <span class="s1">display: flex;</span>
+        <span class="s1">padding: 20px;</span>
+        <span class="s1">width: 80%;</span>
+        <span class="s1">margin: auto;</span>
+    <span class="s1">}</span>
+
+    <span class="s1">.services-wrapper::-webkit-scrollbar {</span>
+        <span class="s1">display: none;</span>
+    <span class="s1">}</span>
+
+    <span class="s1">.cards-container {</span>
+    <span class="s1">display: flex;</span>
+    <span class="s1">gap: 20px;</span>
+    <span class="s1">flex-wrap: nowrap;</span>
+    <span class="s1">justify-content: center;</span>
+    <span class="s1">align-items: center;</span>
+<span class="s1">}</span>
+
+<span class="s1">.card {</span>
+    <span class="s1">flex: 0 0 auto;</span>
+    <span class="s1">width: 400px;</span>
+    <span class="s1">height: 500px;</span>
+    <span class="s1">max-width: 400px;</span>
+    
+    <span class="s1">aspect-ratio: 2 / 3; /* يجعل البطاقات متناسقة في الحجم */</span>
+    <span class="s1">perspective: 1200px;</span>
+    <span class="s1">cursor: pointer;</span>
+    <span class="s1">position: relative;</span>
+    <span class="s1">transition: transform 0.3s ease-in-out;</span>
+<span class="s1">}</span>
+
+<span class="s1">.card:hover {</span>
+    <span class="s1">transform: scale(1.05); /* تأثير تكبير خفيف عند المرور */</span>
+<span class="s1">}</span>
+
+<span class="s1">.card .front,</span>
+<span class="s1">.card .back {</span>
+    <span class="s1">width: 100%;</span>
+    <span class="s1">height: 100%;</span>
+    <span class="s1">position: absolute;</span>
+    <span class="s1">border-radius: 15px;</span>
+    <span class="s1">backface-visibility: hidden;</span>
+    <span class="s1">overflow: hidden;</span>
+    <span class="s1">transition: transform 0.6s ease-in-out;</span>
+    <span class="s1">display: flex;</span>
+    <span class="s1">flex-direction: column;</span>
+    <span class="s1">align-items: center;</span>
+    <span class="s1">justify-content: center;</span>
+    <span class="s1">text-align: center;</span>
+    <span class="s1">box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* ظل خفيف */</span>
+<span class="s1">}</span>
+
+<span class="s1">.card .front {</span>
+    <span class="s1">transform: rotateY(0deg);</span>
+    <span class="s1">background-color: #fff;</span>
+<span class="s1">}</span>
+
+<span class="s1">.card .back {</span>
+    <span class="s1">transform: rotateY(180deg);</span>
+    <span class="s1">background: linear-gradient(135deg, #004d66, #007b8a);</span>
+    <span class="s1">color: white;</span>
+    <span class="s1">padding: 20px;</span>
+<span class="s1">}</span>
+
+<span class="s1">/* عند التقليب */</span>
+<span class="s1">.card.flip .front {</span>
+    <span class="s1">transform: rotateY(180deg);</span>
+<span class="s1">}</span>
+
+
+<span class="s1">/* جعل الفيديو داخل البطاقة يتكيف مع الحجم */</span>
+
+
+<span class="s1">/* تحسين الاستجابة للشاشات الصغيرة */</span>
+<span class="s1">@media (max-width: 600px) {</span>
+    <span class="s1">.cards-container {</span>
+        <span class="s1">flex-direction: column;</span>
+        <span class="s1">gap: 15px;</span>
+    <span class="s1">}</span>
+
+    <span class="s1">.card {</span>
+        <span class="s1">max-width: 300px;</span>
+        <span class="s1">aspect-ratio: 3 / 4;</span>
+    <span class="s1">}</span>
+<span class="s1">}</span>
+    <span class="s1">.btn {</span>
+        <span class="s1">margin-top: 15px;</span>
+        <span class="s1">padding: 10px 20px;</span>
+        <span class="s1">font-size: 16px;</span>
+        <span class="s1">background-color: #00aabb;</span>
+        <span class="s1">color: white;</span>
+        <span class="s1">border: none;</span>
+        <span class="s1">border-radius: 5px;</span>
+        <span class="s1">text-decoration: none;</span>
+        <span class="s1">font-weight: bold;</span>
+        <span class="s1">transition: background-color 0.3s;</span>
+    <span class="s1">}</span>
+
+    <span class="s1">.btn:hover {</span>
+        <span class="s1">background-color: #007b8a;</span>
+    <span class="s1">}</span>
+
+    <span class="s1">video {</span>
+        <span class="s1">width: 100%;</span>
+        <span class="s1">height: 100%;</span>
+        <span class="s1">object-fit: cover;</span>
+    <span class="s1">}</span>
+
+    <span class="s1">.scroll-btn {</span>
+        <span class="s1">background-color: rgba(0, 0, 0, 0.5);</span>
+        <span class="s1">color: white;</span>
+        <span class="s1">border: none;</span>
+        <span class="s1">padding: 10px 15px;</span>
+        <span class="s1">font-size: 24px;</span>
+        <span class="s1">cursor: pointer;</span>
+        <span class="s1">position: absolute;</span>
+        <span class="s1">top: 50%;</span>
+        <span class="s1">transform: translateY(-50%);</span>
+        <span class="s1">z-index: 10;</span>
+        <span class="s1">border-radius: 50%;</span>
+    <span class="s1">}</span>
+
+    <span class="s1">.scroll-btn.left {</span>
+        <span class="s1">left: 10px;</span>
+    <span class="s1">}</span>
+
+    <span class="s1">.scroll-btn.right {</span>
+        <span class="s1">right: 10px;</span>
+    <span class="s1">}</span>
+
+    <span class="s1">.scroll-btn:hover {</span>
+        <span class="s1">background-color: rgba(0, 0, 0, 0.8);</span>
+    <span class="s1">}</span>
+    <span class="s1">body.dark-mode {</span>
+    <span class="s1">background-color: #121212;</span>
+    <span class="s1">color: #ffffff;</span>
+<span class="s1">}</span>
+
+<span class="s1">body.dark-mode header {</span>
+    <span class="s1">background-color: #1a1a1a;</span>
+<span class="s1">}</span>
+
+<span class="s1">body.dark-mode nav a {</span>
+    <span class="s1">background-color: #333;</span>
+    <span class="s1">color: #fff;</span>
+<span class="s1">}</span>
+
+<span class="s1">body.dark-mode nav a:hover {</span>
+    <span class="s1">background-color: #444;</span>
+<span class="s1">}</span>
+
+<span class="s1">body.dark-mode .sidebar {</span>
+    <span class="s1">background: rgba(26, 26, 26, 0.9);</span>
+<span class="s1">}</span>
+
+<span class="s1">body.dark-mode h2 {</span>
+    <span class="s1">color: #00e6e6;</span>
+<span class="s1">}</span>
+
+<span class="s1">body.dark-mode .btn {</span>
+    <span class="s1">background-color: #00aabb;</span>
+    <span class="s1">color: #fff;</span>
+<span class="s1">}</span>
+
+<span class="s1">body.dark-mode .btn:hover {</span>
+    <span class="s1">background-color: #007b8a;</span>
+<span class="s1">}</span>
+<span class="s0">&lt;/style&gt;</span>
+
+
+<span class="s0">&lt;/style&gt;</span>
+
+<span class="s0">&lt;/style&gt;</span>
+  <span class="s0">&lt;/style&gt;</span>
+<span class="s0">&lt;/head&gt;</span>
+<span class="s0">&lt;body&gt;</span>
+
+  <span class="s4">&lt;!-- Navbar --&gt;</span>
+  <span class="s0">&lt;header&gt;</span>
+    <span class="s0">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;logo&quot;</span><span class="s0">&gt;</span><span class="s1">SMART FUEL STATION</span><span class="s0">&lt;/div&gt;</span>
+    <span class="s0">&lt;nav&gt;</span>
+      <span class="s0">&lt;a </span><span class="s2">href</span><span class="s3">=&quot;#services&quot;</span><span class="s0">&gt;</span><span class="s1">SERVICES</span><span class="s0">&lt;/a&gt;</span>
+      <span class="s0">&lt;a </span><span class="s2">href</span><span class="s3">=&quot;#about&quot;</span><span class="s0">&gt;</span><span class="s1">ABOUT</span><span class="s0">&lt;/a&gt;</span>
+      <span class="s0">&lt;a </span><span class="s2">href</span><span class="s3">=&quot;#contact&quot;</span><span class="s0">&gt;</span><span class="s1">CONTACT</span><span class="s0">&lt;/a&gt;</span>
+      <span class="s0">&lt;div </span><span class="s2">id</span><span class="s3">=&quot;user-icon&quot; </span><span class="s2">class</span><span class="s3">=&quot;icon-link&quot; </span><span class="s2">onclick</span><span class="s3">=&quot;toggleSidebar()&quot;</span><span class="s0">&gt;</span>
+        <span class="s0">&lt;i </span><span class="s2">class</span><span class="s3">=&quot;bx bx-user-circle&quot;</span><span class="s0">&gt;&lt;/i&gt;</span>
+    <span class="s0">&lt;/div&gt;</span>
+    <span class="s0">&lt;/nav&gt;</span>
+  <span class="s0">&lt;/header&gt;</span>
+
+  <span class="s4">&lt;!-- Sidebar (User Menu) --&gt;</span>
+  <span class="s0">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;sidebar&quot; </span><span class="s2">id</span><span class="s3">=&quot;sidebar&quot;</span><span class="s0">&gt;</span>
+    <span class="s0">&lt;a </span><span class="s2">href</span><span class="s3">=&quot;index.html&quot;</span><span class="s0">&gt;&lt;i </span><span class="s2">class</span><span class="s3">='bx bx-user'</span><span class="s0">&gt;&lt;/i&gt; </span><span class="s1">Profile</span><span class="s0">&lt;/a&gt;</span>
+    <span class="s0">&lt;a </span><span class="s2">href</span><span class="s3">=&quot;orders.html&quot;</span><span class="s0">&gt;&lt;i </span><span class="s2">class</span><span class="s3">='bx bx-list-ul'</span><span class="s0">&gt;&lt;/i&gt; </span><span class="s1">My Orders</span><span class="s0">&lt;/a&gt;</span>
+    <span class="s0">&lt;a </span><span class="s2">href</span><span class="s3">=&quot;cart.html&quot;</span><span class="s0">&gt;&lt;i </span><span class="s2">class</span><span class="s3">='bx bx-cart'</span><span class="s0">&gt;&lt;/i&gt; </span><span class="s1">Shopping Cart</span><span class="s0">&lt;/a&gt;</span>
+    <span class="s0">&lt;a </span><span class="s2">href</span><span class="s3">=&quot;#&quot; </span><span class="s2">id</span><span class="s3">=&quot;night-mode-toggle&quot;</span><span class="s0">&gt;&lt;i </span><span class="s2">class</span><span class="s3">='bx bx-moon'</span><span class="s0">&gt;&lt;/i&gt; </span><span class="s1">Night Mode</span><span class="s0">&lt;/a&gt;</span>
+  <span class="s0">&lt;/div&gt;</span>
+
+  <span class="s4">&lt;!-- Sections --&gt;</span>
+   <span class="s0">&lt;section&gt;</span>
+   <span class="s0">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;video-container&quot;</span><span class="s0">&gt;</span>
+    <span class="s0">&lt;video </span><span class="s2">autoplay muted loop</span><span class="s0">&gt;</span>
+        <span class="s0">&lt;source </span><span class="s2">src</span><span class="s3">=&quot;vedio.mp4&quot; </span><span class="s2">type</span><span class="s3">=&quot;video/mp4&quot;</span><span class="s0">&gt;</span>
+        <span class="s4">&lt;!-- إذا كان الفيديو غير متاح للمتصفح --&gt;</span>
+        <span class="s1">متصفحك لا يدعم تشغيل الفيديو.</span>
+    <span class="s0">&lt;/video&gt;</span>
+<span class="s0">&lt;/div&gt;</span>
+
+<span class="s4">&lt;!-- النصوص والزر --&gt;</span>
+<span class="s0">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;content&quot;</span><span class="s0">&gt;</span>
+    <span class="s0">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;main-text&quot;</span><span class="s0">&gt;</span><span class="s1">Convenience on the move</span><span class="s0">&lt;/div&gt;</span>
+    <span class="s0">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;sub-text&quot;</span><span class="s0">&gt;</span><span class="s1">Smart Fuel Station is the worlds leading fuel delivery</span><span class="s0">&lt;br&gt;</span>
+    <span class="s1">and vehicle service platform. we are all </span><span class="s0">&lt;br&gt;</span>
+  <span class="s1">about fulling innovation through </span><span class="s0">&lt;br&gt;</span>
+<span class="s1">Convenience,and giving you back the time </span><span class="s0">&lt;/div&gt;</span>
+<span class="s0">&lt;a </span><span class="s2">href</span><span class="s3">=&quot;#services&quot; </span><span class="s2">id</span><span class="s3">=&quot;loginLink&quot; </span><span class="s2">style</span><span class="s3">=&quot;display: inline-block; padding: 16px 50px; background-color: #003d4d; color: white; border-radius: 10px; font-size: 18px; font-weight: bold; font-family: 'Arial', sans-serif; text-decoration: none; transition: background-color 0.3s;&quot;</span><span class="s0">&gt;</span><span class="s1">Order now</span><span class="s0">&lt;/a&gt;</span>
+<span class="s0">&lt;/div&gt;</span>
+
+
+<span class="s0">&lt;/section&gt;</span>
+<span class="s0">&lt;section </span><span class="s2">id</span><span class="s3">=&quot;services&quot;</span><span class="s0">&gt;</span>
+  <span class="s0">&lt;h2&gt;</span><span class="s1">Our Services</span><span class="s0">&lt;/h2&gt;</span>
+  <span class="s0">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;services-container&quot;</span><span class="s0">&gt;</span>
+      <span class="s0">&lt;button </span><span class="s2">class</span><span class="s3">=&quot;scroll-btn left&quot; </span><span class="s2">onclick</span><span class="s3">=&quot;scrollLeft()&quot;</span><span class="s0">&gt;</span><span class="s5">&amp;#10094;</span><span class="s0">&lt;/button&gt;</span>
+      <span class="s0">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;services-wrapper&quot;</span><span class="s0">&gt;</span>
+          <span class="s0">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;cards-container&quot;</span><span class="s0">&gt;</span>
+              <span class="s0">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;card&quot;</span><span class="s0">&gt;</span>
+                  <span class="s0">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;front&quot;</span><span class="s0">&gt;</span>
+                      <span class="s0">&lt;video </span><span class="s2">autoplay loop muted</span><span class="s0">&gt;</span>
+                          <span class="s0">&lt;source </span><span class="s2">src</span><span class="s3">=&quot;vidio1.mp4&quot; </span><span class="s2">type</span><span class="s3">=&quot;video/mp4&quot;</span><span class="s0">&gt;</span>
+                      <span class="s0">&lt;/video&gt;</span>
+                  <span class="s0">&lt;/div&gt;</span>
+                  <span class="s0">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;back&quot;</span><span class="s0">&gt;</span>
+                      <span class="s0">&lt;p&gt;</span><span class="s1">Fuel Delivery Service - We bring the fuel to you, anytime, anywhere.</span><span class="s0">&lt;/p&gt;</span>
+                      <span class="s0">&lt;a </span><span class="s2">href</span><span class="s3">=&quot;#&quot; </span><span class="s2">class</span><span class="s3">=&quot;btn&quot;</span><span class="s0">&gt;</span><span class="s1">Learn More</span><span class="s0">&lt;/a&gt;</span>
+                  <span class="s0">&lt;/div&gt;</span>
+              <span class="s0">&lt;/div&gt;</span>
+
+              <span class="s0">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;card&quot;</span><span class="s0">&gt;</span>
+                  <span class="s0">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;front&quot;</span><span class="s0">&gt;</span>
+                      <span class="s0">&lt;video </span><span class="s2">autoplay loop muted</span><span class="s0">&gt;</span>
+                          <span class="s0">&lt;source </span><span class="s2">src</span><span class="s3">=&quot;vidio2.mp4&quot; </span><span class="s2">type</span><span class="s3">=&quot;video/mp4&quot;</span><span class="s0">&gt;</span>
+                      <span class="s0">&lt;/video&gt;</span>
+                  <span class="s0">&lt;/div&gt;</span>
+                  <span class="s0">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;back&quot;</span><span class="s0">&gt;</span>
+                      <span class="s0">&lt;p&gt;</span><span class="s1">Car Wash Service - Get your car washed on demand, hassle-free.</span><span class="s0">&lt;/p&gt;</span>
+                      <span class="s0">&lt;a </span><span class="s2">href</span><span class="s3">=&quot;#&quot; </span><span class="s2">class</span><span class="s3">=&quot;btn&quot;</span><span class="s0">&gt;</span><span class="s1">Learn More</span><span class="s0">&lt;/a&gt;</span>
+                  <span class="s0">&lt;/div&gt;</span>
+              <span class="s0">&lt;/div&gt;</span>
+
+              <span class="s0">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;card&quot;</span><span class="s0">&gt;</span>
+                  <span class="s0">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;front&quot;</span><span class="s0">&gt;</span>
+                      <span class="s0">&lt;video </span><span class="s2">autoplay loop muted</span><span class="s0">&gt;</span>
+                          <span class="s0">&lt;source </span><span class="s2">src</span><span class="s3">=&quot;vidio3.mp4&quot; </span><span class="s2">type</span><span class="s3">=&quot;video/mp4&quot;</span><span class="s0">&gt;</span>
+                      <span class="s0">&lt;/video&gt;</span>
+                  <span class="s0">&lt;/div&gt;</span>
+                  <span class="s0">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;back&quot;</span><span class="s0">&gt;</span>
+                      <span class="s0">&lt;p&gt;</span><span class="s1">EV Charging Service - Charge your electric vehicle wherever you are.</span><span class="s0">&lt;/p&gt;</span>
+                      <span class="s0">&lt;a </span><span class="s2">href</span><span class="s3">=&quot;#&quot; </span><span class="s2">class</span><span class="s3">=&quot;btn&quot;</span><span class="s0">&gt;</span><span class="s1">Learn More</span><span class="s0">&lt;/a&gt;</span>
+                  <span class="s0">&lt;/div&gt;</span>
+              <span class="s0">&lt;/div&gt;</span>
+
+              <span class="s0">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;card&quot;</span><span class="s0">&gt;</span>
+                  <span class="s0">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;front&quot;</span><span class="s0">&gt;</span>
+                      <span class="s0">&lt;video </span><span class="s2">autoplay loop muted</span><span class="s0">&gt;</span>
+                          <span class="s0">&lt;source </span><span class="s2">src</span><span class="s3">=&quot;vidio4.mp4&quot; </span><span class="s2">type</span><span class="s3">=&quot;video/mp4&quot;</span><span class="s0">&gt;</span>
+                      <span class="s0">&lt;/video&gt;</span>
+                  <span class="s0">&lt;/div&gt;</span>
+                  <span class="s0">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;back&quot;</span><span class="s0">&gt;</span>
+                      <span class="s0">&lt;p&gt;</span><span class="s1">Oil Change Service - Keep your engine running smoothly with our mobile oil change.</span><span class="s0">&lt;/p&gt;</span>
+                      <span class="s0">&lt;a </span><span class="s2">href</span><span class="s3">=&quot;#&quot; </span><span class="s2">class</span><span class="s3">=&quot;btn&quot;</span><span class="s0">&gt;</span><span class="s1">Learn More</span><span class="s0">&lt;/a&gt;</span>
+                  <span class="s0">&lt;/div&gt;</span>
+              <span class="s0">&lt;/div&gt;</span>
+          <span class="s0">&lt;/div&gt;</span>
+      <span class="s0">&lt;/div&gt;</span>
+      <span class="s0">&lt;button </span><span class="s2">class</span><span class="s3">=&quot;scroll-btn right&quot; </span><span class="s2">onclick</span><span class="s3">=&quot;scrollRight()&quot;</span><span class="s0">&gt;</span><span class="s5">&amp;#10095;</span><span class="s0">&lt;/button&gt;</span>
+  <span class="s0">&lt;/div&gt;</span>
+<span class="s0">&lt;/section&gt;</span>
+
+  <span class="s0">&lt;section </span><span class="s2">id</span><span class="s3">=&quot;about&quot;</span><span class="s0">&gt;</span>
+    <span class="s0">&lt;h2&gt;</span><span class="s1">Our About</span><span class="s0">&lt;/h2&gt;</span>
+  <span class="s0">&lt;/section&gt;</span>
+
+  <span class="s0">&lt;section </span><span class="s2">id</span><span class="s3">=&quot;contact&quot;</span><span class="s0">&gt;</span>
+    <span class="s0">&lt;h2&gt;</span><span class="s1">Contact Us</span><span class="s0">&lt;/h2&gt;</span>
+  <span class="s0">&lt;/section&gt;</span>
+
+  
+  
+
+<span class="s0">&lt;/body&gt;</span>
+<span class="s0">&lt;/html</span></pre>
+</body>
+</html>
