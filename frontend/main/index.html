@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="index.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    <style>
+        @keyframes gradientBackground {
+            0% { background: linear-gradient(135deg, #ffffff, #d0f0f3, #99e6ff, #003d4d); }
+            100% { background: linear-gradient(135deg, #003d4d, #99e6ff, #d0f0f3, #ffffff); }
+        }
+
+        @keyframes bubble {
+            0% { transform: scale(1); opacity: 0.1; }
+            50% { transform: scale(1.5); opacity: 0.05; }
+            100% { transform: scale(1); opacity: 0.1; }
+        }
+
+        a:hover {
+            background-color: #002b36;
+        }
+
+        /* Responsive Styling */
+        @media (max-width: 600px) {
+            #loginForm {
+                width: 90% !important;
+                padding: 20px !important;
+            }
+
+            #loginForm h2 {
+                font-size: 24px !important;
+            }
+
+            #loginForm label {
+                font-size: 16px !important;
+            }
+
+            #loginForm input,
+            #loginForm select {
+                font-size: 15px !important;
+                padding: 10px !important;
+            }
+
+            #loginLink {
+                font-size: 16px !important;
+                padding: 14px 40px !important;
+            }
+
+            #loginForm p {
+                font-size: 14px !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div style="display: flex; justify-content: center; align-items: center; height: 100vh; background: linear-gradient(135deg, #ffffff, #d0f0f3, #99e6ff, #003d4d); animation: gradientBackground 10s infinite alternate; padding: 20px;">
+        <form id="loginForm" style="background-color: white; padding: 30px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2); width: 400px; position: relative; overflow: hidden; transform: scale(1); transition: transform 0.3s;">
+            <div style="position: absolute; top: -50px; right: -50px; width: 120px; height: 120px; background-color: #003d4d; border-radius: 50%; opacity: 0.1; animation: bubble 6s infinite;"></div>
+            <div style="position: absolute; bottom: -50px; left: -50px; width: 120px; height: 120px; background-color: #003d4d; border-radius: 50%; opacity: 0.1; animation: bubble 8s infinite;"></div>
+
+            <h2 style="text-align: center; color: #003d4d; font-family: 'Arial', sans-serif; font-size: 30px; margin-bottom: 20px;">Sign Up</h2>
+
+            <div style="margin-bottom: 20px;">
+                <label for="username" style="display: block; color: #003d4d; font-weight: bold; font-size: 18px; font-family: 'Arial', sans-serif;">Username:</label>
+                <input type="text" id="username" name="username" style="width: 100%; padding: 12px; font-size: 16px; border: 1px solid #bbb; border-radius: 10px; font-family: 'Arial', sans-serif;" required>
+            </div>
+
+            <div style="margin-bottom: 20px;">
+                <label for="email" style="display: block; color: #003d4d; font-weight: bold; font-size: 18px; font-family: 'Arial', sans-serif;">Email:</label>
+                <input type="email" id="email" name="email" style="width: 100%; padding: 12px; font-size: 16px; border: 1px solid #bbb; border-radius: 10px; font-family: 'Arial', sans-serif;" required>
+            </div>
+
+            <div style="margin-bottom: 20px;">
+                <label for="password" style="display: block; color: #003d4d; font-weight: bold; font-size: 18px; font-family: 'Arial', sans-serif;">Password:</label>
+                <div style="position: relative;">
+                    <input type="password" id="password" name="password" style="width: 100%; padding: 12px; font-size: 16px; border: 1px solid #bbb; border-radius: 10px; font-family: 'Arial', sans-serif;" required>
+                    <i id="togglePassword" class="bx bx-show" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer; font-size: 20px; color: #003d4d;"></i>
+                </div>
+            </div>
+
+            <div style="margin-bottom: 20px;">
+                <label for="role" style="display: block; color: #003d4d; font-weight: bold; font-size: 18px; font-family: 'Arial', sans-serif;">Select Role:</label>
+                <select id="role" name="role" style="width: 100%; padding: 12px; font-size: 16px; border: 1px solid #bbb; border-radius: 10px; font-family: 'Arial', sans-serif;" required>
+                    <option value="">Select User System</option>
+                    <option value="customer">Customer</option>
+                    <option value="manager">Manager</option>
+                    <option value="employee">Employee</option>
+                </select>
+            </div>
+
+            <div id="message" style="margin-bottom: 20px; text-align: center; font-size: 16px;"></div>
+
+            <div style="text-align: center; margin-top: 20px;">
+                <a href="home1.html" id="loginLink" style="display: inline-block; padding: 16px 50px; background-color: #003d4d; color: white; border-radius: 10px; font-size: 18px; font-weight: bold; font-family: 'Arial', sans-serif; text-decoration: none; transition: background-color 0.3s;">Sign Up</a>
+            </div>
+
+            <p style="text-align: center; margin-top: 20px; color: #003d4d; font-size: 16px; font-family: 'Arial', sans-serif;">
+                Don't have an account? <a href="login.html" style="color: #003d4d; font-weight: bold; text-decoration: none;">Register here</a>
+            </p>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById("togglePassword").addEventListener("click", function () {
+            const passwordField = document.getElementById("password");
+            const icon = document.getElementById("togglePassword");
+
+            if (passwordField.type === "password") {
+                passwordField.type = "text";
+                icon.classList.remove("bx-show");
+                icon.classList.add("bx-hide");
+            } else {
+                passwordField.type = "password";
+                icon.classList.remove("bx-hide");
+                icon.classList.add("bx-show");
+            }
+        });
+
+        document.getElementById("loginLink").addEventListener("click", async function (event) {
+            event.preventDefault();
+
+            let username = document.getElementById("username").value.trim();
+            let email = document.getElementById("email").value.trim();
+            let password = document.getElementById("password").value.trim();
+            let role = document.getElementById("role").value;
+            let message = document.getElementById("message");
+
+            if (username.length < 3) {
+                message.textContent = "Username must be at least 3 characters!";
+                message.style.color = "red";
+                return;
+            }
+            if (!email.includes("@")) {
+                message.textContent = "Please enter a valid email!";
+                message.style.color = "red";
+                return;
+            }
+            if (password.length < 6) {
+                message.textContent = "Password must be at least 6 characters!";
+                message.style.color = "red";
+                return;
+            }
+            if (!role) {
+                message.textContent = "Please select a role!";
+                message.style.color = "red";
+                return;
+            }
+
+            let userData = {
+                username: username,
+                email: email,
+                password: password,
+                role: role
+            };
+
+            const apiUrl = "https://your-api.com/auth/login";
+
+            try {
+                let response = await fetch(apiUrl, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(userData)
+                });
+
+                let data = await response.json();
+
+                if (response.ok) {
+                    message.textContent = "Login successful!";
+                    message.style.color = "green";
+                    if (data.token) localStorage.setItem("authToken", data.token);
+                    window.location.href = "frontend/home.html";
+                } else {
+                    message.textContent = data.message || "Login failed! Please check your credentials.";
+                    message.style.color = "red";
+                }
+            } catch (error) {
+                message.textContent = "An error occurred while connecting to the server!";
+                message.style.color = "red";
+                console.error("Error:", error);
+            }
+        });
+    </script>
+</body>
+</html>
