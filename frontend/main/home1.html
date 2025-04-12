@@ -48,17 +48,22 @@
     }
 
     nav a {
-      color: white;
-      text-decoration: none;
-      padding: 8px 14px;
-      border-radius: 8px;
-      background-color: #007b8a;
-      transition: background 0.3s;
-      font-weight: bold;
+        padding: 14px 28px;
+  font-size: 15px;
+  font-weight: bold;
+  background: linear-gradient(135deg, #00aabb, #004d66);
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     }
 
     nav a:hover {
-      background-color: #00aabb;
+        background: linear-gradient(135deg, #004d66, #00aabb);
+  transform: scale(1.05);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
     }
 
     .icon-link {
@@ -185,303 +190,117 @@
 
         /* تصميم الزر */
         .btn {
-            padding: 15px 30px;
-            font-size: 18px;
-            background-color:  rgba(0, 77, 102, 0.9);
-            color: rgb(255, 234, 234);
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            text-transform: uppercase;
-        }
+  padding: 14px 28px;
+  font-size: 20px;
+  font-weight: bold;
+  background: linear-gradient(135deg, #00aabb, #004d66);
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
 
-        .btn:hover {
-          background-color: #00aabb;
-        }
+.btn:hover {
+  background: linear-gradient(135deg, #004d66, #00aabb);
+  transform: scale(1.05);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
         #services {
-        text-align: center;
-        padding: 100px 20px;
-        background: linear-gradient(135deg, #004d66, #006d8f, #0099cc);
-        color: white;
+      text-align: center;
+      padding: 100px 20px;
+      background: linear-gradient(to bottom right, #ffffff, #a3d3f5);
+      color: white;
+      position: relative;
     }
 
     .services-wrapper {
-        overflow-x: auto; /* تمكين التمرير الجانبي */
-        white-space: nowrap; /* منع التفاف البطاقات */
-        padding: 20px;
-        scrollbar-width: none; /* إخفاء شريط التمرير */
+      overflow-x: auto;
+      white-space: nowrap;
+      scroll-behavior: smooth;
+      padding: 20px;
+      width: 100%;
     }
 
     .services-wrapper::-webkit-scrollbar {
-        display: none; /* إخفاء شريط التمرير لمتصفح كروم */
+      display: none;
     }
 
     .cards-container {
-        display: flex;
-        gap: 20px;
-        width: max-content; /* يجعل الحاوية تتكيف مع المحتوى */
-        scroll-snap-type: x mandatory;
+      display: flex;
+      gap: 20px;
     }
 
     .card {
-        flex: 0 0 auto;
-        width: 400px;
-        height: 500px;
-        perspective: 1000px;
-        cursor: pointer;
-        position: relative;
-        scroll-snap-align: center; /* يجعل البطاقات تلتصق بالمركز عند السحب */
+      flex: 0 0 auto;
+      width: 400px;
+      height: 500px;
+      position: relative;
+      border-radius: 15px;
+      overflow: hidden;
+      background-color: #000;
     }
 
-    .card .front,
-    .card .back {
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        border-radius: 10px;
-        backface-visibility: hidden;
-        overflow: hidden;
-        transition: transform 0.6s;
-        display: flex;
+    .card video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: opacity 0.5s;
+      opacity: 1;
+    }
+
+    .card .overlay-content {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      opacity: 0;
+      transition: opacity 0.5s;
+    }
+
+    .card:hover video {
+      opacity: 0.2;
+    }
+
+    .card:hover .overlay-content {
+      opacity: 1;
+    }
+
+    .overlay-content h3 {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .overlay-content p {
+      font-size: 16px;
+    }
+
+    @media (max-width: 600px) {
+      .card {
+        width: 300px;
+        height: 400px;
+      }
+
+      .cards-container {
         flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        padding: 20px;
+      }
     }
 
-    .card .front {
-        transform: rotateY(0deg);
-    }
-
-    .card .back {
-        transform: rotateY(180deg);
-        background: linear-gradient(135deg, #004d66, #007b8a);
-        color: white;
-    }
-
-    .card.flip .front {
-        transform: rotateY(180deg);
-    }
-
-    .card.flip .back {
-        transform: rotateY(0deg);
-    }
-
-    .btn {
-        margin-top: 15px;
-        padding: 10px 20px;
-        font-size: 16px;
-        background-color: #00aabb;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        text-decoration: none;
-        font-weight: bold;
-        transition: background-color 0.3s;
-    }
-
-    .btn:hover {
-        background-color: #007b8a;
-    }
-
-    video {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-    #services {
-        text-align: center;
-        padding: 100px 20px;
-        background: rgb(199, 197, 197);
-        color: white;
-        position: relative;
-    }
-
-    .services-container {
-        display: flex;
-        align-items: center;
-        position: relative;
-    }
-
-    .services-wrapper {
-        overflow-x: auto;
-        white-space: nowrap;
-        scroll-behavior: smooth;
-        display: flex;
-        padding: 20px;
-        width: 80%;
-        margin: auto;
-    }
-
-    .services-wrapper::-webkit-scrollbar {
-        display: none;
-    }
-
-    .cards-container {
-    display: flex;
-    gap: 20px;
-    flex-wrap: nowrap;
-    justify-content: center;
-    align-items: center;
-}
-
-.card {
-    flex: 0 0 auto;
-    width: 400px;
-    height: 500px;
-    max-width: 400px;
-    
-    aspect-ratio: 2 / 3; /* يجعل البطاقات متناسقة في الحجم */
-    perspective: 1200px;
-    cursor: pointer;
-    position: relative;
-    transition: transform 0.3s ease-in-out;
-}
-
-.card:hover {
-    transform: scale(1.05); /* تأثير تكبير خفيف عند المرور */
-}
-
-.card .front,
-.card .back {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    border-radius: 15px;
-    backface-visibility: hidden;
-    overflow: hidden;
-    transition: transform 0.6s ease-in-out;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* ظل خفيف */
-}
-
-.card .front {
-    transform: rotateY(0deg);
-    background-color: #fff;
-}
-
-.card .back {
-    transform: rotateY(180deg);
-    background: linear-gradient(135deg, #004d66, #007b8a);
-    color: white;
-    padding: 20px;
-}
-
-/* عند التقليب */
-.card.flip .front {
-    transform: rotateY(180deg);
-}
-
-
-/* جعل الفيديو داخل البطاقة يتكيف مع الحجم */
-
-
-/* تحسين الاستجابة للشاشات الصغيرة */
-@media (max-width: 600px) {
-    .cards-container {
-        flex-direction: column;
-        gap: 15px;
-    }
-
-    .card {
-        max-width: 300px;
-        aspect-ratio: 3 / 4;
-    }
-}
-    .btn {
-        margin-top: 15px;
-        padding: 10px 20px;
-        font-size: 16px;
-        background-color: #00aabb;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        text-decoration: none;
-        font-weight: bold;
-        transition: background-color 0.3s;
-    }
-
-    .btn:hover {
-        background-color: #007b8a;
-    }
-
-    video {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-
-    .scroll-btn {
-        background-color: rgba(0, 0, 0, 0.5);
-        color: white;
-        border: none;
-        padding: 10px 15px;
-        font-size: 24px;
-        cursor: pointer;
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        z-index: 10;
-        border-radius: 50%;
-    }
-
-    .scroll-btn.left {
-        left: 10px;
-    }
-
-    .scroll-btn.right {
-        right: 10px;
-    }
-
-    .scroll-btn:hover {
-        background-color: rgba(0, 0, 0, 0.8);
-    }
-    body.dark-mode {
-    background-color: #121212;
-    color: #ffffff;
-}
-
-body.dark-mode header {
-    background-color: #1a1a1a;
-}
-
-body.dark-mode nav a {
-    background-color: #333;
-    color: #fff;
-}
-
-body.dark-mode nav a:hover {
-    background-color: #444;
-}
-
-body.dark-mode .sidebar {
-    background: rgba(26, 26, 26, 0.9);
-}
-
-body.dark-mode h2 {
-    color: #00e6e6;
-}
-
-body.dark-mode .btn {
-    background-color: #00aabb;
-    color: #fff;
-}
-
-body.dark-mode .btn:hover {
-    background-color: #007b8a;
-}
 </style>
 
 
-</style>
 
-</style>
-  </style>
 </head>
 <body>
 
@@ -523,69 +342,66 @@ body.dark-mode .btn:hover {
     and vehicle service platform. we are all <br>
   about fulling innovation through <br>
 Convenience,and giving you back the time </div>
-<a href="#services" id="loginLink" style="display: inline-block; padding: 16px 50px; background-color: #003d4d; color: white; border-radius: 10px; font-size: 18px; font-weight: bold; font-family: 'Arial', sans-serif; text-decoration: none; transition: background-color 0.3s;">Order now</a>
+<a href="#services" class="btn" >Order now</a>
 </div>
 
 
 </section>
 <section id="services">
-  <h2>Our Services</h2>
-  <div class="services-container">
-      <button class="scroll-btn left" onclick="scrollLeft()">&#10094;</button>
-      <div class="services-wrapper">
-          <div class="cards-container">
-              <div class="card">
-                  <div class="front">
-                      <video autoplay loop muted>
-                          <source src="vidio1.mp4" type="video/mp4">
-                      </video>
-                  </div>
-                  <div class="back">
-                      <p>Fuel Delivery Service - We bring the fuel to you, anytime, anywhere.</p>
-                      <a href="#" class="btn">Learn More</a>
-                  </div>
-              </div>
-
-              <div class="card">
-                  <div class="front">
-                      <video autoplay loop muted>
-                          <source src="vidio2.mp4" type="video/mp4">
-                      </video>
-                  </div>
-                  <div class="back">
-                      <p>Car Wash Service - Get your car washed on demand, hassle-free.</p>
-                      <a href="#" class="btn">Learn More</a>
-                  </div>
-              </div>
-
-              <div class="card">
-                  <div class="front">
-                      <video autoplay loop muted>
-                          <source src="vidio3.mp4" type="video/mp4">
-                      </video>
-                  </div>
-                  <div class="back">
-                      <p>EV Charging Service - Charge your electric vehicle wherever you are.</p>
-                      <a href="#" class="btn">Learn More</a>
-                  </div>
-              </div>
-
-              <div class="card">
-                  <div class="front">
-                      <video autoplay loop muted>
-                          <source src="vidio4.mp4" type="video/mp4">
-                      </video>
-                  </div>
-                  <div class="back">
-                      <p>Oil Change Service - Keep your engine running smoothly with our mobile oil change.</p>
-                      <a href="#" class="btn">Learn More</a>
-                  </div>
-              </div>
+    <h2>Our Services</h2>
+    <div class="services-wrapper">
+      <div class="cards-container">
+        <div class="card">
+          <video autoplay loop muted>
+            <source src="vidio3.mp4" type="video/mp4" />
+          </video>
+          <div class="overlay-content">
+            <h3>Fuel Delivery</h3>
+            <p>We bring the fuel to you, anytime, anywhere.</p>
+            <br>
+            <a href="#" class="btn">Order Now</a>
           </div>
+        </div>
+        <div class="card">
+          <video autoplay loop muted>
+            <source src="vidio4.mp4" type="video/mp4" />
+          </video>
+          <div class="overlay-content">
+            <h3>Car Wash</h3>
+            <p>Get your car washed on demand, hassle-free.</p>
+            <br>
+            <a href="#" class="btn">Order Now</a>
+          </div>
+        </div>
+        <div class="card">
+          <video autoplay loop muted>
+            <source src="vidio1.mp4" type="video/mp4" />
+          </video>
+          <div class="overlay-content">
+            <h3>EV Charging</h3>
+            <p>Charge your electric vehicle wherever you are.</p>
+            <br>
+            <a href="#" class="btn">Order Now</a>
+          </div>
+        </div>
+        <div class="card">
+          <video autoplay loop muted>
+            <source src="vidio2.mp4" type="video/mp4" />
+          </video>
+          <div class="overlay-content">
+            <h3>Oil Change</h3>
+            <p>Keep your engine running smoothly with our mobile oil change.</p>
+            <br>
+            <a href="#" class="btn">Order Now</a>
+          </div>
+        </div>
       </div>
-      <button class="scroll-btn right" onclick="scrollRight()">&#10095;</button>
-  </div>
-</section>
+    </div>
+  </section>
+  
+
+  
+  
 
 <!--  <section id="about">
     <h2>Our About</h2>
@@ -656,4 +472,4 @@ Convenience,and giving you back the time </div>
   
 
 </body>
-</html
+</html>

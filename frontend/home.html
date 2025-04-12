@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>HOME - Smart Fuel Station</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background-image: url('img2.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      color: #fff;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 30px;
+      background-color: rgba(0, 0, 0, 0.5);
+      border-radius: 8px;
+      backdrop-filter: blur(8px);
+    }
+
+    .logo {
+      font-size: 26px;
+      font-weight: 700;
+      color: #00bcd4;
+      padding: 6px 12px;
+      border-radius: 8px;
+    }
+
+    nav {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    nav a {
+      padding: 8px 14px;
+      text-decoration: none;
+      color: #fff;
+      background-color: rgba(0, 188, 212, 0.6);
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: bold;
+      text-align: center;
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+
+    nav a:hover {
+      background-color: rgba(0, 188, 212, 0.8);
+      transform: scale(1.05);
+    }
+<<<<<<< Updated upstream
+
+    nav a#home-link {
+      background-color: #fff;
+      color: #00bcd4;
+    }
+
+    
+
+    nav a.icon-link {
+      background: transparent;
+      border: none;
+      padding: 0;
+      min-width: auto;
+      height: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: 20px;
+    }
+
+    nav a.icon-link i {
+      font-size: 32px;
+      color: #fff;
+    }
+
+    nav a.icon-link:hover i {
+      font-size: 36px;
+      color: rgba(0, 188, 212, 0.8);
+    }
+
+=======
+>>>>>>> Stashed changes
+    .hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 40px 20px;
+      min-height: 50vh;
+    }
+
+    .hero-content {
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 30px;
+      border-radius: 15px;
+      max-width: 650px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .hero-content h1 {
+      font-size: 32px;
+      color: #00bcd4;
+      margin-bottom: 18px;
+    }
+
+    .hero-content p {
+      font-size: 16px;
+      color: #f0f0f0;
+      margin-bottom: 20px;
+    }
+
+    .cta-btn {
+      background-color: #00bcd4;
+      color: #fff;
+      padding: 6px 18px;
+      font-size: 14px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .cta-btn:hover {
+      background-color: #0097a7;
+    }
+
+    .services-section {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      padding: 40px 20px;
+      margin-top: 40px;
+    }
+
+    .service-box {
+      background: rgba(0, 0, 0, 0.5);
+      padding: 15px;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+      transition: transform 0.3s ease;
+    }
+
+    .service-box:hover {
+      transform: translateY(-5px);
+    }
+
+    .service-box h3 {
+      font-size: 18px;
+      margin-bottom: 10px;
+      color: #00bcd4;
+    }
+
+    .service-box p {
+      font-size: 14px;
+      color: #f0f0f0;
+    }
+
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">SMART FUEL STATION</div>
+    <nav>
+      <a href="home.html" id="home-link">HOME</a>
+      <a href="services.html">SERVICES</a>
+      <a href="about.html">ABOUT US</a>
+      <a href="contact.html">CONTACT</a>
+      <a href="your profile.html" class="icon-link"><i class='bx bx-user bx-tada'></i></a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-content">
+      <h1>SMART FUEL STATIONS</h1>
+      <p>Providing futuristic mobile fuel delivery solutions directly to your vehicle, ensuring fast, efficient, and smart refueling.</p>
+      <button class="cta-btn">Request Service</button>
+    </div>
+  </section>
+
+  <section class="services-section">
+    <div class="service-box">
+      <h3>HOME DELIVERY</h3>
+      <p>Fuel delivered to your home on demand with ease and safety.</p>
+    </div>
+    <div class="service-box">
+      <h3>EV CHARGING</h3>
+      <p>Electric vehicle charging support wherever you are.</p>
+    </div>
+    <div class="service-box">
+      <h3>FLEET SERVICES</h3>
+      <p>Efficient fueling for commercial fleets and large-scale operations.</p>
+    </div>
+    <div class="service-box">
+      <h3>EMERGENCY SUPPORT</h3>
+      <p>Rapid response fuel delivery in emergency situations.</p>
+    </div>
+  </section>
+
+</body>
+</html>
