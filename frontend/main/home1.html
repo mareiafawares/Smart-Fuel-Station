@@ -70,7 +70,7 @@
     font-size: 30px;
     cursor: pointer;
     transition: transform 0.3s;
-    z-index: 1200; 
+    z-index: 1200; /* تأكد من أنها فوق كل شيء */
 }
 
 
@@ -78,7 +78,7 @@
     .sidebar {
     position: fixed;
     top: 0;
-    right: -250px; 
+    right: -250px; /* تبدأ خارج الشاشة */
     width: 250px;
     height: 100%;
     background: rgba(0, 77, 102, 0.9);
@@ -90,6 +90,11 @@
     transition: right 0.4s ease-in-out;
     z-index: 1100; /* تأكد من أن القائمة فوق كل شيء */
 }
+
+
+
+
+
 
     .sidebar a {
       color: white;
@@ -293,30 +298,28 @@
     }
 
 
-   
-    .popup {
+    <style>
+.popup {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
-  width: 350px;
-  height: 500px;
-  background: rgba(0, 0, 0, 0.6);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
   display: none;
   justify-content: center;
   align-items: center;
   z-index: 2000;
-  border-radius: 15px;
-  overflow: hidden;
-  box-shadow: 0 8px 16px rgba(0,0,0,0.3);
 }
 
 .popup-content {
   background: #fff;
-  width: 100%;
-  height: 100%;
+  width: 90%;
+  height: 90%;
   border-radius: 15px;
   overflow: hidden;
   position: relative;
+  box-shadow: 0 0 20px rgba(0,0,0,0.5);
 }
 
 .popup-content iframe {
@@ -327,13 +330,14 @@
 
 .popup .close {
   position: absolute;
-  top: 8px;
-  right: 12px;
-  font-size: 20px;
+  top: 10px;
+  right: 20px;
+  font-size: 28px;
   color: #004d66;
   cursor: pointer;
   z-index: 2100;
 }
+</style>
 
 </style>
 
@@ -357,7 +361,7 @@
 
   <!-- Sidebar (User Menu) -->
   <div class="sidebar" id="sidebar">
-    <a href="#" onclick="openPopup()"><i class='bx bx-user'></i> Profile</a>
+    <a href="index.html"><i class='bx bx-user'></i> Profile</a>
     <a href="orders.html"><i class='bx bx-list-ul'></i> My Orders</a>
     <a href="cart.html"><i class='bx bx-cart'></i> Shopping Cart</a>
     <a href="#" id="night-mode-toggle"><i class='bx bx-moon'></i> Night Mode</a>
@@ -449,7 +453,10 @@ Convenience,and giving you back the time </div>
     <h2>Contact Us</h2>
   </section>
 
- <!-- النافذة العائمة -->
+  <!-- زر لإظهار النافذة العائمة -->
+<button onclick="openPopup()">Open Smart Fuel</button>
+
+<!-- النافذة العائمة -->
 <div class="popup" id="popupWindow">
   <div class="popup-content">
     <span class="close" onclick="closePopup()">&times;</span>
@@ -457,8 +464,7 @@ Convenience,and giving you back the time </div>
   </div>
 </div>
 
-
   
 
 </body>
-</html>
+</html>هذا الكود كامل بدي ملف index يضهر كنافذه عائمه مصغره فوق ملف home
