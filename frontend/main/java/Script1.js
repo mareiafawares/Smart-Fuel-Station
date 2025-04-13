@@ -2,7 +2,7 @@
 <script src="login.js"></script>
 
 
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', function ()
     const loginButton = document.querySelector('button');
     const usernameInput = document.querySelector('input[type="text"]');
     const passwordInput = document.querySelector('input[type="password"]');
