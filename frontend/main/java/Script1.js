@@ -1,25 +1,59 @@
 ﻿// JavaScript source code
-<script src="login.js"></script>
+import React, { useState } from 'react';
 
+const LoginPage = () => {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
 
-document.addEventListener('DOMContentLoaded', function ()
-    const loginButton = document.querySelector('button');
-    const usernameInput = document.querySelector('input[type="text"]');
-    const passwordInput = document.querySelector('input[type="password"]');
+    const handleLogin = (e) => {
+        e.preventDefault();
 
-    loginButton.addEventListener('click', function (e) {
-        const username = usernameInput.value.trim();
-        const password = passwordInput.value.trim();
-
-        if (!username || !password) {
-            alert('يرجى إدخال اسم المستخدم وكلمة المرور.');
-            e.preventDefault();
+        // التحقق من صحة المدخلات
+        if (!email || !password) {
+            setError('يرجى إدخال البريد الإلكتروني وكلمة المرور');
             return;
         }
 
-        if (password.length < 8) {
-            alert('يجب أن تكون كلمة المرور 8 أحرف على الأقل.');
-            e.preventDefault();
-            return;
+        // تحقق من إسم المستخدم وكلمة المرور (مثال بسيط)
+        if (email === 'user@example.com' && password === 'password123') {
+            setError('');
+            // إعادة التوجيه إلى الصفحة الرئيسية (يمكنك تعديلها بما يتناسب مع التطبيق)
+            window.location.href = '/home';
+        } else {
+            setError('البريد الإلكتروني أو كلمة المرور غير صحيحة');
         }
-       
+    };
+
+    return (
+        <div>
+            <h2>تسجيل الدخول</h2>
+            <form onSubmit={handleLogin}>
+                <div>
+                    <label htmlFor="email">البريد الإلكتروني</label>
+                    <input
+                        type="email"
+                        id="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
+                    />
+                </div>
+                <div>
+                    <label htmlFor="password">كلمة المرور</label>
+                    <input
+                        type="password"
+                        id="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                    />
+                </div>
+                {error && <p style={{ color: 'red' }}>{error}</p>}
+                <button type="submit">تسجيل الدخول</button>
+            </form>
+        </div>
+    );
+};
+
+export default LoginPage;
