@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <script src="java/home.js"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Smart Fuel Station</title>
@@ -130,6 +129,12 @@
       margin-bottom: 20px;
       color: #004d66;
     }
+    .card.active-card {
+  transform: scale(1.05) translateY(-15px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
+  z-index: 5;
+  transition: transform 0.6s ease, box-shadow 0.6s ease;
+}
 
     /* Responsive */
     @media (max-width: 600px) {
@@ -285,6 +290,26 @@
     .overlay-content p {
       font-size: 16px;
     }
+    .indicators {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.indicators span {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  margin: 0 5px;
+  background-color: #ccc;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.indicators span.active {
+  background-color: #004d66;
+}
+
 
     @media (max-width: 600px) {
       .card {
@@ -295,49 +320,9 @@
       .cards-container {
         flex-direction: column;
       }
+     
+
     }
-
-
-    <style>
-.popup {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.6);
-  display: none;
-  justify-content: center;
-  align-items: center;
-  z-index: 2000;
-}
-
-.popup-content {
-  background: #fff;
-  width: 90%;
-  height: 90%;
-  border-radius: 15px;
-  overflow: hidden;
-  position: relative;
-  box-shadow: 0 0 20px rgba(0,0,0,0.5);
-}
-
-.popup-content iframe {
-  width: 100%;
-  height: 100%;
-  border: none;
-}
-
-.popup .close {
-  position: absolute;
-  top: 10px;
-  right: 20px;
-  font-size: 28px;
-  color: #004d66;
-  cursor: pointer;
-  z-index: 2100;
-}
-</style>
 
 </style>
 
@@ -439,11 +424,11 @@ Convenience,and giving you back the time </div>
         </div>
       </div>
     </div>
-  </section>
-  
+    <!-- نقاط التنقل بين البطاقات -->
+<div class="indicators" id="indicators"></div>
 
-  
-  
+  </section>
+
 
   <section id="about">
     <h2>Our About</h2>
@@ -452,19 +437,76 @@ Convenience,and giving you back the time </div>
   <section id="contact">
     <h2>Contact Us</h2>
   </section>
-
-  <!-- زر لإظهار النافذة العائمة -->
-<button onclick="openPopup()">Open Smart Fuel</button>
-
-<!-- النافذة العائمة -->
-<div class="popup" id="popupWindow">
-  <div class="popup-content">
-    <span class="close" onclick="closePopup()">&times;</span>
-    <iframe src="index.html" frameborder="0"></iframe>
-  </div>
-</div>
-
+  <script>
+    const cards = document.querySelectorAll('.card');
+    const indicatorsContainer = document.getElementById('indicators');
+    let currentIndex = 0;
+    let intervalId = null; // لتخزين رقم التكرار
   
-
+    // إنشاء النقاط (indicators)
+    cards.forEach((_, index) => {
+      const dot = document.createElement('span');
+      dot.addEventListener('click', () => {
+        currentIndex = index;
+        highlightCard(currentIndex);
+      });
+      indicatorsContainer.appendChild(dot);
+    });
+  
+    // تفعيل البطاقة المحددة وتحديث المؤشر
+    function highlightCard(index) {
+      cards.forEach(card => card.classList.remove('active-card'));
+      cards[index].classList.add('active-card');
+  
+      // تمرير البطاقة إلى المنتصف
+      cards[index].scrollIntoView({
+        behavior: 'smooth',
+        inline: 'center',
+        block: 'nearest'
+      });
+  
+      // تحديث النقاط
+      const indicators = document.querySelectorAll('.indicators span');
+      indicators.forEach(dot => dot.classList.remove('active'));
+      if (indicators[index]) indicators[index].classList.add('active');
+    }
+  
+    // تمرير تلقائي
+    function autoSlide() {
+      highlightCard(currentIndex);
+      currentIndex = (currentIndex + 1) % cards.length;
+    }
+  
+    // تشغيل التمرير التلقائي
+    function startAutoSlide() {
+      if (!intervalId) {
+        intervalId = setInterval(autoSlide, 3000);
+      }
+    }
+  
+    // إيقاف التمرير التلقائي
+    function stopAutoSlide() {
+      clearInterval(intervalId);
+      intervalId = null;
+    }
+  
+    // مراقبة قسم الخدمات
+    const servicesSection = document.getElementById('services');
+    const observer = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        startAutoSlide();
+      } else {
+        stopAutoSlide();
+      }
+    }, {
+      threshold: 0.5, // على الأقل نصف القسم ظاهر
+    });
+  
+    observer.observe(servicesSection);
+  
+    // أول مرة
+    highlightCard(currentIndex);
+  </script>
+  
 </body>
-</html>هذا الكود كامل بدي ملف index يضهر كنافذه عائمه مصغره فوق ملف home
+</html> 
