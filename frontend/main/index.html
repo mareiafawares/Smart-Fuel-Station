@@ -173,6 +173,7 @@
       const passwordField = document.getElementById("password");
       const icon = document.getElementById("togglePassword");
 
+<<<<<<< Updated upstream
       if (passwordField.type === "password") {
         passwordField.type = "text";
         icon.classList.remove("bx-show");
@@ -183,6 +184,13 @@
         icon.classList.add("bx-show");
       }
     });
+=======
+            <p style="text-align: center; margin-top: 20px; color: #003d4d; font-size: 16px; font-family: 'Arial', sans-serif;">
+               Already have an account? <a href="login.html" style="color: #067c99; font-weight: bold; text-decoration: none;">Login here</a>
+            </p>
+        </form>
+    </div>
+>>>>>>> Stashed changes
 
     document.getElementById("signupButton").addEventListener("click", async function (event) {
       event.preventDefault();
@@ -232,6 +240,7 @@
 
         let data = await response.json();
 
+<<<<<<< Updated upstream
         if (response.ok) {
           message.textContent = "Login successful!";
           message.style.color = "green";
@@ -248,5 +257,68 @@
       }
     });
   </script>
+=======
+            let username = document.getElementById("username").value.trim();
+            let email = document.getElementById("email").value.trim();
+            let password = document.getElementById("password").value.trim();
+            let role = document.getElementById("role").value;
+            let message = document.getElementById("message");
+
+            if (username.length < 3) {
+                message.textContent = "Username must be at least 3 characters!";
+                message.style.color = "red";
+                return;
+            }
+            if (!email.includes("@")) {
+                message.textContent = "Please enter a valid email!";
+                message.style.color = "red";
+                return;
+            }
+            if (password.length < 6) {
+                message.textContent = "Password must be at least 6 characters!";
+                message.style.color = "red";
+                return;
+            }
+            if (!role) {
+                message.textContent = "Please select a role!";
+                message.style.color = "red";
+                return;
+            }
+
+            let userData = {
+                username: username,
+                email: email,
+                password: password,
+                role: role
+            };
+
+            const apiUrl = "https://your-api.com/auth/register";
+
+            try {
+                let response = await fetch(apiUrl, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(userData)
+                });
+
+                let data = await response.json();
+
+                if (response.ok) {
+                    message.textContent = "Login successful!";
+                    message.style.color = "green";
+                    if (data.token) localStorage.setItem("authToken", data.token);
+                    window.location.href = "frontend/home.html";
+                } else {
+                    message.textContent = data.message || "Login failed! Please check your credentials.";
+                    message.style.color = "red";
+                }
+            } catch (error) {
+                message.textContent = "An error occurred while connecting to the server!";
+                message.style.color = "red";
+                console.error("Error:", error);
+            }
+        });
+    </script>
+>>>>>>> Stashed changes
 </body>
 </html>
