@@ -35,7 +35,7 @@
 
     .icon {
       text-align: center;
-      color:;
+    
       font-family: 'Arial', sans-serif;
       font-size: 60px;
       margin-top: -30px;
@@ -173,7 +173,7 @@
       const passwordField = document.getElementById("password");
       const icon = document.getElementById("togglePassword");
 
-<<<<<<< Updated upstream
+
       if (passwordField.type === "password") {
         passwordField.type = "text";
         icon.classList.remove("bx-show");
@@ -184,13 +184,14 @@
         icon.classList.add("bx-show");
       }
     });
-=======
+    <div>
+<form>
             <p style="text-align: center; margin-top: 20px; color: #003d4d; font-size: 16px; font-family: 'Arial', sans-serif;">
                Already have an account? <a href="login.html" style="color: #067c99; font-weight: bold; text-decoration: none;">Login here</a>
             </p>
         </form>
     </div>
->>>>>>> Stashed changes
+
 
     document.getElementById("signupButton").addEventListener("click", async function (event) {
       event.preventDefault();
@@ -240,7 +241,7 @@
 
         let data = await response.json();
 
-<<<<<<< Updated upstream
+
         if (response.ok) {
           message.textContent = "Login successful!";
           message.style.color = "green";
@@ -256,8 +257,8 @@
         console.error("Error:", error);
       }
     });
-  </script>
-=======
+  
+
             let username = document.getElementById("username").value.trim();
             let email = document.getElementById("email").value.trim();
             let password = document.getElementById("password").value.trim();
@@ -317,8 +318,8 @@
                 message.style.color = "red";
                 console.error("Error:", error);
             }
-        });
+       ;
     </script>
->>>>>>> Stashed changes
+
 </body>
 </html>
