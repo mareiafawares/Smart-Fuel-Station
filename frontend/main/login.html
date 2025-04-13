@@ -1,95 +1,169 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Login</title>
-    <link rel="stylesheet" href="index.css">
-    <link rel="javascript" href="login.js">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        @keyframes gradientBackground {
-            0% { background: linear-gradient(135deg, #ffffff, #d0f0f3, #99e6ff, #003d4d); }
-            100% { background: linear-gradient(135deg, #003d4d, #99e6ff, #d0f0f3, #ffffff); }
-        }
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link rel="stylesheet" href="index.css">
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
-        a:hover {
-            background-color: #002b36;
-        }
+  <style>
+    @keyframes bubble {
+      0% { transform: scale(1); opacity: 0.1; }
+      50% { transform: scale(1.5); opacity: 0.05; }
+      100% { transform: scale(1); opacity: 0.1; }
+    }
 
-        /* Responsive styles */
-        @media (max-width: 768px) {
-            form {
-                width: 90% !important;
-                padding: 30px !important;
-            }
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+    }
 
-            h2 {
-                font-size: 24px !important;
-            }
+    @media (max-width: 600px) {
+      #loginForm {
+        width: 90% !important;
+        height: auto !important;
+        padding: 20px !important;
+      }
+    }
 
-            input, select {
-                font-size: 14px !important;
-                padding: 12px !important;
-            }
+    .icon {
+      text-align: center;
+      font-family: 'Arial', sans-serif;
+      font-size: 60px;
+      margin-top: -30px;
+      color: white;
+    }
 
-            a {
-                font-size: 16px !important;
-                padding: 14px !important;
-            }
-        }
-    </style>
+    #loginForm {
+      background-color: #004d66;
+      width: 30vw;
+      height: 65vh;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .form-section {
+      margin-bottom: 20px;
+    }
+
+    .form-section label {
+      display: block;
+      color: white;
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    .form-section input,
+    .form-section select {
+      width: 100%;
+      padding: 10px;
+      font-size: 14px;
+      border-radius: 50px;
+      background: linear-gradient(135deg, #00aabb, #004d66);
+      color: white;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+
+    .password-wrapper {
+      position: relative;
+      width: 100%;
+    }
+
+    .password-wrapper input {
+      width: 100%;
+      padding: 10px 45px 10px 10px;
+      font-size: 14px;
+      border-radius: 50px;
+      background: linear-gradient(135deg, #00aabb, #004d66);
+      color: white;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+
+    .password-wrapper i {
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      font-size: 20px;
+      color: white;
+    }
+
+    #loginButton {
+      display: block;
+      width: fit-content;
+      margin: 0 auto;
+      text-align: center;
+      padding: 10px 25px;
+      font-size: 27px;
+      font-weight: bold;
+      background: linear-gradient(135deg, #00aabb, #004d66);
+      color: #fff;
+      border: none;
+      border-radius: 50px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+  </style>
 </head>
 <body>
-    <div style="display: flex; justify-content: center; align-items: center; height: 100vh; padding: 20px; background: linear-gradient(135deg, #ffffff, #d0f0f3, #99e6ff, #003d4d); animation: gradientBackground 10s infinite alternate;">
-        <form style="background-color: white; padding: 50px; border-radius: 25px; box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2); max-width: 450px; width: 100%; position: relative; overflow: hidden;">
-            <h2 style="text-align: center; color: #003d4d; font-family: 'Arial', sans-serif; font-size: 30px; margin-bottom: 30px;">Login</h2>
+  <div style="display: flex; justify-content: center; align-items: center; height: 100vh; background-color: #004d66;">
+    <form id="loginForm">
+      <div style="position: absolute; top: -50px; right: -50px; width: 120px; height: 120px; background-color: #003d4d; border-radius: 50%; opacity: 0.1; animation: bubble 6s infinite;"></div>
+      <div style="position: absolute; bottom: -50px; left: -50px; width: 120px; height: 120px; background-color: #003d4d; border-radius: 50%; opacity: 0.1; animation: bubble 8s infinite;"></div>
 
-            
-            <div style="margin-bottom: 25px;">
-                <label for="username" style="display: block; color: #003d4d; font-weight: bold; font-size: 18px; font-family: 'Arial', sans-serif;">Username:</label>
-                <input type="text" id="username" name="username" style="width: 100%; padding: 14px; font-size: 16px; border: 1px solid #bbb; border-radius: 10px; font-family: 'Arial', sans-serif;" required>
-            </div>
+      <div class="icon">
+        <i class='bx bx-user'></i>
+      </div>
 
-           
-<div style="margin-bottom: 25px; position: relative;">
-    <label for="password" style="display: block; color: #003d4d; font-weight: bold; font-size: 18px; font-family: 'Arial', sans-serif;">Password:</label>
-                <input type="password" id="password" name="password" style="width: 100%; padding: 14px; font-size: 16px; border: 1px solid #bbb; border-radius: 10px; font-family: 'Arial', sans-serif;" required>
+      <div class="form-section">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+      </div>
 
-    <i id="togglePassword" class='bx bx-show'
-        style="position: absolute; top: 50%; transform: translateY(-50%); right: 14px; font-size: 22px; cursor: pointer; color: #003d4d;"></i>
-</div>
+      <div class="form-section">
+        <label for="password">Password:</label>
+        <div class="password-wrapper">
+          <input type="password" id="password" name="password" required>
+          <i id="togglePassword" class="bx bx-show"></i>
+        </div>
+      </div>
 
+      <div class="form-section">
+        <label for="role">Select Role:</label>
+        <select id="role" name="role" required style="background-color: #002b36;">
+          <option value="">Select User System</option>
+          <option value="customer">Customer</option>
+          <option value="manager">Manager</option>
+          <option value="employee">Employee</option>
+        </select>
+      </div>
 
-           
-            <div style="margin-bottom: 30px;">
-                <label for="role" style="display: block; color: #003d4d; font-weight: bold; font-size: 18px; font-family: 'Arial', sans-serif;">Select Role:</label>
-                <select id="role" name="role" style="width: 100%; padding: 14px; font-size: 16px; border: 1px solid #bbb; border-radius: 10px; font-family: 'Arial', sans-serif;" required>
-                    <option value="">Choose User System</option>
-                    <option value="customer">Customer</option>
-                    <option value="manager">Manager</option>
-                    <option value="employee">Employee</option>
-                </select>
-            </div>
+      <div id="message" style="margin-bottom: 10px; text-align: center; font-size: 13px;"></div>
+      <a href="home1.html" id="loginButton">Login</a>
+    </form>
+  </div>
 
-            
-            <a href="home1.html" style="display: block; width: 100%; padding: 16px; background-color: #003d4d; color: white; text-align: center; border-radius: 10px; font-size: 18px; font-weight: bold; font-family: 'Arial', sans-serif; text-decoration: none; cursor: pointer; transition: background-color 0.3s;">
-                Login
-            </a>
-        </form>
-    </div>
+  <script>
+    const togglePassword = document.getElementById("togglePassword");
+    const passwordField = document.getElementById("password");
 
-    
-    <script>
-        const togglePassword = document.getElementById("togglePassword");
-        const passwordField = document.getElementById("password");
+    togglePassword.addEventListener("click", () => {
+        const type = passwordField.type === "password" ? "text" : "password";
+        passwordField.type = type;
+        togglePassword.classList.toggle("bx-show");
+        togglePassword.classList.toggle("bx-hide");
+    });
+</script>
 
-        togglePassword.addEventListener("click", () => {
-            const type = passwordField.type === "password" ? "text" : "password";
-            passwordField.type = type;
-            togglePassword.classList.toggle("bx-show");
-            togglePassword.classList.toggle("bx-hide");
-        });
-    </script>
 </body>
 </html>

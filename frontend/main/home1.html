@@ -6,6 +6,7 @@
   <title>Smart Fuel Station</title>
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
   <style>
+   
     * {
       margin: 0;
       padding: 0;
@@ -324,6 +325,86 @@
 
     }
 
+<<<<<<< HEAD
+=======
+
+    
+
+  
+ 
+
+
+/* نافذة منبثقة */
+.popup {
+  
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  
+
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  backdrop-filter: blur(10px); /* تأثير الضبابية على الخلفية */
+}
+
+/* محتوى النافذة المنبثقة */
+.popup-content {
+  background: #fff;
+  width: 30vw;
+  height: 84vh;
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 15px;
+  overflow: hidden; /* إخفاء أي تجاوز */
+  position: relative;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  z-index: 2100;
+  box-sizing: border-box; /* لتضمين الحواف والحشوات في الأبعاد */
+}
+
+/* زر الإغلاق */
+.popup .close {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 28px;
+  color: #004d66;
+  cursor: pointer;
+  z-index: 2200;
+}
+
+/* iframe داخل النافذة */
+.popup iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block; /* إزالة المسافات الفارغة أسفله */
+}
+
+body.night-mode {
+  background-color: #121212;
+  color: #f0f0f0;
+}
+
+body.night-mode header {
+  background-color: #1a1a1a;
+}
+
+body.night-mode .sidebar {
+  background-color: rgba(30, 30, 30, 0.95);
+}
+
+body.night-mode .btn {
+  background: linear-gradient(135deg, #555, #111);
+}
+
+
+
+>>>>>>> 6aaf6e842ed3d7f5ad1663735379c26e05d6a0ab
 </style>
 
 
@@ -346,7 +427,8 @@
 
   <!-- Sidebar (User Menu) -->
   <div class="sidebar" id="sidebar">
-    <a href="index.html"><i class='bx bx-user'></i> Profile</a>
+    <a href="javascript:void(0);" onclick="openPopup()"><i class='bx bx-user'></i> Profile</a>
+
     <a href="orders.html"><i class='bx bx-list-ul'></i> My Orders</a>
     <a href="cart.html"><i class='bx bx-cart'></i> Shopping Cart</a>
     <a href="#" id="night-mode-toggle"><i class='bx bx-moon'></i> Night Mode</a>
@@ -508,5 +590,12 @@ Convenience,and giving you back the time </div>
     highlightCard(currentIndex);
   </script>
   
+<<<<<<< HEAD
 </body>
 </html> 
+=======
+
+
+</body>
+</html>
+>>>>>>> 6aaf6e842ed3d7f5ad1663735379c26e05d6a0ab
