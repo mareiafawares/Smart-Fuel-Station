@@ -282,6 +282,7 @@
     .indicators {
   text-align: center;
   margin-top: 30px;
+  
 }
 
 .indicators span {
@@ -298,6 +299,11 @@
 .indicators span.active {
   background-color: #004d66;
 }
+.active-card {
+  transform: translateY(-20px);
+  box-shadow: 0 12px 25px rgba(0, 77, 102, 0.4);
+  transition: transform 0.5s, box-shadow 0.5s;
+}
 
     @media (max-width: 600px) {
       .card {
@@ -311,56 +317,67 @@
     }
 
 
-.popup {
-  
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  
-
-  display: none;
+    .popup {
+  display: none; 
   justify-content: center;
   align-items: center;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(5px);
   z-index: 2000;
-  backdrop-filter: blur(10px); 
 }
+
+
 
 
 .popup-content {
-  background: #fff;
-  width: 30vw;
-  height: 84vh;
-  max-width: 100%;
-  max-height: 100%;
-  border-radius: 15px;
-  overflow: hidden; 
+  background: #ffffff;
+  width: 95vw;
+  height: 95vh;
+  border-radius: 20px;
+  overflow: hidden;
   position: relative;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
   z-index: 2100;
-  box-sizing: border-box; 
+  display: flex;
+  flex-direction: column;
+  padding: 0; 
 }
 
-/* زر الإغلاق */
+
+
 .popup .close {
   position: absolute;
   top: 10px;
-  right: 20px;
-  font-size: 28px;
-  color: #004d66;
+  right: 10px;
+  width: 32px;
+  height: 32px;
+  background-color: #004d66;
+  color: #fff;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 32px;
+  font-size: 20px;
+  font-weight: bold;
   cursor: pointer;
-  z-index: 2200;
+  transition: background-color 0.3s ease;
 }
 
-/* داخل النافذة */
+.popup .close:hover {
+  background-color: #00aabb;
+}
+
+
+
 .popup iframe {
   width: 100%;
   height: 100%;
   border: none;
-  display: block; 
+  border-radius: 0 0 20px 20px;
 }
-
 body.night-mode {
   background-color: #121212;
   color: #f0f0f0;
@@ -438,7 +455,8 @@ Convenience,and giving you back the time </div>
             <h3>Fuel Delivery</h3>
             <p>We bring the fuel to you, anytime, anywhere.</p>
             <br>
-            <a href="#" class="btn">Order Now</a>
+            <a href="javascript:void(0);" class="btn" onclick="openPopupWithPage('Fuel Delivery.html')">Order Now</a>
+
           </div>
         </div>
         <div class="card">
@@ -490,21 +508,27 @@ Convenience,and giving you back the time </div>
   
 <button onclick="openPopup()">Open Smart Fuel</button>
 
-<!-- النافذة العائمة -->
+
 <div class="popup" id="popupWindow">
   <div class="popup-content">
     <span class="close" onclick="closePopup()">&times;</span>
+    <iframe src="Fuel Delivery.html" frameborder="0"></iframe>
+  </div>
+</div>
+<div class="popup" id="popupWindow1">
+  <div class="popup-content">
+    <span class="close" onclick="closePopup1()">&times;</span>
     <iframe src="index.html" frameborder="0"></iframe>
   </div>
 </div>
 
 <script>
-  
   const cards = document.querySelectorAll('.card');
   const indicatorsContainer = document.getElementById('indicators');
   let currentIndex = 0;
+  let slideInterval;
 
-  // إنشاء النقاط (indicators)
+  
   cards.forEach((_, index) => {
     const dot = document.createElement('span');
     dot.addEventListener('click', () => {
@@ -514,36 +538,47 @@ Convenience,and giving you back the time </div>
     indicatorsContainer.appendChild(dot);
   });
 
-  // تفعيل البطاقة المحددة وتحديث المؤشر
   function highlightCard(index) {
     cards.forEach(card => card.classList.remove('active-card'));
     cards[index].classList.add('active-card');
 
-    // تمرير البطاقة إلى المنتصف
     cards[index].scrollIntoView({
       behavior: 'smooth',
       inline: 'center',
       block: 'nearest'
     });
 
-    // تحديث المؤشر (النقاط)
     const indicators = document.querySelectorAll('.indicators span');
     indicators.forEach(dot => dot.classList.remove('active'));
     if (indicators[index]) indicators[index].classList.add('active');
   }
 
-  // تمرير تلقائي
   function autoSlide() {
     highlightCard(currentIndex);
-    currentIndex = (currentIndex + 1) % cards.length; // يرجع للبداية بعد آخر بطاقة
+    currentIndex = (currentIndex + 1) % cards.length;
   }
 
-  // تشغيل أول مرة
+  
   highlightCard(currentIndex);
 
-  // تكرار التمرير كل 3 ثوانٍ
-  setInterval(autoSlide, 3000);
+  
+  const servicesSection = document.getElementById('services');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        slideInterval = setInterval(autoSlide, 2000);
+      } else {
+        clearInterval(slideInterval);
+      }
+    });
+  }, {
+    threshold: 0.5 
+  });
+
+  
+  observer.observe(servicesSection);
 </script>
+
 
 
 </body>
