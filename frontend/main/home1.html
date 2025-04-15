@@ -734,7 +734,7 @@ Convenience,and giving you back the time </div>
 <a href="#services" class="btn" >Order now</a>
 </div>
 
-
+<!-- النصوص والزر -->
 </section>
 </section>
 <section id="services">
@@ -790,17 +790,127 @@ Convenience,and giving you back the time </div>
     <div class="indicators" id="indicators"></div>
   </section>
 
-  
-  
+  <section id="about" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; background: linear-gradient(to right, #c9d6ff, #e2e2e2); padding: 60px 30px; font-family: 'Poppins', sans-serif; color: #2b2e4a;">
 
-  <section id="about">
-    <h2>Our About</h2>
+    <!-- Left content -->
+    <div style="flex: 1 1 55%; padding: 20px; max-width: 650px;">
+      <h2 style="font-size: 38px; margin-bottom: 15px; color: #1f4068;">Who We Are</h2>
+      <p style="font-size: 18px; margin-bottom: 20px; color: #3e3e3e;">
+        Discover how we make car services more accessible, convenient, and time-saving for everyone, everywhere. Our smart mobile station is ready to serve you on-demand.
+      </p>
+  
+      <!-- Buttons -->
+      <div style="display: flex; gap: 15px;">
+        <!-- Services Button -->
+        <button onclick="toggleSection('services-list')" style="padding: 12px 25px; background-color: #4b6cb7; color: #fff; border: none; border-radius: 6px; cursor: pointer; transition: all 0.3s ease;">
+          Our Services
+        </button>
+        <!-- Media Info Button -->
+        <button onclick="toggleSection('media-info')" style="padding: 12px 25px; background-color: #182848; color: #fff; border: none; border-radius: 6px; cursor: pointer; transition: all 0.3s ease;">
+          View Media
+        </button>
+      </div>
+  
+      <!-- Hidden Services List with Animation -->
+      <div id="services-list" style="display: none; margin-top: 20px; font-size: 17px; line-height: 1.8; background-color: #ffffffd6; padding: 20px; border-radius: 10px; box-shadow: 0 8px 16px rgba(0,0,0,0.1); color: #2c3e50; opacity: 0; animation: fadeIn 1s forwards;">
+        <ul style="list-style: none; padding: 0;">
+          <li style="margin-bottom: 15px;">
+            ⛽ <strong>Fuel Delivery</strong><br>
+            <span style="font-size: 15px; color: #444;">We deliver fuel to your parked car wherever you are — skip the gas station queue entirely.</span>
+          </li>
+          <li style="margin-bottom: 15px;">
+            ⚡ <strong>Electric Vehicle Charging</strong><br>
+            <span style="font-size: 15px; color: #444;">Our mobile station provides reliable EV charging at your location, whether at home or work.</span>
+          </li>
+          <li style="margin-bottom: 15px;">
+            🛢 <strong>Oil Change</strong><br>
+            <span style="font-size: 15px; color: #444;">Regular oil changes with top-quality products — no more waiting at service centers.</span>
+          </li>
+          <li>
+            🚗 <strong>Car Wash</strong><br>
+            <span style="font-size: 15px; color: #444;">We offer eco-friendly, water-saving car washes that leave your vehicle spotless.</span>
+          </li>
+        </ul>
+      </div>
+  
+      <!-- Hidden Media Info with Animation -->
+      <div id="media-info" style="display: none; margin-top: 20px; font-size: 17px; line-height: 1.8; background-color: #ffffffd6; padding: 20px; border-radius: 10px; box-shadow: 0 8px 16px rgba(0,0,0,0.1); color: #2c3e50; opacity: 0; animation: fadeIn 1s forwards;">
+        <p><strong>Our Vision:</strong> To revolutionize car care services by offering smart, efficient, and contactless solutions through mobile stations.</p>
+        <p><strong>How it works:</strong> Simply choose the service, set your location, and our station comes to you — no queues, no hassle!</p>
+        <p><strong>Why choose us?</strong></p>
+        <ul style="padding-left: 20px; line-height: 1.7;">
+          <li>🚀 Fast & Smart On-Demand Service</li>
+          <li>📍 GPS-Based Real-Time Location</li>
+          <li>🧼 Eco-Friendly & Safe Procedures</li>
+          <li>📱 Easy-to-Use Web App</li>
+        </ul>
+        <p style="margin-top: 10px;"><em>We're here to fuel your journey — anytime, anywhere.</em></p>
+      </div>
+    </div>
+  
+    <!-- Right image -->
+    <div style="flex: 1 1 40%; text-align: center;">
+      <img src="about1.jpg" alt="Smart Station" style="max-width: 80%; border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.1);">
+    </div>
   </section>
+  
+ 
+  
+  <script>
+    function toggleSection(id) {
+      const element = document.getElementById(id);
+      // Toggle visibility with fade-in effect
+      if (element.style.display === 'none') {
+        element.style.display = 'block';
+        element.style.opacity = 0;
+        element.style.animation = 'fadeIn 1s forwards';
+      } else {
+        element.style.display = 'none';
+      }
+    }
+  </script>
+  
+  <style>
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+  </style>
+  
+  
+  
+  <script>
+    function toggleSection(id) {
+      const target = document.getElementById(id);
+      const other = id === 'services-list' ? document.getElementById('media-info') : document.getElementById('services-list');
+  
+      if (target.style.display === 'block') {
+        target.style.display = 'none';
+      } else {
+        target.style.display = 'block';
+        other.style.display = 'none';
+      }
+    }
+  </script>
 
   <section id="contact">
     <h2>Contact Us</h2>
   </section>
-
+<!-- Team Section -->
+<section style="background-color: #f4f6f8; padding: 40px 30px; font-family: 'Poppins', sans-serif;">
+  <div style="max-width: 1000px; margin: auto;">
+    <h3 style="font-size: 28px; margin-bottom: 20px; color: #1f4068;">
+      <span style="font-size: 28px;">👥</span> Our Team
+    </h3>
+    <p style="font-size: 17px; line-height: 1.8; color: #2c3e50;">
+      <strong>Supervisor:</strong> Eng. Mondher Labasoul<br>
+      <strong>Coordinator:</strong> Maria Al-Fawaris<br>
+      <strong>Team Members:</strong><br>
+      Alaa Al-Sharman, Farah Al-Hawari, Sarah Al-Hayassat, Amina Jawabra, Mais Abu Al-Heija
+    </p>
+  </div>
+</section>
   
 
   
@@ -814,7 +924,7 @@ Convenience,and giving you back the time </div>
     <iframe src="index.html" frameborder="0"></iframe>
   </div>
 </div>
-
+ 
 
 <script>
   const cards = document.querySelectorAll('.card');
