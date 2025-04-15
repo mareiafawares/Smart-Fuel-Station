@@ -1,144 +1,266 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Quick Car Wash</title>
+  <meta charset="UTF-8">
+  <title>Car Wash Service</title>
+  <link href="https://fonts.googleapis.com/css2?family=Segoe+UI&display=swap" rel="stylesheet">
   <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    html, body {
-      width: 100%;
-      height: 100%;
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #e6f0f8;
       margin: 0;
-      padding: 0;
-      overflow: hidden;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #f0f8f9;
+      padding: 40px;
     }
 
-    .container {
-      width: 100%;
-      height: 100%;
-      padding: 10px;
+    .main-box {
+      display: flex;
       background-color: #ffffff;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+      overflow: hidden;
+      max-width: 950px;
+      margin: auto;
+    }
+
+    .left {
+      flex: 1;
+      background: #f1f9ff;
+      padding: 40px 30px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      border-right: 1px solid #dbe2ea;
     }
 
-    h1 {
-      font-size: 18px;
-      color: #00e6e6;
-      margin-bottom: 8px;
-      text-align: center;
+    .left img {
+      width: 120px;
+      margin-bottom: 20px;
     }
 
-    p {
-      font-size: 12px;
-      color: #444;
-      text-align: center;
-      margin-bottom: 15px;
-    }
-
-    form {
-      width: 100%;
-      max-width: 250px;
-    }
-
-    .form-group {
+    .left h2 {
+      color: #2b6cb0;
+      font-size: 26px;
       margin-bottom: 10px;
     }
 
-    .form-group label {
+    .left p {
+      text-align: center;
+      color: #4a5568;
+      font-size: 15px;
+    }
+
+    .right {
+      flex: 1;
+      padding: 40px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      font-weight: 600;
       display: block;
-      font-size: 12px;
-      margin-bottom: 4px;
-      color: #444;
+      margin-bottom: 8px;
     }
 
-    .form-group select,
-    .form-group input {
+    select, input {
       width: 100%;
-      padding: 6px;
-      font-size: 12px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      background-color: #f9f9f9;
+      padding: 12px;
+      border: 1px solid #cbd5e0;
+      border-radius: 8px;
+      font-size: 14px;
     }
 
-    .form-group button {
+    .map-preview {
+      width: 100%;
+      height: 180px;
+      border-radius: 10px;
       margin-top: 10px;
-      width: 100%;
-      padding: 8px;
-      font-size: 13px;
-      background: linear-gradient(135deg, #00aabb, #004d66);
-  color: #fff;
-  border: none;
-  border-radius: 50px;
-  text-decoration: none;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+      border: 2px solid #ccc;
+      overflow: hidden;
     }
 
-    .form-group button:hover {
-      background-color: #004d40;
+    .map-preview iframe {
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
     }
+
+    .price-display {
+      margin-top: 10px;
+      font-size: 16px;
+      color: #2b6cb0;
+      font-weight: bold;
+    }
+
+    button {
+      background-color: #2b6cb0;
+      color: white;
+      padding: 14px;
+      width: 100%;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+
+    button:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+
+    button:hover:enabled {
+      background-color: #1a4f90;
+    }
+
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 10;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.4);
+    }
+
+    .modal-content {
+      background-color: #fff;
+      margin: 10% auto;
+      padding: 20px;
+      border-radius: 15px;
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+    }
+
+    .modal-content h3 {
+      color: #2b6cb0;
+      margin-bottom: 10px;
+    }
+
+    .modal-content p {
+      color: #444;
+      margin: 10px 0;
+    }
+
+    .modal-content button {
+      background-color: #2b6cb0;
+      color: white;
+      padding: 10px 20px;
+      margin-top: 15px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .modal-content button:hover {
+      background-color: #1a4f90;
+    }
+
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Quick Car Wash</h1>
-    <p>Choose your car type & wash package</p>
-    <form>
-      <div class="form-group">
-        <label for="car-type">Car Type</label>
-        <select id="car-type">
-          <option value="">Select</option>
-          <option value="sedan">Sedan</option>
-          <option value="suv">SUV</option>
-          <option value="truck">Truck</option>
-        </select>
-      </div>
 
-      <div class="form-group">
-        <label for="wash-package">Wash Package</label>
-        <select id="wash-package">
-          <option value="">Select</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <button type="submit">Start Wash</button>
-      </div>
-    </form>
+<div class="main-box">
+  <div class="left">
+    <img src="icon car.png" alt="Car Wash Icon">
+    <h2>Smart Car Wash</h2>
+    <p>Book your car wash now with just one click! Reliable, fast, and at your doorstep.</p>
   </div>
 
-  <script>
-    const washPackageSelect = document.getElementById("wash-package");
-    const carTypeSelect = document.getElementById("car-type");
+  <div class="right">
+    <div class="form-group">
+      <label>Wash Type</label>
+      <select id="washType" onchange="showPrice(); validateForm();">
+        <option value="">Select Wash Type</option>
+        <option value="Internal Wash">Internal Wash</option>
+        <option value="External Wash">External Wash</option>
+        <option value="Full Wash">Full Wash</option>
+      </select>
+      <div id="priceDisplay" class="price-display"></div>
+    </div>
 
-    const washPackages = {
-      sedan: ["Basic Wash", "Deluxe Wash", "Premium Wash"],
-      suv: ["Basic Wash", "Deluxe Wash", "Premium Wash"],
-      truck: ["Deluxe Wash", "Premium Wash"]
-    };
+    <div class="form-group">
+      <label>Your Location</label>
+      <input type="text" id="addressInput" placeholder="Enter your address" oninput="validateForm()">
+      <div class="map-preview" onclick="openMap()">
+        <iframe src="https://www.google.com/maps?q=Jordan&output=embed" frameborder="0" allowfullscreen></iframe>
+      </div>
+    </div>
 
-    carTypeSelect.addEventListener("change", function () {
-      const type = this.value;
-      washPackageSelect.innerHTML = `<option value="">Select</option>`;
-      if (washPackages[type]) {
-        washPackages[type].forEach(option => {
-          const optionElement = document.createElement("option");
-          optionElement.value = option;
-          optionElement.textContent = option;
-          washPackageSelect.appendChild(optionElement);
-        });
-      }
-    });
-  </script>
+    <button id="submitBtn" onclick="confirmOrder()" disabled>Submit Order</button>
+  </div>
+</div>
+
+<!-- Modal -->
+<div id="orderModal" class="modal">
+  <div class="modal-content">
+    <h3>Confirm Your Order</h3>
+    <p id="orderDetails"></p>
+    <button onclick="finalizeOrder()">Confirm Order</button>
+  </div>
+</div>
+
+<script>
+  const priceDisplay = document.getElementById('priceDisplay');
+  const washType = document.getElementById('washType');
+  const addressInput = document.getElementById('addressInput');
+  const submitBtn = document.getElementById('submitBtn');
+  const orderModal = document.getElementById('orderModal');
+  const orderDetails = document.getElementById('orderDetails');
+
+  function showPrice() {
+    const type = washType.value;
+    let price = '';
+
+    if (type === 'Internal Wash') {
+      price = 'Price: 5 JD';
+    } else if (type === 'External Wash') {
+      price = 'Price: 4 JD';
+    } else if (type === 'Full Wash') {
+      price = 'Price: 8 JD';
+    }
+
+    priceDisplay.textContent = price;
+  }
+
+  function openMap() {
+    window.open("https://www.google.com/maps?q=Jordan", "_blank");
+  }
+
+  function validateForm() {
+    const wash = washType.value;
+    const address = addressInput.value.trim();
+    submitBtn.disabled = !(wash && address);
+  }
+
+  function confirmOrder() {
+    const wash = washType.value;
+    const address = addressInput.value.trim();
+    const price = priceDisplay.textContent;
+
+    orderDetails.innerText = 🚗 Wash Type: ${wash}\n📍 Location: ${address}\n💰 ${price};
+    orderModal.style.display = 'block';
+  }
+
+  function finalizeOrder() {
+    orderModal.style.display = 'none';
+    alert("✅ Your order has been confirmed! Thank you 🙌");
+  }
+
+  window.onclick = function(event) {
+    if (event.target === orderModal) {
+      orderModal.style.display = "none";
+    }
+  }
+</script>
+
 </body>
 </html>
