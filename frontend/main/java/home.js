@@ -28,55 +28,29 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-// النافذة المنبثقة
-function openPopup() {
-  const popup = document.getElementById('popupWindow');
+// فتح نافذة Oil Change
+function openOilPopup() {
+  const popup = document.getElementById('popupOil');
   if (popup) {
     popup.style.display = 'flex';
   }
 }
 
-function closePopup() {
-  const popup = document.getElementById('popupWindow');
+// إغلاق نافذة Oil Change
+function closeOilPopup() {
+  const popup = document.getElementById('popupOil');
   if (popup) {
     popup.style.display = 'none';
   }
 }
 
-// إغلاق النافذة عند الضغط خارجها (اختياري)
+// إغلاق النافذة عند الضغط خارجها
 window.addEventListener('click', function (event) {
-  const popup = document.getElementById('popupWindow');
+  const popup = document.getElementById('popupOil');
   if (popup && event.target === popup) {
-    closePopup();
+    closeOilPopup();
   }
 });
-
-  if (localStorage.getItem('nightMode') === 'enabled') {
-    document.documentElement.classList.add('night-mode');
-  }
-  if (nightModeToggle) {
-    nightModeToggle.addEventListener('click',() => {
-      document.body.classList.toggle('night-mode');
-      localStorage.setItem('nightMode',
-        document.body.classList.contains('night-mode') ? 'enabled' : 'disabled'
-      );
-    });
-  }
-// وظيفة إظهار وإخفاء النافذة الجانبية
-function toggleSidebar() {
-  const sidebar = document.getElementById('sidebar');
-  sidebar.classList.toggle('active');
-}
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -110,7 +84,28 @@ window.addEventListener('click', function (event) {
   }
 });
 
+// النافذة المنبثقة
+function openPopup() {
+  const popup = document.getElementById('popupWindow');
+  if (popup) {
+    popup.style.display = 'flex';
+  }
+}
 
+function closePopup() {
+  const popup = document.getElementById('popupWindow');
+  if (popup) {
+    popup.style.display = 'none';
+  }
+}
+
+// إغلاق النافذة عند الضغط خارجها (اختياري)
+window.addEventListener('click', function (event) {
+  const popup = document.getElementById('popupWindow');
+  if (popup && event.target === popup) {
+    closePopup();
+  }
+});
 
 
 
@@ -152,3 +147,90 @@ function closeModal() {
   servicesWrapper.classList.remove('no-pointer');
   cardsContainer.classList.remove('no-pointer');
 }
+
+
+
+
+
+
+/// فتح نافذة "Car Wash"
+function openCarWashPopup() {
+  const popup = document.getElementById('carWashPopup');
+  if (popup) {
+    popup.style.display = 'flex'; // يعرض النافذة المنبثقة
+  }
+}
+
+// إغلاق نافذة "Car Wash"
+function closeCarWashPopup() {
+  const popup = document.getElementById('carWashPopup');
+  if (popup) {
+    popup.style.display = 'none'; // يخفي النافذة المنبثقة
+  }
+}
+
+// إغلاق النافذة عند الضغط خارجها (اختياري)
+window.addEventListener('click', function (event) {
+  const popup = document.getElementById('carWashPopup');
+  if (popup && event.target === popup) {
+    closeCarWashPopup();
+  }
+});
+
+
+
+
+
+
+
+// فتح النافذة المنبثقة الخاصة بتوصيل الوقود
+function openFuelPopup() {
+  const popup = document.getElementById('popupFuel');
+  if (popup) {
+    popup.style.display = 'flex';
+  }
+}
+
+// إغلاق النافذة المنبثقة الخاصة بتوصيل الوقود
+function closeFuelPopup() {
+  const popup = document.getElementById('popupFuel');
+  if (popup) {
+    popup.style.display = 'none';
+  }
+}
+
+// إغلاق النافذة عند الضغط خارجها (اختياري)
+window.addEventListener('click', function (event) {
+  const popup = document.getElementById('popupFuel');
+  if (popup && event.target === popup) {
+    closeFuelPopup();
+  }
+});
+
+
+
+
+
+// فتح النافذة المنبثقة الخاصة بشحن السيارات الكهربائية
+function openEVPopup() {
+  const popup = document.getElementById('popupEV');
+  if (popup) {
+    popup.style.display = 'flex';
+  }
+}
+
+// إغلاق النافذة المنبثقة الخاصة بشحن السيارات الكهربائية
+function closeEVPopup() {
+  const popup = document.getElementById('popupEV');
+  if (popup) {
+    popup.style.display = 'none';
+  }
+}
+
+// إغلاق النافذة عند الضغط خارجها (اختياري)
+window.addEventListener('click', function (event) {
+  const popup = document.getElementById('popupEV');
+  if (popup && event.target === popup) {
+    closeEVPopup();
+  }
+});
