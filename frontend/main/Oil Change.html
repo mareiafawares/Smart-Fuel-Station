@@ -341,6 +341,7 @@
       const selectedOil = oilTypes[type]?.find(o => o.value === oilTypeSelect.value);
       if (selectedOil) {
         priceDisplay.innerText = `Total Price: $${selectedOil.price}`;
+
         priceDisplay.style.display = 'block';
       } else {
         priceDisplay.style.display = 'none';
