@@ -286,7 +286,31 @@
     .overlay-content p {
       font-size: 16px;
     }
+    .indicators {
+  text-align: center;
+  margin-top: 30px;
+  
+}
 
+.indicators span {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  margin: 0 5px;
+  background-color: #ccc;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.indicators span.active {
+  background-color: #004d66;
+}
+.active-card {
+  transform: translateY(-20px);
+  box-shadow: 0 12px 25px rgba(0, 77, 102, 0.4);
+  transition: transform 0.5s, box-shadow 0.5s;
+}
     @media (max-width: 600px) {
       .card {
         width: 300px;
@@ -712,6 +736,7 @@ Convenience,and giving you back the time </div>
 
 
 </section>
+</section>
 <section id="services">
     <h2>Our Services</h2>
     <div class="services-wrapper">
@@ -721,19 +746,10 @@ Convenience,and giving you back the time </div>
             <source src="vidio3.mp4" type="video/mp4" />
           </video>
           <div class="overlay-content">
-            <h3>Oil Change</h3>
-            <p>Keep your engine running smoothly with our mobile oil change.</p>
+            <h3>Fuel Delivery</h3>
+            <p>We bring the fuel to you, anytime, anywhere.</p>
             <br>
-            <a href="javascript:void(0);" class="btn" onclick="openOilPopup()">Order Now</a>
-<!-- نافذة Oil Change -->
-<div class="popup" id="popupOil">
-  <div class="popup-content">
-    <span class="close" onclick="closeOilPopup()">&times;</span>
-    <iframe src="Oil Change.html"></iframe>
-  </div>
-</div>
-            
-
+            <a href="#" class="btn">Order Now</a>
           </div>
         </div>
         <div class="card">
@@ -741,19 +757,11 @@ Convenience,and giving you back the time </div>
             <source src="vidio4.mp4" type="video/mp4" />
           </video>
           <div class="overlay-content">
-            <!-- زر لإظهار النافذة المنبثقة لفتح صفحة "Car Wash" -->
-
-  <a href="javascript:void(0);" class="btn" onclick="openCarWashPopup()">Order Now</a>
-
-<!-- النافذة المنبثقة -->
-<div class="popup" id="carWashPopup">
-  <div class="popup-content">
-    <span class="close" onclick="closeCarWashPopup()">&times;</span>
-    <iframe src="car wash.html" frameborder="0"></iframe>
-  </div>
-</div>
-
-</div>
+            <h3>Car Wash</h3>
+            <p>Get your car washed on demand, hassle-free.</p>
+            <br>
+            <a href="#" class="btn">Order Now</a>
+          </div>
         </div>
         <div class="card">
           <video autoplay loop muted>
@@ -761,18 +769,9 @@ Convenience,and giving you back the time </div>
           </video>
           <div class="overlay-content">
             <h3>EV Charging</h3>
-<p>Charge your electric vehicle wherever you are.</p>
-<br>
-<a href="#" class="btn" onclick="openEVPopup()">Order Now</a>
-
-<!-- نافذة منبثقة لملف Electric Vehicle Charging -->
-<div class="popup" id="popupEV">
-  <div class="popup-content">
-    <span class="close" onclick="closeEVPopup()">&times;</span>
-    <iframe src="Electric Vehicle Charging.html" frameborder="0"></iframe>
-  </div>
-</div>
-
+            <p>Charge your electric vehicle wherever you are.</p>
+            <br>
+            <a href="#" class="btn">Order Now</a>
           </div>
         </div>
         <div class="card">
@@ -780,26 +779,16 @@ Convenience,and giving you back the time </div>
             <source src="vidio2.mp4" type="video/mp4" />
           </video>
           <div class="overlay-content">
-            
-            <h3>Fuel Delivery</h3>
-<p>We bring the fuel to you, anytime, anywhere.</p>
-<br>
-<a href="#" class="btn" onclick="openFuelPopup()">Order Now</a>
-
-<!-- النافذة المنبثقة الخاصة بتوصيل الوقود -->
-<div class="popup" id="popupFuel">
-  <div class="popup-content">
-    <span class="close" onclick="closeFuelPopup()">&times;</span>
-    <iframe src="Fuel Delivery.html" frameborder="0"></iframe>
-  </div>
-</div>
-
+            <h3>Oil Change</h3>
+            <p>Keep your engine running smoothly with our mobile oil change.</p>
+            <br>
+            <a href="#" class="btn">Order Now</a>
           </div>
         </div>
       </div>
     </div>
+    <div class="indicators" id="indicators"></div>
   </section>
-  
 
   
   
@@ -826,6 +815,63 @@ Convenience,and giving you back the time </div>
   </div>
 </div>
 
+
+<script>
+  const cards = document.querySelectorAll('.card');
+  const indicatorsContainer = document.getElementById('indicators');
+  let currentIndex = 0;
+  let slideInterval;
+
+  
+  cards.forEach((_, index) => {
+    const dot = document.createElement('span');
+    dot.addEventListener('click', () => {
+      currentIndex = index;
+      highlightCard(currentIndex);
+    });
+    indicatorsContainer.appendChild(dot);
+  });
+
+  function highlightCard(index) {
+    cards.forEach(card => card.classList.remove('active-card'));
+    cards[index].classList.add('active-card');
+
+    cards[index].scrollIntoView({
+      behavior: 'smooth',
+      inline: 'center',
+      block: 'nearest'
+    });
+
+    const indicators = document.querySelectorAll('.indicators span');
+    indicators.forEach(dot => dot.classList.remove('active'));
+    if (indicators[index]) indicators[index].classList.add('active');
+  }
+
+  function autoSlide() {
+    highlightCard(currentIndex);
+    currentIndex = (currentIndex + 1) % cards.length;
+  }
+
+  
+  highlightCard(currentIndex);
+
+  
+  const servicesSection = document.getElementById('services');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        slideInterval = setInterval(autoSlide, 2000);
+      } else {
+        clearInterval(slideInterval);
+      }
+    });
+  }, {
+    threshold: 0.5 
+  });
+
+  
+  observer.observe(servicesSection);
+</script>
 
 
 </body>
