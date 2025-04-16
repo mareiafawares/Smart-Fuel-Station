@@ -124,23 +124,268 @@ Convenience,and giving you back the time </div>
 
 
 
-  <section id="about" >
 
-    
-      
-      
-  </section>
-  
- 
-  
-  
-  
-  
-  
-  
-  
-  
 
+
+
+
+
+  <section id="about-smart-fuel-station">
+    <style>
+      /* General Styling */
+      #about-smart-fuel-station {
+        font-family: 'Arial', sans-serif;
+        background: #f2f2f2;
+        padding: 80px 20px;
+        text-align: center;
+        overflow-x: hidden; /* Prevent horizontal scrolling */
+      }
+  
+      .about-title, .team-title {
+        font-size: 40px;
+        color: #003344;
+        margin-bottom: 20px;
+        font-weight: bold;
+      }
+  
+      .about-main {
+        font-size: 22px;
+        color: #444;
+        margin-bottom: 40px;
+        max-width: 900px;
+        margin-left: auto;
+        margin-right: auto;
+        line-height: 1.6;
+        text-align: justify;
+      }
+  
+      .about-cards {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 30px;
+        margin-bottom: 60px;
+      }
+  
+      .about-card {
+        background: #ffffff;
+        border-radius: 10px;
+        padding: 20px;
+        width: 250px; /* Smaller size */
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        text-align: left;
+        font-size: 18px;
+      }
+  
+      .about-card h3 {
+        color: #007799;
+        font-size: 22px;
+        margin-bottom: 10px;
+      }
+  
+      .about-card p {
+        font-size: 16px;
+        color: #333;
+      }
+  
+      /* Team Section - Full Screen */
+      .team-fullscreen {
+        width: 100vw;
+        min-height: 100vh;
+        background-color: #e5f1f5;
+        padding: 60px 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+  
+      .team-grid {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px; /* Reduced gap */
+      }
+  
+      .team-card {
+        width: 150px; /* Smaller size */
+        background-color: #ffffff;
+        border-radius: 10px;
+        padding: 10px;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        cursor: pointer;
+        transition: transform 0.3s;
+      }
+  
+      .team-card:hover {
+        transform: scale(1.05);
+      }
+  
+      .team-card img {
+        width: 100%;
+        height: 120px; /* Smaller size */
+        object-fit: cover;
+        border-radius: 50%;
+        margin-bottom: 10px;
+      }
+  
+      .team-card h3 {
+        font-size: 16px;
+        color: #005577;
+        margin-bottom: 5px;
+      }
+  
+      .team-card p {
+        font-size: 14px;
+        color: #666;
+      }
+  
+      /* Modal Styling */
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 9999;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%); /* Center the modal both horizontally and vertically */
+        width: 50vw; /* 50% width */
+        height: 70vh; /* 70% height */
+        background-color: rgba(0,0,0,0.7);
+        justify-content: center;
+        align-items: center;
+      }
+  
+      .modal-content {
+        width: 100%;
+        height: 100%;
+        background-color: white;
+        border-radius: 8px;
+        overflow: hidden;
+        position: relative;
+      }
+  
+      .modal-content iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+      }
+  
+      .modal-close {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        font-size: 22px;
+        font-weight: bold;
+        cursor: pointer;
+        color: #333;
+      }
+  
+      @media (max-width: 768px) {
+        .team-card {
+          width: 120px; /* Smaller on mobile */
+        }
+  
+        .team-card img {
+          height: 100px;
+        }
+  
+        .modal {
+          width: 60vw; /* Adjusted for mobile */
+          height: 60vh;
+        }
+      }
+    </style>
+  
+    <!-- About Section -->
+    <div class="about-content">
+      <h2 class="about-title">About Smart Fuel Station</h2>
+      <p class="about-main">
+        Our Smart Fuel Station is a revolutionary concept that integrates technology into everyday fueling services. Through state-of-the-art automation and smart systems, we provide a seamless and efficient refueling experience. Our station uses sensors, AI, and real-time data monitoring to ensure accuracy, security, and convenience for our customers.
+      </p>
+  
+      <div class="about-cards">
+        <div class="about-card">
+          <h3>Features</h3>
+          <p>Smart sensors, automated service, and real-time monitoring for user convenience.</p>
+        </div>
+        <div class="about-card">
+          <h3>Goals</h3>
+          <p>To improve the fueling experience and reduce environmental impact through innovation.</p>
+        </div>
+        <div class="about-card">
+          <h3>Future Vision</h3>
+          <p>Expand services across cities with full automation and AI integration.</p>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Team Section (Full Screen) -->
+    <div class="team-fullscreen">
+      <h2 class="team-title">Our Team</h2>
+      <div class="team-grid">
+        <div class="team-card" onclick="openModal('team/mareia.html')">
+          <img src="team/mareia.jpg" alt="Maria Fawaris">
+          <h3>Maria Fawaris</h3>
+          <p>Front-end Developer</p>
+        </div>
+        <div class="team-card" onclick="openModal('team/alaa.html')">
+          <img src="team/alaa.jpg" alt="Alaa Sharaman">
+          <h3>Alaa Sharaman</h3>
+          <p>Front-end Developer</p>
+        </div>
+        <div class="team-card" onclick="openModal('team/sara.html')">
+          <img src="team/sara.jpg" alt="Sara Hayassat">
+          <h3>Sara Hayassat</h3>
+          <p>React Developer</p>
+        </div>
+        <div class="team-card" onclick="openModal('team/amneh.html')">
+          <img src="team/amneh.jpg" alt="Amneh Jawabra">
+          <h3>Amneh Jawabra</h3>
+          <p>React Developer</p>
+        </div>
+        <div class="team-card" onclick="openModal('team/mays.html')">
+          <img src="team/mays.jpg" alt="Mays Abu Alhajeh">
+          <h3>Mays Abu Alhajeh</h3>
+          <p>React Developer</p>
+        </div>
+        <div class="team-card" onclick="openModal('team/farah.html')">
+          <img src="team/farah.png" alt="Farah Al-Hawari">
+          <h3>Farah Al-Hawari</h3>
+          <p>React Developer</p>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Modal Window -->
+    <div class="modal" id="teamModal">
+      <div class="modal-content">
+        <span class="modal-close" onclick="closeModal()">&times;</span>
+        <iframe id="teamFrame" src=""></iframe>
+      </div>
+    </div>
+  
+    <!-- Modal Script -->
+    <script>
+      function openModal(pageUrl) {
+        document.getElementById("teamFrame").src = pageUrl;
+        document.getElementById("teamModal").style.display = "flex";
+      }
+  
+      function closeModal() {
+        document.getElementById("teamModal").style.display = "none";
+        document.getElementById("teamFrame").src = "";
+      }
+    </script>
+</section>
+
+
+
+
+
+
+
+
+  
+  
   <section id="contact">
     <h2>Contact Us</h2>
   </section>
