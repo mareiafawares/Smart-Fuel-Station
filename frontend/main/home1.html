@@ -116,26 +116,11 @@ Convenience,and giving you back the time </div>
       </div>
     </div>
     <div class="indicators" id="indicators"></div>
-  </section>
+  </section>           
 
 
-
-
-
-
-
-
-
-
-                      
-
-
-
-
-
-
-<!-- Section: Project Overview with Image and Paragraph -->
-<section style="width: 100vw; min-height: 100vh; background: #f0f8ff; display: flex; flex-direction: column; align-items: center; padding: 40px 20px; box-sizing: border-box;">
+<!-- Section About by alaa-->
+<section id="about" style="width: 100vw; min-height: 100vh; background: #f0f8ff; display: flex; flex-direction: column; align-items: center; padding: 40px 20px; box-sizing: border-box;">
 
   <!-- Image and Description Side by Side -->
   <div style="display: flex; gap: 40px; align-items: center; max-width: 1200px; width: 100%; flex-wrap: wrap;">
@@ -343,6 +328,107 @@ Convenience,and giving you back the time </div>
 
 
 
+<!--section contact by alaa-->
+
+<section id="contact" style="padding: 60px 20px; background: linear-gradient(to right, #f0f4f8, #d9e2ec); font-family: 'Segoe UI', sans-serif;">
+  <div style="max-width: 1000px; margin: auto; background-color: white; padding: 40px; border-radius: 15px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
+    <h2 style="text-align: center; margin-bottom: 40px; font-size: 32px; color: #333;">Contact Us</h2>
+
+    <!-- Contact Form -->
+    <div style="max-width: 600px; margin: auto;">
+      <form id="contactForm" onsubmit="return validateForm()">
+        <label style="display:block; margin-bottom:5px;">Your Name:</label>
+        <input type="text" id="name" name="name" required style="width:100%; padding:12px; margin-bottom:15px; border:1px solid #ccc; border-radius:8px;">
+
+        <label style="display:block; margin-bottom:5px;">Your Email:</label>
+        <input type="email" id="email" name="email" required style="width:100%; padding:12px; margin-bottom:15px; border:1px solid #ccc; border-radius:8px;">
+
+        <label style="display:block; margin-bottom:5px;">Your Message:</label>
+        <textarea id="message" name="message" required style="width:100%; padding:12px; height:100px; margin-bottom:15px; border:1px solid #ccc; border-radius:8px;"></textarea>
+
+        <button type="submit" style="background-color: #2f5061; color: white; border: none; padding: 12px 20px; border-radius: 8px; cursor: pointer;">Send Message</button>
+      </form>
+
+      <!-- Star Rating -->
+      <div style="margin-top: 30px;">
+        <h4 style="margin-bottom: 10px;">Rate Us</h4>
+        <div id="stars" style="font-size: 40px; color: #ccc; cursor: pointer;">
+          <span onclick="rateUs(1)">&#9733;</span>
+          <span onclick="rateUs(2)">&#9733;</span>
+          <span onclick="rateUs(3)">&#9733;</span>
+          <span onclick="rateUs(4)">&#9733;</span>
+          <span onclick="rateUs(5)">&#9733;</span>
+        </div>
+        <div id="rating-message" style="margin-top: 10px; color: #2f5061;"></div>
+      </div>
+    </div>
+
+    <!-- Contact Info -->
+    <div style="margin-top: 50px; text-align: center; padding: 30px; background-color: #f1f5f9; border-radius: 12px;">
+      <h3 style="color: #2f5061; margin-bottom: 20px;">Our Information</h3>
+
+      <p style="margin: 8px 0;"><strong>Location:</strong> Irbid, Jordan</p>
+      <p style="margin: 8px 0;"><strong>Phone 1:</strong> +962 7 9123 4567</p>
+      <p style="margin: 8px 0;"><strong>Phone 2:</strong> +962 7 9888 1122</p>
+      <p style="margin: 8px 0;"><strong>Email:</strong> info@smartfuelstation.com</p>
+
+      <!-- Instagram Links -->
+      <div style="margin-top: 20px; display: flex; gap: 10px; flex-direction: column; align-items: center;">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <a href="https://www.instagram.com/alaa_el.hussein?igsh=cWswdG1qMnAwZmU1" target="_blank">
+            <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram" style="width:36px; height:36px; border-radius:50%;">
+          </a>
+          <span style="font-weight: 500;">alaa_el.hussein</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <a href="https://www.instagram.com/mareiafawares.ff?igsh=dDRleWZrMG9jZnFn" target="_blank">
+            <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram" style="width:36px; height:36px; border-radius:50%;">
+          </a>
+          <span style="font-weight: 500;">mareiafawares.ff</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+    function validateForm() {
+      var name = document.getElementById('name').value.trim();
+      var email = document.getElementById('email').value.trim();
+      var message = document.getElementById('message').value.trim();
+      var emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+
+      if (!name || !email || !message) {
+        alert("Please fill out all fields.");
+        return false;
+      }
+
+      if (!emailPattern.test(email)) {
+        alert("Please enter a valid email address.");
+        return false;
+      }
+
+      alert("Message sent successfully!");
+      return true;
+    }
+
+    function rateUs(rating) {
+      const stars = document.querySelectorAll("#stars span");
+      stars.forEach((star, index) => {
+        star.style.color = index < rating ? "#FFD700" : "#ccc";
+      });
+
+      const messages = [
+        "Thank you for your feedback!",
+        "We appreciate your opinion!",
+        "Thanks! We're getting better!",
+        "Awesome! You're the best!",
+        "Perfect! We're happy you're happy!"
+      ];
+      document.getElementById('rating-message').innerText = messages[rating - 1];
+    }
+  </script>
+</section>
 
 
 
@@ -351,15 +437,7 @@ Convenience,and giving you back the time </div>
 
 
 
-
-
-
-
-
-
-
-
-
+  
 
 
 
@@ -377,25 +455,6 @@ Convenience,and giving you back the time </div>
 
 
   
-  
-  <section id="contact">
-    <h2>Contact Us</h2>
-  </section>
-
-  
-
-
-
-
-
-
-
-
-
-
-  
-<!-- زر لإظهار النافذة العائمة -->
-<button onclick="openPopup()">Open Smart Fuel</button>
 
 <!-- النافذة العائمة -->
 <div class="popup" id="popupWindow">
@@ -405,6 +464,22 @@ Convenience,and giving you back the time </div>
   </div>
 </div>
  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <script>
   const cards = document.querySelectorAll('.card');
