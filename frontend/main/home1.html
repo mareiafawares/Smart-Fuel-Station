@@ -310,8 +310,9 @@
       <a href="#services">SERVICES</a>
       <a href="#about">ABOUT</a>
       <a href="#contact">CONTACT</a>
-      <div id="user-icon" class="icon-link" onclick="toggleSidebar()">
+      <button onclick="toggleSidebar()" class="icon-link">
         <i class="bx bx-user-circle"></i>
+      </button>
     </div>
     </nav>
   </header>
@@ -411,7 +412,12 @@ Convenience,and giving you back the time </div>
   </section>
 
   
-  
-
+  <script>
+    function toggleSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      sidebar.classList.toggle('active');
+    }
+  </script>
+<script src="index.js"></script>
 </body>
 </html>
