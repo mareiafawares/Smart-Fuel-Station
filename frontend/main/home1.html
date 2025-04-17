@@ -249,20 +249,25 @@ Convenience,and giving you back the time </div>
           <a href="#" class="btn service-btn" data-url="fuel.html">Order Now</a>
         </div>
       </div>
-
     </div>
-  </div>
-  <div class="indicators" id="indicators"></div>
-</section>
+    <div class="indicators" id="indicators"></div>
+  </section>
 
-<!-- النافذة المنبثقة -->
-<!-- Modal Window -->
-<div id="serviceModal" class="modal">
-  <div class="modal-content">
-    <span class="close-btn">&times;</span>
-    <iframe id="modalIframe" src="" frameborder="0"></iframe>
-  </div>
-</div>
+
+
+
+
+
+
+
+
+
+                      
+
+
+
+
+
 
 <!-- Section: Project Overview with Image and Paragraph -->
 <section style="width: 100vw; min-height: 100vh; background: #f0f8ff; display: flex; flex-direction: column; align-items: center; padding: 40px 20px; box-sizing: border-box;">
@@ -352,6 +357,124 @@ Convenience,and giving you back the time </div>
   </div>
 </div>
 
+<!-- JavaScript for Modal -->
+<script>
+  function openModal(url) {
+    document.getElementById('modal').style.display = 'block';
+    var modalBody = document.getElementById('modal-body');
+    fetch(url)
+      .then(response => response.text())
+      .then(data => {
+        modalBody.innerHTML = data;
+      });
+  }
+
+  function closeModal() {
+    document.getElementById('modal').style.display = 'none';
+  }
+</script>
+
+<!-- Styles -->
+<style>
+  body {
+    overflow-x: hidden;
+  }
+
+  .info-box:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .team-card {
+    width: calc(16.66% - 20px);
+    background-color: #ffffff;
+    border-radius: 15px;
+    padding: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: transform 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 40px;
+  }
+
+  .team-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+  }
+
+  .team-card img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 12px;
+  }
+
+  .team-card h3 {
+    font-size: 16px;
+    color: #003344;
+    margin: 5px 0;
+    text-align: center;
+  }
+
+  .team-card p {
+    font-size: 14px;
+    color: #555;
+    text-align: center;
+  }
+
+  @media (max-width: 1024px) {
+    .team-card {
+      width: calc(33.33% - 20px);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .team-card {
+      width: calc(50% - 20px);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .team-card {
+      width: 100%;
+    }
+  }
+  
+  
+  .monther-card {
+  width: 40%;
+  margin: 30px auto 0 auto; /* وسط الصفحة */
+  background-color: #ffffff;
+  border-radius: 15px;
+  padding: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s;
+ margin-top: 70px;
+}
+
+.monther-card:hover {
+  transform: scale(1.05);
+}
+
+.monther-card img {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 12px;
+}
+
+
+
+
+
+
+</style>
 
 
 
@@ -360,6 +483,36 @@ Convenience,and giving you back the time </div>
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
   <section id="contact">
     <h2>Contact Us</h2>
   </section>
@@ -376,7 +529,8 @@ Convenience,and giving you back the time </div>
 
 
   
-
+<!-- زر لإظهار النافذة العائمة -->
+<button onclick="openPopup()">Open Smart Fuel</button>
 
 <!-- النافذة العائمة -->
 <div class="popup" id="popupWindow">
@@ -386,6 +540,22 @@ Convenience,and giving you back the time </div>
   </div>
 </div>
  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <script>
   const cards = document.querySelectorAll('.card');
