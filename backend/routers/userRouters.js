@@ -1,4 +1,5 @@
 const express= require('express')
+<<<<<<< Updated upstream
 const {auth,getAllUsers,createuser,UpdateUserByID,deleteUserById,login}=require('../controllers/userController')
 
 const router = express.Router();
@@ -9,3 +10,10 @@ router.delete('/deleteUser/:id',deleteUserById)
 router.post('/login',login)
 router.get('/auth',auth)
 module.exports=router;
+=======
+const {getAllUsers}=require('../controllers/UserController')
+ 
+const router = express.Router();
+router.get('/users', getAllUsers);
+module.exports=router
+>>>>>>> Stashed changes

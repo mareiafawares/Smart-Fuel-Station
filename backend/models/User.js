@@ -1,11 +1,18 @@
 const mongoose = require('mongoose')
+<<<<<<< Updated upstream
 const bcrypt=require('bcrypt')
 const UserSchema = new mongoose.Schema({
    name:{type:String,required:true},
+=======
+
+const UserSchema = new mongoose.Schema({
+    name:{type:String,required:true},
+>>>>>>> Stashed changes
     email:{type:String,required:true},
     password:{type:String,required:true},
    
 })
+<<<<<<< Updated upstream
 UserSchema.pre('save',async function (next){
     if(!this.isModified('password')) return next()
     try{
@@ -18,8 +25,13 @@ UserSchema.pre('save',async function (next){
 
 
     }
+
 })
 
+=======
+
+
+>>>>>>> Stashed changes
 
 
 module.exports=mongoose.model('User',UserSchema)
