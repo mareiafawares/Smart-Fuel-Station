@@ -103,7 +103,44 @@
       text-decoration: underline;
     }
 
-    /* Responsive for small screens */
+    .social-login {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .social-login p {
+      font-size: 13px;
+      color: #666;
+      margin-bottom: 10px;
+    }
+
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    .social-icons a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background-color: #f0f0f0;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      transition: background-color 0.3s;
+    }
+
+    .social-icons a:hover {
+      background-color: #e0e0e0;
+    }
+
+    .social-icons img {
+      width: 22px;
+      height: 22px;
+    }
+
     @media screen and (max-width: 480px) {
       .container {
         padding: 20px 15px;
@@ -166,6 +203,14 @@
 
       <div class="form-group">
         <button type="submit">Sign Up</button>
+      </div>
+
+      <div class="social-login">
+        <p>or sign up using</p>
+        <div class="social-icons">
+          <a href="#"><img src="fac.png" alt="Facebook"></a>
+          <a href="#"><img src="google (1).png" alt="Google"></a>
+        </div>
       </div>
 
       <div class="footer">
