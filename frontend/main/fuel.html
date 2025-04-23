@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Fuel Order Page</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Roboto', sans-serif;
+    }
+
+    body {
+      background-color: #f0f0f0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      display: flex;
+      justify-content: space-between;
+      width: 90%;
+      max-width: 700px;
+      background-color: #ffffff;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      padding: 15px;
+    }
+
+    .left-side {
+      width: 30%;
+      background-color: #f7f7f7;
+      border-radius: 10px;
+      padding: 15px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .fuel-icon img {
+      width: 100px;
+      height: 100px;
+      margin-bottom: 10px;
+    }
+
+    .left-side h3 {
+      font-size: 20px;
+      color: #333;
+      font-weight: bold;
+    }
+
+    .left-side p {
+      margin-top: 8px;
+      color: #666;
+      font-size: 13px;
+    }
+
+    .right-side {
+      width: 65%;
+      padding: 15px;
+      background-color: #f9f9f9;
+      border-radius: 10px;
+    }
+
+    .right-side h2 {
+      font-size: 24px;
+      margin-bottom: 15px;
+      color: #333;
+      text-align: center;
+    }
+
+    .right-side label {
+      font-size: 16px;
+      margin-bottom: 5px;
+      display: block;
+      color: #555;
+    }
+
+    .right-side select,
+    .right-side input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 15px;
+    }
+
+    .right-side select:focus,
+    .right-side input:focus {
+      border-color: #007BFF;
+      outline: none;
+    }
+
+    .price {
+      font-size: 18px;
+      text-align: center;
+      font-weight: bold;
+      color: #28a745;
+      margin-bottom: 10px;
+    }
+
+    .map iframe {
+      width: 100%;
+      height: 120px;
+      border: 0;
+      border-radius: 8px;
+    }
+
+    #orderBtn:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+
+    #orderBtn {
+      width: 100%;
+      padding: 12px;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    #orderBtn:hover {
+      background-color: #218838;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.6);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background-color: white;
+      padding: 25px;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    .modal-content p {
+      margin-bottom: 15px;
+      font-size: 16px;
+      color: #333;
+    }
+
+    .modal button {
+      padding: 10px 20px;
+      margin-top: 10px;
+      border: none;
+      background-color: #28a745;
+      color: white;
+      cursor: pointer;
+      font-size: 16px;
+      border-radius: 8px;
+    }
+
+    .modal button:hover {
+      background-color: #218838;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    
+    <div class="left-side">
+      <div class="fuel-icon">
+        <img src="fuel.png" alt="Fuel Icon" />
+      </div>
+      <h3>Fuel Refills</h3>
+      <p>Best refueling service in your area.</p>
+    </div>
+
+   
+    <div class="right-side">
+      <h2>Order Fuel</h2>
+      <form id="fuelForm">
+        <label for="carType">Car Type:</label>
+        <select id="carType" required>
+          <option value="">Select Car Type</option>
+          <option value="Regular Gasoline">Regular Gasoline</option>
+          <option value="Diesel">Diesel</option>
+        </select>
+
+        <label for="fuelType">Fuel Type:</label>
+        <select id="fuelType" required disabled>
+          <option value="">Select Fuel Type</option>
+        </select>
+
+        <label for="location">Location:</label>
+        <input type="text" id="location" placeholder="Enter your location" required />
+
+        <div class="map">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18..." loading="lazy"></iframe>
+        </div>
+
+        <div class="price">
+          Price: <span id="price">0</span> JOD
+        </div>
+
+        <button type="button" id="orderBtn" disabled>Order Now</button>
+      </form>
+    </div>
+  </div>
+
+  
+  <div id="confirmationModal" class="modal">
+    <div class="modal-content" id="modalContent">
+      
+    </div>
+  </div>
+
+  <script>
+    const carTypeSelect = document.getElementById('carType');
+    const fuelTypeSelect = document.getElementById('fuelType');
+    const priceElement = document.getElementById('price');
+    const orderBtn = document.getElementById('orderBtn');
+    const locationInput = document.getElementById('location');
+    const confirmationModal = document.getElementById('confirmationModal');
+    const modalContent = document.getElementById('modalContent');
+
+    const fuelPrices = {
+      "Regular Gasoline": { "95": 2.0, "98": 2.5 },
+      "Diesel": { "Diesel": 2.2 },
+    };
+
+    carTypeSelect.addEventListener('change', (e) => {
+      const carType = e.target.value;
+      fuelTypeSelect.innerHTML = `<option value="">Select Fuel Type</option>`;
+      priceElement.textContent = '0';
+      if (carType && fuelPrices[carType]) {
+        fuelTypeSelect.disabled = false;
+        for (const type in fuelPrices[carType]) {
+          const opt = document.createElement('option');
+          opt.value = type;
+          opt.textContent = type;
+          fuelTypeSelect.appendChild(opt);
+        }
+      } else {
+        fuelTypeSelect.disabled = true;
+      }
+      checkInputs();
+    });
+
+    fuelTypeSelect.addEventListener('change', () => {
+      const fuelType = fuelTypeSelect.value;
+      const carType = carTypeSelect.value;
+      if (fuelType && carType) {
+        priceElement.textContent = fuelPrices[carType][fuelType];
+      } else {
+        priceElement.textContent = '0';
+      }
+      checkInputs();
+    });
+
+    locationInput.addEventListener('input', checkInputs);
+
+    function checkInputs() {
+      const allFilled =
+        carTypeSelect.value &&
+        fuelTypeSelect.value &&
+        locationInput.value;
+      orderBtn.disabled = !allFilled;
+    }
+
+    orderBtn.addEventListener('click', () => {
+      const car = carTypeSelect.value;
+      const fuel = fuelTypeSelect.value;
+      const loc = locationInput.value;
+      const price = priceElement.textContent;
+
+      modalContent.innerHTML = `
+        <p><strong>Car Type:</strong> ${car}</p>
+        <p><strong>Fuel Type:</strong> ${fuel}</p>
+        <p><strong>Location:</strong> ${loc}</p>
+        <p><strong>Price:</strong> ${price} JOD</p>
+        <button id="confirmOrder">Confirm Order</button>
+      `;
+      confirmationModal.style.display = 'flex';
+
+      document.getElementById('confirmOrder').addEventListener('click', () => {
+        confirmationModal.style.display = 'none';
+        alert('✅ Your order has been added to the cart. Thank you 🙌');
+      });
+    });
+   
+    // إغلاق المودال عند الضغط خارجه
+    window.addEventListener('click', (e) => {
+      if (e.target === confirmationModal) {
+        confirmationModal.style.display = 'none';
+      }
+    });
+  </script>
+  
+</body>
+</html>
