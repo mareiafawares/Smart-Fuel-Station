@@ -1,3 +1,4 @@
+
 const express = require('express');
 const { auth,getAllUsers,createuser,UpdateUserByID,deleteUserById,login} = 
 require('../controllers/userController');
@@ -12,3 +13,11 @@ router.post('/login', login);
 router.get('/auth', auth);
 
 module.exports = router;
+
+const express= require('express')
+const {getAllUsers}=require('../controllers/UserController')
+ 
+
+router.get('/users', getAllUsers);
+module.exports=router
+
