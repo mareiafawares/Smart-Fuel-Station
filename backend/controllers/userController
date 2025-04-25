@@ -1,16 +1,13 @@
 
 
 
+
 const mongoose = require('mongoose');
 const User= require('../models/User')
 const bcrypt=require('bcrypt')
 const jwt=require('jsonwebtoken')
 require ('dotenv').config()
 const SECRET_KEY=process.env.SECRET_KEY
-
-
-
-
 
 
 exports.getAllUsers=async(req,res)=>{
@@ -20,6 +17,7 @@ exports.getAllUsers=async(req,res)=>{
     } catch (error) {
      res.status(500).json({message:error.message})
     }
+
 
 
 }
@@ -101,6 +99,9 @@ exports.auth = async (req,res,next)=>{
         res.status (500).json({message:error.message})
     }
 }
+
+
+
 
 
 
