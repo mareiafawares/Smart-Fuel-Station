@@ -22,15 +22,17 @@
     }
 
     .container {
-      display: flex;
-      justify-content: space-between;
-      width: 90%;
-      max-width:500px;
-      background-color: #ffffff;
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-      border-radius: 10px;
-      padding: 15px;
-    }
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 600px; /* صغرنا الحجم شوي */
+  background-color: #ffffff;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+  padding: 20px;
+}
+
+
 
     .left-side {
       flex: 1;
@@ -41,7 +43,7 @@
 
     .right-side {
       flex: 1;
-      max-width: 350px;
+      max-width: 250px;
     }
 
     .oil-icon img {
@@ -66,7 +68,7 @@
 
     .service-info p {
       font-size: 14px;
-      color: #666;
+      color: #080808;
     }
 
     .form-group {
@@ -76,7 +78,7 @@
     .form-group label {
       display: block;
       margin-bottom: 6px;
-      font-size: 15px;
+      font-size: 12px;
       font-weight: 500;
       color: #444;
     }
@@ -194,20 +196,19 @@
     }
 
     @media screen and (max-width: 800px) {
-      .container {
-        flex-direction: column;
-        padding: 20px;
-        margin: 20px;
-      }
+  .container {
+    margin: 20px auto;
+  }
 
-      .left-side, .right-side {
-        width: 100%;
-      }
+  .left-side, .right-side {
+    width: 100%;
+  }
 
-      h1 {
-        text-align: center;
-      }
-    }
+  h1 {
+    text-align: center;
+  }
+}
+
   </style>
 </head>
 <body>
