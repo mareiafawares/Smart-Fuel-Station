@@ -1,4 +1,6 @@
-<<<<<<< Updated upstream
+
+
+
 
 const mongoose = require('mongoose');
 const User= require('../models/User')
@@ -6,9 +8,8 @@ const bcrypt=require('bcrypt')
 const jwt=require('jsonwebtoken')
 require ('dotenv').config()
 const SECRET_KEY=process.env.SECRET_KEY
-=======
-const User= require('../models/User')
->>>>>>> Stashed changes
+
+
 exports.getAllUsers=async(req,res)=>{
     try {
         const users=await User.find()
@@ -16,7 +17,9 @@ exports.getAllUsers=async(req,res)=>{
     } catch (error) {
      res.status(500).json({message:error.message})
     }
-<<<<<<< Updated upstream
+
+
+
 }
 exports.createuser=async (req,res)=>{
     const {name,email,password}=req.body 
@@ -96,3 +99,9 @@ exports.auth = async (req,res,next)=>{
         res.status (500).json({message:error.message})
     }
 }
+
+
+
+
+
+
