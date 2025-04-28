@@ -172,6 +172,7 @@
   </style>
 </head>
 <body>
+
   <div class="container">
     <h1>Sign Up</h1>
     <p>Choose your role & sign up</p>
@@ -199,31 +200,143 @@
           <option value="manager">Manager</option>
           <option value="employee">Employee</option>
         </select>
-      </div>
+    </div>
 
-      <div class="form-group">
-        <button type="submit">Sign Up</button>
-      </div>
+    <div class="form-group">
+      <button type="submit">Sign Up</button>
+    </div>
 
-      <div class="social-login">
-        <p>or sign up using</p>
-        <div class="social-icons">
-          <a href="#"><img src="fac.png" alt="Facebook"></a>
-          <a href="#"><img src="google (1).png" alt="Google"></a>
-        </div>
+    <div class="social-login">
+      <p>or sign up using</p>
+      <div class="social-icons">
+          <div class="fb-login-button" data-width="" data-size="" data-button-type="" data-layout="" data-auto-logout-link="false" data-use-continue-as="false"></div>
+          <div>
+            <div id="g_id_onload"
+            data-client_id="125948482176-uoellcrg04oqg6bsjb3fujq9ktak9sje.apps.googleusercontent.com"
+            data-context="signup"
+            data-ux_mode="popup"
+            data-callback="signUpCallback"
+            data-auto_prompt="false">
+       </div>
+       
+       <div class="g_id_signin"
+            data-type="icon"
+            data-shape="square"
+            data-theme="filled_black"
+            data-text="signup_with"
+            data-size="large">
+       </div>
+          </div>
+        <!-- <a href="#"><img src="fac.png" alt="Facebook"></a>
+        <a href="#"><img src="google (1).png" alt="Google"></a> -->
       </div>
+    </div>
 
-      <div class="footer">
-        <p>Already have an account? <a href="login.html">Sign in</a></p>
-      </div>
-    </form>
-  </div>
+    <div class="footer">
+      <p>Already have an account? <a href="/login">Sign in</a></p>
+    </div>
+    <div id="message" style="margin-bottom: 10px; text-align: center; font-size: 13px;"></div>
 
-  <script>
-    document.getElementById("signupForm").addEventListener("submit", function(e) {
-      e.preventDefault();
-      alert("Registration successful!");
+    
+  </form>
+</div>
+
+<script>
+    // إظهار/إخفاء الباسورد
+    document.getElementById("togglePassword")?.addEventListener("click", function () {
+      const passwordField = document.getElementById("password");
+      const icon = document.getElementById("togglePassword");
+  
+      if (passwordField.type === "password") {
+        passwordField.type = "text";
+        icon.classList.remove("bx-show");
+        icon.classList.add("bx-hide");
+      } else {
+        passwordField.type = "password";
+        icon.classList.remove("bx-hide");
+        icon.classList.add("bx-show");
+      }
+    });
+  
+    // كولباك تسجيل الدخول من جوجل
+    async function signUpCallback(response) {
+      const userInfo = jwt_decode(response.credential);
+      console.log("Google user info:", userInfo);
+  
+      const username = userInfo.name || "";
+      const email = userInfo.email || "";
+      const role = "customer"; // ديفولت role
+  
+      // ما في باسورد لأنو Google login
+      const userData = { username, email, password: null, role };
+  
+      try {
+        const res = await fetch("http://localhost:3000/signup/google", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(userData),
+        });
+  
+        const data = await res.json();
+  
+        if (res.ok) {
+          alert("Signup successful with Google!");
+          window.location.href = "login.html";
+        } else {
+          alert(data.message || "Signup failed");
+        }
+      } catch (err) {
+        console.error("Signup error:", err);
+        alert("Server error. Try again.");
+      }
+    }
+  
+    // إرسال النموذج التقليدي
+    document.getElementById("signupForm").addEventListener("submit", async function (event) {
+      event.preventDefault();
+  
+      const username = document.getElementById("username").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value.trim();
+      const role = document.getElementById("role").value;
+      const message = document.getElementById("message");
+  
+      if (username.length < 3 || !email.includes("@") || password.length < 6 || !role) {
+        message.textContent = "Please fill out the form correctly.";
+        message.style.color = "red";
+        return;
+      }
+  
+      const userData = { username, email, password, role };
+  
+      try {
+        const response = await fetch("http://localhost:3000/signup", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(userData),
+        });
+  
+        const data = await response.json();
+  
+        if (response.ok) {
+          message.textContent = "Signup successful!";
+          message.style.color = "green";
+          setTimeout(() => window.location.href = "login.html", 1000);
+        } else {
+          message.textContent = data.message || "Signup failed!";
+          message.style.color = "red";
+        }
+      } catch (error) {
+        message.textContent = "Server error! Please try again.";
+        message.style.color = "red";
+        console.error(error);
+      }
     });
   </script>
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/jwt-decode@4.0.0/build/jwt-decode.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-decode.min.js"></script>
+  
+<!-- <script src="https://accounts.google.com/gsi/client" async></script> -->
 </body>
 </html>
