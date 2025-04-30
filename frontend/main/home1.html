@@ -584,6 +584,25 @@ function closeModal() {
     <iframe src="index.html" frameborder="0"></iframe>
   </div>
 </div>
+<script>
+   serviceButtons = document.querySelectorAll('.service-btn');
+
+  serviceButtons.forEach(button => {
+    button.addEventListener('click', (e) => {
+      e.preventDefault();
+      const serviceUrl = button.getAttribute('data-url');
+      
+      const token = sessionStorage.getItem('token');
+      console.log('Token:', token); // نطبع التوكن عالكونسول
+      
+      if (token && token.trim() !== "") {
+        window.location.href = serviceUrl;
+      } else {
+        window.location.href = 'login.html';
+      }
+    });
+  });
+</script>
  
 </body>
 </html>
