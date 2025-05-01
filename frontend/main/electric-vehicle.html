@@ -230,9 +230,23 @@
     }
 
     function submitFinal() {
-      document.getElementById('popupConfirm').style.display = 'none';
-      alert("✅ Your order has been added to the cart. Thank you 🙌");
-    }
+  document.getElementById('popupConfirm').style.display = 'none';
+  const type = chargeType.value;
+  const price = parseFloat(price.value);
+  const serviceData = {
+    name: `EV Charging - ${type}`,
+    price: price,
+    image: 'EV charging.png' // تأكد من أن الصورة متاحة
+  };
+  addToCart(serviceData);
+  alert("✅ Your order has been added to the cart. Thank you 🙌");
+}
+
+function addToCart(service) {
+  let cart = JSON.parse(localStorage.getItem('cart')) || [];
+  cart.push(service);
+  localStorage.setItem('cart', JSON.stringify(cart));
+}
   </script>
 
 </body>
