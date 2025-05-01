@@ -416,6 +416,25 @@ Convenience,and giving you back the time </div>
   </div>
 
 </section>
+<script>
+  document.querySelectorAll('.service-btn').forEach(btn => {
+    btn.addEventListener('click', function (event) {
+      event.preventDefault(); // يمنع الانتقال الافتراضي
+
+      const token = sessionStorage.getItem("token");
+      //const targetUrl = this.getAttribute("data-url");
+
+      if (token) {
+       
+        window.location.href = "Oil change.html";
+      } else {
+        
+        alert("Please log in or sign up first.");
+        window.location.href = "login.html"; 
+      }
+    });
+  });
+</script>
   <script>
    function openModal(url) {
   document.getElementById('modal').style.display = 'block';
