@@ -295,9 +295,24 @@
       confirmationModal.style.display = 'flex';
 
       document.getElementById('confirmOrder').addEventListener('click', () => {
-        confirmationModal.style.display = 'none';
-        alert('✅ Your order has been added to the cart. Thank you 🙌');
-      });
+  confirmationModal.style.display = 'none';
+  const car = carTypeSelect.value;
+  const fuel = fuelTypeSelect.value;
+  const price = parseFloat(priceElement.textContent);
+  const serviceData = {
+    name: `Fuel Delivery - ${car} (${fuel})`,
+    price: price,
+    image: 'fuel.png' // تأكد من أن الصورة متاحة
+  };
+  addToCart(serviceData);
+  alert('✅ Your order has been added to the cart. Thank you 🙌');
+});
+
+function addToCart(service) {
+  let cart = JSON.parse(localStorage.getItem('cart')) || [];
+  cart.push(service);
+  localStorage.setItem('cart', JSON.stringify(cart));
+}
     });
    
     // إغلاق المودال عند الضغط خارجه
