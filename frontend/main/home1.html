@@ -140,6 +140,37 @@
   font-weight: bold;
   cursor: pointer;
 }
+.popup-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  z-index: 1000;
+}
+
+.popup-content {
+  background: #fff;
+  width: 60%;
+  max-width: 700px;
+  height: 450px;
+  margin: 10% auto;
+  border-radius: 8px;
+  position: relative;
+  padding: 0;
+  overflow: hidden;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 22px;
+  cursor: pointer;
+  z-index: 1001;
+}
 </style>
 
 </head>
@@ -168,10 +199,15 @@
 
     <a href="orders.html"><i class='bx bx-list-ul'></i> My Orders</a>
     
-    <a href="shopping.html"><i class='bx bx-cart'></i> Shopping Cart</a>
+    <a href="javascript:void(0);" onclick="openModal()"><i class='bx bx-cart'></i> Shopping Cart</a>
     <a href="#" id="night-mode-toggle"><i class='bx bx-moon'></i> Night Mode</a>
   </div>
-
+  <div id="modalContainer" class="popup-overlay">
+    <div class="popup-content">
+      <span class="close-btn" onclick="closeModal()">&times;</span>
+      <iframe src="shopping.html" frameborder="0" style="width:100%; height:400px;"></iframe>
+    </div>
+  </div>
   <!-- Sections -->
    <section>
    <div class="video-container">
@@ -593,7 +629,13 @@ function closeModal() {
       e.preventDefault();
     }
   }
+  function openModal() {
+  document.getElementById("modalContainer").style.display = "block";
+}
 
+function closeModal() {
+  document.getElementById("modalContainer").style.display = "none";
+}
   </script>
 
 
