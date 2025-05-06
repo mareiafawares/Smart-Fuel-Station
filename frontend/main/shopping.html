@@ -8,7 +8,7 @@
         /* General Styles */
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: #e3f2fd; /* Light blue background */
+            background-color: #e3f2fd; /* Light blue gradient */
             margin: 0;
             padding: 0;
             color: #2c3e50; /* Dark blue text */
@@ -26,7 +26,7 @@
 
         h1 {
             font-size: 24px;
-            color: #1565c0; /* Medium blue for heading */
+            color: #004d66; /* Medium blue for heading */
             margin-bottom: 20px;
         }
 
@@ -41,49 +41,17 @@
             margin-top: 20px;
         }
 
-        .action-buttons {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 20px;
-        }
-
-        .remove-all-btn, .checkout-btn {
-            padding: 12px 24px;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background 0.3s ease;
-        }
-
-        .remove-all-btn {
-            background: #bbdefb; /* Light blue */
-            color: #1565c0; /* Medium blue */
-            border: 1px solid #90caf9; /* Slightly darker border */
-        }
-
-        .remove-all-btn:hover {
-            background: #90caf9; /* Slightly darker blue */
-        }
-
-        .checkout-btn {
-            background: #1565c0; /* Medium blue */
-            color: white;
-        }
-
-        .checkout-btn:hover {
-            background: #0d47a1; /* Dark blue */
-        }
-
         /* Product Card Design */
         .product-card {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 15px;
-            background: #bbdefb; /* Light blue */
+            background: linear-gradient(135deg, #e3f2fd, #bbdefb); /* Gradient background */
             border-radius: 8px;
             margin-bottom: 15px;
+            position: relative;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow */
         }
 
         .product-card img {
@@ -96,12 +64,13 @@
         .product-details {
             flex-grow: 1;
             margin-left: 15px;
+            text-align: left;
         }
 
         .product-details h3 {
             font-size: 16px;
             margin: 0;
-            color: #1565c0; /* Medium blue */
+            color: #004d66; /* Medium blue */
         }
 
         .product-details p {
@@ -110,13 +79,30 @@
             margin: 5px 0 0;
         }
 
+        .delete-btn {
+            background: none;
+            border: none;
+            color: #e57373;
+            font-size: 18px;
+            cursor: pointer;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+
+        .delete-btn:hover {
+            color: #d32f2f;
+        }
+
         .quantity-control {
             display: flex;
             align-items: center;
+            gap: 10px;
+            margin-top: 10px;
         }
 
         .quantity-control button {
-            background: #1565c0; /* Medium blue */
+            background: #004d66; /* Medium blue */
             color: white;
             border: none;
             padding: 5px 10px;
@@ -128,11 +114,45 @@
         .quantity-control input {
             width: 50px;
             text-align: center;
-            margin: 0 10px;
             border: 1px solid #90caf9; /* Light blue border */
             border-radius: 4px;
             background: #ffffff; /* White background */
-            color: #1565c0; /* Medium blue text */
+            color: #004d66; /* Medium blue text */
+        }
+
+        /* Total Price Section */
+        .total-price {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            font-size: 18px;
+            color: #004d66; /* Medium blue */
+        }
+
+        .total-price span {
+            font-weight: bold;
+        }
+
+        /* Place Order Button */
+        .place-order-btn {
+            display: none; /* Hidden by default */
+            width: 150px; /* Smaller size */
+            padding: 10px;
+            background: linear-gradient(135deg, #00aabb, #004d66); /* Gradient */
+            color: white;
+            border: none;
+            border-radius: 25px; /* Rounded corners */
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin: 20px auto; /* Centered */
+        }
+
+        .place-order-btn:hover {
+            transform: scale(1.1); /* Scale up on hover */
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
         }
 
         /* Checkout Popup */
@@ -142,7 +162,7 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background: #ffffff; /* White background */
+            background: #ffffff;
             padding: 30px;
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
             border-radius: 12px;
@@ -152,8 +172,8 @@
         }
 
         .popup h2 {
-            font-size: 20px;
-            color: #1565c0; /* Medium blue */
+            font mardi: 20px;
+            color: #004d66;
             margin-bottom: 20px;
         }
 
@@ -169,14 +189,14 @@
             justify-content: center;
             gap: 15px;
             padding: 15px;
-            background: #bbdefb; /* Light blue */
+            background: #bbdefb;
             border-radius: 8px;
             cursor: pointer;
             transition: background 0.3s ease;
         }
 
         .payment-option:hover {
-            background: #90caf9; /* Slightly darker blue */
+            background: #90caf9;
         }
 
         .payment-option img {
@@ -212,11 +232,14 @@
             <!-- Products will be dynamically added here -->
         </div>
 
-        <!-- Action Buttons -->
-        <div class="action-buttons" id="actionButtons" style="display: none;">
-            <button class="remove-all-btn" onclick="clearCart()">Remove All</button>
-            <button class="checkout-btn" onclick="openCheckoutPopup()">Place Order</button>
+        <!-- Total Price -->
+        <div class="total-price" id="totalPriceSection" style="display: none;">
+            <span>Total:</span>
+            <span id="totalPrice">0 JD</span>
         </div>
+
+        <!-- Place Order Button -->
+        <button class="place-order-btn" id="placeOrderBtn" onclick="openCheckoutPopup()">Place Order</button>
     </div>
 
     <!-- Checkout Popup -->
@@ -225,98 +248,145 @@
         <h2>Select Payment Method</h2>
         <div class="payment-options">
             <div class="payment-option" onclick="selectPayment('wallet')">
-                <img src="https://img.icons8.com/ios-filled/50/wallet.png" alt="Wallet">
+                <img src="wallet.png" alt="Wallet">
                 <span>Pay with Wallet</span>
             </div>
             <div class="payment-option" onclick="selectPayment('card')">
-                <img src="https://img.icons8.com/ios-filled/50/credit-card.png" alt="Card">
+                <img src="card.png" alt="Card">
                 <span>Pay with Card</span>
             </div>
             <div class="payment-option" onclick="selectPayment('cash')">
-                <img src="https://img.icons8.com/ios-filled/50/cash-in-hand.png" alt="Cash">
+                <img src="cash.png" alt="Cash">
                 <span>Cash on Delivery</span>
             </div>
         </div>
     </div>
 
     <script>
-        // Function to add products to the cart
-        function addToCart(productName, productPrice, productImage) {
+        // Load cart items from localStorage
+        function loadCart() {
             const cartItems = document.getElementById('cartItems');
             const emptyCartMessage = document.getElementById('emptyCartMessage');
-            const actionButtons = document.getElementById('actionButtons');
+            const totalPriceSection = document.getElementById('totalPriceSection');
+            const totalPriceElement = document.getElementById('totalPrice');
+            const placeOrderBtn = document.getElementById('placeOrderBtn');
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-            // Hide the empty cart message and show the cart items section
+            if (cart.length === 0) {
+                emptyCartMessage.style.display = 'block';
+                cartItems.style.display = 'none';
+                totalPriceSection.style.display = 'none';
+                placeOrderBtn.style.display = 'none'; // Hide the button
+                return;
+            }
+
             emptyCartMessage.style.display = 'none';
             cartItems.style.display = 'block';
-            actionButtons.style.display = 'flex';
+            totalPriceSection.style.display = 'flex';
+            placeOrderBtn.style.display = 'block'; // Show the button
+            cartItems.innerHTML = '';
 
-            const cartItem = document.createElement('div');
-            cartItem.classList.add('product-card');
+            let total = 0;
 
-            cartItem.innerHTML = `
-                <img src="${productImage}" alt="${productName}">
-                <div class="product-details">
-                    <h3>${productName}</h3>
-                    <p>$${productPrice}</p>
-                </div>
-                <div class="quantity-control">
-                    <button onclick="changeQuantity(this, -1)">-</button>
-                    <input type="number" value="1" min="1">
-                    <button onclick="changeQuantity(this, 1)">+</button>
-                </div>
-            `;
+            cart.forEach((item, index) => {
+                const cartItem = document.createElement('div');
+                cartItem.classList.add('product-card');
+                cartItem.innerHTML = `
+                    <img src="${item.image}" alt="${item.name}">
+                    <div class="product-details">
+                        <h3>${item.name}</h3>
+                        <p>Price: ${item.price} JD</p>
+                        <div class="quantity-control">
+                            <button onclick="changeQuantity(${index}, -1)">-</button>
+                            <input type="number" value="${item.quantity || 1}" min="1" onchange="updateQuantity(${index}, this.value)">
+                            <button onclick="changeQuantity(${index}, 1)">+</button>
+                        </div>
+                        <p>Total: <span id="total-${index}">${(item.price * (item.quantity || 1)).toFixed(2)} JD</span></p>
+                    </div>
+                    <button class="delete-btn" onclick="deleteItem(${index})" aria-label="Delete ${item.name}">×</button>
+                `;
+                cartItems.appendChild(cartItem);
 
-            cartItems.appendChild(cartItem);
+                total += item.price * (item.quantity || 1);
+            });
+
+            totalPriceElement.textContent = `${total.toFixed(2)} JD`;
         }
 
-        // Function to change quantity
-        function changeQuantity(button, amount) {
-            const input = button.parentElement.querySelector('input');
-            let value = parseInt(input.value);
-            if (value + amount > 0) {
-                input.value = value + amount;
+        // Change quantity of a product
+        function changeQuantity(index, amount) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            if (cart[index].quantity + amount > 0) {
+                cart[index].quantity += amount;
+                localStorage.setItem('cart', JSON.stringify(cart));
+                updateTotal(index, cart[index].price, cart[index].quantity);
+            }
+            loadCart();
+        }
+
+        // Update quantity manually
+        function updateQuantity(index, value) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart[index].quantity = parseInt(value);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateTotal(index, cart[index].price, cart[index].quantity);
+            loadCart();
+        }
+
+        // Update total price
+        function updateTotal(index, price, quantity) {
+            const totalElement = document.getElementById(`total-${index}`);
+            if (totalElement) {
+                totalElement.textContent = `${(price * quantity).toFixed(2)} JD`;
             }
         }
 
-        // Function to clear the cart
-        function clearCart() {
-            const cartItems = document.getElementById('cartItems');
-            const emptyCartMessage = document.getElementById('emptyCartMessage');
-            const actionButtons = document.getElementById('actionButtons');
-
-            // Clear all items and reset the UI
-            cartItems.innerHTML = '';
-            cartItems.style.display = 'none';
-            emptyCartMessage.style.display = 'block';
-            actionButtons.style.display = 'none';
+        // Delete a specific item from the cart
+        function deleteItem(index) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart.splice(index, 1);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            loadCart();
         }
 
-        // Function to open checkout popup
+        // Open checkout popup
         function openCheckoutPopup() {
             document.getElementById('checkoutPopup').style.display = 'block';
             document.getElementById('overlay').style.display = 'block';
         }
 
-        // Function to close checkout popup
+        // Close checkout popup
         function closeCheckoutPopup() {
             document.getElementById('checkoutPopup').style.display = 'none';
             document.getElementById('overlay').style.display = 'none';
         }
 
-        // Function to select payment method
+        // Select payment method
         function selectPayment(method) {
-            alert(`You selected ${method} as your payment method.`);
-            closeCheckoutPopup();
+            if (method === 'wallet' || method === 'card') {
+                window.location.href = 'Payment.html';
+            } else if (method === 'cash') {
+                alert(`You selected ${method} as your payment method.`);
+                closeCheckoutPopup();
+                clearCart();
+            }
         }
 
-        // Example of adding a product to the cart
-        window.onload = () => {
-            // Uncomment the lines below to test adding products
-            // addToCart("Product 1", 10, "https://via.placeholder.com/60");
-            // addToCart("Product 2", 20, "https://via.placeholder.com/60");
-        };
-    </script>
+        // Clear the entire cart
+        function clearCart() {
+            localStorage.removeItem('cart');
+            loadCart();
+        }
 
+        // Listen for changes in localStorage
+        window.addEventListener('storage', (event) => {
+            if (event.key === 'cart') {
+                loadCart();
+            }
+        });
+
+        // Load cart on page load
+        window.onload = loadCart;
+    </script>
 </body>
 </html>

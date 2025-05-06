@@ -257,9 +257,23 @@
   }
 
   function finalizeOrder() {
-    orderModal.style.display = 'none';
-    alert("✅ Your order has been confirmed! Thank you 🙌");
-  }
+  orderModal.style.display = 'none';
+  const wash = washType.value;
+  const price = priceDisplay.textContent.split(': ')[1]; // استخراج السعر (مثل "5 JD")
+  const serviceData = {
+    name: `Car Wash - ${wash}`,
+    price: parseFloat(price),
+    image: 'icon car.png' // تأكد من أن الصورة متاحة في مجلد المشروع
+  };
+  addToCart(serviceData);
+  alert("✅ Your order has been added to the cart. Thank you 🙌");
+}
+
+function addToCart(service) {
+  let cart = JSON.parse(localStorage.getItem('cart')) || [];
+  cart.push(service);
+  localStorage.setItem('cart', JSON.stringify(cart));
+}
 
   window.onclick = function(event) {
     if (event.target === orderModal) {
@@ -267,7 +281,7 @@
     }
   }
 </script>
-<script src="order.js"></script>
+
 </body>
 
 

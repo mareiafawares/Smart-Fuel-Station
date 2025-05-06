@@ -367,9 +367,25 @@
     }
 
     function confirmOrder() {
-      alert("✅ Your order has been added to the cart. Thank you 🙌");
-      closeModal();
-    }
+  closeModal();
+  const type = carTypeSelect.value;
+  const selectedOil = oilTypes[type].find(o => o.value === oilTypeSelect.value);
+  const oilName = selectedOil.name;
+  const oilPrice = selectedOil.price;
+  const serviceData = {
+    name: `Oil Change - ${type} (${oilName})`,
+    price: oilPrice,
+    image: 'car-oil.png' // تأكد من أن الصورة متاحة
+  };
+  addToCart(serviceData);
+  alert("✅ Your order has been added to the cart. Thank you 🙌");
+}
+
+function addToCart(service) {
+  let cart = JSON.parse(localStorage.getItem('cart')) || [];
+  cart.push(service);
+  localStorage.setItem('cart', JSON.stringify(cart));
+}
 
     carTypeSelect.addEventListener("change", updateFormOptions);
     oilTypeSelect.addEventListener("change", () => {
