@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard</title>
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <style>
+    /* General Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background-color: #e3f2fd; /* Light blue gradient */
+      color: #2c3e50; /* Dark blue text */
+      overflow-x: hidden;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+      background-color: #004d66; /* Medium blue */
+      color: white;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: white;
+    }
+
+    nav a {
+      margin: 0 10px;
+      text-decoration: none;
+      color: white;
+      font-size: 16px;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: #a6e0f5; /* Light blue */
+    }
+
+    /* Main Content */
+    .main-content {
+      padding: 20px;
+      min-height: 100vh;
+    }
+
+    .card {
+      background-color: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      margin-bottom: 20px;
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card h3 {
+      margin-top: 0;
+      color: #004d66; /* Medium blue */
+    }
+
+    .card p {
+      font-size: 14px;
+      color: #455a64; /* Slightly darker blue-grey */
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #004d66; /* Medium blue */
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn:hover {
+      background-color: #00aabb; /* Light blue */
+    }
+
+    /* Empty State */
+    .empty-state {
+      text-align: center;
+      padding: 50px;
+      color: #455a64;
+      font-size: 18px;
+    }
+
+    /* Service Stats */
+    .service-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+
+    .stat-card {
+      background-color: #bbdefb; /* Light blue */
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .stat-card:hover {
+      transform: scale(1.05);
+    }
+
+    .stat-card h4 {
+      margin-top: 0;
+      color: #004d66; /* Medium blue */
+    }
+
+    .stat-card p {
+      font-size: 18px;
+      color: #004d66; /* Medium blue */
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="logo">Admin Dashboard</div>
+    <nav>
+      <a href="#"><i class='bx bx-bell'></i> Notifications</a>
+      <a href="#"><i class='bx bx-user'></i> Profile</a>
+      <a href="#"><i class='bx bx-log-out'></i> Logout</a>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div id="usersSection" class="card empty-state">
+      <h3>Users Overview</h3>
+      <p>No users found.</p>
+    </div>
+
+    <div id="employeesSection" class="card empty-state">
+      <h3>Employees Overview</h3>
+      <p>No employees found.</p>
+    </div>
+
+    <div id="servicesSection" class="card">
+      <h3>Services Overview</h3>
+      <div class="service-stats" id="serviceStats">
+        <div class="stat-card">
+          <h4>Fuel Delivery</h4>
+          <p id="fuelCount">0 Orders</p>
+        </div>
+        <div class="stat-card">
+          <h4>Oil Change</h4>
+          <p id="oilChangeCount">0 Orders</p>
+        </div>
+        <div class="stat-card">
+          <h4>Car Wash</h4>
+          <p id="carWashCount">0 Orders</p>
+        </div>
+        <div class="stat-card">
+          <h4>Electric Car Charging</h4>
+          <p id="electricChargeCount">0 Orders</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // Simulate Fetching Data
+    function fetchData() {
+      // Simulated data for services (Replace with real API call in production)
+      const serviceData = {
+        fuelDelivery: 0,
+        oilChange: 0,
+        carWash: 0,
+        electricCharge: 0
+      };
+
+      // Update stats dynamically
+      document.getElementById('fuelCount').textContent = `${serviceData.fuelDelivery} Orders`;
+      document.getElementById('oilChangeCount').textContent = `${serviceData.oilChange} Orders`;
+      document.getElementById('carWashCount').textContent = `${serviceData.carWash} Orders`;
+      document.getElementById('electricChargeCount').textContent = `${serviceData.electricCharge} Orders`;
+    }
+
+    // Initial Data Load
+    window.onload = fetchData;
+
+    // Function to update stats dynamically (Call this when new data is received)
+    function updateServiceStats(updatedData) {
+      if (updatedData.fuelDelivery !== undefined) {
+        document.getElementById('fuelCount').textContent = `${updatedData.fuelDelivery} Orders`;
+      }
+      if (updatedData.oilChange !== undefined) {
+        document.getElementById('oilChangeCount').textContent = `${updatedData.oilChange} Orders`;
+      }
+      if (updatedData.carWash !== undefined) {
+        document.getElementById('carWashCount').textContent = `${updatedData.carWash} Orders`;
+      }
+      if (updatedData.electricCharge !== undefined) {
+        document.getElementById('electricChargeCount').textContent = `${updatedData.electricCharge} Orders`;
+      }
+    }
+
+    // Example of updating stats dynamically
+    setTimeout(() => {
+     
+      updateServiceStats(newData);
+    }, 5000); // Simulate data update after 5 seconds
+  </script>
+</body>
+</html>
