@@ -172,7 +172,7 @@
         }
 
         .popup h2 {
-            font-size: 20px;
+            font mardi: 20px;
             color: #004d66;
             margin-bottom: 20px;
         }
@@ -303,7 +303,7 @@
                         </div>
                         <p>Total: <span id="total-${index}">${(item.price * (item.quantity || 1)).toFixed(2)} JD</span></p>
                     </div>
-                    <button class="delete-btn" onclick="deleteItem(${index})" aria-label="Delete ${item.name}">&times;</button>
+                    <button class="delete-btn" onclick="deleteItem(${index})" aria-label="Delete ${item.name}">×</button>
                 `;
                 cartItems.appendChild(cartItem);
 
@@ -363,9 +363,13 @@
 
         // Select payment method
         function selectPayment(method) {
-            alert(`You selected ${method} as your payment method.`);
-            closeCheckoutPopup();
-            clearCart(); // Clear cart after payment (optional)
+            if (method === 'wallet' || method === 'card') {
+                window.location.href = 'Payment.html';
+            } else if (method === 'cash') {
+                alert(`You selected ${method} as your payment method.`);
+                closeCheckoutPopup();
+                clearCart();
+            }
         }
 
         // Clear the entire cart
