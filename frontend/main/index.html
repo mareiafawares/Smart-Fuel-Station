@@ -250,7 +250,7 @@
       const userData = { name, email, password: null, role };
 
       try {
-        const res = await fetch("http://localhost:3000/signup/google", {
+        const res = await fetch("https://3953-176-29-18-140.ngrok-free.app/signup/google", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(userData),
