@@ -249,7 +249,7 @@
       const userData = { name, email, password: null, role };
 
       try {
-        const res = await fetch("https://3953-176-29-18-140.ngrok-free.app/signup/google", {
+        const res = await fetch("http://localhost:3000/signup/google", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(userData),
@@ -287,7 +287,7 @@
       const userData = { name, email, password, role };
 
       try {
-        const response = await fetch("https://3953-176-29-18-140.ngrok-free.app/createuser", {
+        const response = await fetch("http://127.0.0.1:5500/api/createuser", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(userData),

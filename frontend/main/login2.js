@@ -8,7 +8,7 @@ form.addEventListener('submit', async (e) => {
   const role = document.getElementById('role').value;
 
   try {
-    const response = await fetch('https://3953-176-29-18-140.ngrok-free.app/login', {
+    const response = await fetch('http://127.0.0.1:5500/api/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
