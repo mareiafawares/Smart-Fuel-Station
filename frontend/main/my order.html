@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Previous Orders</title>
+ 
+  <style>
+    body {
+      margin: 0;
+      background-color: #e6f2ff;
+      font-family: Arial, sans-serif;
+    }
+
+    .center-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .order-box {
+      background-color: white;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      width: 90%;
+      max-width: 500px;
+    }
+
+    .order-box h1 {
+      color: #004d66;
+      margin-bottom: 15px;
+    }
+
+    .order-box i {
+      font-size: 60px;
+      color: black;
+      margin-bottom: 10px;
+    }
+
+    .no-orders {
+      color: #555;
+      font-size: 15px;
+      margin-bottom: 20px;
+    }
+
+    .order-list {
+      margin-top: 10px;
+    }
+
+    .order-item {
+      background-color: #f0f0f0;
+      padding: 10px;
+      margin: 8px 0;
+      border-radius: 8px;
+    }
+
+    .reorder-btn {
+      margin-top: 10px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .reorder-btn:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div class="center-container">
+    <div class="order-box">
+      <h1>My Orders</h1>
+      <img src="my order.png">
+      <i class="fas fa-shopping-bag"></i>
+      <p class="no-orders" id="noOrdersMessage">No previous orders.</p>
+      <div id="ordersContainer" class="order-list"></div>
+    </div>
+  </div>
+
+  <script>
+    function loadPreviousOrders() {
+      const ordersContainer = document.getElementById("ordersContainer");
+      const noOrdersMessage = document.getElementById("noOrdersMessage");
+      const orders = JSON.parse(localStorage.getItem("previousOrders")) || [];
+
+      ordersContainer.innerHTML = "";
+
+      if (orders.length === 0) {
+        noOrdersMessage.style.display = "block";
+        return;
+      }
+
+      noOrdersMessage.style.display = "none";
+
+      orders.forEach((order) => {
+        const item = document.createElement("div");
+        item.className = "order-item";
+        item.textContent = order;
+
+        const reorderBtn = document.createElement("button");
+        reorderBtn.className = "reorder-btn";
+        reorderBtn.textContent = "Order Again";
+        reorderBtn.onclick = () => {
+          let currentOrders = JSON.parse(localStorage.getItem("previousOrders")) || [];
+          currentOrders.push(order);
+          localStorage.setItem("previousOrders", JSON.stringify(currentOrders));
+          alert(`You have reordered: ${order}`);
+          loadPreviousOrders();
+        };
+
+        item.appendChild(reorderBtn);
+        ordersContainer.appendChild(item);
+      });
+    }
+
+    loadPreviousOrders();
+  </script>
+</body>
+</html>
