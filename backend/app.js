@@ -12,7 +12,7 @@ const app = express();
 
 
 app.use(cors({
-  origin: 'http://localhost:5501', 
+  origin: ' https://3953-176-29-18-140.ngrok-free.app ', 
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true
 }));
