@@ -48,6 +48,24 @@
       color: #a6e0f5; /* Light blue */
     }
 
+    /* Profile Button */
+    .profile-btn {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #004d66;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: all 0.3s ease;
+    }
+
+    .profile-btn:hover {
+      background-color: #00aabb;
+      transform: scale(1.05);
+    }
+
     /* Main Content */
     .main-content {
       padding: 20px;
@@ -70,65 +88,186 @@
     .card h3 {
       margin-top: 0;
       color: #004d66; /* Medium blue */
+      font-size: 24px;
     }
 
     .card p {
-      font-size: 14px;
+      font-size: 16px;
       color: #455a64; /* Slightly darker blue-grey */
     }
 
-    /* Buttons */
-    .btn {
-      display: inline-block;
-      padding: 10px 20px;
-      background-color: #004d66; /* Medium blue */
-      color: white;
-      border: none;
+    /* Employee Form */
+    .employee-form input,
+    .employee-form select {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 2px solid #bbdefb;
       border-radius: 8px;
-      cursor: pointer;
-      font-size: 14px;
-      transition: background-color 0.3s ease;
+      font-size: 16px;
+      transition: border-color 0.3s ease;
     }
 
-    .btn:hover {
-      background-color: #00aabb; /* Light blue */
+    .employee-form input:focus,
+    .employee-form select:focus {
+      border-color: #00aabb;
+      outline: none;
     }
 
-    /* Empty State */
-    .empty-state {
-      text-align: center;
-      padding: 50px;
-      color: #455a64;
-      font-size: 18px;
+    /* Employee List */
+    .employee-list {
+      list-style: none;
+      padding: 0;
     }
 
-    /* Service Stats */
-    .service-stats {
+    .employee-item {
+      background-color: #bbdefb; /* Light blue */
+      border-radius: 8px;
+      padding: 10px;
+      margin-bottom: 10px;
+      font-size: 16px;
+      color: #004d66;
+      transition: transform 0.3s ease;
+    }
+
+    .employee-item:hover {
+      transform: scale(1.02);
+    }
+
+    /* Service Cards */
+    .service-cards {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 20px;
     }
 
-    .stat-card {
-      background-color: #bbdefb; /* Light blue */
+    .service-card {
+      background: linear-gradient(145deg, #bbdefb, #90caf9); /* Blue gradient */
       border-radius: 12px;
       padding: 20px;
       text-align: center;
-      transition: transform 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
-    .stat-card:hover {
+    .service-card:hover {
       transform: scale(1.05);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
     }
 
-    .stat-card h4 {
-      margin-top: 0;
+    .service-card i {
+      font-size: 48px;
       color: #004d66; /* Medium blue */
+      margin-bottom: 10px;
     }
 
-    .stat-card p {
-      font-size: 18px;
+    .service-card h4 {
+      margin: 0;
       color: #004d66; /* Medium blue */
+      font-size: 20px;
+    }
+
+    .service-card p {
+      font-size: 16px;
+      color: #455a64; /* Slightly darker blue-grey */
+    }
+
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .modal.show {
+      display: flex;
+      opacity: 1;
+    }
+
+    .modal-content {
+      background-color: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      width: 400px;
+      max-width: 90%;
+      padding: 20px;
+      text-align: center;
+      animation: fadeIn 0.5s ease forwards;
+      position: relative;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: scale(0.9);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .modal img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 10px;
+      border: 3px solid #004d66;
+    }
+
+    .modal h2 {
+      margin: 0;
+      color: #004d66;
+      font-size: 24px;
+    }
+
+    .modal p {
+      font-size: 16px;
+      color: #455a64;
+      margin: 10px 0;
+    }
+
+    .modal .info {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .modal .info div {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 16px;
+      color: #455a64;
+    }
+
+    .modal .info i {
+      color: #004d66;
+    }
+
+    .close-modal {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 24px;
+      cursor: pointer;
+      color: #004d66;
+      transition: color 0.3s ease;
+    }
+
+    .close-modal:hover {
+      color: #a6e0f5;
     }
   </style>
 </head>
@@ -138,8 +277,8 @@
   <header>
     <div class="logo">Admin Dashboard</div>
     <nav>
+      <button class="profile-btn" onclick="openModal()">Profile</button>
       <a href="#"><i class='bx bx-bell'></i> Notifications</a>
-      <a href="#"><i class='bx bx-user'></i> Profile</a>
       <a href="#"><i class='bx bx-log-out'></i> Logout</a>
     </nav>
   </header>
@@ -151,27 +290,44 @@
       <p>No users found.</p>
     </div>
 
-    <div id="employeesSection" class="card empty-state">
+    <div id="employeesSection" class="card">
       <h3>Employees Overview</h3>
-      <p>No employees found.</p>
+      <form class="employee-form" id="employeeForm">
+        <input type="text" id="employeeName" placeholder="Employee Name" required>
+        <select id="employeeRole" required>
+          <option value="" disabled selected>Select Role</option>
+          <option value="Manager">Manager</option>
+          <option value="Technician">Technician</option>
+          <option value="Driver">Driver</option>
+          <option value="Cleaner">Cleaner</option>
+        </select>
+        <button type="submit" class="btn profile-btn">Add Employee</button>
+      </form>
+      <ul class="employee-list" id="employeeList">
+        <!-- Employees will be listed here dynamically -->
+      </ul>
     </div>
 
     <div id="servicesSection" class="card">
       <h3>Services Overview</h3>
-      <div class="service-stats" id="serviceStats">
-        <div class="stat-card">
+      <div class="service-cards" id="serviceCards">
+        <div class="service-card">
+          <i class='bx bxs-gas-pump'></i>
           <h4>Fuel Delivery</h4>
           <p id="fuelCount">0 Orders</p>
         </div>
-        <div class="stat-card">
+        <div class="service-card">
+          <i class='bx bxs-oil'></i>
           <h4>Oil Change</h4>
           <p id="oilChangeCount">0 Orders</p>
         </div>
-        <div class="stat-card">
+        <div class="service-card">
+          <i class='bx bxs-car-wash'></i>
           <h4>Car Wash</h4>
           <p id="carWashCount">0 Orders</p>
         </div>
-        <div class="stat-card">
+        <div class="service-card">
+          <i class='bx bxs-battery-charging'></i>
           <h4>Electric Car Charging</h4>
           <p id="electricChargeCount">0 Orders</p>
         </div>
@@ -179,48 +335,72 @@
     </div>
   </main>
 
+  <!-- Modal -->
+  <div class="modal" id="profileModal">
+    <div class="modal-content">
+      <span class="close-modal" onclick="closeModal()">&times;</span>
+      <img src="mareia.jpt" >
+      <h2>Maria Fawares</h2>
+      <p><strong>Mobile Station Supervisor</strong></p>
+      <div class="info">
+        <div><i class='bx bxs-phone'></i> <span>+962 781270733</span></div>
+        <div><i class='bx bxs-envelope'></i> <span>maria.Fawares@gmail.com</span></div>
+        <div><i class='bx bxs-map'></i> <span>Amman, Jordan</span></div>
+      </div>
+    </div>
+  </div>
+
   <script>
-    // Simulate Fetching Data
-    function fetchData() {
-      // Simulated data for services (Replace with real API call in production)
-      const serviceData = {
-        fuelDelivery: 0,
-        oilChange: 0,
-        carWash: 0,
-        electricCharge: 0
-      };
-
-      // Update stats dynamically
-      document.getElementById('fuelCount').textContent = `${serviceData.fuelDelivery} Orders`;
-      document.getElementById('oilChangeCount').textContent = `${serviceData.oilChange} Orders`;
-      document.getElementById('carWashCount').textContent = `${serviceData.carWash} Orders`;
-      document.getElementById('electricChargeCount').textContent = `${serviceData.electricCharge} Orders`;
+    // Open Modal
+    function openModal() {
+      const modal = document.getElementById('profileModal');
+      modal.classList.add('show'); // Add 'show' class for fade-in effect
+      modal.style.display = 'flex'; // Make modal visible
     }
 
-    // Initial Data Load
-    window.onload = fetchData;
-
-    // Function to update stats dynamically (Call this when new data is received)
-    function updateServiceStats(updatedData) {
-      if (updatedData.fuelDelivery !== undefined) {
-        document.getElementById('fuelCount').textContent = `${updatedData.fuelDelivery} Orders`;
-      }
-      if (updatedData.oilChange !== undefined) {
-        document.getElementById('oilChangeCount').textContent = `${updatedData.oilChange} Orders`;
-      }
-      if (updatedData.carWash !== undefined) {
-        document.getElementById('carWashCount').textContent = `${updatedData.carWash} Orders`;
-      }
-      if (updatedData.electricCharge !== undefined) {
-        document.getElementById('electricChargeCount').textContent = `${updatedData.electricCharge} Orders`;
-      }
+    // Close Modal
+    function closeModal() {
+      const modal = document.getElementById('profileModal');
+      modal.classList.remove('show'); // Remove 'show' class for fade-out effect
+      setTimeout(() => {
+        modal.style.display = 'none'; // Hide modal after fade-out
+      }, 300); // Match the duration of the fade-out transition
     }
 
-    // Example of updating stats dynamically
-    setTimeout(() => {
-     
-      updateServiceStats(newData);
-    }, 5000); // Simulate data update after 5 seconds
-  </script>
+    // Close Modal on Outside Click
+    window.onclick = function(event) {
+      const modal = document.getElementById('profileModal');
+      if (event.target === modal) {
+        closeModal();
+      }
+    };
+
+    // Add Employee Logic
+    const employeeList = document.getElementById('employeeList');
+    const employeeForm = document.getElementById('employeeForm');
+
+    employeeForm.addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      // Get form values
+      const employeeName = document.getElementById('employeeName').value.trim();
+      const employeeRole = document.getElementById('employeeRole').value;
+
+      if (employeeName && employeeRole) {
+        // Create new employee item
+        const employeeItem = document.createElement('li');
+        employeeItem.classList.add('employee-item');
+        employeeItem.textContent = `${employeeName} - ${employeeRole}`;
+
+        // Append to the list
+        employeeList.appendChild(employeeItem);
+
+        // Clear form fields
+        employeeForm.reset();
+      } else {
+        alert('Please fill in all fields.');
+      }
+    });
+    </script>
 </body>
 </html>
