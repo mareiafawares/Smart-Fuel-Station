@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mobile Oil Change Service</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #e0f7fa, #ffffff);
+      margin: 0;
+      padding: 0;
+      color: #333;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .container {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      max-width: 600px;
+      background-color: #ffffff;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+      border-radius: 16px;
+      padding: 20px;
+    }
+
+    .left-side {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .right-side {
+      flex: 1;
+      max-width: 250px;
+    }
+
+    .oil-icon img {
+      width: 100px;
+      height: 100px;
+      margin-bottom: 10px;
+    }
+
+    h1 {
+      text-align: left;
+      color: #006064;
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+
+    .service-info h3 {
+      color: #00796b;
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .service-info p {
+      font-size: 14px;
+      color: #080808;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 12px;
+      font-weight: 500;
+      color: #444;
+    }
+
+    iframe {
+      width: 100%;
+      height: 120px;
+      border: 0;
+      border-radius: 8px;
+    }
+
+    .form-group select,
+    .form-group input {
+      width: 100%;
+      padding: 10px;
+      font-size: 14px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      background-color: #f9f9f9;
+    }
+
+    .form-group select:focus,
+    .form-group input:focus {
+      outline: none;
+      border-color: #00acc1;
+      background-color: #fff;
+    }
+
+    .price-display {
+      text-align: center;
+      font-size: 18px;
+      font-weight: bold;
+      margin: 15px 0;
+      display: none;
+    }
+
+    .form-group button {
+      background-color: #00796b;
+      color: white;
+      padding: 14px;
+      width: 100%;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: not-allowed;
+      opacity: 0.6;
+    }
+
+    .form-group button.active {
+      cursor: pointer;
+      opacity: 1;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      padding-top: 60px;
+    }
+
+    .modal-content {
+      background: #ffffff;
+      margin: auto;
+      padding: 30px;
+      border-radius: 30px;
+      width: 90%;
+      max-width: 500px;
+      max-height: 90vh;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+      animation: fadeIn 0.4s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-header h2 {
+      color: #006064;
+      margin-bottom: 10px;
+      font-size: 24px;
+    }
+
+    .modal-body p {
+      font-size: 17px;
+      color: #555;
+      text-align: center;
+    }
+
+    .modal-footer {
+      margin-top: 20px;
+    }
+
+    .modal-footer button {
+      background-color: #00695c;
+      color: white;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .modal-footer button:hover {
+      background-color: #004d40;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(-20px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    @media screen and (max-width: 800px) {
+      .container {
+        margin: 20px auto;
+      }
+
+      .left-side, .right-side {
+        width: 100%;
+      }
+
+      h1 {
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="left-side">
+      <div class="oil-icon">
+        <img src="car-oil.png" alt="oil">
+      </div>
+      <h1>Mobile Oil Change</h1>
+      <div class="service-info">
+        <h3>Fast & Reliable Service to Your Location</h3>
+        <p>Choose your car details and get your oil changed without leaving home.</p>
+      </div>
+    </div>
+
+    <div class="right-side">
+      <form id="oilChangeForm">
+        <div class="form-group">
+          <label for="car-type">Car Type</label>
+          <select id="car-type" required>
+            <option value="">Select Car Type</option>
+            <option value="electric">Electric</option>
+            <option value="gasoline">Gasoline</option>
+            <option value="diesel">Diesel</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="car-model">Car Model</label>
+          <select id="car-model" required></select>
+        </div>
+
+        <div class="form-group">
+          <label for="oil-type">Oil Type</label>
+          <select id="oil-type" required></select>
+        </div>
+
+        <div class="form-group">
+          <label for="location">Your Location</label>
+          <input type="text" id="location" placeholder="Enter your address" required />
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18..." loading="lazy"></iframe>
+        </div>
+
+        <div id="price" class="price-display">
+          <span id="originalPrice" style="text-decoration: line-through; color: #888;"></span>
+          <span id="discountedPrice" style="color: red; font-weight: bold;"></span>
+        </div>
+
+        <div class="form-group">
+          <button id="submitBtn" type="submit" disabled>Submit Order</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="orderModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Order Confirmation</h2>
+      </div>
+      <div class="modal-body">
+        <p id="modalContent"></p>
+      </div>
+      <div class="modal-footer">
+        <button onclick="confirmOrder()">Confirm Order</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const modal = document.getElementById("orderModal");
+    const carTypeSelect = document.getElementById("car-type");
+    const carModelSelect = document.getElementById("car-model");
+    const oilTypeSelect = document.getElementById("oil-type");
+    const locationInput = document.getElementById("location");
+    const priceDisplay = document.getElementById("price");
+    const submitBtn = document.getElementById("submitBtn");
+
+    const carModels = {
+      electric: ["Tesla Model S", "Nissan Leaf", "Chevy Bolt"],
+      gasoline: ["Toyota Corolla", "Honda Civic", "Ford Focus"],
+      diesel: ["Volkswagen Passat", "BMW 320d", "Ford F-250"]
+    };
+
+    const oilTypes = {
+      electric: [
+        { name: "Synthetic EV Oil 0W-20 ($40)", value: "ev_oil", price: 40 }
+      ],
+      gasoline: [
+        { name: "Castrol 5W-30 ($30)", value: "castrol", price: 30 },
+        { name: "Mobil 1 10W-40 ($35)", value: "mobil", price: 35 }
+      ],
+      diesel: [
+        { name: "Shell Helix 0W-20 ($28)", value: "shell", price: 28 },
+        { name: "Diesel Pro 15W-40 ($33)", value: "diesel_pro", price: 33 }
+      ]
+    };
+
+    function updateFormOptions() {
+      const type = carTypeSelect.value;
+      carModelSelect.innerHTML = '<option value="">Select Car Model</option>';
+      oilTypeSelect.innerHTML = '<option value="">Select Oil Type</option>';
+      priceDisplay.style.display = 'none';
+
+      if (carModels[type]) {
+        carModels[type].forEach(model => {
+          const option = document.createElement("option");
+          option.value = model;
+          option.textContent = model;
+          carModelSelect.appendChild(option);
+        });
+      }
+
+      if (oilTypes[type]) {
+        oilTypes[type].forEach(oil => {
+          const option = document.createElement("option");
+          option.value = oil.value;
+          option.textContent = oil.name;
+          oilTypeSelect.appendChild(option);
+        });
+      }
+
+      checkFormFilled();
+    }
+
+    function showPrice() {
+      const type = carTypeSelect.value;
+      const selectedOil = oilTypes[type]?.find(o => o.value === oilTypeSelect.value);
+      if (selectedOil) {
+        const original = selectedOil.price;
+        const discount = (original * 0.8).toFixed(2);
+        document.getElementById("originalPrice").innerText = `$${original}`;
+        document.getElementById("discountedPrice").innerText = ` $${discount}`;
+        priceDisplay.style.display = 'block';
+      } else {
+        priceDisplay.style.display = 'none';
+      }
+    }
+
+    function checkFormFilled() {
+      const filled =
+        carTypeSelect.value &&
+        carModelSelect.value &&
+        oilTypeSelect.value &&
+        locationInput.value.trim();
+
+      submitBtn.disabled = !filled;
+      submitBtn.classList.toggle("active", filled);
+    }
+
+    function openModal(message) {
+      document.getElementById("modalContent").innerText = message;
+      modal.style.display = "block";
+    }
+
+    function closeModal() {
+      modal.style.display = "none";
+    }
+
+    function confirmOrder() {
+      closeModal();
+      const type = carTypeSelect.value;
+      const selectedOil = oilTypes[type].find(o => o.value === oilTypeSelect.value);
+      const oilName = selectedOil.name;
+      const oilPrice = selectedOil.price;
+      const discounted = (oilPrice * 0.8).toFixed(2);
+      const serviceData = {
+        name: `Oil Change - ${type} (${oilName})`,
+        price: discounted,
+        image: 'car-oil.png'
+      };
+      addToCart(serviceData);
+      alert("✅ Your order has been added to the cart. Thank you 🙌");
+    }
+
+    function addToCart(service) {
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      cart.push(service);
+      localStorage.setItem('cart', JSON.stringify(cart));
+    }
+
+    carTypeSelect.addEventListener("change", updateFormOptions);
+    oilTypeSelect.addEventListener("change", () => {
+      showPrice();
+      checkFormFilled();
+    });
+    carModelSelect.addEventListener("change", checkFormFilled);
+    locationInput.addEventListener("input", checkFormFilled);
+
+    document.getElementById("oilChangeForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const selectedOil = oilTypes[carTypeSelect.value].find(o => o.value === oilTypeSelect.value);
+      const oilName = selectedOil.name;
+      const oilPrice = selectedOil.price;
+      const discounted = (oilPrice * 0.8).toFixed(2);
+
+      const message =
+`Your order has been received!
+Car Type: ${carTypeSelect.value}
+Car Model: ${carModelSelect.value}
+Oil Type: ${oilName}
+Location: ${locationInput.value}
+Total Price (after discount): $${discounted}`;
+
+      openModal(message);
+    });
+
+    window.onclick = function (event) {
+      if (event.target === modal) {
+        closeModal();
+      }
+    };
+  </script>
+</body>
+</html>
