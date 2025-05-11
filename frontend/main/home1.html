@@ -144,6 +144,13 @@
     <a href="orders.html"><i class='bx bx-list-ul'></i> My Orders</a>
     <a href="cart.html"><i class='bx bx-cart'></i> Shopping Cart</a>
     <a href="nightmode.html"><i class='bx bx-moon'></i> Night Mode</a>
+
+    <!-- زر اللغة -->
+  <select id="languageSwitcher" style="margin-top: 20px; padding: 8px; border-radius: 8px; font-weight: bold;">
+    <option value="en">English</option>
+    <option value="ar">العربية</option>
+  </select>
+
   </div>
 
   <!-- Sections -->
@@ -176,6 +183,57 @@
       }
     }
   </script>
+
+
+<script>
+  const translations = {
+    en: {
+      logo: "SMART FUEL STATION",
+      services: "SERVICES",
+      about: "ABOUT",
+      contact: "CONTACT",
+      profile: "Profile",
+      orders: "My Orders",
+      cart: "Shopping Cart",
+      night: "Night Mode"
+    },
+    ar: {
+      logo: "محطة الوقود الذكية",
+      services: "الخدمات",
+      about: "معلومات عنا",
+      contact: "تواصل معنا",
+      profile: "الملف الشخصي",
+      orders: "طلباتي",
+      cart: "سلة المشتريات",
+      night: "الوضع الليلي"
+    }
+  };
+
+  const langSelect = document.getElementById("languageSwitcher");
+  let lang = localStorage.getItem("lang") || "en";
+  langSelect.value = lang;
+
+  function applyTranslation() {
+    document.querySelector(".logo").textContent = translations[lang].logo;
+    document.querySelector('a[href="#services"]').textContent = translations[lang].services;
+    document.querySelector('a[href="#about"]').textContent = translations[lang].about;
+    document.querySelector('a[href="#contact"]').textContent = translations[lang].contact;
+
+    document.querySelector(".text-profile").textContent = translations[lang].profile;
+    document.querySelector(".text-orders").textContent = translations[lang].orders;
+    document.querySelector(".text-cart").textContent = translations[lang].cart;
+    document.querySelector(".text-night").textContent = translations[lang].night;
+  }
+
+  applyTranslation();
+
+  langSelect.addEventListener("change", function () {
+    lang = this.value;
+    localStorage.setItem("lang", lang);
+    applyTranslation();
+  });
+</script>
+
 
 </body>
 </html>
