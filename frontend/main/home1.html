@@ -1,3 +1,4 @@
+
 <html>
     
 
@@ -225,7 +226,6 @@
   to { opacity: 1; transform: scale(1); }
 }
 
-
 .language-dropdown {
   position: relative;
 }
@@ -267,21 +267,29 @@
 <body>
 
   <!-- Navbar -->
-  <header>
-    <div class="logo">SMART FUEL STATION</div>
-    <nav>
-      <a href="#services">SERVICES</a>
-      <a href="#about">ABOUT</a>
-      <a href="#contact">CONTACT</a>
-      <div id="user-icon" class="icon-link" onclick="toggleSidebar()">
-        <i class="bx bx-user-circle"></i>
+<header>
+  <div class="logo">
+    <span data-en="SMART FUEL STATION" data-ar="محطة الوقود الذكية">SMART FUEL STATION</span>
+  </div>
+  <nav>
+    <a href="#services">
+      <span data-en="SERVICES" data-ar="الخدمات">SERVICES</span>
+    </a>
+    <a href="#about">
+      <span data-en="ABOUT" data-ar="عن الشركة">ABOUT</span>
+    </a>
+    <a href="#contact">
+      <span data-en="CONTACT" data-ar="اتصل بنا">CONTACT</span>
+    </a>
+    <div id="user-icon" class="icon-link" onclick="toggleSidebar()">
+      <i class="bx bx-user-circle"></i>
     </div>
-    </nav>
-  </header>
+  </nav>
+</header>
 
 
 
-<!-- Sidebar (User Menu) -->
+  <!-- Sidebar (User Menu) -->
 <div class="sidebar" id="sidebar">
   <button class="sidebar-close" onclick="toggleSidebar()">×</button>
 
@@ -313,45 +321,35 @@
   </div>
 </div>
 
-<!-- Modal Container -->
-<div id="modalContainer" class="popup-overlay">
-  <div class="popup-content">
-    <span class="close-btn" onclick="closeModal()">&times;</span>
-    <iframe src="shopping.html" frameborder="0" style="width:100%; height:400px;"></iframe>
-  </div>
-</div>
-
-
-
 
 <!-- Modal Container -->
 <div id="modalContainer" class="popup-overlay">
   <div class="popup-content">
-    <span class="close-btn" onclick="closeModal()">&times;</span>
+    <span class="close-btn" onclick="closeModal()">
+      <span data-en="&times;" data-ar="×">&times;</span>
+    </span>
     <iframe src="shopping.html" frameborder="0" style="width:100%; height:400px;"></iframe>
   </div>
 </div>
+
 
   <!-- Sections -->
-   <section>
-   <div class="video-container">
+<section>
+  <div class="video-container">
     <video autoplay muted loop>
         <source src="vedio.mp4" type="video/mp4">
-        
     </video>
-</div>
-   <section>
-<!-- النصوص والزر -->
-<div class="content">
-    <div class="main-text">Convenience on the move</div>
-    <div class="sub-text">Smart Fuel Station is the worlds leading fuel delivery<br>
-    and vehicle service platform. we are all <br>
-  about fulling innovation through <br>
-Convenience,and giving you back the time </div>
-<a href="#services" class="btn" >Order now</a>
-</div>
+  </div>
+</section>
 
 <!-- النصوص والزر -->
+<div class="content">
+    <div class="main-text" data-en="Convenience on the move" data-ar="الراحة أثناء التنقل">Convenience on the move</div>
+    <div class="sub-text" data-en="Smart Fuel Station is the world's leading fuel delivery<br>and vehicle service platform. We are all <br>about fueling innovation through <br>Convenience, and giving you back the time" data-ar="محطة الوقود الذكية هي المنصة الرائدة في توصيل الوقود<br> وخدمات المركبات. نحن نهتم <br>بالابتكار من خلال الراحة ، واستعادة الوقت لك">Smart Fuel Station is the world's leading fuel delivery<br>and vehicle service platform. We are all <br>about fueling innovation through <br>Convenience, and giving you back the time</div>
+    <a href="#services" class="btn" data-en="Order now" data-ar="اطلب الآن">Order now</a>
+</div>
+<!-- النصوص والزر -->
+
 
 </section>
 <section id="services">
@@ -363,25 +361,26 @@ Convenience,and giving you back the time </div>
 
 <!--quick by alaa-->
 
-      <div class="card">
-        <video autoplay loop muted>
-          <source src="aa.mp4" type="video/mp4" />
-        </video>
-        <div class="overlay-content">
-          <h3>Quick Order Service</h3>
-          <p>  Place an order in minutes by <br> providing your phone number and location.<br>No need to log in or add items to your cart<br>. Pay upon delivery.</p>
-          <br>
-          <a href="#" onclick="openQuickModal()" class="btn ">Quick Service</a>
-
-          
-        </div>
-      </div>
+<div class="card">
+  <video autoplay loop muted>
+    <source src="aa.mp4" type="video/mp4" />
+  </video>
+  <div class="overlay-content">
+    <h3 data-en="Quick Order Service" data-ar="خدمة الطلب السريع">Quick Order Service</h3>
+    <p data-en="Place an order in minutes by providing your phone number and location. No need to log in or add items to your cart. Pay upon delivery." 
+       data-ar="قم بوضع طلبك في دقائق عبر تقديم رقم هاتفك وموقعك. لا حاجة لتسجيل الدخول أو إضافة عناصر إلى سلة التسوق. الدفع عند التسليم.">
+       Place an order in minutes by providing your phone number and location. No need to log in or add items to your cart. Pay upon delivery.
+    </p>
+    <br>
+    <a href="#" onclick="openQuickModal()" class="btn" data-en="Quick Service" data-ar="خدمة سريعة">Quick Service</a>
+  </div>
+</div>
 
 
       <!-- Modal for Quick Order -->
 <div id="quickModal" class="modal">
   <div class="modal-content">
-    <span class="close-btn" onclick="closeQuickModal()">&times;</span>
+    <span class="close-btn" onclick="closeQuickModal()" data-en="Close" data-ar="إغلاق">×</span>
     <iframe id="quickIframe" src="" frameborder="0"></iframe>
   </div>
 </div>
@@ -390,96 +389,100 @@ Convenience,and giving you back the time </div>
   
 
       <div class="card">
-        <video autoplay loop muted>
-          <source src="vidio3.mp4" type="video/mp4" />
-        </video>
-        <div class="overlay-content">
-          <h3>Oil Change</h3>
-          <p>Keep your engine running smoothly with <br>our mobile oil change.</p>
-          <br>
-          <a href="#" class="btn service-btn" data-url="Oil change.html">Order Now</a>
-        </div>
-      </div>
-
-      <div class="card">
-        <video autoplay loop muted>
-          <source src="vidio4.mp4" type="video/mp4" />
-        </video>
-        <div class="overlay-content">
-          <h3>Car Wash</h3>
-          <p>Get your car washed on demand,<br> hassle-free.</p>
-          <br>
-          <a href="#" class="btn service-btn" data-url="car wash.html">Order Now</a>
-        </div>
-      </div>
-
-      <div class="card">
-        <video autoplay loop muted>
-          <source src="vidio1.mp4" type="video/mp4" />
-        </video>
-        <div class="overlay-content">
-          <h3>EV Charging</h3>
-          <p>Charge your electric vehicle wherever you are.</p>
-          <br>
-          <a href="#" class="btn service-btn" data-url="electric-vehicle.html">Order Now</a>
-        </div>
-      </div>
-
-      <div class="card">
-        <video autoplay loop muted>
-          <source src="vidio2.mp4" type="video/mp4" />
-        </video>
-        <div class="overlay-content">
-          <h3>Fuel Delivery</h3>
-          <p>We bring the fuel to you, anytime, anywhere.</p>
-          <br>
-          <a href="#" class="btn service-btn" data-url="fuel.html">Order Now</a>
-        </div>
-      </div>
-
+    <video autoplay loop muted>
+      <source src="vidio3.mp4" type="video/mp4" />
+    </video>
+    <div class="overlay-content">
+      <h3 data-en="Oil Change" data-ar="تغيير الزيت">Oil Change</h3>
+      <p data-en="Keep your engine running smoothly with <br>our mobile oil change." data-ar="احفظ محرك سيارتك يعمل بسلاسة مع <br>خدمة تغيير الزيت المتنقلة لدينا.">Keep your engine running smoothly with <br>our mobile oil change.</p>
+      <br>
+      <a href="#" class="btn service-btn" data-url="Oil change.html" data-en="Order Now" data-ar="اطلب الآن">Order Now</a>
     </div>
-  </div>
-  <div class="indicators" id="indicators"></div>
+</div>
+
+
+      <div class="card">
+    <video autoplay loop muted>
+      <source src="vidio4.mp4" type="video/mp4" />
+    </video>
+    <div class="overlay-content">
+      <h3 data-en="Car Wash" data-ar="غسيل السيارات">Car Wash</h3>
+      <p data-en="Get your car washed on demand,<br> hassle-free." data-ar="اغسل سيارتك عند الطلب،<br> دون عناء.">Get your car washed on demand,<br> hassle-free.</p>
+      <br>
+      <a href="#" class="btn service-btn" data-url="car wash.html" data-en="Order Now" data-ar="اطلب الآن">Order Now</a>
+    </div>
+</div>
+
+
+      <div class="card">
+    <video autoplay loop muted>
+      <source src="vidio1.mp4" type="video/mp4" />
+    </video>
+    <div class="overlay-content">
+      <h3 data-en="EV Charging" data-ar="شحن السيارات الكهربائية">EV Charging</h3>
+      <p data-en="Charge your electric vehicle wherever you are." data-ar="اشحن سيارتك الكهربائية أينما كنت.">Charge your electric vehicle wherever you are.</p>
+      <br>
+      <a href="#" class="btn service-btn" data-url="electric-vehicle.html" data-en="Order Now" data-ar="اطلب الآن">Order Now</a>
+    </div>
+</div>
+
+
+      <div class="card">
+    <video autoplay loop muted>
+      <source src="vidio2.mp4" type="video/mp4" />
+    </video>
+    <div class="overlay-content">
+      <h3 data-en="Fuel Delivery" data-ar="توصيل الوقود">Fuel Delivery</h3>
+      <p data-en="We bring the fuel to you, anytime, anywhere." data-ar="نحن نوفر لك الوقود في أي وقت وفي أي مكان.">We bring the fuel to you, anytime, anywhere.</p>
+      <br>
+      <a href="#" class="btn service-btn" data-url="fuel.html" data-en="Order Now" data-ar="اطلب الآن">Order Now</a>
+    </div>
+</div>
+
+</div>
+</div>
+<div class="indicators" id="indicators"></div>
 </section>
 
 <!-- النافذة المنبثقة -->
 <!-- Modal Window -->
-<!-- Modal Window -->
 <div id="serviceModal" class="modal">
   <div class="modal-content">
-    <span class="close-btn">&times;</span>
+    <span class="close-btn" data-en="Close" data-ar="إغلاق">&times;</span>
     <iframe id="modalIframe" src="" frameborder="0"></iframe>
   </div>
 </div>
+
 <!-- S Offers Section  by alaa-->
 <section id="offers" class="offers-section">
   <div class="offer-card">
     <img src="offer1.jpg" alt="Offer 1" />
     <div class="offer-content">
-      <h3 class="offer-title">20% Off on Fuel</h3>
-      <p class="offer-description">Get 20% off on every fuel refill! Limited time offer.</p>
-      <a href="#" class="offer-button">Claim Offer</a>
+      <h3 class="offer-title" data-en="20% Off on Fuel" data-ar="خصم 20% على الوقود">20% Off on Fuel</h3>
+      <p class="offer-description" data-en="Get 20% off on every fuel refill! Limited time offer." data-ar="احصل على خصم 20% على كل تعبئة وقود! عرض لفترة محدودة.">Get 20% off on every fuel refill! Limited time offer.</p>
+      <a href="#" class="offer-button" data-en="Claim Offer" data-ar="استClaim العرض">Claim Offer</a>
     </div>
   </div>
+</section>
 
   <div class="offer-card">
     <img src="offer2.jpg" alt="Offer 2" />
     <div class="offer-content">
-      <h3 class="offer-title">Free Car Wash</h3>
-      <p class="offer-description">Get a free car wash with every full tank. Hurry up!</p>
-      <a href="#" class="offer-button">Claim Offer</a>
+      <h3 class="offer-title" data-en="Free Car Wash" data-ar="غسيل سيارة مجاني">Free Car Wash</h3>
+      <p class="offer-description" data-en="Get a free car wash with every full tank. Hurry up!" data-ar="احصل على غسيل سيارة مجاني مع كل تعبئة كاملة. أسرع!">Get a free car wash with every full tank. Hurry up!</p>
+      <a href="#" class="offer-button" data-en="Claim Offer" data-ar="استClaim العرض">Claim Offer</a>
     </div>
   </div>
+
 
   <div class="offer-card">
     <img src="offer3.jpg" alt="Offer 3" />
     <div class="offer-content">
-      <h3 class="offer-title">Buy One, Get One Free</h3>
-      <p class="offer-description">Buy one oil change and get another one free. Limited to first 50 customers.</p>
-      <a href="#" class="offer-button">Claim Offer</a>
+      <h3 class="offer-title" data-en="Buy One, Get One Free" data-ar="اشترِ واحدة، واحصل على الأخرى مجاناً">Buy One, Get One Free</h3>
+      <p class="offer-description" data-en="Buy one oil change and get another one free. Limited to first 50 customers." data-ar="اشترِ تغيير زيت واحد واحصل على الآخر مجانًا. العرض محدود لأول 50 عميلًا.">Buy one oil change and get another one free. Limited to first 50 customers.</p>
+      <a href="#" class="offer-button" data-en="Claim Offer" data-ar="استClaim العرض">Claim Offer</a>
     </div>
   </div>
-</section>
 
 <!-- Add this to your styles in the <style> tag -->
 <style>
@@ -582,45 +585,50 @@ Convenience,and giving you back the time </div>
 
 <!-- Section: Team  by Alaa-->
 <section style="width: 100vw; padding: 40px 20px; background-color: #f9f9f9; box-sizing: border-box;">
-  <h2 style="text-align: center; font-size: 32px; margin-bottom: 30px;">Our Collaboration Built This Project</h2>
+  <h2 style="text-align: center; font-size: 32px; margin-bottom: 30px;" data-en="Our Collaboration Built This Project" data-ar="تعاوننا بنى هذا المشروع">Our Collaboration Built This Project</h2>
 
   <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 20px; max-width: 1200px; margin: auto;">
     <div class="team-card" onclick="openModal('team/mareia.html')">
       <img src="team/mareia.jpg" alt="Maria Fawaris">
-      <h3>Maria Fawaris</h3>
-      <p>Front-end Developer</p>
+      <h3 data-en="Maria Fawaris" data-ar="ماريا فوارس">Maria Fawaris</h3>
+      <p data-en="Front-end Developer" data-ar="مطور واجهات المستخدم">Front-end Developer</p>
     </div>
     <div class="team-card" onclick="openModal('team/alaa.html')">
       <img src="team/alaa.jpg" alt="Alaa Sharaman">
-      <h3>Alaa Sharaman</h3>
-      <p>Front-end Developer</p>
+      <h3 data-en="Alaa Sharaman" data-ar="الاء شرمان">Alaa Sharaman</h3>
+      <p data-en="Front-end Developer" data-ar="مطور واجهات المستخدم">Front-end Developer</p>
     </div>
     <div class="team-card" onclick="openModal('team/sara.html')">
       <img src="team/sara.jpg" alt="Sara Hayassat">
-      <h3>Sara Hayassat</h3>
-      <p>Back-end Developer</p>
+      <h3 data-en="Sara Hayassat" data-ar="سارة حياصات">Sara Hayassat</h3>
+      <p data-en="Back-end Developer" data-ar="مطور خلفيات">Back-end Developer</p>
     </div>
-    <div class="team-card" onclick="openModal('team/amneh.html')">
-      <img src="team/amneh.jpg" alt="Amneh Jawabra">
-      <h3>Amneh Jawabra</h3>
-      <p>Back-end Developer</p>
-    </div>
-    <div class="team-card" onclick="openModal('team/mays.html')">
-      <img src="team/mays.jpg" alt="Mays Abu Alhajeh">
-      <h3>Mays Abu Alhajeh</h3>
-      <p>Back-end Developerr</p>
-    </div>
-    <div class="team-card" onclick="openModal('team/farah.html')">
-      <img src="team/farah.png" alt="Farah Al-Hawari">
-      <h3>Farah Al-Hawari</h3>
-      <p>Back-end Developer</p>
-    </div>
+  </div>
+</section>
+
+   <div class="team-card" onclick="openModal('team/amneh.html')">
+  <img src="team/amneh.jpg" alt="Amneh Jawabra">
+  <h3 data-en="Amneh Jawabra" data-ar="أمنة جوابرة">Amneh Jawabra</h3>
+  <p data-en="Back-end Developer" data-ar="مطور خلفيات">Back-end Developer</p>
+</div>
+<div class="team-card" onclick="openModal('team/mays.html')">
+  <img src="team/mays.jpg" alt="Mays Abu Alhaija">
+  <h3 data-en="Mays Abu Alhajeh" data-ar="ميس أبو الهيجاء">Mays Abu Alhajeh</h3>
+  <p data-en="Back-end Developer" data-ar="مطور خلفيات">Back-end Developer</p>
+</div>
+<div class="team-card" onclick="openModal('team/farah.html')">
+  <img src="team/farah.png" alt="Farah Al-Hawari">
+  <h3 data-en="Farah Al-Hawari" data-ar="فرح الهواري">Farah Al-Hawari</h3>
+  <p data-en="Back-end Developer" data-ar="مطور خلفيات">Back-end Developer</p>
+</div>
+
    <!-- Card for Monther Albsool -->
 <div class="team-card monther-card">
   <img src="team/monther.jpg" alt="Monther Albsool">
-  <h3>Eng.Monther Albsool</h3>
-  <p>Project Supervisor</p>
+  <h3 data-en="Eng. Monther Albsool" data-ar="المهندس منتر البصول">Eng. Monther Albsool</h3>
+  <p data-en="Project Supervisor" data-ar="مشرف المشروع">Project Supervisor</p>
 </div>
+
 
 
   </div>
@@ -630,7 +638,12 @@ Convenience,and giving you back the time </div>
   <div id="modal-content" style="width: 50%; height: 70%; margin: 0 auto; background-color: white; border-radius: 10px; padding: 20px; position: relative; top: 50%; transform: translateY(-50%); box-shadow: 0 4px 20px rgba(0,0,0,0.2); overflow-y: hidden;">
     <button onclick="closeModal()" style="position: absolute; top: 10px; right: 10px; background-color: transparent; border: none; font-size: 24px; cursor: pointer; color: #333;">&times;</button>
     <div id="modal-body" style="padding: 20px;">
-     
+      <h2 data-en="Modal Title" data-ar="عنوان النافذة">Modal Title</h2>
+      <p data-en="This is a sample modal body text in English." data-ar="هذا نص عينة للنافذة المنبثقة باللغة العربية.">This is a sample modal body text in English.</p>
+    </div>
+  </div>
+</div>
+
     </div>
   </div>
 </div>
@@ -643,47 +656,75 @@ Convenience,and giving you back the time </div>
 
 <section id="contact" style="padding: 60px 20px; background: linear-gradient(to right, #f0f4f8, #d9e2ec); font-family: 'Segoe UI', sans-serif;">
   <div style="max-width: 1000px; margin: auto; background-color: white; padding: 40px; border-radius: 15px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
-    <h2 style="text-align: center; margin-bottom: 40px; font-size: 32px; color: #333;">Contact Us</h2>
+    <h2 style="text-align: center; margin-bottom: 40px; font-size: 32px; color: #333;">
+      <span data-en="Contact Us" data-ar="اتصل بنا">Contact Us</span>
+    </h2>
 
-    
     <div style="max-width: 600px; margin: auto;">
       <form id="contactForm" onsubmit="return validateForm()">
-        <label style="display:block; margin-bottom:5px;">Your Name:</label>
+        <label style="display:block; margin-bottom:5px;">
+          <span data-en="Your Name:" data-ar="اسمك:">Your Name:</span>
+        </label>
         <input type="text" id="name" name="name" required style="width:100%; padding:12px; margin-bottom:15px; border:1px solid #ccc; border-radius:8px;">
 
-        <label style="display:block; margin-bottom:5px;">Your Email:</label>
+        <label style="display:block; margin-bottom:5px;">
+          <span data-en="Your Email:" data-ar="بريدك الإلكتروني:">Your Email:</span>
+        </label>
         <input type="email" id="email" name="email" required style="width:100%; padding:12px; margin-bottom:15px; border:1px solid #ccc; border-radius:8px;">
 
-        <label style="display:block; margin-bottom:5px;">Your Message:</label>
+        <label style="display:block; margin-bottom:5px;">
+          <span data-en="Your Message:" data-ar="رسالتك:">Your Message:</span>
+        </label>
         <textarea id="message" name="message" required style="width:100%; padding:12px; height:100px; margin-bottom:15px; border:1px solid #ccc; border-radius:8px;"></textarea>
 
-        <button type="submit" style="background-color: #2f5061; color: white; border: none; padding: 12px 20px; border-radius: 8px; cursor: pointer;">Send Message</button>
+        <button type="submit" style="background-color: #2f5061; color: white; border: none; padding: 12px 20px; border-radius: 8px; cursor: pointer;">
+          <span data-en="Send Message" data-ar="إرسال الرسالة">Send Message</span>
+        </button>
       </form>
-
-     
-      <div style="margin-top: 30px;">
-        <h4 style="margin-bottom: 10px;">Rate Us</h4>
-        <div id="stars" style="font-size: 40px; color: #ccc; cursor: pointer;">
-          <span onclick="rateUs(1)">&#9733;</span>
-          <span onclick="rateUs(2)">&#9733;</span>
-          <span onclick="rateUs(3)">&#9733;</span>
-          <span onclick="rateUs(4)">&#9733;</span>
-          <span onclick="rateUs(5)">&#9733;</span>
-        </div>
-        <div id="rating-message" style="margin-top: 10px; color: #2f5061;"></div>
-      </div>
     </div>
+  </div>
+</section>
+
+      <div style="margin-top: 30px;">
+  <h4 style="margin-bottom: 10px;">
+    <span data-en="Rate Us" data-ar="قيمنا">Rate Us</span>
+  </h4>
+  <div id="stars" style="font-size: 40px; color: #ccc; cursor: pointer;">
+    <span onclick="rateUs(1)">&#9733;</span>
+    <span onclick="rateUs(2)">&#9733;</span>
+    <span onclick="rateUs(3)">&#9733;</span>
+    <span onclick="rateUs(4)">&#9733;</span>
+    <span onclick="rateUs(5)">&#9733;</span>
+  </div>
+  <div id="rating-message" style="margin-top: 10px; color: #2f5061;">
+    <span data-en="Thank you for your feedback!" data-ar="شكرًا على ملاحظاتك!">Thank you for your feedback!</span>
+  </div>
+</div>
 
     
-    <div style="margin-top: 50px; text-align: center; padding: 30px; background-color: #f1f5f9; border-radius: 12px;">
-      <h3 style="color: #2f5061; margin-bottom: 20px;">Our Information</h3>
+    <<div style="margin-top: 50px; text-align: center; padding: 30px; background-color: #f1f5f9; border-radius: 12px;">
+  <h3 style="color: #2f5061; margin-bottom: 20px;">
+    <span data-en="Our Information" data-ar="معلوماتنا">Our Information</span>
+  </h3>
 
-      <p style="margin: 8px 0;"><strong>Location:</strong> Irbid, Jordan</p>
-      <p style="margin: 8px 0;"><strong>Phone 1:</strong> +962 7 9123 4567</p>
-      <p style="margin: 8px 0;"><strong>Phone 2:</strong> +962 7 9888 1122</p>
-      <p style="margin: 8px 0;"><strong>Email:</strong> info@smartfuelstation.com</p>
+  <p style="margin: 8px 0;">
+    <strong><span data-en="Location:" data-ar="الموقع:">Location:</span></strong> 
+    <span data-en="Irbid, Jordan" data-ar="إربد، الأردن">Irbid, Jordan</span>
+  </p>
+  <p style="margin: 8px 0;">
+    <strong><span data-en="Phone 1:" data-ar="الهاتف 1:">Phone 1:</span></strong> 
+    <span data-en="+962 7 9123 4567" data-ar="+962 7 9123 4567">+962 7 9123 4567</span>
+  </p>
+  <p style="margin: 8px 0;">
+    <strong><span data-en="Phone 2:" data-ar="الهاتف 2:">Phone 2:</span></strong> 
+    <span data-en="+962 7 9888 1122" data-ar="+962 7 9888 1122">+962 7 9888 1122</span>
+  </p>
+  <p style="margin: 8px 0;">
+    <strong><span data-en="Email:" data-ar="البريد الإلكتروني:">Email:</span></strong> 
+    <span data-en="info@smartfuelstation.com" data-ar="info@smartfuelstation.com">info@smartfuelstation.com</span>
+  </p>
+</div>
 
-      
       <div style="margin-top: 20px; display: flex; gap: 10px; flex-direction: column; align-items: center;">
         <div style="display: flex; align-items: center; gap: 10px;">
           <a href="https://www.instagram.com/alaa_el.hussein?igsh=cWswdG1qMnAwZmU1" target="_blank">
@@ -705,21 +746,23 @@ Convenience,and giving you back the time </div>
 <script>
   document.querySelectorAll('.service-btn').forEach(btn => {
     btn.addEventListener('click', function (event) {
-      event.preventDefault(); // يمنع الانتقال الافتراضي
+        event.preventDefault(); // يمنع الانتقال الافتراضي
 
-      const token = sessionStorage.getItem("token");
-      //const targetUrl = this.getAttribute("data-url");
+        const token = sessionStorage.getItem("token");
 
-      if (token) {
-       
-        window.location.href = "Oil change.html";
-      } else {
-        
-        alert("Please log in or sign up first.");
-        window.location.href = "login.html"; 
-      }
+        if (token) {
+            // إذا كان هناك رمز جلسة، انتقل إلى الصفحة المطلوبة
+            const targetUrl = this.getAttribute("data-url"); // الحصول على URL الهدف من data-url
+            window.location.href = targetUrl;
+        } else {
+            // إذا لم يكن هناك رمز جلسة، اطلب من المستخدم تسجيل الدخول أو الاشتراك
+            alert("Please log in or sign up first.");
+            window.location.href = "login.html"; 
+        }
     });
-  });
+});
+
+    
 </script>
   <script>
    function openModal(url) {
@@ -739,24 +782,31 @@ function closeModal() {
 }
 
     function validateForm() {
-      var name = document.getElementById('name').value.trim();
-      var email = document.getElementById('email').value.trim();
-      var message = document.getElementById('message').value.trim();
-      var emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+  // جلب القيم المدخلة في النموذج
+  var name = document.getElementById('name').value.trim();
+  var email = document.getElementById('email').value.trim();
+  var message = document.getElementById('message').value.trim();
 
-      if (!name || !email || !message) {
-        alert("Please fill out all fields.");
-        return false;
-      }
+  // تعريف نمط البريد الإلكتروني
+  var emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
 
-      if (!emailPattern.test(email)) {
-        alert("Please enter a valid email address.");
-        return false;
-      }
+  // التحقق من أن جميع الحقول قد تم تعبئتها
+  if (!name || !email || !message) {
+    alert("الرجاء تعبئة جميع الحقول.");
+    return false;
+  }
 
-      alert("Message sent successfully!");
-      return true;
-    }
+  // التحقق من صحة البريد الإلكتروني
+  if (!emailPattern.test(email)) {
+    alert("الرجاء إدخال بريد إلكتروني صالح.");
+    return false;
+  }
+
+  // إذا تم التحقق بنجاح، يظهر تنبيه
+  alert("تم إرسال الرسالة بنجاح!");
+  return true;
+}
+
 
     function rateUs(rating) {
       const stars = document.querySelectorAll("#stars span");
@@ -765,12 +815,12 @@ function closeModal() {
       });
 
       const messages = [
-        "Thank you for your feedback!",
-        "We appreciate your opinion!",
-        "Thanks! We're getting better!",
-        "Awesome! You're the best!",
-        "Perfect! We're happy you're happy!"
-      ];
+  { en: "Thank you for your feedback!", ar: "شكرًا على ملاحظاتك!" },
+  { en: "We appreciate your opinion!", ar: "نحن نقدر رأيك!" },
+  { en: "Thanks! We're getting better!", ar: "شكرًا! نحن نتحسن!" },
+  { en: "Awesome! You're the best!", ar: "رائع! أنت الأفضل!" },
+  { en: "Perfect! We're happy you're happy!", ar: "مثالي! نحن سعداء لأنك سعيد!" }
+];
       document.getElementById('rating-message').innerText = messages[rating - 1];
     }
     const serviceButtons = document.querySelectorAll(".service-btn");
@@ -929,7 +979,7 @@ function closeModal() {
   }
 
 
-
+ 
 
 function toggleLanguageMenu() {
   const menu = document.getElementById("languageMenu");
