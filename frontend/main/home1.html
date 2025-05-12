@@ -859,17 +859,31 @@ function closeModal() {
     document.getElementById('quickIframe').src = "";
   }
 
-let currentLanguage = 'en';
 
-function toggleLanguage() {
-  currentLanguage = currentLanguage === 'en' ? 'ar' : 'en';
-  
-  // مثال لتحديث محتوى الصفحة حسب اللغة (يمكنك التوسيع لاحقًا)
-  alert('Language switched to: ' + (currentLanguage === 'en' ? 'English' : 'Arabic'));
 
-  // يمكنك حفظ اللغة في localStorage أو إعادة تحميل الصفحة مع مسار لغة مختلف
-  // localStorage.setItem('lang', currentLanguage);
+function toggleLanguageMenu() {
+  const menu = document.getElementById("languageMenu");
+  menu.style.display = menu.style.display === "none" ? "block" : "none";
 }
+
+function switchLanguage(lang) {
+  localStorage.setItem("lang", lang);
+  applyLanguage(lang);
+}
+
+function applyLanguage(lang) {
+  const elements = document.querySelectorAll("[data-en], [data-ar]");
+  elements.forEach(el => {
+    el.innerHTML = el.getAttribute(`data-${lang}`);
+  });
+  document.body.dir = (lang === "ar") ? "rtl" : "ltr";
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+  const savedLang = localStorage.getItem("lang") || "en";
+  applyLanguage(savedLang);
+});
+
 
 
 </script>
