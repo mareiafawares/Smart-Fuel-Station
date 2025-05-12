@@ -294,14 +294,15 @@
       <h3>Employees Overview</h3>
       <form class="employee-form" id="employeeForm">
         <input type="text" id="employeeName" placeholder="Employee Name" required>
-        <select id="employeeRole" required>
-          <option value="" disabled selected>Select Role</option>
-          <option value="Manager">Manager</option>
-          <option value="Technician">Technician</option>
-          <option value="Driver">Driver</option>
-          <option value="Cleaner">Cleaner</option>
-        </select>
-        <button type="submit" class="btn profile-btn">Add Employee</button>
+<select id="employeeRole" required>
+  <option value="" disabled selected>Select Role</option>
+  <option value="Manager">Manager</option>
+  <option value="Technician">Technician</option>
+  <option value="Driver">Driver</option>
+  <option value="Cleaner">Cleaner</option>
+</select>
+<textarea id="employeeTasks" placeholder="Enter tasks for this employee..." rows="3"></textarea>
+<button type="submit" class="btn profile-btn">Add Employee</button>
       </form>
       <ul class="employee-list" id="employeeList">
         <!-- Employees will be listed here dynamically -->
@@ -357,7 +358,6 @@
       modal.classList.add('show'); // Add 'show' class for fade-in effect
       modal.style.display = 'flex'; // Make modal visible
     }
-
     // Close Modal
     function closeModal() {
       const modal = document.getElementById('profileModal');
@@ -366,7 +366,6 @@
         modal.style.display = 'none'; // Hide modal after fade-out
       }, 300); // Match the duration of the fade-out transition
     }
-
     // Close Modal on Outside Click
     window.onclick = function(event) {
       const modal = document.getElementById('profileModal');
@@ -374,33 +373,29 @@
         closeModal();
       }
     };
-
+  
     // Add Employee Logic
     const employeeList = document.getElementById('employeeList');
     const employeeForm = document.getElementById('employeeForm');
-
+  
     employeeForm.addEventListener('submit', function(event) {
       event.preventDefault();
-
-      // Get form values
+  
       const employeeName = document.getElementById('employeeName').value.trim();
       const employeeRole = document.getElementById('employeeRole').value;
-
+      const employeeTasks = document.getElementById('employeeTasks').value.trim() || 'No tasks assigned';
+  
       if (employeeName && employeeRole) {
-        // Create new employee item
         const employeeItem = document.createElement('li');
         employeeItem.classList.add('employee-item');
-        employeeItem.textContent = `${employeeName} - ${employeeRole}`;
-
-        // Append to the list
+        employeeItem.innerHTML = `<strong>${employeeName}</strong> - ${employeeRole}<br><small style="color:#455a64; font-size:14px;">Tasks: ${employeeTasks}</small>`;
+        
         employeeList.appendChild(employeeItem);
-
-        // Clear form fields
         employeeForm.reset();
       } else {
         alert('Please fill in all fields.');
       }
     });
-    </script>
+  </script>
 </body>
 </html>

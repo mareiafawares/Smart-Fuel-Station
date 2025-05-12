@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Car Wash Service</title>
+  <link href="https://fonts.googleapis.com/css2?family=Segoe+UI&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #e0f7fa, #ffffff);
+      margin: 0;
+      padding: 0;
+      color: #131212;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .main-box {
+      display: flex;
+      background-color: #ffffff;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+      overflow: hidden;
+      max-width: 650px;
+      margin: auto;
+    }
+
+    .left {
+      flex: 1;
+      background: #f1f9ff;
+      padding: 40px 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border-right: 1px solid #dbe2ea;
+    }
+
+    .left img {
+      width: 120px;
+      margin-bottom: 20px;
+    }
+
+    .left h2 {
+      color: #2b6cb0;
+      font-size: 26px;
+      margin-bottom: 10px;
+    }
+
+    .left p {
+      text-align: center;
+      color: #050505;
+      font-size: 15px;
+    }
+
+    .right {
+      flex: 1;
+      padding: 40px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      font-weight: 600;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    select, input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #cbd5e0;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+
+    .map-preview {
+      width: 100%;
+      height: 180px;
+      border-radius: 10px;
+      margin-top: 10px;
+      cursor: pointer;
+      border: 2px solid #ccc;
+      overflow: hidden;
+    }
+
+    .map-preview iframe {
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    .price-display {
+      margin-top: 10px;
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    button {
+      background-color: #2b6cb0;
+      color: white;
+      padding: 14px;
+      width: 100%;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+
+    button:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+
+    button:hover:enabled {
+      background-color: #1a4f90;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 10;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.4);
+    }
+
+    .modal-content {
+      background-color: #fff;
+      margin: 10% auto;
+      padding: 20px;
+      border-radius: 15px;
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+    }
+
+    .modal-content h3 {
+      color: #2b6cb0;
+      margin-bottom: 10px;
+    }
+
+    .modal-content p {
+      color: #444;
+      margin: 10px 0;
+    }
+
+    .modal-content button {
+      background-color: #2b6cb0;
+      color: white;
+      padding: 10px 20px;
+      margin-top: 15px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .modal-content button:hover {
+      background-color: #1a4f90;
+    }
+  </style>
+</head>
+<body>
+
+<div class="main-box">
+  <div class="left">
+    <img src="icon car.png" alt="Car Wash Icon">
+    <h2>Smart Car Wash</h2>
+    <p>Book your car wash now with just one click! Reliable, fast, and at your doorstep.</p>
+  </div>
+
+  <div class="right">
+    <div class="form-group">
+      <label>Wash Type</label>
+      <select id="washType" onchange="showPrice(); validateForm();">
+        <option value="">Select Wash Type</option>
+        <option value="Internal Wash">Internal Wash</option>
+        <option value="External Wash">External Wash</option>
+        <option value="Full Wash">Full Wash</option>
+      </select>
+      <div id="priceDisplay" class="price-display"></div>
+    </div>
+
+    <div class="form-group">
+      <label>Your Location</label>
+      <input type="text" id="addressInput" placeholder="Enter your address" oninput="validateForm()">
+      <div class="map-preview" onclick="openMap()">
+        <iframe src="https://www.google.com/maps?q=Jordan&output=embed" frameborder="0" allowfullscreen></iframe>
+      </div>
+    </div>
+
+    <button id="submitBtn" onclick="confirmOrder()" disabled>Submit Order</button>
+  </div>
+</div>
+
+<div id="orderModal" class="modal">
+  <div class="modal-content">
+    <h3>Confirm Your Order</h3>
+    <p id="orderDetails"></p>
+    <button onclick="finalizeOrder()">Confirm Order</button>
+  </div>
+</div>
+
+<script>
+  const priceDisplay = document.getElementById('priceDisplay');
+  const washType = document.getElementById('washType');
+  const addressInput = document.getElementById('addressInput');
+  const submitBtn = document.getElementById('submitBtn');
+  const orderModal = document.getElementById('orderModal');
+  const orderDetails = document.getElementById('orderDetails');
+
+  let originalPriceValue = 0;
+  let discountedPriceValue = 0;
+
+  function showPrice() {
+    const type = washType.value;
+    let originalPrice = 0;
+
+    if (type === 'Internal Wash') {
+      originalPrice = 5;
+    } else if (type === 'External Wash') {
+      originalPrice = 4;
+    } else if (type === 'Full Wash') {
+      originalPrice = 8;
+    }
+
+    originalPriceValue = originalPrice;
+    discountedPriceValue = (originalPrice * 0.8).toFixed(2);
+
+    priceDisplay.innerHTML = `
+      Price: <span style="text-decoration: line-through; color: #888;">${originalPriceValue} JD</span>
+      <span style="color: red;">${discountedPriceValue} JD</span>
+    `;
+  }
+
+  function openMap() {
+    window.open("https://www.google.com/maps?q=Jordan", "_blank");
+  }
+
+  function validateForm() {
+    const wash = washType.value;
+    const address = addressInput.value.trim();
+    submitBtn.disabled = !(wash && address);
+  }
+
+  function confirmOrder() {
+    const wash = washType.value;
+    const address = addressInput.value.trim();
+
+    orderDetails.innerHTML = `
+      🚗 Wash Type: ${wash}<br>
+      📍 Location: ${address}<br>
+      💰 <span style="text-decoration: line-through; color: #888;">${originalPriceValue} JD</span>
+      <span style="color: red;"> ${discountedPriceValue} JD</span>
+    `;
+
+    orderModal.style.display = 'block';
+  }
+
+  function finalizeOrder() {
+    orderModal.style.display = 'none';
+    const wash = washType.value;
+
+    const serviceData = {
+      name: `Car Wash - ${wash}`,
+      originalPrice: originalPriceValue,
+      price: parseFloat(discountedPriceValue),
+      image: 'icon car.png',
+      discounted: true
+    };
+
+    addToCart(serviceData);
+    alert("✅ Your order has been added to the cart with discount!");
+  }
+
+  function addToCart(service) {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    cart.push(service);
+    localStorage.setItem('cart', JSON.stringify(cart));
+  }
+
+  window.onclick = function(event) {
+    if (event.target === orderModal) {
+      orderModal.style.display = "none";
+    }
+  }
+</script>
+
+</body>
+</html>

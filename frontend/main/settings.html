@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Settings - Smart Fuel Station</title>
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f0f8ff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .content-box {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+      min-height: 400px; /* لضمان طول مشابه لـ menu-box */
+    }
+
+    .content-box h2 {
+      color: #004d66;
+      margin-bottom: 20px;
+    }
+
+    .info-item {
+      font-size: 15px;
+      color: #333;
+      margin: 10px 0;
+      text-align: left;
+    }
+
+    .info-item input {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #b3d9ff;
+      border-radius: 8px;
+      font-size: 14px;
+      background: #f9fbff;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .info-item input:focus {
+      border-color: #00aabb;
+      box-shadow: 0 0 5px rgba(0, 170, 187, 0.3);
+      outline: none;
+    }
+
+    .back-btn {
+      padding: 8px 15px;
+      background: #004d66;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: background 0.3s ease;
+    }
+
+    .back-btn:hover {
+      background: #00334d;
+    }
+
+    @media (max-width: 480px) {
+      .content-box {
+        padding: 20px;
+        max-width: 90%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="content-box">
+    <h2>Settings</h2>
+    <div class="info-item"><strong>Language:</strong> <input type="text" id="settingLang" value="English"></div>
+    <div class="info-item"><strong>Notifications:</strong> <input type="text" id="settingNotif" value="Enabled"></div>
+    <div class="info-item"><strong>Dark Mode:</strong> <input type="text" id="settingDark" value="Disabled"></div>
+    <button class="back-btn" onclick="window.location.href='index.html'">Back</button>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const settingLang = localStorage.getItem('settingLang') || 'English';
+      const settingNotif = localStorage.getItem('settingNotif') || 'Enabled';
+      const settingDark = localStorage.getItem('settingDark') || 'Disabled';
+
+      document.getElementById('settingLang').value = settingLang;
+      document.getElementById('settingNotif').value = settingNotif;
+      document.getElementById('settingDark').value = settingDark;
+    });
+
+    ['settingLang', 'settingNotif', 'settingDark'].forEach(id => {
+      document.getElementById(id).addEventListener('blur', () => {
+        const value = document.getElementById(id).value;
+        localStorage.setItem(id, value);
+      });
+    });
+  </script>
+</body>
+</html>

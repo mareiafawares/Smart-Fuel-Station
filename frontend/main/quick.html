@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Quick Service</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background: transparent;
+    }
+
+    .quick-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; /* يجعل الحاوية تأخذ عرض وارتفاع كاملين */
+  text-align: center;
+}
+
+    .quick-icon {
+      font-size: 40px;
+      margin-bottom: 10px;
+    }
+
+    .quick-title {
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 8px;
+      text-align: center;
+    }
+
+    .quick-desc {
+      font-size: 20px;
+      color: #555;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+
+    input, select {
+      width: 90%;
+      padding: 8px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    .btn {
+  padding: 14px 28px;
+  font-size: 20px;
+  font-weight: bold;
+  background: linear-gradient(135deg, #00aabb, #004d66);
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+الشرح:
+
+    .submit-btn:hover {
+      background: #0056b3;
+    }
+
+    .success-message {
+      display: none;
+      margin-top: 15px;
+      background-color: #d4edda;
+      color: #155724;
+      padding: 10px;
+      border: 1px solid #c3e6cb;
+      border-radius: 6px;
+      font-size: 13px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="quick-container">
+    <div class="quick-icon">⏱️🚗</div>
+    <div class="quick-title">Quick Service Request</div>
+    <div class="quick-desc">
+      No login required. Just enter your phone number and select your governorate.<br>
+      Pay upon delivery.
+    </div>
+    <form id="quickForm">
+      <input type="tel" id="phone" placeholder="Phone Number" required />
+      <select id="governorate" required>
+        <option value="" disabled selected>Select Governorate</option>
+        <option value="Amman">Amman</option>
+        <option value="Irbid">Irbid</option>
+        <option value="Mafraq">Mafraq</option>
+      </select>
+      <button class="btn" type="submit">Confirm Order</button>
+    </form>
+    <div id="successMsg" class="success-message">
+      ✅ We will contact you shortly at: <span id="userPhone"></span><br>
+      🏙️ Governorate: <span id="userGov"></span>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById('quickForm');
+    const successMsg = document.getElementById('successMsg');
+    const userPhone = document.getElementById('userPhone');
+    const userGov = document.getElementById('userGov');
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      const phone = document.getElementById('phone').value.trim();
+      const gov = document.getElementById('governorate').value;
+      if (phone && gov) {
+        userPhone.textContent = phone;
+        userGov.textContent = gov;
+        successMsg.style.display = 'block';
+      }
+    });
+  </script>
+</body>
+</html>
+
