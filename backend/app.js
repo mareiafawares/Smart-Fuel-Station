@@ -41,10 +41,10 @@ const verifyToken = (req, res, next) => {
 // ✅ تسجيل مستخدم عبر جوجل
 app.post("/signup/google", async (req, res) => {
     try {
-      const { username, email, role } = req.body;
-      console.log("Received Google signup data:", { username, email, role });
+      const { name, email, role } = req.body;
+      console.log("Received Google signup data:", { name, email, role });
   
-      if (!username || !email || !role) {
+      if (!name || !email || !role) {
         return res.status(400).json({ message: "Missing required fields" });
       }
   
@@ -60,7 +60,7 @@ app.post("/signup/google", async (req, res) => {
           message: "User already exists",
           token,
           user: {
-            username: user.username,
+            name: user.name,
             email: user.email,
             role: user.role,
           },
@@ -68,7 +68,7 @@ app.post("/signup/google", async (req, res) => {
       }
   
       user = new User({
-        username,
+       name,
         email,
         password: null,
         role,
@@ -88,7 +88,7 @@ app.post("/signup/google", async (req, res) => {
         message: "Google signup successful",
         token,
         user: {
-          username: user.username,
+         name: user.name,
           email: user.email,
           role: user.role,
         },
