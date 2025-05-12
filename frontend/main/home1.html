@@ -284,26 +284,36 @@
     </nav>
   </header>
 
-  <!-- Sidebar (User Menu) -->
+
   
-  <div class="sidebar" id="sidebar">
-    <button class="sidebar-close" onclick="toggleSidebar()">×</button>
-    <a href="javascript:void(0);" onclick="openPopup()"><i class='bx bx-user'></i> Profile</a>
+  <!-- Sidebar (User Menu) -->
+<div class="sidebar" id="sidebar">
+  <button class="sidebar-close" onclick="toggleSidebar()">×</button>
+  
+  <a href="javascript:void(0);" onclick="openPopup()" data-en="Profile" data-ar="الملف الشخصي">
+    <i class='bx bx-user'></i> Profile
+  </a>
 
+  <a href="orders.html" data-en="My Orders" data-ar="طلباتي">
+    <i class='bx bx-list-ul'></i> My Orders
+  </a>
 
-    <a href="orders.html"><i class='bx bx-list-ul'></i> My Orders</a>
-    
-    <a href="javascript:void(0);" onclick="openModal()"><i class='bx bx-cart'></i> Shopping Cart</a>
-    
-    <div class="language-switcher">
-  <button onclick="toggleLanguageMenu()" class="lang-btn">
+  <a href="javascript:void(0);" onclick="openModal()" data-en="Shopping Cart" data-ar="سلة التسوق">
+    <i class='bx bx-cart'></i> Shopping Cart
+  </a>
 
-    🌐 Language
-  </button>
-  <div id="languageMenu" class="language-menu">
-    <button onclick="switchLanguage('en')">English</button>
-    <button onclick="switchLanguage('ar')">العربية</button>
+  <!-- زر اللغة -->
+  <div class="language-selector" style="margin-top: 10px;" id="languageContainer">
+    <button onclick="toggleLanguageMenu()" data-en="Language" data-ar="اللغة">
+      🌐 Language
+    </button>
+    <div id="languageMenu" style="display: none; margin-top: 5px;">
+      <button onclick="switchLanguage('en')">English</button>
+      <button onclick="switchLanguage('ar')">العربية</button>
+    </div>
   </div>
+</div>
+
 
 </div>
 
