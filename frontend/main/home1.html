@@ -894,7 +894,7 @@ function switchLanguage(lang) {
 function applyLanguage(lang) {
   const elements = document.querySelectorAll("[data-en], [data-ar]");
   elements.forEach(el => {
-    el.innerHTML = el.getAttribute(`data-${lang}`);
+    el.innerHTML = el.getAttribute(data-${lang});
   });
   document.body.dir = (lang === "ar") ? "rtl" : "ltr";
 }
@@ -904,6 +904,13 @@ window.addEventListener("DOMContentLoaded", () => {
   applyLanguage(savedLang);
 });
 
+
+
+
+function toggleLanguageMenu() {
+  const menu = document.getElementById("languageMenu");
+  menu.style.display = menu.style.display === "block" ? "none" : "block";
+}
 
 
 
