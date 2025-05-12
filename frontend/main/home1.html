@@ -223,6 +223,7 @@
   to { opacity: 1; transform: scale(1); }
 }
 
+<<<<<<< HEAD
 .language-switcher {
   position: relative;
   margin-top: 10px;
@@ -235,11 +236,16 @@
   color: white;
   cursor: pointer;
   font-size: 16px;
+=======
+.language-dropdown {
+  position: relative;
+>>>>>>> f0744170a56340e1beb8b189ca94f55da0c6eca5
 }
 
 .language-menu {
   display: none;
   position: absolute;
+<<<<<<< HEAD
   background-color: #222;
   border: 1px solid #444;
   top: 30px;
@@ -263,6 +269,34 @@
   background-color: #444;
 }
 
+=======
+  top: 100%;
+  left: 30px;
+  background: #fff;
+  border: 1px solid #ccc;
+  padding: 5px;
+  border-radius: 4px;
+  z-index: 999;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.language-menu button {
+  display: block;
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 6px 10px;
+  text-align: left;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.language-menu button:hover {
+  background-color: #f0f0f0;
+}
+
+
+>>>>>>> f0744170a56340e1beb8b189ca94f55da0c6eca5
 </style>
 
 </head>
@@ -283,6 +317,7 @@
   </header>
 
   <!-- Sidebar (User Menu) -->
+<<<<<<< HEAD
   
   <div class="sidebar" id="sidebar">
     <button class="sidebar-close" onclick="toggleSidebar()">×</button>
@@ -314,6 +349,49 @@
   </div>
   <!--//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
   
+=======
+<div class="sidebar" id="sidebar">
+  <button class="sidebar-close" onclick="toggleSidebar()">×</button>
+
+  <a href="javascript:void(0);" onclick="openPopup()">
+    <i class='bx bx-user'></i>
+    <span data-en="Profile" data-ar="الملف الشخصي">Profile</span>
+  </a>
+
+  <a href="orders.html">
+    <i class='bx bx-list-ul'></i>
+    <span data-en="My Orders" data-ar="طلباتي">My Orders</span>
+  </a>
+
+  <a href="javascript:void(0);" onclick="openModal()">
+    <i class='bx bx-cart'></i>
+    <span data-en="Shopping Cart" data-ar="سلة المشتريات">Shopping Cart</span>
+  </a>
+
+  <!-- 🌐 Language Dropdown -->
+  <div class="language-dropdown">
+    <a href="javascript:void(0);" onclick="toggleLanguageMenu()">
+      <i class='bx bx-globe'></i>
+      <span data-en="Language" data-ar="اللغة">Language</span>
+    </a>
+    <div id="languageMenu" class="language-menu">
+      <button onclick="switchLanguage('en')">English</button>
+      <button onclick="switchLanguage('ar')">العربية</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Container -->
+<div id="modalContainer" class="popup-overlay">
+  <div class="popup-content">
+    <span class="close-btn" onclick="closeModal()">&times;</span>
+    <iframe src="shopping.html" frameborder="0" style="width:100%; height:400px;"></iframe>
+  </div>
+</div>
+
+
+  <!-- Sections -->
+>>>>>>> f0744170a56340e1beb8b189ca94f55da0c6eca5
    <section>
    <div class="video-container">
     <video autoplay muted loop>
@@ -686,26 +764,15 @@ Convenience,and giving you back the time </div>
   </div>
 
 </section>
+<<<<<<< HEAD
 <!--/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
 <script>
   document.querySelectorAll('.service-btn').forEach(btn => {
     btn.addEventListener('click', function (event) {
       event.preventDefault(); // يمنع الانتقال الافتراضي
+=======
+>>>>>>> f0744170a56340e1beb8b189ca94f55da0c6eca5
 
-      const token = sessionStorage.getItem("token");
-      //const targetUrl = this.getAttribute("data-url");
-
-      if (token) {
-       
-        window.location.href = "Oil change.html";
-      } else {
-        
-        alert("Please log in or sign up first.");
-        window.location.href = "login.html"; 
-      }
-    });
-  });
-</script>
   <script>
    function openModal(url) {
   document.getElementById('modal').style.display = 'block';
@@ -880,27 +947,9 @@ function closeModal() {
     <iframe src="index.html" frameborder="0"></iframe>
   </div>
 </div>
+
+
 <script>
-   serviceButtons = document.querySelectorAll('.service-btn');
-
-  serviceButtons.forEach(button => {
-    button.addEventListener('click', (e) => {
-      e.preventDefault();
-      const serviceUrl = button.getAttribute('data-url');
-      
-      const token = sessionStorage.getItem('token');
-      console.log('Token:', token); // نطبع التوكن عالكونسول
-      
-      if (token && token.trim() !== "") {
-        window.location.href = serviceUrl;
-      } else {
-        window.location.href = 'index.html';
-      }
-    });
-  });
-
-
-
  //هاي النافذه لا quick
  
   function openQuickModal() {
@@ -915,17 +964,25 @@ function closeModal() {
 //انتهت 
 
 
+<<<<<<< HEAD
 </script>
  
 <script>
 function toggleLanguageMenu() {
   const menu = document.getElementById("languageMenu");
   menu.style.display = menu.style.display === "none" ? "block" : "none";
+=======
+  
+function toggleLanguageMenu() {
+  const menu = document.getElementById("languageMenu");
+  menu.style.display = menu.style.display === "block" ? "none" : "block";
+>>>>>>> f0744170a56340e1beb8b189ca94f55da0c6eca5
 }
 
 function switchLanguage(lang) {
   localStorage.setItem("lang", lang);
   applyLanguage(lang);
+  document.getElementById("languageMenu").style.display = "none";
 }
 
 function applyLanguage(lang) {
@@ -940,6 +997,21 @@ window.addEventListener("DOMContentLoaded", () => {
   const savedLang = localStorage.getItem("lang") || "en";
   applyLanguage(savedLang);
 });
+<<<<<<< HEAD
+=======
+
+
+
+
+function toggleLanguageMenu() {
+  const menu = document.getElementById("languageMenu");
+  menu.style.display = menu.style.display === "block" ? "none" : "block";
+}
+
+
+
+
+>>>>>>> f0744170a56340e1beb8b189ca94f55da0c6eca5
 </script>
 
 
