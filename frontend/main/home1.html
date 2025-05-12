@@ -1,10 +1,10 @@
 <html>
     
 
-
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <script src="java/home.js"></script>
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Smart Fuel Station</title>
@@ -225,6 +225,46 @@
   to { opacity: 1; transform: scale(1); }
 }
 
+.language-switcher {
+  position: relative;
+  margin-top: 10px;
+  padding-left: 20px;
+}
+
+.lang-btn {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.language-menu {
+  display: none;
+  position: absolute;
+  background-color: #222;
+  border: 1px solid #444;
+  top: 30px;
+  left: 0;
+  z-index: 1000;
+  flex-direction: column;
+  min-width: 100px;
+}
+
+.language-menu button {
+  background: none;
+  border: none;
+  color: white;
+  padding: 10px;
+  text-align: left;
+  width: 100%;
+  cursor: pointer;
+}
+
+.language-menu button:hover {
+  background-color: #444;
+}
+
 </style>
 
 </head>
@@ -244,17 +284,37 @@
     </nav>
   </header>
 
-  <!-- Sidebar (User Menu) -->
-  
-  <div class="sidebar" id="sidebar">
-    <button class="sidebar-close" onclick="toggleSidebar()">×</button>
-    <a href="javascript:void(0);" onclick="openPopup()"><i class='bx bx-user'></i> Profile</a>
+<!-- Sidebar (User Menu) -->
+<div class="sidebar" id="sidebar">
+  <button class="sidebar-close" onclick="toggleSidebar()">×</button>
+
+  <a href="javascript:void(0);" onclick="openPopup()" data-en="Profile" data-ar="الملف الشخصي">
+    <i class='bx bx-user'></i> Profile
+  </a>
+
+  <a href="orders.html" data-en="My Orders" data-ar="طلباتي">
+    <i class='bx bx-list-ul'></i> My Orders
+  </a>
+
+  <a href="javascript:void(0);" onclick="openModal()" data-en="Shopping Cart" data-ar="سلة التسوق">
+    <i class='bx bx-cart'></i> Shopping Cart
+  </a>
+
+  <!-- زر اللغة -->
+  <div class="language-selector" style="margin-top: 10px;">
+    <button onclick="toggleLanguageMenu()" data-en="Language" data-ar="اللغة">
+      🌐 Language
+    </button>
+    <div id="languageMenu" style="display: none; margin-top: 5px;">
+      <button onclick="switchLanguage('en')">English</button>
+      <button onclick="switchLanguage('ar')">العربية</button>
+    </div>
+  </div>
+</div>
 
 
-    <a href="orders.html"><i class='bx bx-list-ul'></i> My Orders</a>
-    
-    <a href="javascript:void(0);" onclick="openModal()"><i class='bx bx-cart'></i> Shopping Cart</a>
-    <a href="#" id="night-mode-toggle"><i class='bx bx-moon'></i> Night Mode</a>
+</div>
+
   </div>
   <div id="modalContainer" class="popup-overlay">
     <div class="popup-content">
@@ -843,28 +903,8 @@ function closeModal() {
       }
     });
   });
-
-
-
- //هاي النافذه لا quick
- 
-  function openQuickModal() {
-    document.getElementById('quickIframe').src = "quick.html";
-    document.getElementById('quickModal').style.display = 'block';
-  }
-
-  function closeQuickModal() {
-    document.getElementById('quickModal').style.display = 'none';
-    document.getElementById('quickIframe').src = "";
-  }
-
-
-
-
 </script>
  
-
-
 </body>
 
 </html>
