@@ -244,12 +244,32 @@
     </nav>
   </header>
 
+<<<<<<< HEAD
   <!-- Sidebar (User Menu) -->
   
   <div class="sidebar" id="sidebar">
     <button class="sidebar-close" onclick="toggleSidebar()">×</button>
     <a href="javascript:void(0);" onclick="openPopup()"><i class='bx bx-user'></i> Profile</a>
 
+=======
+
+ <!-- Sidebar (User Menu) -->
+<div class="sidebar" id="sidebar">
+  <button class="sidebar-close" onclick="toggleSidebar()">×</button>
+  <a href="javascript:void(0);" onclick="openPopup()"><i class='bx bx-user'></i> <span data-en="Profile" data-ar="الملف الشخصي">Profile</span></a>
+  <a href="orders.html"><i class='bx bx-list-ul'></i> <span data-en="My Orders" data-ar="طلباتي">My Orders</span></a>
+  <a href="javascript:void(0);" onclick="openModal()"><i class='bx bx-cart'></i> <span data-en="Shopping Cart" data-ar="سلة المشتريات">Shopping Cart</span></a>
+
+  <!-- 🔄 Language Toggle Button -->
+  <div style="position: relative;">
+    <a href="javascript:void(0);" onclick="toggleLanguageMenu()"><i class='bx bx-globe'></i> <span data-en="Language" data-ar="اللغة">Language</span></a>
+    <div id="languageMenu" style="display: none; position: absolute; background: #fff; border: 1px solid #ccc; padding: 5px; left: 40px; top: 0;">
+      <button onclick="switchLanguage('en')">English</button>
+      <button onclick="switchLanguage('ar')">العربية</button>
+    </div>
+  </div>
+</div>
+>>>>>>> 122f1c158337f9237610394dbe829cb7d1ccbcd3
 
     <a href="orders.html"><i class='bx bx-list-ul'></i> My Orders</a>
     
@@ -262,6 +282,19 @@
       <iframe src="shopping.html" frameborder="0" style="width:100%; height:400px;"></iframe>
     </div>
   </div>
+<<<<<<< HEAD
+=======
+</div>
+
+
+<!-- Modal Container -->
+<div id="modalContainer" class="popup-overlay">
+  <div class="popup-content">
+    <span class="close-btn" onclick="closeModal()">&times;</span>
+    <iframe src="shopping.html" frameborder="0" style="width:100%; height:400px;"></iframe>
+  </div>
+</div>
+>>>>>>> 122f1c158337f9237610394dbe829cb7d1ccbcd3
   <!-- Sections -->
    <section>
    <div class="video-container">
@@ -857,6 +890,37 @@ function closeModal() {
     document.getElementById('quickModal').style.display = 'none';
     document.getElementById('quickIframe').src = "";
   }
+
+
+<<<<<<< HEAD
+=======
+
+function toggleLanguageMenu() {
+  const menu = document.getElementById("languageMenu");
+  if (menu) {
+    menu.style.display = (menu.style.display === "block") ? "none" : "block";
+  }
+}
+>>>>>>> 122f1c158337f9237610394dbe829cb7d1ccbcd3
+
+function switchLanguage(lang) {
+  localStorage.setItem("lang", lang);
+  applyLanguage(lang);
+}
+
+function applyLanguage(lang) {
+  const elements = document.querySelectorAll("[data-en], [data-ar]");
+  elements.forEach(el => {
+    const translation = el.getAttribute(`data-${lang}`);
+    if (translation) el.innerHTML = translation;
+  });
+  document.body.dir = (lang === "ar") ? "rtl" : "ltr";
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+  const savedLang = localStorage.getItem("lang") || "en";
+  applyLanguage(savedLang);
+});
 
 
 
