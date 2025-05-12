@@ -225,6 +225,46 @@
   to { opacity: 1; transform: scale(1); }
 }
 
+.language-switcher {
+  position: relative;
+  margin-top: 10px;
+  padding-left: 20px;
+}
+
+.lang-btn {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.language-menu {
+  display: none;
+  position: absolute;
+  background-color: #222;
+  border: 1px solid #444;
+  top: 30px;
+  left: 0;
+  z-index: 1000;
+  flex-direction: column;
+  min-width: 100px;
+}
+
+.language-menu button {
+  background: none;
+  border: none;
+  color: white;
+  padding: 10px;
+  text-align: left;
+  width: 100%;
+  cursor: pointer;
+}
+
+.language-menu button:hover {
+  background-color: #444;
+}
+
 </style>
 
 </head>
@@ -254,7 +294,19 @@
     <a href="orders.html"><i class='bx bx-list-ul'></i> My Orders</a>
     
     <a href="javascript:void(0);" onclick="openModal()"><i class='bx bx-cart'></i> Shopping Cart</a>
-    <a href="#" id="night-mode-toggle"><i class='bx bx-moon'></i> Night Mode</a>
+    
+    <div class="language-switcher">
+  <button onclick="toggleLanguageMenu()" class="lang-btn">
+
+    🌐 Language
+  </button>
+  <div id="languageMenu" class="language-menu">
+    <button onclick="switchLanguage('en')">English</button>
+    <button onclick="switchLanguage('ar')">العربية</button>
+  </div>
+
+</div>
+
   </div>
   <div id="modalContainer" class="popup-overlay">
     <div class="popup-content">
@@ -860,9 +912,65 @@ function closeModal() {
 
 
 
-
 </script>
  
+function toggleLanguageMenu() {
+  const menu = document.getElementById('languageMenu');
+  menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
+}
+
+function switchLanguage(lang) {
+  const translations = {
+    en: {
+      'profile': 'Profile',
+      'orders': 'My Orders',
+      'cart': 'Shopping Cart',
+      'nightMode': 'Night Mode',
+      'language': 'Language',
+      'mainText': 'Convenience on the move',
+      'subText': `Smart Fuel Station is the world's leading fuel delivery and vehicle service platform. We are all about fueling innovation through convenience, and giving you back the time.`,
+      'orderNow': 'Order Now',
+    },
+    ar: {
+      'profile': 'الملف الشخصي',
+      'orders': 'طلباتي',
+      'cart': 'سلة التسوق',
+      'nightMode': 'الوضع الليلي',
+      'language': 'اللغة',
+      'mainText': 'الراحة أثناء التنقل',
+      'subText': `محطة الوقود الذكية هي المنصة الرائدة عالميًا لتوصيل الوقود وخدمات السيارات. نحن نبتكر من خلال الراحة، ونمنحك وقتك مرة أخرى.`,
+      'orderNow': 'اطلب الآن',
+    }
+  };
+
+  const t = translations[lang];
+
+  // Update static elements
+  document.querySelector("a[onclick='openPopup()']").innerHTML = `<i class='bx bx-user'></i> ${t.profile}`;
+  document.querySelector("a[href='orders.html']").innerHTML = `<i class='bx bx-list-ul'></i> ${t.orders}`;
+  document.querySelector("a[onclick='openModal()']").innerHTML = `<i class='bx bx-cart'></i> ${t.cart}`;
+  document.getElementById("night-mode-toggle").innerHTML = `<i class='bx bx-moon'></i> ${t.nightMode}`;
+  document.querySelector(".lang-btn").innerHTML = `🌐 ${t.language}`;
+  document.querySelector(".main-text").innerText = t.mainText;
+  document.querySelector(".sub-text").innerText = t.subText;
+
+  // Update buttons inside services
+  document.querySelectorAll(".service-btn").forEach(btn => {
+    btn.innerText = t.orderNow;
+  });
+
+  // Store preference (optional)
+  localStorage.setItem("lang", lang);
+
+  // Hide language menu
+  toggleLanguageMenu();
+}
+
+// Auto-load saved language
+window.addEventListener("load", () => {
+  const savedLang = localStorage.getItem("lang") || "en";
+  switchLanguage(savedLang);
+});
 
 
 </body>
