@@ -914,63 +914,31 @@ function closeModal() {
 
 </script>
  
+<script>
 function toggleLanguageMenu() {
-  const menu = document.getElementById('languageMenu');
-  menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
+  const menu = document.getElementById("languageMenu");
+  menu.style.display = menu.style.display === "none" ? "block" : "none";
 }
 
 function switchLanguage(lang) {
-  const translations = {
-    en: {
-      'profile': 'Profile',
-      'orders': 'My Orders',
-      'cart': 'Shopping Cart',
-      'nightMode': 'Night Mode',
-      'language': 'Language',
-      'mainText': 'Convenience on the move',
-      'subText': `Smart Fuel Station is the world's leading fuel delivery and vehicle service platform. We are all about fueling innovation through convenience, and giving you back the time.`,
-      'orderNow': 'Order Now',
-    },
-    ar: {
-      'profile': 'الملف الشخصي',
-      'orders': 'طلباتي',
-      'cart': 'سلة التسوق',
-      'nightMode': 'الوضع الليلي',
-      'language': 'اللغة',
-      'mainText': 'الراحة أثناء التنقل',
-      'subText': `محطة الوقود الذكية هي المنصة الرائدة عالميًا لتوصيل الوقود وخدمات السيارات. نحن نبتكر من خلال الراحة، ونمنحك وقتك مرة أخرى.`,
-      'orderNow': 'اطلب الآن',
-    }
-  };
-
-  const t = translations[lang];
-
-  // Update static elements
-  document.querySelector("a[onclick='openPopup()']").innerHTML = `<i class='bx bx-user'></i> ${t.profile}`;
-  document.querySelector("a[href='orders.html']").innerHTML = `<i class='bx bx-list-ul'></i> ${t.orders}`;
-  document.querySelector("a[onclick='openModal()']").innerHTML = `<i class='bx bx-cart'></i> ${t.cart}`;
-  document.getElementById("night-mode-toggle").innerHTML = `<i class='bx bx-moon'></i> ${t.nightMode}`;
-  document.querySelector(".lang-btn").innerHTML = `🌐 ${t.language}`;
-  document.querySelector(".main-text").innerText = t.mainText;
-  document.querySelector(".sub-text").innerText = t.subText;
-
-  // Update buttons inside services
-  document.querySelectorAll(".service-btn").forEach(btn => {
-    btn.innerText = t.orderNow;
-  });
-
-  // Store preference (optional)
   localStorage.setItem("lang", lang);
-
-  // Hide language menu
-  toggleLanguageMenu();
+  applyLanguage(lang);
 }
 
-// Auto-load saved language
-window.addEventListener("load", () => {
+function applyLanguage(lang) {
+  const elements = document.querySelectorAll("[data-en], [data-ar]");
+  elements.forEach(el => {
+    el.innerHTML = el.getAttribute(`data-${lang}`);
+  });
+  document.body.dir = (lang === "ar") ? "rtl" : "ltr";
+}
+
+window.addEventListener("DOMContentLoaded", () => {
   const savedLang = localStorage.getItem("lang") || "en";
-  switchLanguage(savedLang);
+  applyLanguage(savedLang);
 });
+</script>
+
 
 
 </body>
