@@ -351,6 +351,12 @@
 
         // Open checkout popup
         function openCheckoutPopup() {
+             const token = sessionStorage.getItem('token');
+    if (!token || token.trim() === "") {
+          alert("You need to sign up or log in before placing an order.");
+        window.location.href = 'signup.html';
+        return;
+    }
             document.getElementById('checkoutPopup').style.display = 'block';
             document.getElementById('overlay').style.display = 'block';
         }
