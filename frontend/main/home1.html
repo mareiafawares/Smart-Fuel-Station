@@ -456,7 +456,7 @@ Convenience,and giving you back the time </div>
     <div class="offer-content">
       <h3 class="offer-title">20% Off on Fuel</h3>
       <p class="offer-description">Get 20% off on every fuel refill! Limited time offer.</p>
-      <a href="#" class="offer-button">Claim Offer</a>
+      <a href="offer1.html" class="offer-button">Claim Offer</a>
     </div>
   </div>
 
@@ -465,7 +465,7 @@ Convenience,and giving you back the time </div>
     <div class="offer-content">
       <h3 class="offer-title">Free Car Wash</h3>
       <p class="offer-description">Get a free car wash with every full tank. Hurry up!</p>
-      <a href="#" class="offer-button">Claim Offer</a>
+      <a href="offer2.html" class="offer-button">Claim Offer</a>
     </div>
   </div>
 
@@ -474,7 +474,7 @@ Convenience,and giving you back the time </div>
     <div class="offer-content">
       <h3 class="offer-title">Buy One, Get One Free</h3>
       <p class="offer-description">Buy one oil change and get another one free. Limited to first 50 customers.</p>
-      <a href="#" class="offer-button">Claim Offer</a>
+      <a href="offer3.html" class="offer-button">Claim Offer</a>
     </div>
   </div>
 </section>
@@ -700,25 +700,7 @@ Convenience,and giving you back the time </div>
   </div>
 
 </section>
-<script>
-  document.querySelectorAll('.service-btn').forEach(btn => {
-    btn.addEventListener('click', function (event) {
-      event.preventDefault(); // يمنع الانتقال الافتراضي
 
-      const token = sessionStorage.getItem("token");
-      //const targetUrl = this.getAttribute("data-url");
-
-      if (token) {
-       
-        window.location.href = "Oil change.html";
-      } else {
-        
-        alert("Please log in or sign up first.");
-        window.location.href = "login.html"; 
-      }
-    });
-  });
-</script>
   <script>
    function openModal(url) {
   document.getElementById('modal').style.display = 'block';
