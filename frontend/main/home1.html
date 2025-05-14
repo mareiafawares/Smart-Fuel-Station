@@ -1,4 +1,3 @@
-
 <html lang="en">
 <head>
   <script src="java/home.js"></script>
@@ -172,7 +171,7 @@
   z-index: 1001;
 }
 
-/*هاي النافذه لا  quick*/
+<!--هاي النافذه لا quick-->
 
 .modal {
   display: none;
@@ -215,7 +214,6 @@
   color: #444;
   cursor: pointer;
 }
-/*--انتهت*/
 
 /* Optional: Animation */
 @keyframes fadeIn {
@@ -223,53 +221,14 @@
   to { opacity: 1; transform: scale(1); }
 }
 
-<<<<<<< HEAD
-.language-switcher {
-  position: relative;
-  margin-top: 10px;
-  padding-left: 20px;
-}
 
-.lang-btn {
-  background: none;
-  border: none;
-  color: white;
-  cursor: pointer;
-  font-size: 16px;
-=======
 .language-dropdown {
   position: relative;
->>>>>>> f0744170a56340e1beb8b189ca94f55da0c6eca5
 }
 
 .language-menu {
   display: none;
   position: absolute;
-<<<<<<< HEAD
-  background-color: #222;
-  border: 1px solid #444;
-  top: 30px;
-  left: 0;
-  z-index: 1000;
-  flex-direction: column;
-  min-width: 100px;
-}
-
-.language-menu button {
-  background: none;
-  border: none;
-  color: white;
-  padding: 10px;
-  text-align: left;
-  width: 100%;
-  cursor: pointer;
-}
-
-.language-menu button:hover {
-  background-color: #444;
-}
-
-=======
   top: 100%;
   left: 30px;
   background: #fff;
@@ -296,14 +255,14 @@
 }
 
 
->>>>>>> f0744170a56340e1beb8b189ca94f55da0c6eca5
+
 </style>
 
 </head>
 
 <body>
 
-  <!--  القوائم الثنتين by alaa -->
+  <!-- Navbar -->
   <header>
     <div class="logo">SMART FUEL STATION</div>
     <nav>
@@ -316,40 +275,9 @@
     </nav>
   </header>
 
-  <!-- Sidebar (User Menu) -->
-<<<<<<< HEAD
-  
-  <div class="sidebar" id="sidebar">
-    <button class="sidebar-close" onclick="toggleSidebar()">×</button>
-    <a href="javascript:void(0);" onclick="openPopup()"><i class='bx bx-user'></i> Profile</a>
 
 
-    <a href="orders.html"><i class='bx bx-list-ul'></i> My Orders</a>
-    
-    <a href="javascript:void(0);" onclick="openModal()"><i class='bx bx-cart'></i> Shopping Cart</a>
-    
-    <div class="language-switcher">
-  <button onclick="toggleLanguageMenu()" class="lang-btn">
-
-    🌐 Language
-  </button>
-  <div id="languageMenu" class="language-menu">
-    <button onclick="switchLanguage('en')">English</button>
-    <button onclick="switchLanguage('ar')">العربية</button>
-  </div>
-
-</div>
-
-  </div>
-  <div id="modalContainer" class="popup-overlay">
-    <div class="popup-content">
-      <span class="close-btn" onclick="closeModal()">&times;</span>
-      <iframe src="shopping.html" frameborder="0" style="width:100%; height:400px;"></iframe>
-    </div>
-  </div>
-  <!--//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
-  
-=======
+<!-- Sidebar (User Menu) -->
 <div class="sidebar" id="sidebar">
   <button class="sidebar-close" onclick="toggleSidebar()">×</button>
 
@@ -358,7 +286,7 @@
     <span data-en="Profile" data-ar="الملف الشخصي">Profile</span>
   </a>
 
-  <a href="orders.html">
+  <a href="my order.html">
     <i class='bx bx-list-ul'></i>
     <span data-en="My Orders" data-ar="طلباتي">My Orders</span>
   </a>
@@ -390,8 +318,17 @@
 </div>
 
 
+
+
+<!-- Modal Container -->
+<div id="modalContainer" class="popup-overlay">
+  <div class="popup-content">
+    <span class="close-btn" onclick="closeModal()">&times;</span>
+    <iframe src="shopping.html" frameborder="0" style="width:100%; height:400px;"></iframe>
+  </div>
+</div>
+
   <!-- Sections -->
->>>>>>> f0744170a56340e1beb8b189ca94f55da0c6eca5
    <section>
    <div class="video-container">
     <video autoplay muted loop>
@@ -445,7 +382,9 @@ Convenience,and giving you back the time </div>
   </div>
 </div>
 
-    
+      
+  
+
       <div class="card">
         <video autoplay loop muted>
           <source src="vidio3.mp4" type="video/mp4" />
@@ -508,8 +447,7 @@ Convenience,and giving you back the time </div>
     <iframe id="modalIframe" src="" frameborder="0"></iframe>
   </div>
 </div>
-
-<!-- S Offers Section  by alaa/////////////-->
+<!-- S Offers Section  by alaa-->
 <section id="offers" class="offers-section">
   <div class="offer-card">
     <img src="offer/offer1.jpg" alt="Offer 1" />
@@ -537,11 +475,11 @@ Convenience,and giving you back the time </div>
       <a href="#" class="offer-button">Claim Offer</a>
     </div>
   </div>
-
+</section>
 
 
 <style>
-  
+  /* Special Offers Section */
   .offers-section {
     display: flex;
     justify-content: space-around;
@@ -600,18 +538,12 @@ Convenience,and giving you back the time </div>
     background-color: #004d66;
   }
 
-  
+  /* Hover effect */
   .offer-card:hover {
     transform: translateY(-10px);
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
   }
-/* هون رح احط تصميم النافذه */
-
-
 </style>
-</section>
-<!--//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
-
 <!-- Section About by alaa-->
 <section id="about" style="width: 100vw; min-height: 100vh; background: #f0f8ff; display: flex; flex-direction: column; align-items: center; padding: 40px 20px; box-sizing: border-box;">
 
@@ -643,7 +575,7 @@ Convenience,and giving you back the time </div>
     </div>
   </div>
 </section>
-<!--//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+
 <!-- Section: Team  by Alaa-->
 <section style="width: 100vw; padding: 40px 20px; background-color: #f9f9f9; box-sizing: border-box;">
   <h2 style="text-align: center; font-size: 32px; margin-bottom: 30px;">Our Collaboration Built This Project</h2>
@@ -699,7 +631,9 @@ Convenience,and giving you back the time </div>
   </div>
 </div>
 
-<!--/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+
+
+
 
 <!--section contact by alaa-->
 
@@ -764,15 +698,25 @@ Convenience,and giving you back the time </div>
   </div>
 
 </section>
-<<<<<<< HEAD
-<!--/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
 <script>
   document.querySelectorAll('.service-btn').forEach(btn => {
     btn.addEventListener('click', function (event) {
       event.preventDefault(); // يمنع الانتقال الافتراضي
-=======
->>>>>>> f0744170a56340e1beb8b189ca94f55da0c6eca5
 
+      const token = sessionStorage.getItem("token");
+      //const targetUrl = this.getAttribute("data-url");
+
+      if (token) {
+       
+        window.location.href = "Oil change.html";
+      } else {
+        
+        alert("Please log in or sign up first.");
+        window.location.href = "login.html"; 
+      }
+    });
+  });
+</script>
   <script>
    function openModal(url) {
   document.getElementById('modal').style.display = 'block';
@@ -836,21 +780,21 @@ function closeModal() {
       const url = this.getAttribute("data-url");
       modalIframe.src = url;
       modal.style.display = "block";
-      disableModalScroll(); // ✅ هنا منع التمرير
+      disableModalScroll(); //  هنا منع التمرير
     });
   });
 
   closeBtn.addEventListener("click", () => {
     modal.style.display = "none";
     modalIframe.src = "";
-    enableModalScroll(); // ✅ هنا رجع التمرير
+    enableModalScroll(); // نا رجع التمرير
   });
 
   window.addEventListener("click", function(e) {
     if (e.target == modal) {
       modal.style.display = "none";
       modalIframe.src = "";
-      enableModalScroll(); // ✅ هنا كمان
+      enableModalScroll(); //  هنا كمان
     }
   });
 
@@ -947,9 +891,27 @@ function closeModal() {
     <iframe src="index.html" frameborder="0"></iframe>
   </div>
 </div>
-
-
 <script>
+   serviceButtons = document.querySelectorAll('.service-btn');
+
+  serviceButtons.forEach(button => {
+    button.addEventListener('click', (e) => {
+      e.preventDefault();
+      const serviceUrl = button.getAttribute('data-url');
+      
+      const token = sessionStorage.getItem('token');
+      console.log('Token:', token); // نطبع التوكن عالكونسول
+      
+      if (token && token.trim() !== "") {
+        window.location.href = serviceUrl;
+      } else {
+        window.location.href = 'index.html';
+      }
+    });
+  });
+
+
+
  //هاي النافذه لا quick
  
   function openQuickModal() {
@@ -961,22 +923,13 @@ function closeModal() {
     document.getElementById('quickModal').style.display = 'none';
     document.getElementById('quickIframe').src = "";
   }
-//انتهت 
 
 
-<<<<<<< HEAD
-</script>
- 
-<script>
-function toggleLanguageMenu() {
-  const menu = document.getElementById("languageMenu");
-  menu.style.display = menu.style.display === "none" ? "block" : "none";
-=======
-  
+
+
 function toggleLanguageMenu() {
   const menu = document.getElementById("languageMenu");
   menu.style.display = menu.style.display === "block" ? "none" : "block";
->>>>>>> f0744170a56340e1beb8b189ca94f55da0c6eca5
 }
 
 function switchLanguage(lang) {
@@ -997,23 +950,12 @@ window.addEventListener("DOMContentLoaded", () => {
   const savedLang = localStorage.getItem("lang") || "en";
   applyLanguage(savedLang);
 });
-<<<<<<< HEAD
-=======
 
 
 
 
-function toggleLanguageMenu() {
-  const menu = document.getElementById("languageMenu");
-  menu.style.display = menu.style.display === "block" ? "none" : "block";
-}
-
-
-
-
->>>>>>> f0744170a56340e1beb8b189ca94f55da0c6eca5
 </script>
-
+ 
 
 
 </body>

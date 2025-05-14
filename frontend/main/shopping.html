@@ -172,7 +172,7 @@
         }
 
         .popup h2 {
-            font mardi: 20px;
+            font size: 20px;
             color: #004d66;
             margin-bottom: 20px;
         }
@@ -324,7 +324,7 @@
             loadCart();
         }
 
-        // Update quantity manually
+        
         function updateQuantity(index, value) {
             let cart = JSON.parse(localStorage.getItem('cart')) || [];
             cart[index].quantity = parseInt(value);
@@ -333,7 +333,7 @@
             loadCart();
         }
 
-        // Update total price
+      
         function updateTotal(index, price, quantity) {
             const totalElement = document.getElementById(`total-${index}`);
             if (totalElement) {
@@ -341,7 +341,7 @@
             }
         }
 
-        // Delete a specific item from the cart
+        
         function deleteItem(index) {
             let cart = JSON.parse(localStorage.getItem('cart')) || [];
             cart.splice(index, 1);
@@ -349,7 +349,7 @@
             loadCart();
         }
 
-        // Open checkout popup
+        
         function openCheckoutPopup() {
             document.getElementById('checkoutPopup').style.display = 'block';
             document.getElementById('overlay').style.display = 'block';
@@ -372,20 +372,20 @@
             }
         }
 
-        // Clear the entire cart
+        
         function clearCart() {
             localStorage.removeItem('cart');
             loadCart();
         }
 
-        // Listen for changes in localStorage
+      
         window.addEventListener('storage', (event) => {
             if (event.key === 'cart') {
                 loadCart();
             }
         });
 
-        // Load cart on page load
+      
         window.onload = loadCart;
     </script>
 </body>
