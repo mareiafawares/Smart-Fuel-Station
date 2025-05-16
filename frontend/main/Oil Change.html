@@ -9,46 +9,46 @@
       box-sizing: border-box;
     }
 
-   body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(to right, #e0f7fa, #ffffff);
-  margin: 0;
-  padding: 0;
-  color: #333;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #e0f7fa, #ffffff);
+      margin: 0;
+      padding: 0;
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
 
-.container {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  width: 100%;
-  max-width: 700px; 
-  max-height: 400px; 
-  overflow-y: auto; 
-  background-color: #ffffff;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-  border-radius: 16px;
-  padding: 20px;
-  margin: 20px;
-}
+    .container {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      width: 100%;
+      max-width: 700px; 
+      max-height: 400px; 
+      overflow-y: auto; 
+      background-color: #ffffff;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+      border-radius: 16px;
+      padding: 20px;
+      margin: 20px;
+    }
 
-   .left-side {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;  
-  align-items: center;      
-  text-align: center;       
-}
+    .left-side {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;  
+      align-items: center;      
+      text-align: center;       
+    }
 
-.right-side {
-  flex: 1.2;
-  max-width: none;
-}
+    .right-side {
+      flex: 1.2;
+      max-width: none;
+    }
 
     .oil-icon img {
       width: 100px;
@@ -212,17 +212,18 @@
         text-align: center;
       }
     }
-    @media screen and (max-width: 768px) {
-  .container {
-    flex-direction: column;
-    padding: 20px;
-  }
 
-  .left-side {
-    margin-right: 0;
-    margin-bottom: 20px;
-  }
-}
+    @media screen and (max-width: 768px) {
+      .container {
+        flex-direction: column;
+        padding: 20px;
+      }
+
+      .left-side {
+        margin-right: 0;
+        margin-bottom: 20px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -266,8 +267,6 @@
           <input type="date" id="last-change-date" required />
         </div>
 
-        
-
         <div class="form-group">
           <label for="oil-type">Oil Type</label>
           <select id="oil-type" required></select>
@@ -276,14 +275,16 @@
         <div class="form-group">
           <label for="location">Your Location</label>
           <input type="text" id="location" placeholder="Enter your address" required />
+          <div id="delivery-time" style="margin-top: 10px; font-size: 14px; color: #00796b;"></div>
           <iframe src="https://www.google.com/maps/embed?pb=!1m18..." loading="lazy"></iframe>
         </div>
 
         <div id="price" class="price-display"></div>
 
-        <div class="form-group">
-          <button id="submitBtn" type="submit" disabled>Submit Order</button>
-        </div>
+       <div class="form-group" style="display: flex; gap: 10px; flex-direction: column;">
+  <button id="submitBtn" type="submit" disabled>Submit Order</button>
+  <a id="whatsappBtn" href="#" target="_blank" style="background-color: #25D366; text-align: center; padding: 12px; border-radius: 12px; color: white; font-weight: bold; font-size: 16px; text-decoration: none; display: none;">Order via WhatsApp</a>
+</div>
       </form>
     </div>
   </div>
@@ -312,6 +313,7 @@
     const lastChangeInput = document.getElementById("last-change-date");
     const priceDisplay = document.getElementById("price");
     const submitBtn = document.getElementById("submitBtn");
+    const deliveryTimeDisplay = document.getElementById("delivery-time");
 
     const carModels = {
       electric: ["Tesla Model S", "Nissan Leaf", "Chevy Bolt"],
@@ -403,6 +405,21 @@
       }
     }
 
+    function calculateDeliveryTime() {
+      const locationText = locationInput.value.toLowerCase();
+      let estimated = "Estimated Delivery: Within 1 hour";
+
+      if (locationText.includes("irbid")) {
+        estimated = "Estimated Delivery: 30-45 minutes";
+      } else if (locationText.includes("amman")) {
+        estimated = "Estimated Delivery: 1-1.5 hours";
+      } else if (locationText.includes("zarqa")) {
+        estimated = "Estimated Delivery: 45-60 minutes";
+      }
+
+      deliveryTimeDisplay.innerText = estimated;
+    }
+
     function checkFormFilled() {
       const filled =
         carTypeSelect.value &&
@@ -446,15 +463,37 @@
       localStorage.setItem('cart', JSON.stringify(cart));
     }
 
-    carTypeSelect.addEventListener("change", updateFormOptions);
-    oilTypeSelect.addEventListener("change", () => {
-      showPrice();
-      checkFormFilled();
-    });
-    carModelSelect.addEventListener("change", checkFormFilled);
-    locationInput.addEventListener("input", checkFormFilled);
-    mileageInput.addEventListener("input", checkFormFilled);
-    lastChangeInput.addEventListener("change", checkFormFilled);
+    carTypeSelect.addEventListener("change", () => {
+  updateFormOptions();
+  updateWhatsAppLink();
+});
+
+carModelSelect.addEventListener("change", () => {
+  checkFormFilled();
+  updateWhatsAppLink();
+});
+
+oilTypeSelect.addEventListener("change", () => {
+  showPrice();
+  checkFormFilled();
+  updateWhatsAppLink();
+});
+
+locationInput.addEventListener("input", () => {
+  checkFormFilled();
+  calculateDeliveryTime();
+  updateWhatsAppLink();
+});
+
+mileageInput.addEventListener("input", () => {
+  checkFormFilled();
+  updateWhatsAppLink();
+});
+
+lastChangeInput.addEventListener("change", () => {
+  checkFormFilled();
+  updateWhatsAppLink();
+});
 
     document.getElementById("oilChangeForm").addEventListener("submit", function (e) {
       e.preventDefault();
@@ -480,6 +519,34 @@ Total Price: $${oilPrice}`;
         closeModal();
       }
     };
+    function updateWhatsAppLink() {
+  const type = carTypeSelect.value;
+  const model = carModelSelect.value;
+  const mileage = mileageInput.value;
+  const lastChange = lastChangeInput.value;
+  const oil = oilTypes[type]?.find(o => o.value === oilTypeSelect.value);
+  const location = locationInput.value;
+
+  if (type && model && mileage && lastChange && oil && location) {
+    const message = 
+`Hello, I would like to order an oil change service:
+- Car Type: ${type}
+- Model: ${model}
+- Mileage: ${mileage} km
+- Last Change Date: ${lastChange}
+- Oil Type: ${oil.name}
+- Location: ${location}
+- Total Price: $${oil.price}`;
+
+    const encodedMsg = encodeURIComponent(message);
+    const whatsappLink = `https://wa.me/962781331072?text=${encodedMsg}`;
+    const whatsappBtn = document.getElementById("whatsappBtn");
+    whatsappBtn.href = whatsappLink;
+    whatsappBtn.style.display = "block";
+  } else {
+    document.getElementById("whatsappBtn").style.display = "none";
+  }
+}
   </script>
 </body>
 </html>
