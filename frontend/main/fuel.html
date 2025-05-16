@@ -22,27 +22,32 @@
 
     .container {
       display: flex;
+      flex-direction: row;
       justify-content: space-between;
-      width: 90%;
-      max-width: 700px;
+      width: 100%;
+      max-width: 700px; 
+      max-height: 400px; 
+      overflow-y: auto; 
       background-color: #ffffff;
       box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-      border-radius: 10px;
-      padding: 15px;
+      border-radius: 16px;
+      padding: 20px;
+      margin: 20px;
     }
 
     .left-side {
-      width: 30%;
-      background-color: #f7f7f7;
-      border-radius: 10px;
-      padding: 15px;
-      text-align: center;
+      flex: 1;
       display: flex;
       flex-direction: column;
-      align-items: center;
-      justify-content: center;
+      justify-content: center;  
+      align-items: center;      
+      text-align: center;       
     }
 
+    .right-side {
+      flex: 1.2;
+      max-width: none;
+    }
     .fuel-icon img {
       width: 100px;
       height: 100px;
@@ -61,12 +66,7 @@
       font-size: 13px;
     }
 
-    .right-side {
-      width: 65%;
-      padding: 15px;
-      background-color: #f9f9f9;
-      border-radius: 10px;
-    }
+    
 
     .right-side h2 {
       font-size: 24px;
@@ -92,10 +92,25 @@
       font-size: 15px;
     }
 
-    .right-side select:focus,
-    .right-side input:focus {
-      border-color: #007BFF;
-      outline: none;
+    .extras-box {
+      background-color: #e9f7ef;
+      border: 1px solid #c3e6cb;
+      border-radius: 10px;
+      padding: 10px;
+      margin-bottom: 15px;
+    }
+
+    .extras-box h4 {
+      margin-bottom: 8px;
+      font-size: 16px;
+      color: #155724;
+    }
+
+    .extras-box label {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 14px;
+      color: #155724;
     }
 
     .price {
@@ -106,11 +121,11 @@
       margin-bottom: 10px;
     }
 
-    .map iframe {
-      width: 100%;
-      height: 120px;
-      border: 0;
-      border-radius: 8px;
+    #deliveryEstimate {
+      text-align: center;
+      font-size: 14px;
+      margin-bottom: 10px;
+      color: #007BFF;
     }
 
     #orderBtn:disabled {
@@ -174,11 +189,22 @@
     .modal button:hover {
       background-color: #218838;
     }
+
+    #whatsappBtn {
+      display: none;
+      text-align: center;
+      background-color: #25D366;
+      color: white;
+      padding: 10px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 16px;
+      margin-top: 10px;
+    }
   </style>
 </head>
 <body>
   <div class="container">
-    
     <div class="left-side">
       <div class="fuel-icon">
         <img src="fuel.png" alt="Fuel Icon" />
@@ -187,7 +213,6 @@
       <p>Best refueling service in your area.</p>
     </div>
 
-   
     <div class="right-side">
       <h2>Order Fuel</h2>
       <form id="fuelForm">
@@ -206,24 +231,29 @@
         <label for="location">Location:</label>
         <input type="text" id="location" placeholder="Enter your location" required />
 
-        <div class="map">
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18..." loading="lazy"></iframe>
+        <div class="extras-box">
+          <h4>📦 Important Add-ons with the Order:</h4>
+          <label><input type="checkbox" class="extra" value="Windshield Water"> Windshield Water</label>
+          <label><input type="checkbox" class="extra" value="Fire Extinguisher"> Fire Extinguisher</label>
+          <label><input type="checkbox" class="extra" value="Battery Boost"> Battery Boost</label>
+          <label><input type="checkbox" class="extra" value="Warning Triangle"> Warning Triangle</label>
+          <label><input type="checkbox" class="extra" value="Basic Tool Kit"> Basic Tool Kit</label>
         </div>
 
         <div class="price">
           Price: <span id="price">0</span> JOD
         </div>
 
+        <div id="deliveryEstimate"></div>
+
         <button type="button" id="orderBtn" disabled>Order Now</button>
+        <a id="whatsappBtn" href="#" target="_blank">📲 Send via WhatsApp</a>
       </form>
     </div>
   </div>
 
-  
   <div id="confirmationModal" class="modal">
-    <div class="modal-content" id="modalContent">
-      
-    </div>
+    <div class="modal-content" id="modalContent"></div>
   </div>
 
   <script>
@@ -234,14 +264,17 @@
     const locationInput = document.getElementById('location');
     const confirmationModal = document.getElementById('confirmationModal');
     const modalContent = document.getElementById('modalContent');
+    const deliveryEstimate = document.getElementById('deliveryEstimate');
+    const whatsappBtn = document.getElementById('whatsappBtn');
+    const extrasCheckboxes = document.querySelectorAll('.extra');
 
     const fuelPrices = {
       "Regular Gasoline": { "95": 2.0, "98": 2.5 },
       "Diesel": { "Diesel": 2.2 },
     };
 
-    carTypeSelect.addEventListener('change', (e) => {
-      const carType = e.target.value;
+    carTypeSelect.addEventListener('change', () => {
+      const carType = carTypeSelect.value;
       fuelTypeSelect.innerHTML = `<option value="">Select Fuel Type</option>`;
       priceElement.textContent = '0';
       if (carType && fuelPrices[carType]) {
@@ -255,28 +288,50 @@
       } else {
         fuelTypeSelect.disabled = true;
       }
-      checkInputs();
+      updateAll();
     });
 
-    fuelTypeSelect.addEventListener('change', () => {
-      const fuelType = fuelTypeSelect.value;
-      const carType = carTypeSelect.value;
-      if (fuelType && carType) {
-        priceElement.textContent = fuelPrices[carType][fuelType];
+    fuelTypeSelect.addEventListener('change', updateAll);
+    locationInput.addEventListener('input', updateAll);
+    extrasCheckboxes.forEach(cb => cb.addEventListener('change', updateAll));
+
+    function getSelectedExtras() {
+      return Array.from(extrasCheckboxes)
+        .filter(cb => cb.checked)
+        .map(cb => cb.value)
+        .join(', ');
+    }
+
+    function updateAll() {
+      const car = carTypeSelect.value;
+      const fuel = fuelTypeSelect.value;
+      const loc = locationInput.value;
+      const extras = getSelectedExtras();
+
+      if (car && fuel && loc) {
+        priceElement.textContent = fuelPrices[car][fuel];
+        orderBtn.disabled = false;
+
+        const msg = `Hello, I’d like to request a fuel delivery:\n🚗 Car Type: ${car}\n⛽ Fuel Type: ${fuel}\n📍 Location: ${loc}\n💵 Price: ${priceElement.textContent} JOD\n📦 Add-ons: ${extras || "None"}`;
+        whatsappBtn.href = `https://wa.me/962781331072?text=${encodeURIComponent(msg)}`;
+        whatsappBtn.style.display = "block";
       } else {
-        priceElement.textContent = '0';
+        orderBtn.disabled = true;
+        whatsappBtn.style.display = "none";
       }
-      checkInputs();
-    });
 
-    locationInput.addEventListener('input', checkInputs);
+      updateDeliveryEstimate(loc);
+    }
 
-    function checkInputs() {
-      const allFilled =
-        carTypeSelect.value &&
-        fuelTypeSelect.value &&
-        locationInput.value;
-      orderBtn.disabled = !allFilled;
+    function updateDeliveryEstimate(loc) {
+      const lowerLoc = loc.toLowerCase();
+      let text = "Estimated Delivery: Within 1 hour";
+
+      if (lowerLoc.includes("irbid")) text = "Estimated Delivery: 30-45 minutes";
+      else if (lowerLoc.includes("amman")) text = "Estimated Delivery: 1-1.5 hours";
+      else if (lowerLoc.includes("zarqa")) text = "Estimated Delivery: 45-60 minutes";
+
+      deliveryEstimate.textContent = text;
     }
 
     orderBtn.addEventListener('click', () => {
@@ -284,44 +339,41 @@
       const fuel = fuelTypeSelect.value;
       const loc = locationInput.value;
       const price = priceElement.textContent;
+      const extras = getSelectedExtras();
 
       modalContent.innerHTML = `
-        <p><strong>Car Type:</strong> ${car}</p>
-        <p><strong>Fuel Type:</strong> ${fuel}</p>
-        <p><strong>Location:</strong> ${loc}</p>
-        <p><strong>Price:</strong> ${price} JOD</p>
+        <p><strong>🚗 Car Type:</strong> ${car}</p>
+        <p><strong>⛽ Fuel Type:</strong> ${fuel}</p>
+        <p><strong>📍 Location:</strong> ${loc}</p>
+        <p><strong>💵 Price:</strong> ${price} JOD</p>
+        <p><strong>📦 Add-ons:</strong> ${extras || "None"}</p>
         <button id="confirmOrder">Confirm Order</button>
       `;
       confirmationModal.style.display = 'flex';
 
       document.getElementById('confirmOrder').addEventListener('click', () => {
-  confirmationModal.style.display = 'none';
-  const car = carTypeSelect.value;
-  const fuel = fuelTypeSelect.value;
-  const price = parseFloat(priceElement.textContent);
-  const serviceData = {
-    name: `Fuel Delivery - ${car} (${fuel})`,
-    price: price,
-    image: 'fuel.png' // تأكد من أن الصورة متاحة
-  };
-  addToCart(serviceData);
-  alert('✅ Your order has been added to the cart. Thank you 🙌');
-});
-
-function addToCart(service) {
-  let cart = JSON.parse(localStorage.getItem('cart')) || [];
-  cart.push(service);
-  localStorage.setItem('cart', JSON.stringify(cart));
-}
+        confirmationModal.style.display = 'none';
+        const serviceData = {
+          name: `Fuel Delivery - ${car} (${fuel})`,
+          price: parseFloat(price),
+          image: 'fuel.png'
+        };
+        addToCart(serviceData);
+        alert('✅ Your order has been added to the cart. Thank you 🙌');
+      });
     });
-   
-    // إغلاق المودال عند الضغط خارجه
+
+    function addToCart(service) {
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      cart.push(service);
+      localStorage.setItem('cart', JSON.stringify(cart));
+    }
+
     window.addEventListener('click', (e) => {
       if (e.target === confirmationModal) {
         confirmationModal.style.display = 'none';
       }
     });
   </script>
-  
 </body>
 </html>
