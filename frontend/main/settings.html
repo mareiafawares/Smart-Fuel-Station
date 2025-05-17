@@ -42,7 +42,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Add & Edit Vehicles - Smart Fuel Station</title>
+  <title>Settings - Smart Fuel Station</title>
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
   <style>
     body {
@@ -119,22 +119,25 @@
 </head>
 <body>
   <div class="content-box">
-    <h2>Add & Edit Vehicles</h2>
-    <div class="info-item"><strong>Vehicle #1:</strong> <input type="text" id="vehicle1" value="Toyota Corolla - 2020 - Petrol"></div>
-    <div class="info-item"><strong>Vehicle #2:</strong> <input type="text" id="vehicle2" value="Hyundai Tucson - 2022 - Diesel"></div>
+    <h2>Settings</h2>
+    <div class="info-item"><strong>Language:</strong> <input type="text" id="settingLang" value="English"></div>
+    <div class="info-item"><strong>Notifications:</strong> <input type="text" id="settingNotif" value="Enabled"></div>
+    <div class="info-item"><strong>Dark Mode:</strong> <input type="text" id="settingDark" value="Disabled"></div>
     <button class="back-btn" onclick="window.location.href='main.html'">Back</button>
   </div>
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      const vehicle1 = localStorage.getItem('vehicle1') || 'Toyota Corolla - 2020 - Petrol';
-      const vehicle2 = localStorage.getItem('vehicle2') || 'Hyundai Tucson - 2022 - Diesel';
+      const settingLang = localStorage.getItem('settingLang') || 'English';
+      const settingNotif = localStorage.getItem('settingNotif') || 'Enabled';
+      const settingDark = localStorage.getItem('settingDark') || 'Disabled';
 
-      document.getElementById('vehicle1').value = vehicle1;
-      document.getElementById('vehicle2').value = vehicle2;
+      document.getElementById('settingLang').value = settingLang;
+      document.getElementById('settingNotif').value = settingNotif;
+      document.getElementById('settingDark').value = settingDark;
     });
 
-    ['vehicle1', 'vehicle2'].forEach(id => {
+    ['settingLang', 'settingNotif', 'settingDark'].forEach(id => {
       document.getElementById(id).addEventListener('blur', () => {
         const value = document.getElementById(id).value;
         localStorage.setItem(id, value);
