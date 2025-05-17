@@ -5,7 +5,7 @@ form.addEventListener('submit', async (e) => {
 
   const email = document.getElementById('Email').value;
   const password = document.getElementById('password').value;
-  const role = document.getElementById('role').value;
+  const selectedRole = document.getElementById('role').value; // من اختيار المستخدم
 
   try {
     const response = await fetch('http://127.0.0.1:5500/api/login', {
@@ -13,17 +13,27 @@ form.addEventListener('submit', async (e) => {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ email, password, role })
+      body: JSON.stringify({ email, password }) // نرسل فقط الإيميل والباسورد
     });
 
-    const data = await response.json(); // مرة واحدة فقط هنا
+    const data = await response.json();
 
     if (response.ok) {
-      console.log('User logged in successfully', data);
+      sessionStorage.setItem('token', data.token);
 
-      sessionStorage.setItem('token', data.token); // نخزن التوكن الحقيقي مش true
+      // manager يعتمد على الدور الحقيقي من قاعدة البيانات
+      if (data.user && data.user.role === 'manager') {
+        window.location.href = 'admin.html';
+      }
+      // employee بناءً على اختيار المستخدم من القائمة
+      else if (selectedRole === 'employee') {
+        window.location.href = 'employee.html';
+      }
+      // الباقي (default) إلى customer page
+      else {
+        window.location.href = 'home1.html';
+      }
 
-      window.location.href = 'home1.html';
     } else {
       alert('Login failed: ' + (data.message || 'Unknown error'));
     }

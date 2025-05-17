@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Car Wash Service</title>
-  <link href="https://fonts.googleapis.com/css2?family=Segoe+UI&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Segoe+UI&display=swap" rel="stylesheet" />
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
@@ -17,67 +16,68 @@
       justify-content: center;
       align-items: center;
     }
-    .main-box {
+    .container {
       display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      width: 100%;
+      max-width: 700px;
+      max-height: 400px;
+      overflow-y: auto;
       background-color: #ffffff;
-      border-radius: 20px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-      overflow: hidden;
-      max-width: 650px;
-      margin: auto;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+      border-radius: 16px;
+      padding: 20px;
+      margin: 20px;
     }
-
-    .left {
+    .left-side {
       flex: 1;
-      background: #f1f9ff;
-      padding: 40px 30px;
       display: flex;
       flex-direction: column;
-      align-items: center;
       justify-content: center;
+      align-items: center;
+      text-align: center;
+      position: sticky;
+      top: 20px; /* يثبت الجهة اليسار */
+      height: fit-content;
+      padding-right: 15px;
       border-right: 1px solid #dbe2ea;
     }
-
-    .left img {
+    .left-side img {
       width: 120px;
       margin-bottom: 20px;
     }
-
-    .left h2 {
+    .left-side h2 {
       color: #2b6cb0;
       font-size: 26px;
       margin-bottom: 10px;
     }
-
-    .left p {
-      text-align: center;
+    .left-side p {
       color: #050505;
       font-size: 15px;
     }
-
-    .right {
-      flex: 1;
-      padding: 40px;
+    .right-side {
+      flex: 1.2;
+      max-width: none;
+      padding-left: 20px;
+      overflow-y: auto;
     }
-
     .form-group {
       margin-bottom: 20px;
     }
-
     label {
       font-weight: 600;
       display: block;
       margin-bottom: 8px;
     }
-
     select, input {
       width: 100%;
       padding: 12px;
       border: 1px solid #cbd5e0;
       border-radius: 8px;
       font-size: 14px;
+      box-sizing: border-box;
     }
-
     .map-preview {
       width: 100%;
       height: 180px;
@@ -87,20 +87,17 @@
       border: 2px solid #ccc;
       overflow: hidden;
     }
-
     .map-preview iframe {
       width: 100%;
       height: 100%;
       pointer-events: none;
     }
-
     .price-display {
       margin-top: 10px;
       font-size: 16px;
       color: #2b6cb0;
       font-weight: bold;
     }
-
     button {
       background-color: #2b6cb0;
       color: white;
@@ -112,17 +109,61 @@
       cursor: pointer;
       margin-top: 20px;
     }
-
     button:disabled {
       background-color: #ccc;
       cursor: not-allowed;
     }
-
     button:hover:enabled {
       background-color: #1a4f90;
     }
-
-    
+    /* تصميم الشيك بوكس */
+    .custom-checkbox {
+      position: relative;
+      display: flex;
+      align-items: center;
+      margin-bottom: 8px;
+      cursor: pointer;
+    }
+    .custom-checkbox input[type="checkbox"] {
+      display: none;
+    }
+    .custom-checkbox label {
+      position: relative;
+      padding-left: 30px;
+      cursor: pointer;
+      font-size: 14px;
+      color: #333;
+      user-select: none;
+    }
+    .custom-checkbox label::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 2px;
+      width: 18px;
+      height: 18px;
+      border: 2px solid #2b6cb0;
+      border-radius: 4px;
+      background-color: white;
+      box-sizing: border-box;
+      transition: background-color 0.2s ease;
+    }
+    .custom-checkbox input[type="checkbox"]:checked + label::before {
+      background-color: #2b6cb0;
+    }
+    .custom-checkbox label::after {
+      content: "✔";
+      position: absolute;
+      left: 3px;
+      top: -1px;
+      font-size: 16px;
+      color: white;
+      display: none;
+    }
+    .custom-checkbox input[type="checkbox"]:checked + label::after {
+      display: block;
+    }
+    /* النافذة المنبثقة */
     .modal {
       display: none;
       position: fixed;
@@ -133,7 +174,6 @@
       height: 100%;
       background-color: rgba(0,0,0,0.4);
     }
-
     .modal-content {
       background-color: #fff;
       margin: 10% auto;
@@ -144,17 +184,15 @@
       text-align: center;
       box-shadow: 0 8px 16px rgba(0,0,0,0.3);
     }
-
     .modal-content h3 {
       color: #2b6cb0;
       margin-bottom: 10px;
     }
-
     .modal-content p {
       color: #444;
       margin: 10px 0;
+      white-space: pre-line; /* للحفاظ على الفراغات والسطر الجديد */
     }
-
     .modal-content button {
       background-color: #2b6cb0;
       color: white;
@@ -164,126 +202,203 @@
       border-radius: 8px;
       cursor: pointer;
     }
-
     .modal-content button:hover {
       background-color: #1a4f90;
     }
-
+    /* زر واتساب مخفي أولاً */
+    #whatsappBtn {
+      display: none;
+      background-color: #25d366;
+      margin-top: 10px;
+      padding: 12px;
+      border-radius: 8px;
+      color: white;
+      font-weight: bold;
+      font-size: 16px;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+    }
+    #whatsappBtn:hover {
+      background-color: #1ebe57;
+    }
   </style>
 </head>
 <body>
 
-<div class="main-box">
-  <div class="left">
-    <img src="icon car.png" alt="Car Wash Icon">
-    <h2>Smart Car Wash</h2>
-    <p>Book your car wash now with just one click! Reliable, fast, and at your doorstep.</p>
-  </div>
-
-  <div class="right">
-    <div class="form-group">
-      <label>Wash Type</label>
-      <select id="washType" onchange="showPrice(); validateForm();">
-        <option value="">Select Wash Type</option>
-        <option value="Internal Wash">Internal Wash</option>
-        <option value="External Wash">External Wash</option>
-        <option value="Full Wash">Full Wash</option>
-      </select>
-      <div id="priceDisplay" class="price-display"></div>
+  <div class="container">
+    <div class="left-side">
+      <img src="icon car.png" alt="Car Wash Icon" />
+      <h2>Smart Car Wash</h2>
+      <p>Book your car wash now with just one click! Reliable, fast, and at your doorstep.</p>
     </div>
-
-    <div class="form-group">
-      <label>Your Location</label>
-      <input type="text" id="addressInput" placeholder="Enter your address" oninput="validateForm()">
-      <div class="map-preview" onclick="openMap()">
-        <iframe src="https://www.google.com/maps?q=Jordan&output=embed" frameborder="0" allowfullscreen></iframe>
+    <div class="right-side">
+      <div class="form-group">
+        <label>Wash Type</label>
+        <select id="washType" onchange="showPrice(); validateForm();">
+          <option value="">Select Wash Type</option>
+          <option value="Internal Wash">Internal Wash</option>
+          <option value="External Wash">External Wash</option>
+          <option value="Full Wash">Full Wash</option>
+        </select>
+        <div id="priceDisplay" class="price-display"></div>
       </div>
+
+      <div class="form-group">
+        <label>Car Type</label>
+        <select id="carType" onchange="validateForm()">
+          <option value="">Select Car Type</option>
+          <option value="Sedan">Sedan</option>
+          <option value="SUV">SUV</option>
+          <option value="Truck">Truck</option>
+          <option value="Coupe">Coupe</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Wash Date & Time</label>
+        <input type="datetime-local" id="washDateTime" onchange="validateForm()" />
+      </div>
+
+      <div class="form-group">
+        <label>Your Location</label>
+        <input type="text" id="addressInput" placeholder="Enter your address" oninput="validateForm()" />
+        <div class="map-preview" onclick="openMap()">
+          <iframe src="https://www.google.com/maps?q=Jordan&output=embed" frameborder="0" allowfullscreen></iframe>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Extra Services</label>
+        <div class="custom-checkbox">
+          <input type="checkbox" id="tire" class="extras" value="Tire Cleaning" />
+          <label for="tire">Tire Cleaning</label>
+        </div>
+        <div class="custom-checkbox">
+          <input type="checkbox" id="window" class="extras" value="Window Polishing" />
+          <label for="window">Window Polishing</label>
+        </div>
+        <div class="custom-checkbox">
+          <input type="checkbox" id="engine" class="extras" value="Engine Cleaning" />
+          <label for="engine">Engine Cleaning</label>
+        </div>
+      </div>
+
+      <button id="submitBtn" onclick="confirmOrder()" disabled>Submit Order</button>
+      <a href="#" id="whatsappBtn" target="_blank">Send via WhatsApp</a>
     </div>
-
-    <button id="submitBtn" onclick="confirmOrder()" disabled>Submit Order</button>
   </div>
-</div>
 
-
-<div id="orderModal" class="modal">
-  <div class="modal-content">
-    <h3>Confirm Your Order</h3>
-    <p id="orderDetails"></p>
-    <button onclick="finalizeOrder()">Confirm Order</button>
+  <div id="orderModal" class="modal">
+    <div class="modal-content">
+      <h3>Confirm Your Order</h3>
+      <p id="orderDetails"></p>
+      <button onclick="finalizeOrder()">Confirm Order</button>
+    </div>
   </div>
-</div>
-<!-- النصوص والزر -->
-<script>
-  const priceDisplay = document.getElementById('priceDisplay');
-  const washType = document.getElementById('washType');
-  const addressInput = document.getElementById('addressInput');
-  const submitBtn = document.getElementById('submitBtn');
-  const orderModal = document.getElementById('orderModal');
-  const orderDetails = document.getElementById('orderDetails');
 
-  function showPrice() {
-    const type = washType.value;
-    let price = '';
+  <script>
+    const priceDisplay = document.getElementById('priceDisplay');
+    const washType = document.getElementById('washType');
+    const addressInput = document.getElementById('addressInput');
+    const submitBtn = document.getElementById('submitBtn');
+    const orderModal = document.getElementById('orderModal');
+    const orderDetails = document.getElementById('orderDetails');
+    const whatsappBtn = document.getElementById('whatsappBtn');
+    const carType = document.getElementById('carType');
+    const washDateTime = document.getElementById('washDateTime');
 
-    if (type === 'Internal Wash') {
-      price = 'Price: 5 JD';
-    } else if (type === 'External Wash') {
-      price = 'Price: 4 JD';
-    } else if (type === 'Full Wash') {
-      price = 'Price: 8 JD';
+    function showPrice() {
+      const type = washType.value;
+      let price = '';
+
+      if (type === 'Internal Wash') {
+        price = 'Price: 5 JD';
+      } else if (type === 'External Wash') {
+        price = 'Price: 4 JD';
+      } else if (type === 'Full Wash') {
+        price = 'Price: 8 JD';
+      }
+
+      priceDisplay.textContent = price;
     }
 
-    priceDisplay.textContent = price;
-  }
-
-  function openMap() {
-    window.open("https://www.google.com/maps?q=Jordan", "_blank");
-  }
-
-  function validateForm() {
-    const wash = washType.value;
-    const address = addressInput.value.trim();
-    submitBtn.disabled = !(wash && address);
-  }
-
-  function confirmOrder() {
-    const wash = washType.value;
-    const address = addressInput.value.trim();
-    const price = priceDisplay.textContent;
-
-    orderDetails.innerText = `🚗 Wash Type: ${wash}\n📍 Location: ${address}\n💰 ${price}`;
-
-    orderModal.style.display = 'block';
-  }
-
-  function finalizeOrder() {
-  orderModal.style.display = 'none';
-  const wash = washType.value;
-  const price = priceDisplay.textContent.split(': ')[1]; // استخراج السعر (مثل "5 JD")
-  const serviceData = {
-    name: `Car Wash - ${wash}`,
-    price: parseFloat(price),
-    image: 'icon car.png' // تأكد من أن الصورة متاحة في مجلد المشروع
-  };
-  addToCart(serviceData);
-  alert("✅ Your order has been added to the cart. Thank you 🙌");
-}
-
-function addToCart(service) {
-  let cart = JSON.parse(localStorage.getItem('cart')) || [];
-  cart.push(service);
-  localStorage.setItem('cart', JSON.stringify(cart));
-}
-
-  window.onclick = function(event) {
-    if (event.target === orderModal) {
-      orderModal.style.display = "none";
+    function openMap() {
+      window.open("https://www.google.com/maps?q=Jordan", "_blank");
     }
-  }
-</script>
 
+    function validateForm() {
+      const wash = washType.value;
+      const address = addressInput.value.trim();
+      const car = carType.value;
+      const dateTime = washDateTime.value;
+
+      submitBtn.disabled = !(wash && address && car && dateTime);
+      whatsappBtn.style.display = "none"; // إخفاء واتساب قبل تأكيد الطلب
+    }
+
+    function confirmOrder() {
+      const wash = washType.value;
+      const address = addressInput.value.trim();
+      const price = priceDisplay.textContent;
+      const car = carType.value;
+      const dateTime = washDateTime.value;
+
+      // Services selected
+      const extras = [...document.querySelectorAll('.extras:checked')]
+        .map(el => el.value)
+        .join(', ') || "None";
+
+      let details = `
+نوع الغسيل: ${wash}
+نوع السيارة: ${car}
+تاريخ ووقت الغسيل: ${dateTime}
+الموقع: ${address}
+الخدمات الإضافية: ${extras}
+${price}
+      `;
+
+      orderDetails.textContent = details.trim();
+      orderModal.style.display = 'block';
+    }
+
+    function finalizeOrder() {
+      orderModal.style.display = 'none';
+
+      // بيانات الطلب لرسالة الواتساب
+      const wash = washType.value;
+      const address = addressInput.value.trim();
+      const price = priceDisplay.textContent;
+      const car = carType.value;
+      const dateTime = washDateTime.value;
+
+      const extras = [...document.querySelectorAll('.extras:checked')]
+        .map(el => el.value)
+        .join(', ') || "None";
+
+      const message = encodeURIComponent(
+        `طلب غسيل سيارة:\n` +
+        `نوع الغسيل: ${wash}\n` +
+        `نوع السيارة: ${car}\n` +
+        `تاريخ ووقت الغسيل: ${dateTime}\n` +
+        `الموقع: ${address}\n` +
+        `الخدمات الإضافية: ${extras}\n` +
+        `${price}`
+      );
+
+      // رقم الواتساب
+      const whatsappNumber = "962781331072";
+
+      whatsappBtn.href = `https://wa.me/${whatsappNumber}?text=${message}`;
+      whatsappBtn.style.display = "block";
+    }
+
+    // اغلاق النافذة بالضغط خارجها
+    window.onclick = function(event) {
+      if (event.target == orderModal) {
+        orderModal.style.display = "none";
+      }
+    }
+  </script>
 </body>
-
-
-
 </html>

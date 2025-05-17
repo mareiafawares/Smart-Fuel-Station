@@ -15,36 +15,43 @@
       margin: 0;
       padding: 0;
       color: #333;
-      height: 100vh;
+      min-height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
     }
 
-    .container {
+   .container {
   display: flex;
-  justify-content: space-between;
+  flex-direction: row;
   width: 100%;
-  max-width: 600px; /* صغرنا الحجم شوي */
+  max-width: 700px;
+  height: 400px; /* نستخدم height بدلاً من max-height */
   background-color: #ffffff;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
   border-radius: 16px;
-  padding: 20px;
+  padding: 0; /* إزالة padding من الحاوية */
+  margin: 20px;
+  overflow: hidden; /* منع التمرير الخارجي */
 }
 
+.left-side {
+  width: 45%; /* ثابت العرض */
+  padding: 20px;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-right: 1px solid #ddd;
+}
 
-
-    .left-side {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-    .right-side {
-      flex: 1;
-      max-width: 250px;
-    }
+.right-side {
+  width: 55%;
+  height: 100%;
+  overflow-y: auto; /* تمكين التمرير العمودي فقط للجهة اليمنى */
+  padding: 20px;
+}
 
     .oil-icon img {
       width: 100px;
@@ -82,12 +89,14 @@
       font-weight: 500;
       color: #444;
     }
-     iframe {
+
+    iframe {
       width: 100%;
       height: 120px;
       border: 0;
       border-radius: 8px;
     }
+
     .form-group select,
     .form-group input {
       width: 100%;
@@ -117,7 +126,7 @@
     .form-group button {
       background-color: #00796b;
       color: white;
-      padding: 14px;
+      padding: 12px;
       width: 100%;
       border: none;
       border-radius: 12px;
@@ -196,19 +205,28 @@
     }
 
     @media screen and (max-width: 800px) {
-  .container {
-    margin: 20px auto;
-  }
+      .container {
+        margin: 20px auto;
+      }
+      .left-side, .right-side {
+        width: 100%;
+      }
+      h1 {
+        text-align: center;
+      }
+    }
 
-  .left-side, .right-side {
-    width: 100%;
-  }
+    @media screen and (max-width: 768px) {
+      .container {
+        flex-direction: column;
+        padding: 20px;
+      }
 
-  h1 {
-    text-align: center;
-  }
-}
-
+      .left-side {
+        margin-right: 0;
+        margin-bottom: 20px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -243,6 +261,16 @@
         </div>
 
         <div class="form-group">
+          <label for="mileage">Current Mileage (km)</label>
+          <input type="number" id="mileage" placeholder="Enter current mileage" required />
+        </div>
+
+        <div class="form-group">
+          <label for="last-change-date">Last Oil Change Date</label>
+          <input type="date" id="last-change-date" required />
+        </div>
+
+        <div class="form-group">
           <label for="oil-type">Oil Type</label>
           <select id="oil-type" required></select>
         </div>
@@ -250,16 +278,16 @@
         <div class="form-group">
           <label for="location">Your Location</label>
           <input type="text" id="location" placeholder="Enter your address" required />
-          
-        
+          <div id="delivery-time" style="margin-top: 10px; font-size: 14px; color: #00796b;"></div>
           <iframe src="https://www.google.com/maps/embed?pb=!1m18..." loading="lazy"></iframe>
-        
         </div>
+
         <div id="price" class="price-display"></div>
 
-        <div class="form-group">
-          <button id="submitBtn" type="submit" disabled>Submit Order</button>
-        </div>
+       <div class="form-group" style="display: flex; gap: 10px; flex-direction: column;">
+  <button id="submitBtn" type="submit" disabled>Submit Order</button>
+  <a id="whatsappBtn" href="#" target="_blank" style="background-color: #25D366; text-align: center; padding: 12px; border-radius: 12px; color: white; font-weight: bold; font-size: 16px; text-decoration: none; display: none;">📲Order via WhatsApp</a>
+</div>
       </form>
     </div>
   </div>
@@ -284,8 +312,11 @@
     const carModelSelect = document.getElementById("car-model");
     const oilTypeSelect = document.getElementById("oil-type");
     const locationInput = document.getElementById("location");
+    const mileageInput = document.getElementById("mileage");
+    const lastChangeInput = document.getElementById("last-change-date");
     const priceDisplay = document.getElementById("price");
     const submitBtn = document.getElementById("submitBtn");
+    const deliveryTimeDisplay = document.getElementById("delivery-time");
 
     const carModels = {
       electric: ["Tesla Model S", "Nissan Leaf", "Chevy Bolt"],
@@ -294,9 +325,7 @@
     };
 
     const oilTypes = {
-      electric: [
-        { name: "Synthetic EV Oil 0W-20 ($40)", value: "ev_oil", price: 40 }
-      ],
+      electric: [{ name: "Synthetic EV Oil 0W-20 ($40)", value: "ev_oil", price: 40 }],
       gasoline: [
         { name: "Castrol 5W-30 ($30)", value: "castrol", price: 30 },
         { name: "Mobil 1 10W-40 ($35)", value: "mobil", price: 35 }
@@ -334,16 +363,64 @@
       checkFormFilled();
     }
 
+    function suggestOilType() {
+      const type = carTypeSelect.value;
+      const mileage = parseInt(mileageInput.value);
+      const lastChangeDate = new Date(lastChangeInput.value);
+      const today = new Date();
+      const monthsDiff = (today.getFullYear() - lastChangeDate.getFullYear()) * 12 + (today.getMonth() - lastChangeDate.getMonth());
+
+      if (!type || isNaN(mileage) || isNaN(lastChangeDate.getTime())) {
+        alert("❗ Please fill all fields before suggesting oil.");
+        return;
+      }
+
+      let suggestedOil;
+
+      if (type === "electric") {
+        suggestedOil = oilTypes[type][0];
+      } else {
+        if (mileage > 150000 || monthsDiff > 6) {
+          suggestedOil = oilTypes[type].find(o => o.name.includes("15W") || o.name.includes("10W"));
+        } else {
+          suggestedOil = oilTypes[type][0];
+        }
+      }
+
+      if (suggestedOil) {
+        oilTypeSelect.value = suggestedOil.value;
+        showPrice();
+        checkFormFilled();
+        alert(`🔧 Suggested Oil: ${suggestedOil.name}`);
+      } else {
+        alert("No suitable oil found for your car type.");
+      }
+    }
+
     function showPrice() {
       const type = carTypeSelect.value;
       const selectedOil = oilTypes[type]?.find(o => o.value === oilTypeSelect.value);
       if (selectedOil) {
         priceDisplay.innerText = `Total Price: $${selectedOil.price}`;
-
         priceDisplay.style.display = 'block';
       } else {
         priceDisplay.style.display = 'none';
       }
+    }
+
+    function calculateDeliveryTime() {
+      const locationText = locationInput.value.toLowerCase();
+      let estimated = "Estimated Delivery: Within 1 hour";
+
+      if (locationText.includes("irbid")) {
+        estimated = "Estimated Delivery: 30-45 minutes";
+      } else if (locationText.includes("amman")) {
+        estimated = "Estimated Delivery: 1-1.5 hours";
+      } else if (locationText.includes("zarqa")) {
+        estimated = "Estimated Delivery: 45-60 minutes";
+      }
+
+      deliveryTimeDisplay.innerText = estimated;
     }
 
     function checkFormFilled() {
@@ -351,7 +428,9 @@
         carTypeSelect.value &&
         carModelSelect.value &&
         oilTypeSelect.value &&
-        locationInput.value.trim();
+        locationInput.value.trim() &&
+        mileageInput.value &&
+        lastChangeInput.value;
 
       submitBtn.disabled = !filled;
       submitBtn.classList.toggle("active", filled);
@@ -367,37 +446,60 @@
     }
 
     function confirmOrder() {
-  closeModal();
-  const type = carTypeSelect.value;
-  const selectedOil = oilTypes[type].find(o => o.value === oilTypeSelect.value);
-  const oilName = selectedOil.name;
-  const oilPrice = selectedOil.price;
-  const serviceData = {
-    name: `Oil Change - ${type} (${oilName})`,
-    price: oilPrice,
-    image: 'car-oil.png' // تأكد من أن الصورة متاحة
-  };
-  addToCart(serviceData);
-  alert("✅ Your order has been added to the cart. Thank you 🙌");
-}
+      closeModal();
+      const type = carTypeSelect.value;
+      const selectedOil = oilTypes[type].find(o => o.value === oilTypeSelect.value);
+      const oilName = selectedOil.name;
+      const oilPrice = selectedOil.price;
+      const serviceData = {
+        name: `Oil Change - ${type} (${oilName})`,
+        price: oilPrice,
+        image: 'car-oil.png'
+      };
+      addToCart(serviceData);
+      alert("✅ Your order has been added to the cart. Thank you 🙌");
+    }
 
-function addToCart(service) {
-  let cart = JSON.parse(localStorage.getItem('cart')) || [];
-  cart.push(service);
-  localStorage.setItem('cart', JSON.stringify(cart));
-}
+    function addToCart(service) {
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      cart.push(service);
+      localStorage.setItem('cart', JSON.stringify(cart));
+    }
 
-    carTypeSelect.addEventListener("change", updateFormOptions);
-    oilTypeSelect.addEventListener("change", () => {
-      showPrice();
-      checkFormFilled();
-    });
-    carModelSelect.addEventListener("change", checkFormFilled);
-    locationInput.addEventListener("input", checkFormFilled);
+    carTypeSelect.addEventListener("change", () => {
+  updateFormOptions();
+  updateWhatsAppLink();
+});
+
+carModelSelect.addEventListener("change", () => {
+  checkFormFilled();
+  updateWhatsAppLink();
+});
+
+oilTypeSelect.addEventListener("change", () => {
+  showPrice();
+  checkFormFilled();
+  updateWhatsAppLink();
+});
+
+locationInput.addEventListener("input", () => {
+  checkFormFilled();
+  calculateDeliveryTime();
+  updateWhatsAppLink();
+});
+
+mileageInput.addEventListener("input", () => {
+  checkFormFilled();
+  updateWhatsAppLink();
+});
+
+lastChangeInput.addEventListener("change", () => {
+  checkFormFilled();
+  updateWhatsAppLink();
+});
 
     document.getElementById("oilChangeForm").addEventListener("submit", function (e) {
       e.preventDefault();
-
       const selectedOil = oilTypes[carTypeSelect.value].find(o => o.value === oilTypeSelect.value);
       const oilName = selectedOil.name;
       const oilPrice = selectedOil.price;
@@ -406,6 +508,8 @@ function addToCart(service) {
 `Your order has been received!
 Car Type: ${carTypeSelect.value}
 Car Model: ${carModelSelect.value}
+Mileage: ${mileageInput.value} km
+Last Change: ${lastChangeInput.value}
 Oil Type: ${oilName}
 Location: ${locationInput.value}
 Total Price: $${oilPrice}`;
@@ -418,6 +522,34 @@ Total Price: $${oilPrice}`;
         closeModal();
       }
     };
+    function updateWhatsAppLink() {
+  const type = carTypeSelect.value;
+  const model = carModelSelect.value;
+  const mileage = mileageInput.value;
+  const lastChange = lastChangeInput.value;
+  const oil = oilTypes[type]?.find(o => o.value === oilTypeSelect.value);
+  const location = locationInput.value;
+
+  if (type && model && mileage && lastChange && oil && location) {
+    const message = 
+`Hello, I would like to order an oil change service:
+- Car Type: ${type}
+- Model: ${model}
+- Mileage: ${mileage} km
+- Last Change Date: ${lastChange}
+- Oil Type: ${oil.name}
+- Location: ${location}
+- Total Price: $${oil.price}`;
+
+    const encodedMsg = encodeURIComponent(message);
+    const whatsappLink = `https://wa.me/962781331072?text=${encodedMsg}`;
+    const whatsappBtn = document.getElementById("whatsappBtn");
+    whatsappBtn.href = whatsappLink;
+    whatsappBtn.style.display = "block";
+  } else {
+    document.getElementById("whatsappBtn").style.display = "none";
+  }
+}
   </script>
 </body>
 </html>
