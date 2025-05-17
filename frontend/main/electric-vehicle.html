@@ -138,8 +138,13 @@
         <label for="price">Price (JOD):</label>
         <input type="text" id="price" readonly placeholder="Calculated automatically" />
 
-        <label for="location">Your Address:</label>
-        <input type="text" id="location" placeholder="Enter your address" required />
+       <div class="form-group">
+        <label>Your Location</label>
+        <input type="text" id="addressInput" placeholder="Enter your address" oninput="validateForm()" />
+        <div class="map-preview" onclick="openMap()">
+          <iframe src="https://www.google.com/maps?q=Jordan&output=embed" frameborder="0" allowfullscreen></iframe>
+        </div>
+      </div>
 
         <button id="submitBtn" disabled>Order Now</button>
         <button type="button" id="whatsappBtn" onclick="sendWhatsApp()">📲 Send via WhatsApp</button>
