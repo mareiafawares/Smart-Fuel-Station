@@ -234,8 +234,13 @@
           <option value="">Select Fuel Type</option>
         </select>
 
-        <label for="location">Location:</label>
-        <input type="text" id="location" placeholder="Enter your location" required />
+        <div class="form-group">
+        <label>Your Location</label>
+        <input type="text" id="addressInput" placeholder="Enter your address" oninput="validateForm()" />
+        <div class="map-preview" onclick="openMap()">
+          <iframe src="https://www.google.com/maps?q=Jordan&output=embed" frameborder="0" allowfullscreen></iframe>
+        </div>
+      </div>
 
         <div class="extras-box">
           <h4>📦 Important Add-ons with the Order:</h4>
