@@ -170,7 +170,8 @@
   cursor: pointer;
   z-index: 1001;
 }
-/*هاي النافذه لا quick*/
+
+<!--هاي النافذه لا quick-->
 
 .modal {
   display: none;
@@ -440,14 +441,14 @@ Convenience,and giving you back the time </div>
     <iframe id="modalIframe" src="" frameborder="0"></iframe>
   </div>
 </div>
-<!-- S Offers Section  by alaa//////////////////////////////-->
+<!-- S Offers Section  by alaa-->
 <section id="offers" class="offers-section">
   <div class="offer-card">
     <img src="offer/offer1.jpg" alt="Offer 1" />
     <div class="offer-content">
       <h3 class="offer-title">20% Off on Fuel</h3>
       <p class="offer-description">Get 20% off on every fuel refill! Limited time offer.</p>
-      <a href="javascript:void(0)" class="offer-button" onclick="openOfferPopup('offer1.html')">Claim Offer</a>
+      <a href="#" class="offer-button">Claim Offer</a>
     </div>
   </div>
 
@@ -456,7 +457,7 @@ Convenience,and giving you back the time </div>
     <div class="offer-content">
       <h3 class="offer-title">Free Car Wash</h3>
       <p class="offer-description">Get a free car wash with every full tank. Hurry up!</p>
-      <a href="javascript:void(0)" class="offer-button" onclick="openOfferPopup('offer2.html')">Claim Offer</a>
+      <a href="#" class="offer-button">Claim Offer</a>
     </div>
   </div>
 
@@ -465,21 +466,14 @@ Convenience,and giving you back the time </div>
     <div class="offer-content">
       <h3 class="offer-title">Buy One, Get One Free</h3>
       <p class="offer-description">Buy one oil change and get another one free. Limited to first 50 customers.</p>
-      <a href="javascript:void(0)" class="offer-button" onclick="openOfferPopup('offer3.html')">Claim Offer</a>
-    </div>
-  </div>
-
-  <!-- Popup Container for Offers -->
-  <div id="offersPopup" class="offers-popup-window">
-    <div class="offers-popup-content">
-      <span class="offers-popup-close" onclick="closeOfferPopup()">&times;</span>
-      <iframe id="offersIframe" src="" width="100%" height="500px" frameborder="0"></iframe>
+      <a href="#" class="offer-button">Claim Offer</a>
     </div>
   </div>
 </section>
 
+
 <style>
-  /* Main Offers Section Styling */
+  /* Special Offers Section */
   .offers-section {
     display: flex;
     justify-content: space-around;
@@ -538,70 +532,13 @@ Convenience,and giving you back the time </div>
     background-color: #004d66;
   }
 
+  /* Hover effect */
   .offer-card:hover {
     transform: translateY(-10px);
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
   }
-
-  /* Popup Specific to Offers Section */
-  .offers-popup-window {
-    display: none;
-    position: fixed;
-    z-index: 9999;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.6);
-    justify-content: center;
-    align-items: center;
-  }
-
-  .offers-popup-content {
-    position: relative;
-    background: #fff;
-    width: 80%;
-    max-width: 600px;
-    padding: 20px;
-    border-radius: 10px;
-  }
-
-  .offers-popup-close {
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    font-size: 26px;
-    cursor: pointer;
-    font-weight: bold;
-    color: #333;
-  }
 </style>
-
-<script>
-  // Open the offers popup and load the correct file
-  function openOfferPopup(file) {
-    const popup = document.getElementById("offersPopup");
-    const iframe = document.getElementById("offersIframe");
-    iframe.src = file;
-    popup.style.display = "flex";
-  }
-
-  // Close the offers popup
-  function closeOfferPopup() {
-    const popup = document.getElementById("offersPopup");
-    const iframe = document.getElementById("offersIframe");
-    popup.style.display = "none";
-    iframe.src = "";
-  }
-</script>
-
-
-  
-
-
-<!--///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
-
-<!-- Section About by alaa///////////-->
+<!-- Section About by alaa-->
 <section id="about" style="width: 100vw; min-height: 100vh; background: #f0f8ff; display: flex; flex-direction: column; align-items: center; padding: 40px 20px; box-sizing: border-box;">
 
   <!-- Image and Description Side by Side -->
@@ -687,7 +624,7 @@ Convenience,and giving you back the time </div>
     </div>
   </div>
 </div>
-<!--////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+
 
 
 
@@ -756,13 +693,7 @@ Convenience,and giving you back the time </div>
 
 </section>
 
-<!--////////////////////////////////////////////////////////////////////////////////////////////////////-->
-<script>
-  document.querySelectorAll('.service-btn').forEach(btn => {
-    btn.addEventListener('click', function (event) {
-      event.preventDefault(); // يمنع الانتقال الافتراضي
-
-  
+  <script>
    function openModal(url) {
   document.getElementById('modal').style.display = 'block';
   var modalBody = document.getElementById('modal-body');
