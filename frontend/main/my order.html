@@ -1,124 +1,212 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>My Previous Orders</title>
- 
-  <style>
-    body {
-      margin: 0;
-      background-color: #e6f2ff;
-      font-family: Arial, sans-serif;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Previous Orders</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            background-color: #e6f2ff;
+            font-family: 'Poppins', sans-serif;
+            color: #2c3e50;
+        }
 
-    .center-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
+        .center-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
 
-    .order-box {
-      background-color: white;
-      padding: 40px;
-      border-radius: 20px;
-      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
-      text-align: center;
-      width: 90%;
-      max-width: 500px;
-    }
+        .order-box {
+            background-color: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            width: 90%;
+            max-width: 800px;
+        }
 
-    .order-box h1 {
-      color: #004d66;
-      margin-bottom: 15px;
-    }
+        .order-box h1 {
+            color: #004d66;
+            margin-bottom: 15px;
+            text-align: center;
+        }
 
-    .order-box i {
-      font-size: 60px;
-      color: black;
-      margin-bottom: 10px;
-    }
+        .order-box i {
+            font-size: 60px;
+            color: #004d66;
+            margin-bottom: 10px;
+            display: block;
+            text-align: center;
+        }
 
-    .no-orders {
-      color: #555;
-      font-size: 15px;
-      margin-bottom: 20px;
-    }
+        .no-orders {
+            color: #555;
+            font-size: 16px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
 
-    .order-list {
-      margin-top: 10px;
-    }
+        .order-list {
+            margin-top: 20px;
+        }
 
-    .order-item {
-      background-color: #f0f0f0;
-      padding: 10px;
-      margin: 8px 0;
-      border-radius: 8px;
-    }
+        .order-item {
+            background-color: #f0f0f0;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+        }
 
-    .reorder-btn {
-      margin-top: 10px;
-      background-color: #007bff;
-      color: white;
-      border: none;
-      padding: 6px 12px;
-      border-radius: 5px;
-      cursor: pointer;
-    }
+        .order-item h3 {
+            margin: 0 0 10px;
+            color: #004d66;
+            font-size: 18px;
+        }
 
-    .reorder-btn:hover {
-      background-color: #0056b3;
-    }
-  </style>
+        .order-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+        }
+
+        .order-table th, .order-table td {
+            border: 1px solid #90caf9;
+            padding: 8px;
+            text-align: left;
+            font-size: 14px;
+        }
+
+        .order-table th {
+            background: #bbdefb;
+            color: #004d66;
+        }
+
+        .order-details p {
+            margin: 5px 0;
+            font-size: 14px;
+            color: #455a64;
+        }
+
+        .reorder-btn {
+            margin-top: 10px;
+            background: linear-gradient(135deg, #00aabb, #004d66);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .reorder-btn:hover {
+            background: linear-gradient(135deg, #008899, #003d55);
+            transform: scale(1.05);
+        }
+    </style>
 </head>
 <body>
-  <div class="center-container">
-    <div class="order-box">
-      <h1>My Orders</h1>
-      <img src="my order.png">
-      <i class="fas fa-shopping-bag"></i>
-      <p class="no-orders" id="noOrdersMessage">No previous orders.</p>
-      <div id="ordersContainer" class="order-list"></div>
+    <div class="center-container">
+        <div class="order-box">
+            <h1>My Orders</h1>
+            <i class="fas fa-shopping-bag"></i>
+            <p class="no-orders"/cre id="noOrdersMessage">No previous orders.</p>
+            <div id="ordersContainer" class="order-list"></div>
+        </div>
     </div>
-  </div>
 
-  <script>
-    function loadPreviousOrders() {
-      const ordersContainer = document.getElementById("ordersContainer");
-      const noOrdersMessage = document.getElementById("noOrdersMessage");
-      const orders = JSON.parse(localStorage.getItem("previousOrders")) || [];
+    <script>
+        function loadPreviousOrders() {
+            const ordersContainer = document.getElementById("ordersContainer");
+            const noOrdersMessage = document.getElementById("noOrdersMessage");
+            const orders = JSON.parse(localStorage.getItem("previousOrders")) || [];
 
-      ordersContainer.innerHTML = "";
+            ordersContainer.innerHTML = "";
 
-      if (orders.length === 0) {
-        noOrdersMessage.style.display = "block";
-        return;
-      }
+            if (orders.length === 0) {
+                noOrdersMessage.style.display = "block";
+                return;
+            }
 
-      noOrdersMessage.style.display = "none";
+            noOrdersMessage.style.display = "none";
 
-      orders.forEach((order) => {
-        const item = document.createElement("div");
-        item.className = "order-item";
-        item.textContent = order;
+            orders.forEach((order, index) => {
+                const item = document.createElement("div");
+                item.className = "order-item";
 
-        const reorderBtn = document.createElement("button");
-        reorderBtn.className = "reorder-btn";
-        reorderBtn.textContent = "Order Again";
-        reorderBtn.onclick = () => {
-          let currentOrders = JSON.parse(localStorage.getItem("previousOrders")) || [];
-          currentOrders.push(order);
-          localStorage.setItem("previousOrders", JSON.stringify(currentOrders));
-          alert(`You have reordered: ${order}`);
-          loadPreviousOrders();
-        };
+                // Order details
+                const details = document.createElement("div");
+                details.className = "order-details";
+                details.innerHTML = `
+                    <h3>Order #${order.invoiceNumber}</h3>
+                    <p><strong>Date:</strong> ${order.date}</p>
+                    <p><strong>Payment Method:</strong> ${order.paymentMethod === 'wallet' ? 'Wallet' : 'Card'}</p>
+                    <p><strong>Card Number:</strong> ${order.lastFourDigits ? `**** **** **** ${order.lastFourDigits}` : 'N/A'}</p>
+                    <p><strong>Card Holder:</strong> ${order.cardHolder || 'N/A'}</p>
+                `;
 
-        item.appendChild(reorderBtn);
-        ordersContainer.appendChild(item);
-      });
-    }
+                // Product table
+                const table = document.createElement("table");
+                table.className = "order-table";
+                table.innerHTML = `
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Price (JD)</th>
+                            <th>Quantity</th>
+                            <th>Total (JD)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${order.products.map(item => `
+                            <tr>
+                                <td>${item.name}</td>
+                                <td>${item.price.toFixed(2)}</td>
+                                <td>${item.quantity || 1}</td>
+                                <td>${(item.price * (item.quantity || 1)).toFixed(2)}</td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                `;
 
-    loadPreviousOrders();
-  </script>
+                // Total
+                const total = document.createElement("p");
+                total.className = "order-details";
+                total.innerHTML = `<strong>Total:</strong> ${order.total} JD`;
+
+                // Reorder button
+                const reorderBtn = document.createElement("button");
+                reorderBtn.className = "reorder-btn";
+                reorderBtn.textContent = "Order Again";
+                reorderBtn.onclick = () => {
+                    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+                    order.products.forEach(product => {
+                        const existingProduct = cart.find(p => p.name === product.name);
+                        if (existingProduct) {
+                            existingProduct.quantity = (existingProduct.quantity || 1) + (product.quantity || 1);
+                        } else {
+                            cart.push({ ...product });
+                        }
+                    });
+                    localStorage.setItem("cart", JSON.stringify(cart));
+                    alert(`Order #${order.invoiceNumber} has been added to your cart.`);
+                    window.location.href = 'index.html'; // Redirect to cart page
+                };
+
+                item.appendChild(details);
+                item.appendChild(table);
+                item.appendChild(total);
+                item.appendChild(reorderBtn);
+                ordersContainer.appendChild(item);
+            });
+        }
+
+        window.onload = loadPreviousOrders;
+    </script>
 </body>
 </html>
