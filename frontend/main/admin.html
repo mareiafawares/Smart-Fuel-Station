@@ -1,401 +1,265 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Dashboard</title>
-  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Dashboard - Smart Fuel Station</title>
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet"/>
   <style>
-    /* General Styles */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Poppins', sans-serif;
+      font-family: "Poppins", sans-serif;
     }
 
     body {
-      background-color: #e3f2fd; /* Light blue gradient */
-      color: #2c3e50; /* Dark blue text */
-      overflow-x: hidden;
+      background: #f0f4f8;
+      color: #2c3e50;
     }
 
     header {
+      background: #004d66;
+      padding: 20px;
+      color: white;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 20px;
-      background-color: #004d66; /* Medium blue */
-      color: white;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      flex-wrap: wrap;
     }
 
-    .logo {
+    header .logo {
       font-size: 24px;
       font-weight: bold;
-      color: white;
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      margin-top: 10px;
     }
 
     nav a {
-      margin: 0 10px;
-      text-decoration: none;
       color: white;
+      margin-left: 15px;
+      text-decoration: none;
       font-size: 16px;
-      transition: color 0.3s ease;
     }
 
     nav a:hover {
-      color: #a6e0f5; /* Light blue */
+      color: #a6e0f5;
     }
 
-    /* Profile Button */
-    .profile-btn {
-      display: inline-block;
-      padding: 10px 20px;
-      background-color: #004d66;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 14px;
-      transition: all 0.3s ease;
-    }
-
-    .profile-btn:hover {
-      background-color: #00aabb;
-      transform: scale(1.05);
-    }
-
-    /* Main Content */
-    .main-content {
+    main {
       padding: 20px;
-      min-height: 100vh;
+      max-width: 1200px;
+      margin: auto;
     }
 
-    .card {
-      background-color: white;
+    .section {
+      background: white;
+      padding: 20px;
       border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      padding: 20px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      margin-bottom: 30px;
+    }
+
+    .section h2 {
       margin-bottom: 20px;
-      transition: transform 0.3s ease;
-    }
-
-    .card:hover {
-      transform: translateY(-5px);
-    }
-
-    .card h3 {
-      margin-top: 0;
-      color: #004d66; /* Medium blue */
-      font-size: 24px;
-    }
-
-    .card p {
-      font-size: 16px;
-      color: #455a64; /* Slightly darker blue-grey */
-    }
-
-    /* Employee Form */
-    .employee-form input,
-    .employee-form select {
-      width: 100%;
-      padding: 10px;
-      margin: 10px 0;
-      border: 2px solid #bbdefb;
-      border-radius: 8px;
-      font-size: 16px;
-      transition: border-color 0.3s ease;
-    }
-
-    .employee-form input:focus,
-    .employee-form select:focus {
-      border-color: #00aabb;
-      outline: none;
-    }
-
-    /* Employee List */
-    .employee-list {
-      list-style: none;
-      padding: 0;
-    }
-
-    .employee-item {
-      background-color: #bbdefb; /* Light blue */
-      border-radius: 8px;
-      padding: 10px;
-      margin-bottom: 10px;
-      font-size: 16px;
       color: #004d66;
-      transition: transform 0.3s ease;
+      font-size: 22px;
     }
 
-    .employee-item:hover {
-      transform: scale(1.02);
-    }
-
-    /* Service Cards */
-    .service-cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 20px;
-    }
-
-    .service-card {
-      background: linear-gradient(145deg, #bbdefb, #90caf9); /* Blue gradient */
-      border-radius: 12px;
-      padding: 20px;
-      text-align: center;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .service-card:hover {
-      transform: scale(1.05);
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
-    }
-
-    .service-card i {
-      font-size: 48px;
-      color: #004d66; /* Medium blue */
+    .order-item, .employee-item, .service-item {
+      background: #e3f2fd;
+      padding: 15px;
       margin-bottom: 10px;
-    }
-
-    .service-card h4 {
-      margin: 0;
-      color: #004d66; /* Medium blue */
-      font-size: 20px;
-    }
-
-    .service-card p {
-      font-size: 16px;
-      color: #455a64; /* Slightly darker blue-grey */
-    }
-
-    /* Modal Styles */
-    .modal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.5);
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-
-    .modal.show {
+      border-radius: 8px;
       display: flex;
-      opacity: 1;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
     }
 
-    .modal-content {
-      background-color: white;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      width: 400px;
-      max-width: 90%;
-      padding: 20px;
-      text-align: center;
-      animation: fadeIn 0.5s ease forwards;
-      position: relative;
+    .order-item select, .employee-item select {
+      padding: 6px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      margin-top: 10px;
     }
 
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: scale(0.9);
-      }
-      to {
-        opacity: 1;
-        transform: scale(1);
-      }
-    }
-
-    .modal img {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      object-fit: cover;
-      margin-bottom: 10px;
-      border: 3px solid #004d66;
-    }
-
-    .modal h2 {
-      margin: 0;
-      color: #004d66;
-      font-size: 24px;
-    }
-
-    .modal p {
-      font-size: 16px;
-      color: #455a64;
-      margin: 10px 0;
-    }
-
-    .modal .info {
-      margin-top: 20px;
+    .add-form {
       display: flex;
       flex-direction: column;
       gap: 10px;
     }
 
-    .modal .info div {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 16px;
-      color: #455a64;
+    .add-form input,
+    .add-form select,
+    .add-form textarea {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      width: 100%;
     }
 
-    .modal .info i {
-      color: #004d66;
-    }
-
-    .close-modal {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      font-size: 24px;
+    .btn {
+      background: #004d66;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
       cursor: pointer;
-      color: #004d66;
-      transition: color 0.3s ease;
+      align-self: flex-start;
     }
 
-    .close-modal:hover {
-      color: #a6e0f5;
+    .btn:hover {
+      background: #007c91;
+    }
+
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      nav {
+        margin-top: 10px;
+        flex-direction: column;
+      }
+
+      nav a {
+        margin: 5px 0;
+      }
+
+      .order-item, .employee-item, .service-item {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .section h2 {
+        font-size: 18px;
+      }
+
+      .btn {
+        width: 100%;
+        text-align: center;
+      }
     }
   </style>
 </head>
 <body>
 
-  <!-- Header -->
   <header>
-    <div class="logo">Admin Dashboard</div>
+    <div class="logo">Smart Fuel Admin</div>
     <nav>
-      <button class="profile-btn" onclick="openModal()">Profile</button>
-      <a href="#"><i class='bx bx-bell'></i> Notifications</a>
-      <a href="#"><i class='bx bx-log-out'></i> Logout</a>
+      <a href="#">Home</a>
+      <a href="#">Profile</a>
+      <a href="#">Logout</a>
     </nav>
   </header>
 
-  <!-- Main Content -->
-  <main class="main-content">
-    <div id="usersSection" class="card empty-state">
-      <h3>Users Overview</h3>
-      <p>No users found.</p>
-    </div>
+  <main>
+    <!-- Orders Section -->
+    <section class="section" id="ordersSection">
+      <h2>Order Management</h2>
+      <div id="ordersList"></div>
+    </section>
 
-    <div id="employeesSection" class="card">
-      <h3>Employees Overview</h3>
-      <form class="employee-form" id="employeeForm">
-        <input type="text" id="employeeName" placeholder="Employee Name" required>
-<select id="employeeRole" required>
-  <option value="" disabled selected>Select Role</option>
-  <option value="Manager">Manager</option>
-  <option value="Technician">Technician</option>
-  <option value="Driver">Driver</option>
-  <option value="Cleaner">Cleaner</option>
-</select>
-<textarea id="employeeTasks" placeholder="Enter tasks for this employee..." rows="3"></textarea>
-<button type="submit" class="btn profile-btn">Add Employee</button>
+    <!-- Services Management -->
+    <section class="section" id="servicesSection">
+      <h2>Manage Services</h2>
+      <form class="add-form" id="serviceForm">
+        <input type="text" id="serviceName" placeholder="Service Name" required />
+        <textarea id="serviceDesc" placeholder="Description..." rows="2"></textarea>
+        <button type="submit" class="btn">Add Service</button>
       </form>
-      <ul class="employee-list" id="employeeList">
-        <!-- Employees will be listed here dynamically -->
-      </ul>
-    </div>
+      <div id="serviceList"></div>
+    </section>
 
-    <div id="servicesSection" class="card">
-      <h3>Services Overview</h3>
-      <div class="service-cards" id="serviceCards">
-        <div class="service-card">
-          <i class='bx bxs-gas-pump'></i>
-          <h4>Fuel Delivery</h4>
-          <p id="fuelCount">0 Orders</p>
-        </div>
-        <div class="service-card">
-          <i class='bx bxs-oil'></i>
-          <h4>Oil Change</h4>
-          <p id="oilChangeCount">0 Orders</p>
-        </div>
-        <div class="service-card">
-          <i class='bx bxs-car-wash'></i>
-          <h4>Car Wash</h4>
-          <p id="carWashCount">0 Orders</p>
-        </div>
-        <div class="service-card">
-          <i class='bx bxs-battery-charging'></i>
-          <h4>Electric Car Charging</h4>
-          <p id="electricChargeCount">0 Orders</p>
-        </div>
-      </div>
-    </div>
+    <!-- Employees Management -->
+    <section class="section" id="employeesSection">
+      <h2>Assign Employee Tasks</h2>
+      <form class="add-form" id="employeeForm">
+        <input type="text" id="employeeName" placeholder="Employee Name" required />
+        <select id="employeeRole" required>
+          <option value="" disabled selected>Select Role</option>
+          <option>Manager</option>
+          <option>Technician</option>
+          <option>Driver</option>
+        </select>
+        <textarea id="employeeTask" placeholder="Task..." rows="2"></textarea>
+        <button type="submit" class="btn">Add Employee</button>
+      </form>
+      <div id="employeeList"></div>
+    </section>
   </main>
 
-  <!-- Modal -->
-  <div class="modal" id="profileModal">
-    <div class="modal-content">
-      <span class="close-modal" onclick="closeModal()">&times;</span>
-      <img src="mareia.jpt" >
-      <h2>Maria Fawares</h2>
-      <p><strong>Mobile Station Supervisor</strong></p>
-      <div class="info">
-        <div><i class='bx bxs-phone'></i> <span>+962 781270733</span></div>
-        <div><i class='bx bxs-envelope'></i> <span>maria.Fawares@gmail.com</span></div>
-        <div><i class='bx bxs-map'></i> <span>Amman, Jordan</span></div>
-      </div>
-    </div>
-  </div>
-
   <script>
-    // Open Modal
-    function openModal() {
-      const modal = document.getElementById('profileModal');
-      modal.classList.add('show'); // Add 'show' class for fade-in effect
-      modal.style.display = 'flex'; // Make modal visible
+    const sampleOrders = [
+      { id: 1, service: "Fuel Delivery", customer: "Ahmad", status: "Pending" },
+      { id: 2, service: "Car Wash", customer: "Lina", status: "In Progress" },
+    ];
+
+    const ordersList = document.getElementById("ordersList");
+    const serviceList = document.getElementById("serviceList");
+    const employeeList = document.getElementById("employeeList");
+
+    function renderOrders() {
+      ordersList.innerHTML = "";
+      sampleOrders.forEach(order => {
+        const item = document.createElement("div");
+        item.className = "order-item";
+        item.innerHTML = `
+          <div>
+            <strong>${order.service}</strong><br>
+            Customer: ${order.customer}
+          </div>
+          <select onchange="updateOrderStatus(${order.id}, this.value)">
+            <option ${order.status === "Pending" ? "selected" : ""}>Pending</option>
+            <option ${order.status === "In Progress" ? "selected" : ""}>In Progress</option>
+            <option ${order.status === "Completed" ? "selected" : ""}>Completed</option>
+          </select>
+        `;
+        ordersList.appendChild(item);
+      });
     }
-    // Close Modal
-    function closeModal() {
-      const modal = document.getElementById('profileModal');
-      modal.classList.remove('show'); // Remove 'show' class for fade-out effect
-      setTimeout(() => {
-        modal.style.display = 'none'; // Hide modal after fade-out
-      }, 300); // Match the duration of the fade-out transition
+
+    function updateOrderStatus(orderId, newStatus) {
+      const order = sampleOrders.find(o => o.id === orderId);
+      if (order) {
+        order.status = newStatus;
+        renderOrders();
+      }
     }
-    // Close Modal on Outside Click
-    window.onclick = function(event) {
-      const modal = document.getElementById('profileModal');
-      if (event.target === modal) {
-        closeModal();
-      }
-    };
-  
-    // Add Employee Logic
-    const employeeList = document.getElementById('employeeList');
-    const employeeForm = document.getElementById('employeeForm');
-  
-    employeeForm.addEventListener('submit', function(event) {
-      event.preventDefault();
-  
-      const employeeName = document.getElementById('employeeName').value.trim();
-      const employeeRole = document.getElementById('employeeRole').value;
-      const employeeTasks = document.getElementById('employeeTasks').value.trim() || 'No tasks assigned';
-  
-      if (employeeName && employeeRole) {
-        const employeeItem = document.createElement('li');
-        employeeItem.classList.add('employee-item');
-        employeeItem.innerHTML = `<strong>${employeeName}</strong> - ${employeeRole}<br><small style="color:#455a64; font-size:14px;">Tasks: ${employeeTasks}</small>`;
-        
-        employeeList.appendChild(employeeItem);
-        employeeForm.reset();
-      } else {
-        alert('Please fill in all fields.');
-      }
+
+    document.getElementById("serviceForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const name = document.getElementById("serviceName").value;
+      const desc = document.getElementById("serviceDesc").value;
+      const item = document.createElement("div");
+      item.className = "service-item";
+      item.innerHTML = `<strong>${name}</strong><br><small>${desc}</small>`;
+      serviceList.appendChild(item);
+      this.reset();
     });
+
+    document.getElementById("employeeForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const name = document.getElementById("employeeName").value;
+      const role = document.getElementById("employeeRole").value;
+      const task = document.getElementById("employeeTask").value;
+      const item = document.createElement("div");
+      item.className = "employee-item";
+      item.innerHTML = `<strong>${name}</strong> - ${role}<br><small>${task}</small>`;
+      employeeList.appendChild(item);
+      this.reset();
+    });
+
+    renderOrders();
   </script>
+
 </body>
 </html>
