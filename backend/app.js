@@ -3,23 +3,12 @@ const dotenv = require('dotenv');
 const cors = require('cors'); 
 const connectDB = require('./config/db'); 
 const userRouters = require('./routers/userRouters');
-
 dotenv.config();
-
 connectDB();
-
 const app = express();
-
-
 app.use(cors());
-
-
-
-
 app.use(express.json());
-
 app.use('/api', userRouters);
-
 
 // دالة للتحقق من التوكن
 const verifyToken = (req, res, next) => {
@@ -27,7 +16,7 @@ const verifyToken = (req, res, next) => {
     if (!token) {
       return res.status(401).json({ message: "Access Denied: No token provided" });
     }
-  
+
     try {
       const decoded = jwt.verify(token, process.env.JWT_SECRET);  // التحقق من التوكن باستخدام JWT_SECRET
       req.user = decoded;  // حفظ بيانات المستخدم في `req.user`

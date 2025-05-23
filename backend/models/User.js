@@ -6,9 +6,9 @@ const UserSchema = new mongoose.Schema({
     name: { type: String, required: true },
     email: { type: String, required: true },
     password: { type: String, required: true },
-    role:{  type: String, default: 'customer'||"employee" ,
-    }
-});
+    role:{ type:String, default:'User', required:true}
+    })
+
 
 UserSchema.pre('save',async function(next){
     if(!this.isModified('password'))return next()
