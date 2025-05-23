@@ -51,6 +51,24 @@
             text-align: center;
         }
 
+        #searchInput {
+            display: none;
+            margin: 10px auto;
+            padding: 8px;
+            width: 100%;
+            max-width: 400px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        #totalDisplay {
+            display: none;
+            text-align: center;
+            font-weight: bold;
+            margin-top: 10px;
+            color: #004d66;
+        }
+
         .order-list {
             margin-top: 20px;
         }
@@ -111,46 +129,58 @@
     </style>
 </head>
 <body>
-    <div class="center-container">
-        <div class="order-box">
-            <h1>My Orders</h1>
-            <i class="fas fa-shopping-bag"></i>
-            <p class="no-orders"/cre id="noOrdersMessage">No previous orders.</p>
-            <div id="ordersContainer" class="order-list"></div>
-        </div>
+<div class="center-container">
+    <div class="order-box">
+        <h1>My Orders</h1>
+        <i class="fas fa-shopping-bag"></i>
+        <input type="text" id="searchInput" placeholder="Search orders...">
+        <p class="no-orders" id="noOrdersMessage">No previous orders.</p>
+        <div id="ordersContainer" class="order-list"></div>
+        <p id="totalDisplay"></p>
     </div>
+</div>
 
-    <script>
-        function loadPreviousOrders() {
-            const ordersContainer = document.getElementById("ordersContainer");
-            const noOrdersMessage = document.getElementById("noOrdersMessage");
-            const orders = JSON.parse(localStorage.getItem("previousOrders")) || [];
+<script>
+    function loadPreviousOrders() {
+        const ordersContainer = document.getElementById("ordersContainer");
+        const noOrdersMessage = document.getElementById("noOrdersMessage");
+        const searchInput = document.getElementById("searchInput");
+        const totalDisplay = document.getElementById("totalDisplay");
+        let orders = JSON.parse(localStorage.getItem("previousOrders")) || [];
 
+        if (orders.length === 0) {
             ordersContainer.innerHTML = "";
+            noOrdersMessage.style.display = "block";
+            searchInput.style.display = "none";
+            totalDisplay.style.display = "none";
+            return;
+        }
 
-            if (orders.length === 0) {
-                noOrdersMessage.style.display = "block";
-                return;
-            }
+        noOrdersMessage.style.display = "none";
+        searchInput.style.display = "block";
+        totalDisplay.style.display = "block";
 
-            noOrdersMessage.style.display = "none";
+        const renderOrders = (filter = "") => {
+            ordersContainer.innerHTML = "";
+            let grandTotal = 0;
 
             orders.forEach((order, index) => {
+                if (filter && !order.products.some(p => p.name.toLowerCase().includes(filter.toLowerCase()))) return;
+
                 const item = document.createElement("div");
                 item.className = "order-item";
 
-                // Order details
                 const details = document.createElement("div");
                 details.className = "order-details";
                 details.innerHTML = `
                     <h3>Order #${order.invoiceNumber}</h3>
                     <p><strong>Date:</strong> ${order.date}</p>
+                    <p><strong>Time:</strong> ${order.time || 'N/A'}</p>
                     <p><strong>Payment Method:</strong> ${order.paymentMethod === 'wallet' ? 'Wallet' : 'Card'}</p>
                     <p><strong>Card Number:</strong> ${order.lastFourDigits ? `**** **** **** ${order.lastFourDigits}` : 'N/A'}</p>
                     <p><strong>Card Holder:</strong> ${order.cardHolder || 'N/A'}</p>
                 `;
 
-                // Product table
                 const table = document.createElement("table");
                 table.className = "order-table";
                 table.innerHTML = `
@@ -174,12 +204,11 @@
                     </tbody>
                 `;
 
-                // Total
                 const total = document.createElement("p");
                 total.className = "order-details";
                 total.innerHTML = `<strong>Total:</strong> ${order.total} JD`;
+                grandTotal += parseFloat(order.total);
 
-                // Reorder button
                 const reorderBtn = document.createElement("button");
                 reorderBtn.className = "reorder-btn";
                 reorderBtn.textContent = "Order Again";
@@ -195,18 +224,38 @@
                     });
                     localStorage.setItem("cart", JSON.stringify(cart));
                     alert(`Order #${order.invoiceNumber} has been added to your cart.`);
-                    window.location.href = 'index.html'; // Redirect to cart page
+                    window.location.href = 'index.html';
+                };
+
+                const deleteBtn = document.createElement("button");
+                deleteBtn.className = "reorder-btn";
+                deleteBtn.style.background = "#e74c3c";
+                deleteBtn.style.marginLeft = "10px";
+                deleteBtn.textContent = "Delete";
+                deleteBtn.onclick = () => {
+                    if (confirm(`Are you sure you want to delete Order #${order.invoiceNumber}?`)) {
+                        orders.splice(index, 1);
+                        localStorage.setItem("previousOrders", JSON.stringify(orders));
+                        renderOrders(searchInput.value);
+                    }
                 };
 
                 item.appendChild(details);
                 item.appendChild(table);
                 item.appendChild(total);
                 item.appendChild(reorderBtn);
+                item.appendChild(deleteBtn);
                 ordersContainer.appendChild(item);
             });
+
+            totalDisplay.textContent = `Total of All Orders: ${grandTotal.toFixed(2)} JD`;
         }
 
-        window.onload = loadPreviousOrders;
-    </script>
+        searchInput.addEventListener("input", () => renderOrders(searchInput.value));
+        renderOrders();
+    }
+
+    window.onload = loadPreviousOrders;
+</script>
 </body>
 </html>
