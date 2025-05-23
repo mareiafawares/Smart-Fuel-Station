@@ -222,6 +222,40 @@
     #whatsappBtn:hover {
       background-color: #1ebe57;
     }
+    @media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    align-items: center;
+    padding: 15px;
+    max-height: none;
+  }
+
+  .left-side {
+    position: relative;
+    top: 0;
+    border-right: none;
+    border-bottom: 1px solid #dbe2ea;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+    text-align: center;
+  }
+
+  .right-side {
+    padding-left: 0;
+    width: 100%;
+  }
+
+  .modal-content {
+    width: 95%;
+    margin-top: 40%;
+  }
+
+  button,
+  #whatsappBtn {
+    font-size: 14px;
+    padding: 12px;
+  }
+}
   </style>
 </head>
 <body>
@@ -347,13 +381,13 @@
       const price = priceDisplay.textContent;
 
       const message = encodeURIComponent(
-        `Car Wash Request:\n` +
-        `Wash Type: ${wash}\n` +
-        `Car Type: ${car}\n` +
-        `Date & Time: ${dateTime}\n` +
-        `Location: ${address}\n` +
-        `Extra Services: ${extras}\n` +
-        `${price}`
+        `🚗 Car Wash Request:\n` +
+        `🧽 Wash Type: ${wash}\n` +
+        `🚙 Car Type: ${car}\n` +
+        `📅 Date & Time: ${dateTime}\n` +
+        `📍 Location: ${address}\n` +
+        `➕ Extra Services: ${extras}\n` +
+        `💰 ${price}`
       );
 
       const whatsappNumber = "962781331072";
@@ -367,22 +401,22 @@
   function confirmOrder() {
     const wash = washType.value;
     const address = addressInput.value.trim();
-    const price = priceDisplay.textContent;
     const car = carType.value;
     const dateTime = washDateTime.value;
+    const price = priceDisplay.textContent;
 
     const extras = [...document.querySelectorAll('.extras:checked')]
       .map(el => el.value)
       .join(', ') || "None";
 
-    let details = `
-Wash Type: ${wash}
-Car Type: ${car}
-Date & Time: ${dateTime}
-Location: ${address}
-Extra Services: ${extras}
-${price}
-`;
+    const details = `
+🚗 Wash Type: ${wash}
+🚙 Car Type: ${car}
+📅 Date & Time: ${dateTime}
+📍 Location: ${address}
+➕ Extra Services: ${extras}
+💰 ${price}
+    `;
 
     orderDetails.textContent = details.trim();
     orderModal.style.display = 'block';
@@ -390,6 +424,7 @@ ${price}
 
   function finalizeOrder() {
     orderModal.style.display = 'none';
+    alert("✅ Your order has been confirmed! Thank you 🙌");
   }
 
   window.onclick = function(event) {

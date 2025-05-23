@@ -197,16 +197,94 @@
     }
 
     #whatsappBtn {
-      display: none;
-      text-align: center;
-      background-color: #25D366;
-      color: white;
-      padding: 10px;
-      border-radius: 8px;
-      text-decoration: none;
-      font-size: 16px;
-      margin-top: 10px;
-    }
+  display: none;
+  width: 100%; /* نفس عرض الزر السابق */
+  text-align: center;
+  background-color: #25D366;
+  color: white;
+  padding: 12px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 16px;
+  margin-top: 10px;
+  
+  box-sizing: border-box;
+}
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .left-side,
+  .right-side {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .left-side {
+    align-items: center;
+    position: static;
+  }
+
+  .right-side {
+    max-height: none;
+    overflow-y: visible;
+    padding-left: 0;
+  }
+
+  .fuel-icon img {
+    width: 80px;
+    height: 80px;
+  }
+
+  .right-side h2 {
+    font-size: 20px;
+  }
+
+  .right-side label,
+  .extras-box label {
+    font-size: 14px;
+  }
+
+  .extras-box {
+    padding: 8px;
+  }
+
+  .price,
+  #deliveryEstimate {
+    font-size: 15px;
+  }
+
+  #orderBtn,
+  #whatsappBtn {
+    font-size: 15px;
+    padding: 10px;
+  }
+
+  .modal-content {
+    width: 95%;
+  }
+}
+
+@media (max-width: 480px) {
+  .fuel-icon img {
+    width: 60px;
+    height: 60px;
+  }
+
+  .left-side h3 {
+    font-size: 16px;
+  }
+
+  .left-side p {
+    font-size: 12px;
+  }
+
+  .right-side h2 {
+    font-size: 18px;
+  }
+}
   </style>
 </head>
 <body>
@@ -272,7 +350,7 @@
     const fuelTypeSelect = document.getElementById('fuelType');
     const priceElement = document.getElementById('price');
     const orderBtn = document.getElementById('orderBtn');
-    const locationInput = document.getElementById('location');
+   const locationInput = document.getElementById('addressInput');
     const confirmationModal = document.getElementById('confirmationModal');
     const modalContent = document.getElementById('modalContent');
     const deliveryEstimate = document.getElementById('deliveryEstimate');
@@ -314,29 +392,31 @@
     }
 
     function updateAll() {
-      const car = carTypeSelect.value;
-      const fuel = fuelTypeSelect.value;
-      const loc = locationInput.value;
-      const extras = getSelectedExtras();
+  const car = carTypeSelect.value;
+  const fuel = fuelTypeSelect.value;
+  const loc = locationInput.value.trim(); // إزالة المسافات الزائدة
+  const extras = getSelectedExtras();
 
-      if (car && fuel && loc) {
-        priceElement.textContent = fuelPrices[car][fuel];
-        orderBtn.disabled = false;
+  const allFilled = car && fuel && loc !== "";
 
-        const msg = `Hello, I’d like to request a fuel delivery:\n🚗 Car Type: ${car}\n⛽ Fuel Type: ${fuel}\n📍 Location: ${loc}\n💵 Price: ${priceElement.textContent} JOD\n📦 Add-ons: ${extras || "None"}`;
-        whatsappBtn.href = `https://wa.me/962781331072?text=${encodeURIComponent(msg)}`;
-        whatsappBtn.style.display = 'inline-block';
+  if (allFilled) {
+    const price = fuelPrices[car][fuel];
+    priceElement.textContent = price;
+    orderBtn.disabled = false;
 
-        // Estimated delivery based on location length (dummy example)
-        const estimate = loc.length > 10 ? 'Delivery in 2 hours' : 'Delivery in 30 minutes';
-        deliveryEstimate.textContent = estimate;
-      } else {
-        priceElement.textContent = '0';
-        orderBtn.disabled = true;
-        whatsappBtn.style.display = 'none';
-        deliveryEstimate.textContent = '';
-      }
-    }
+    const msg = `Hello, I’d like to request a fuel delivery:\n🚗 Car Type: ${car}\n⛽ Fuel Type: ${fuel}\n📍 Location: ${loc}\n💵 Price: ${price} JOD\n📦 Add-ons: ${extras || "None"}`;
+    whatsappBtn.href = `https://wa.me/962781331072?text=${encodeURIComponent(msg)}`;
+    whatsappBtn.style.display = 'inline-block';
+
+    // تقدير التوصيل
+    deliveryEstimate.textContent = loc.length > 10 ? 'Delivery in 2 hours' : 'Delivery in 30 minutes';
+  } else {
+    priceElement.textContent = '0';
+    orderBtn.disabled = true;
+    whatsappBtn.style.display = 'none'; // إخفاء الزر
+    deliveryEstimate.textContent = '';
+  }
+}
 
     orderBtn.addEventListener('click', () => {
       const car = carTypeSelect.value;
@@ -360,7 +440,7 @@
       confirmationModal.style.display = 'flex';
 
       document.getElementById('confirmBtn').onclick = () => {
-        alert('Order confirmed! We will contact you soon.');
+        alert("✅ Your order has been added to the cart. Thank you 🙌");
         confirmationModal.style.display = 'none';
         document.getElementById('fuelForm').reset();
         updateAll();
