@@ -1,383 +1,268 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>EV Charging Order</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #eaf6fb;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EV Charging</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-100 font-sans">
+    <div class="container mx-auto p-4">
+      <div
+        class="flex flex-col md:flex-row bg-white rounded-lg shadow-lg overflow-hidden"
+      >
+        <div
+          class="md:w-1/3 bg-blue-100 p-6 flex flex-col items-center justify-center"
+        >
+          <img src="EV charging.png" alt="Charging Icon" class="w-24 mb-4" />
+          <h2 class="text-2xl font-bold text-blue-600">EV Charging</h2>
+          <p class="text-gray-600 text-center">
+            Fast & reliable charging service.
+          </p>
+        </div>
 
-    .container {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      width: 100%;
-      max-width: 700px;
-      max-height: 400px;
-      overflow-y: auto;
-      background-color: #ffffff;
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-      border-radius: 16px;
-      padding: 20px;
-      margin: 20px;
-    }
+        <div class="md:w-2/3 p-6">
+          <h3 class="text-xl font-semibold mb-4">Order EV Charging</h3>
+          <form id="chargeForm">
+            <div class="mb-4">
+              <label
+                for="carType"
+                class="block text-sm font-medium text-gray-700"
+                >Car Type:</label
+              >
+              <select
+                id="carType"
+                class="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
+                required
+              >
+                <option value="" disabled selected>Select your car</option>
+                <option value="Tesla Model 3">Tesla Model 3</option>
+                <option value="Nissan Leaf">Nissan Leaf</option>
+                <option value="BMW i3">BMW i3</option>
+              </select>
+            </div>
 
-    .left-side {
-      flex: 1;
-      position: sticky;
-      top: 20px;
-      align-self: flex-start;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;  
-      align-items: center;      
-      text-align: center;   
-      height: fit-content;
-    }
+            <div class="mb-4">
+              <label
+                for="chargerType"
+                class="block text-sm font-medium text-gray-700"
+                >Charger Type:</label
+              >
+              <select
+                id="chargerType"
+                class="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
+                required
+              >
+                <option value="" disabled selected>Select charger</option>
+                <option value="Type 1">Type 1</option>
+                <option value="Type 2">Type 2</option>
+                <option value="CCS">CCS</option>
+              </select>
+            </div>
 
-    .left-side img {
-      width: 120px;
-      margin-bottom: 20px;
-    }
+            <div class="mb-4">
+              <label
+                for="chargeType"
+                class="block text-sm font-medium text-gray-700"
+                >Charging Type:</label
+              >
+              <select
+                id="chargeType"
+                class="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
+                onchange="updatePrice()"
+                required
+              >
+                <option value="" disabled selected>Select charging type</option>
+                <option value="Fast Charging">Fast Charging</option>
+                <option value="Normal Charging">Normal Charging</option>
+              </select>
+            </div>
 
-    .right-side {
-      flex: 1.2;
-      max-width: none;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-    }
+            <div class="mb-4">
+              <label
+                for="amount"
+                class="block text-sm font-medium text-gray-700"
+                >Amount (kWh):</label
+              >
+              <input
+                type="number"
+                id="amount"
+                min="1"
+                class="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
+                required
+              />
+            </div>
 
-    label {
-      font-weight: bold;
-      margin-top: 10px;
-      display: block;
-    }
+            <div class="mb-4">
+              <label for="price" class="block text-sm font-medium text-gray-700"
+                >Price (JOD):</label
+              >
+              <input
+                type="text"
+                id="price"
+                readonly
+                class="mt-1 block w-full border-gray-300 rounded-md shadow-sm bg-gray-100"
+              />
+            </div>
 
-    select, input {
-      width: 100%;
-      padding: 8px;
-      margin-top: 6px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-      font-size: 14px;
-    }
+            <div class="mb-4">
+              <label
+                for="location"
+                class="block text-sm font-medium text-gray-700"
+                >Your Location</label
+              >
+              <input
+                type="text"
+                id="location"
+                class="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
+                required
+              />
+            </div>
 
-    #price {
-      background-color: #f5f5f5;
-    }
-
-    button {
-      width: 100%;
-      padding: 12px;
-      margin-top: 15px;
-      font-size: 16px;
-      border-radius: 6px;
-      border: none;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-
-    #submitBtn {
-      background-color: #0288d1;
-      color: white;
-    }
-
-    #submitBtn:disabled {
-      background-color: #a0c4db;
-      cursor: not-allowed;
-    }
-
-    #whatsappBtn {
-      background-color: #25D366;
-      color: white;
-      display: none; 
-    }
-
-    /* Modal styles */
-    #orderModal {
-      display: none;
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background-color: rgba(0, 0, 0, 0.6);
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
-    }
-
-    #orderModal .modal-content {
-      background: #ffffff;
-      padding: 30px 25px;
-      border-radius: 12px;
-      max-width: 400px;
-      width: 90%;
-      text-align: left;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-      animation: fadeIn 0.3s ease-in-out;
-    }
-
-    #orderModal h3 {
-      text-align: center;
-      color: #0288d1;
-      margin-bottom: 20px;
-    }
-
-    #orderDetails p {
-      margin: 8px 0;
-      font-size: 15px;
-      line-height: 1.6;
-    }
-
-    #orderModal button {
-      margin-top: 20px;
-      background-color: #0288d1;
-      color: white;
-      border: none;
-      padding: 12px 18px;
-      font-size: 16px;
-      border-radius: 6px;
-      cursor: pointer;
-      width: 100%;
-      transition: background-color 0.3s ease;
-    }
-
-    #orderModal button:hover {
-      background-color: #0277bd;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* --------- Responsive Design --------- */
-    @media (max-width: 768px) {
-      .container {
-        flex-direction: column;
-        max-height: none;
-        height: auto;
-        align-items: center;
-      }
-
-      .left-side,
-      .right-side {
-        width: 100%;
-        flex: unset;
-        max-width: 100%;
-        align-items: center;
-        text-align: center;
-      }
-
-      .left-side img {
-        width: 100px;
-        margin-bottom: 10px;
-      }
-
-      form {
-        width: 100%;
-      }
-
-      select, input, button {
-        font-size: 14px;
-      }
-
-      #orderModal .modal-content {
-        width: 95%;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .left-side img {
-        width: 80px;
-      }
-
-      h2 {
-        font-size: 20px;
-      }
-
-      p {
-        font-size: 14px;
-      }
-
-      button {
-        font-size: 15px;
-        padding: 10px;
-      }
-    }
-  </style>
-</head>
-<body>
-
-  <div class="container">
-    <div class="left-side">
-      <img src="EV charging.png" alt="Charging Icon" />
-      <h2>EV Charging</h2>
-      <p>Fast & reliable charging service.</p>
+            <div class="flex space-x-4">
+              <button
+                type="button"
+                id="submitBtn"
+                onclick="confirmPopup()"
+                disabled
+                class="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700"
+              >
+                Order Now
+              </button>
+              <a
+                href="https://wa.me/?text=Order%20EV%20Charging"
+                target="_blank"
+                class="w-full bg-green-500 text-white py-2 rounded-md text-center flex items-center justify-center hover:bg-green-600"
+              >
+                📲 Send via WhatsApp
+              </a>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
 
-    <div class="right-side">
-      <form id="chargeForm" onsubmit="return false;">
-        <label for="carType">Car Type:</label>
-        <select id="carType" required>
-          <option value="" disabled selected>Select your car</option>
-          <option value="Tesla Model 3">Tesla Model 3</option>
-          <option value="Nissan Leaf">Nissan Leaf</option>
-          <option value="BMW i3">BMW i3</option>
-        </select>
-
-        <label for="chargerType">Charger Type:</label>
-        <select id="chargerType" required>
-          <option value="" disabled selected>Select charger</option>
-        </select>
-
-        <label for="chargeType">Charging Type:</label>
-        <select id="chargeType" required>
-          <option value="" disabled selected>Select charging type</option>
-          <option value="Fast Charging">Fast Charging</option>
-          <option value="Normal Charging">Normal Charging</option>
-        </select>
-
-        <label for="amount">Amount (kWh):</label>
-        <input type="number" id="amount" min="1" placeholder="Enter kWh amount" required />
-
-        <label for="price">Price (JOD):</label>
-        <input type="text" id="price" readonly placeholder="Calculated automatically" />
-
-        <label>Your Location</label>
-        <input type="text" id="addressInput" placeholder="Enter your address" oninput="validateForm()" />
-
-        <button id="submitBtn" disabled type="button" onclick="showOrderPopup()">Order Now</button>
-        <button type="button" id="whatsappBtn" onclick="sendWhatsApp()">📲 Send via WhatsApp</button>
-      </form>
+    <div
+      class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center"
+      id="popupConfirm"
+    >
+      <div class="bg-white p-6 rounded-lg w-80">
+        <h3 class="text-lg font-semibold mb-4">EV Charging Order Summary</h3>
+        <p id="popupDetails" class="text-sm text-gray-600 mb-4"></p>
+        <button
+          onclick="submitFinal()"
+          class="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700"
+        >
+          Confirm Order
+        </button>
+      </div>
     </div>
-  </div>
 
-  <!-- Modal -->
-  <div id="orderModal">
-    <div class="modal-content">
-      <h3>EV Charging Order Summary</h3>
-      <div id="orderDetails"></div>
-      <button onclick="confirmOrder()">Confirm Order</button>
-    </div>
-  </div>
+    <script>
+      const carType = document.getElementById("carType");
+      const chargerType = document.getElementById("chargerType");
+      const chargeType = document.getElementById("chargeType");
+      const amount = document.getElementById("amount");
+      const locationInput = document.getElementById("location");
+      const price = document.getElementById("price");
+      const submitBtn = document.getElementById("submitBtn");
 
-<script>
-  const carType = document.getElementById('carType');
-  const chargerType = document.getElementById('chargerType');
-  const chargeType = document.getElementById('chargeType');
-  const amount = document.getElementById('amount');
-  const price = document.getElementById('price');
-  const locationInput = document.getElementById('addressInput');
-  const submitBtn = document.getElementById('submitBtn');
-  const whatsappBtn = document.getElementById('whatsappBtn');
+      function updatePrice() {
+        let pricePerKwh = 0;
+        if (chargeType.value === "Fast Charging") pricePerKwh = 0.7;
+        else if (chargeType.value === "Normal Charging") pricePerKwh = 0.4;
 
-  const chargerOptions = {
-    'Tesla Model 3': ['Supercharger', 'Home Charger'],
-    'Nissan Leaf': ['CHAdeMO', 'Standard AC'],
-    'BMW i3': ['CCS Combo', 'Standard AC']
-  };
+        const amountVal = parseFloat(amount.value);
 
-  function updateChargerOptions() {
-    const selectedCar = carType.value;
-    chargerType.innerHTML = '<option value="" disabled selected>Select charger</option>';
-    if (chargerOptions[selectedCar]) {
-      chargerOptions[selectedCar].forEach(opt => {
-        const option = document.createElement('option');
-        option.value = opt;
-        option.textContent = opt;
-        chargerType.appendChild(option);
-      });
-    }
-    checkFormValidity();
-    updatePrice();
-  }
+        if (!isNaN(amountVal) && pricePerKwh > 0) {
+          const total = (amountVal * pricePerKwh).toFixed(2);
+          price.value = total;
+        } else {
+          price.value = "";
+        }
 
-  function updatePrice() {
-    let pricePerKwh = 0;
-    if (chargeType.value === 'Fast Charging') pricePerKwh = 0.70;
-    else if (chargeType.value === 'Normal Charging') pricePerKwh = 0.40;
+        checkFormValidity();
+      }
 
-    const amountVal = parseFloat(amount.value);
-    if (!isNaN(amountVal) && pricePerKwh > 0) {
-      price.value = (amountVal * pricePerKwh).toFixed(2);
-    } else {
-      price.value = '';
-    }
-    checkFormValidity();
-  }
+      function checkFormValidity() {
+        const carTypeVal = carType.value;
+        const chargerTypeVal = chargerType.value;
+        const chargeTypeVal = chargeType.value;
+        const amountVal = amount.value;
+        const locationVal = locationInput.value;
+        const priceVal = price.value;
 
-  function checkFormValidity() {
-    const allFilled =
-      carType.value &&
-      chargerType.value &&
-      chargeType.value &&
-      amount.value &&
-      locationInput.value &&
-      price.value;
-    submitBtn.disabled = !allFilled;
-    whatsappBtn.style.display = allFilled ? 'block' : 'none';
-  }
+        if (
+          carTypeVal &&
+          chargerTypeVal &&
+          chargeTypeVal &&
+          amountVal &&
+          locationVal &&
+          priceVal
+        ) {
+          submitBtn.disabled = false;
+        } else {
+          submitBtn.disabled = true;
+        }
+      }
 
-  carType.addEventListener('change', updateChargerOptions);
-  chargerType.addEventListener('change', checkFormValidity);
-  chargeType.addEventListener('change', updatePrice);
-  amount.addEventListener('input', updatePrice);
-  locationInput.addEventListener('input', checkFormValidity);
+      function confirmPopup() {
+        const carTypeVal = carType.value;
+        const chargerTypeVal = chargerType.value;
+        const chargeTypeVal = chargeType.value;
+        const amountVal = amount.value;
+        const locationVal = locationInput.value;
+        const priceVal = price.value;
 
-  function showOrderPopup() {
-    const details = `
-      <p><strong>Car:</strong> ${carType.value}</p>
-      <p><strong>Charger:</strong> ${chargerType.value}</p>
-      <p><strong>Charging Type:</strong> ${chargeType.value}</p>
-      <p><strong>Amount:</strong> ${amount.value} kWh</p>
-      <p><strong>Price:</strong> ${price.value} JOD</p>
-      <p><strong>Location:</strong> ${locationInput.value}</p>
-    `;
-    document.getElementById("orderDetails").innerHTML = details;
-    document.getElementById("orderModal").style.display = "flex";
-  }
+        document.getElementById(
+          "popupDetails"
+        ).innerText = `Car Type: ${carTypeVal}\nCharger Type: ${chargerTypeVal}\nCharging Type: ${chargeTypeVal}\nAmount: ${amountVal} kWh\nPrice: ${priceVal} JOD\nLocation: ${locationVal}`;
 
-function confirmOrder() {
-    const orderData = {
-      car: carType.value,
-      charger: chargerType.value,
-      chargeType: chargeType.value,
-      amount: amount.value,
-      price: price.value,
-      location: locationInput.value
-    };
+        document.getElementById("popupConfirm").style.display = "flex";
+      }
 
-    localStorage.setItem("evChargingOrder", JSON.stringify(orderData));
+      function submitFinal() {
+        document.getElementById("popupConfirm").style.display = "none";
 
-    document.getElementById("orderModal").style.display = "none";
-    alert("✅ Your order has been added to the cart. Thank you 🙌");
-  }
+        const chargeTypeVal = chargeType.value;
+        const priceVal = parseFloat(price.value);
 
-  function sendWhatsApp() {
-    const message = 
-      `EV Charging Order:\n` +
-      `Car: ${carType.value}\n` +
-      `Charger: ${chargerType.value}\n` +
-      `Charging Type: ${chargeType.value}\n` +
-      `Amount: ${amount.value} kWh\n` +
-      `Price: ${price.value} JOD\n` +
-      `Location: ${locationInput.value}`;
-    
-    const phone = '962781331072';
-    const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
-    window.open(url, '_blank');
-  }
-</script>
+        if (isNaN(priceVal)) {
+          alert("Error: Invalid price. Please try again.");
+          return;
+        }
 
-</body>
+        const serviceData = {
+          name: `EV Charging - ${chargeTypeVal}`,
+          price: priceVal,
+          image: "EV charging.png", // تأكد من أن الصورة متاحة
+        };
+
+        addToCart(serviceData);
+
+        if (
+          window.parent &&
+          window.parent.document.getElementById("serviceModal")
+        ) {
+          window.parent.document.getElementById("serviceModal").style.display =
+            "none";
+          window.parent.document.getElementById("modalIframe").src = "";
+        }
+
+        alert("✅ Your order has been added to the cart. Thank you 🙌");
+      }
+
+      function addToCart(service) {
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        cart.push(service);
+        localStorage.setItem("cart", JSON.stringify(cart));
+      }
+
+      amount.addEventListener("input", updatePrice);
+      carType.addEventListener("change", checkFormValidity);
+      chargerType.addEventListener("change", checkFormValidity);
+      chargeType.addEventListener("change", updatePrice);
+      locationInput.addEventListener("input", checkFormValidity);
+    </script>
+  </body>
 </html>
