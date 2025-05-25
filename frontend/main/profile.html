@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Profile - Smart Fuel Station</title>
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
   <style>
@@ -24,7 +24,6 @@
       width: 100%;
       max-width: 400px;
       text-align: center;
-      min-height: 400px; /* لضمان طول مشابه لـ menu-box */
     }
 
     .content-box h2 {
@@ -33,75 +32,74 @@
     }
 
     .info-item {
-      font-size: 15px;
-      color: #333;
-      margin: 10px 0;
+      margin: 15px 0;
       text-align: left;
+    }
+
+    .info-item label {
+      display: block;
+      margin-bottom: 5px;
+      color: #444;
+      font-size: 14px;
     }
 
     .info-item input {
       width: 100%;
-      padding: 8px;
+      padding: 10px;
+      font-size: 14px;
       border: 1px solid #b3d9ff;
       border-radius: 8px;
-      font-size: 14px;
       background: #f9fbff;
-      transition: border-color 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .info-item input:focus {
-      border-color: #00aabb;
-      box-shadow: 0 0 5px rgba(0, 170, 187, 0.3);
-      outline: none;
     }
 
     .back-btn {
-      padding: 8px 15px;
+      padding: 10px 20px;
       background: #004d66;
       color: white;
       border: none;
-      border-radius: 5px;
-      cursor: pointer;
+      border-radius: 6px;
       margin-top: 20px;
-      transition: background 0.3s ease;
+      cursor: pointer;
     }
 
     .back-btn:hover {
       background: #00334d;
-    }
-
-    @media (max-width: 480px) {
-      .content-box {
-        padding: 20px;
-        max-width: 90%;
-      }
     }
   </style>
 </head>
 <body>
   <div class="content-box">
     <h2>Profile</h2>
-    <div class="info-item"><strong>Name:</strong> <input type="text" id="profileName" value="Ahmad Khaled"></div>
-    <div class="info-item"><strong>Email:</strong> <input type="email" id="profileEmail" value="ahmad.khaled@example.com"></div>
-    <div class="info-item"><strong>User Type:</strong> <input type="text" id="profileType" value="Customer"></div>
+    <div class="info-item">
+      <label for="profileName">Name</label>
+      <input type="text" id="profileName" />
+    </div>
+    <div class="info-item">
+      <label for="profileEmail">Email</label>
+      <input type="email" id="profileEmail" />
+    </div>
+    <div class="info-item">
+      <label for="profileType">User Type</label>
+      <input type="text" id="profileType" />
+    </div>
     <button class="back-btn" onclick="window.location.href='main.html'">Back</button>
   </div>
 
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const profileName = localStorage.getItem('profileName') || 'Ahmad Khaled';
-      const profileEmail = localStorage.getItem('profileEmail') || 'ahmad.khaled@example.com';
-      const profileType = localStorage.getItem('profileType') || 'Customer';
-
-      document.getElementById('profileName').value = profileName;
-      document.getElementById('profileEmail').value = profileEmail;
-      document.getElementById('profileType').value = profileType;
+    // تحميل البيانات عند فتح الصفحة
+    window.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('profileName').value = sessionStorage.getItem('name') || '';
+      document.getElementById('profileEmail').value = sessionStorage.getItem('email') || '';
+      document.getElementById('profileType').value = sessionStorage.getItem('role') || '';
     });
 
+    // تحديث sessionStorage عند التعديل
     ['profileName', 'profileEmail', 'profileType'].forEach(id => {
       document.getElementById(id).addEventListener('blur', () => {
-        const value = document.getElementById(id).value;
-        localStorage.setItem(id, value);
+        const key = id === 'profileName' ? 'name'
+                  : id === 'profileEmail' ? 'email'
+                  : 'role';
+        sessionStorage.setItem(key, document.getElementById(id).value);
       });
     });
   </script>

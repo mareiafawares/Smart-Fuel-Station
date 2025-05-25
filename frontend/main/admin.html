@@ -198,42 +198,44 @@
   </main>
 
   <script>
-    const sampleOrders = [
-      { id: 1, service: "Fuel Delivery", customer: "Ahmad", status: "Pending" },
-      { id: 2, service: "Car Wash", customer: "Lina", status: "In Progress" },
-    ];
+    const loggedInName = sessionStorage.getItem('name') || 'User';
 
-    const ordersList = document.getElementById("ordersList");
-    const serviceList = document.getElementById("serviceList");
-    const employeeList = document.getElementById("employeeList");
+const sampleOrders = [
+  { id: 1, service: "Fuel Delivery", customer: loggedInName, status: "Pending" },
+  { id: 2, service: "Car Wash", customer: loggedInName, status: "In Progress" },
+];
 
-    function renderOrders() {
-      ordersList.innerHTML = "";
-      sampleOrders.forEach(order => {
-        const item = document.createElement("div");
-        item.className = "order-item";
-        item.innerHTML = `
-          <div>
-            <strong>${order.service}</strong><br>
-            Customer: ${order.customer}
-          </div>
-          <select onchange="updateOrderStatus(${order.id}, this.value)">
-            <option ${order.status === "Pending" ? "selected" : ""}>Pending</option>
-            <option ${order.status === "In Progress" ? "selected" : ""}>In Progress</option>
-            <option ${order.status === "Completed" ? "selected" : ""}>Completed</option>
-          </select>
-        `;
-        ordersList.appendChild(item);
-      });
-    }
+const ordersList = document.getElementById("ordersList");
 
-    function updateOrderStatus(orderId, newStatus) {
-      const order = sampleOrders.find(o => o.id === orderId);
-      if (order) {
-        order.status = newStatus;
-        renderOrders();
-      }
-    }
+function renderOrders() {
+  ordersList.innerHTML = "";
+  sampleOrders.forEach(order => {
+    const item = document.createElement("div");
+    item.className = "order-item";
+    item.innerHTML = `
+      <div>
+        <strong>${order.service}</strong><br>
+        Customer: ${order.customer}
+      </div>
+      <select onchange="updateOrderStatus(${order.id}, this.value)">
+        <option ${order.status === "Pending" ? "selected" : ""}>Pending</option>
+        <option ${order.status === "In Progress" ? "selected" : ""}>In Progress</option>
+        <option ${order.status === "Completed" ? "selected" : ""}>Completed</option>
+      </select>
+    `;
+    ordersList.appendChild(item);
+  });
+}
+
+function updateOrderStatus(orderId, newStatus) {
+  const order = sampleOrders.find(o => o.id === orderId);
+  if (order) {
+    order.status = newStatus;
+    renderOrders();
+  }
+}
+
+renderOrders();
 
     document.getElementById("serviceForm").addEventListener("submit", function(e) {
       e.preventDefault();

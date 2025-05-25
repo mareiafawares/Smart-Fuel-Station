@@ -75,8 +75,7 @@ exports.login = async (req, res) => {
       return res.status(400).json({ message: "Invalid password" });
     }
 
-    // تحقق من الدور من قاعدة البيانات فقط (لا تعتمد على req.body.role)
-    const token = jwt.sign({ userID: user._id }, SECRET_KEY, {
+    const token = jwt.sign({ userID: user._id }, process.env.SECRET_KEY, {
       expiresIn: "24h",
     });
 
@@ -86,13 +85,14 @@ exports.login = async (req, res) => {
       user: {
         name: user.name,
         email: user.email,
-       
+        role: user.role, 
       },
     });
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
 };
+
 exports.auth = async (req,res,next)=>{
    
     const token = req.header('Auth')
