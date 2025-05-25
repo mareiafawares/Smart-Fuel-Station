@@ -222,40 +222,6 @@
     #whatsappBtn:hover {
       background-color: #1ebe57;
     }
-    @media (max-width: 768px) {
-  .container {
-    flex-direction: column;
-    align-items: center;
-    padding: 15px;
-    max-height: none;
-  }
-
-  .left-side {
-    position: relative;
-    top: 0;
-    border-right: none;
-    border-bottom: 1px solid #dbe2ea;
-    padding-bottom: 15px;
-    margin-bottom: 15px;
-    text-align: center;
-  }
-
-  .right-side {
-    padding-left: 0;
-    width: 100%;
-  }
-
-  .modal-content {
-    width: 95%;
-    margin-top: 40%;
-  }
-
-  button,
-  #whatsappBtn {
-    font-size: 14px;
-    padding: 12px;
-  }
-}
   </style>
 </head>
 <body>
@@ -380,13 +346,13 @@
       const price = priceDisplay.textContent;
 
       const message = encodeURIComponent(
-        `🚗 Car Wash Request:\n` +
-        `🧽 Wash Type: ${wash}\n` +
-        `🚙 Car Type: ${car}\n` +
-        `📅 Date & Time: ${dateTime}\n` +
-        `📍 Location: ${address}\n` +
-        `➕ Extra Services: ${extras}\n` +
-        `💰 ${price}`
+        `Car Wash Request:\n` +
+        `Wash Type: ${wash}\n` +
+        `Car Type: ${car}\n` +
+        `Date & Time: ${dateTime}\n` +
+        `Location: ${address}\n` +
+        `Extra Services: ${extras}\n` +
+        `${price}`
       );
 
       const whatsappNumber = "962781331072";
@@ -400,30 +366,74 @@
   function confirmOrder() {
     const wash = washType.value;
     const address = addressInput.value.trim();
+    const price = priceDisplay.textContent;
     const car = carType.value;
     const dateTime = washDateTime.value;
-    const price = priceDisplay.textContent;
 
     const extras = [...document.querySelectorAll('.extras:checked')]
       .map(el => el.value)
       .join(', ') || "None";
 
-    const details = `
-🚗 Wash Type: ${wash}
-🚙 Car Type: ${car}
-📅 Date & Time: ${dateTime}
-📍 Location: ${address}
-➕ Extra Services: ${extras}
-💰 ${price}
-    `;
+    let details = `
+Wash Type: ${wash}
+Car Type: ${car}
+Date & Time: ${dateTime}
+Location: ${address}
+Extra Services: ${extras}
+${price}
+`;
 
     orderDetails.textContent = details.trim();
     orderModal.style.display = 'block';
   }
 
   function finalizeOrder() {
+    const wash = washType.value;
+    const extras = [...document.querySelectorAll('.extras:checked')]
+      .map(el => el.value)
+      .join(', ') || "None";
+    const priceText = priceDisplay.textContent; // e.g., "Price: 5 JD"
+    const priceMatch = priceText.match(/(\d+)/); // Extract number (e.g., "5")
+    const price = priceMatch ? parseFloat(priceMatch[0]) : 0;
+
+    if (!wash || price === 0) {
+      alert('Error: Invalid order details. Please try again.');
+      return;
+    }
+
+    const serviceData = {
+      name: `Car Wash - ${wash}${extras !== 'None' ? ` (${extras})` : ''}`,
+      price: price,
+      image: 'icon car.png'
+    };
+
+    addToCart(serviceData);
+
     orderModal.style.display = 'none';
-    alert("✅ Your order has been confirmed! Thank you 🙌");
+
+    // Close the modal/iframe in index.html if opened in an iframe
+    if (window.parent && window.parent.document.getElementById('serviceModal')) {
+      window.parent.document.getElementById('serviceModal').style.display = 'none';
+      window.parent.document.getElementById('modalIframe').src = '';
+    }
+
+    alert('✅ Your order has been added to the cart. Thank you 🙌');
+
+    // Reset the form
+    washType.value = '';
+    carType.value = '';
+    washDateTime.value = '';
+    addressInput.value = '';
+    document.querySelectorAll('.extras').forEach(el => el.checked = false);
+    priceDisplay.textContent = '';
+    submitBtn.disabled = true;
+    whatsappBtn.style.display = 'none';
+  }
+
+  function addToCart(service) {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    cart.push(service);
+    localStorage.setItem('cart', JSON.stringify(cart));
   }
 
   window.onclick = function(event) {

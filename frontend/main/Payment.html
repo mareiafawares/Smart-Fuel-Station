@@ -825,15 +825,52 @@
                     vm.isInputFocused = false;
                 },
                 submitPayment() {
-                    // تخزين بيانات البطاقة مؤقتًا (آخر 4 أرقام فقط للأمان)
-                    const cardData = {
-                        lastFourDigits: this.cardNumber.slice(-4),
-                        cardHolder: this.cardName,
+                    // Check if all payment fields are filled
+                    const areFieldsFilled = this.cardNumber && this.cardName && this.cardMonth && this.cardYear && this.cardCvv;
+
+                    // Show alert if fields are filled
+                    if (areFieldsFilled) {
+                        alert("Your order has been successfully transferred to My Orders!");
+                    }
+
+                    // Load cart from localStorage
+                    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+                    let total = 0;
+                    cart.forEach(item => {
+                        total += item.price * (item.quantity || 1);
+                    });
+
+                    // Generate invoice number and date
+                    const invoiceNumber = 'INV-' + Math.floor(100000 + Math.random() * 900000);
+                    const date = new Date().toLocaleString();
+
+                    // Prepare payment data
+                    const paymentData = {
+                        lastFourDigits: this.cardNumber.slice(-4) || 'N/A',
+                        cardHolder: this.cardName || 'N/A',
                         paymentMethod: new URLSearchParams(window.location.search).get('method') || 'card'
                     };
-                    localStorage.setItem('paymentData', JSON.stringify(cardData));
-                    // إعادة التوجيه إلى Invoice.html
-                    window.location.href = 'Invoice.html';
+
+                    // Save order to previousOrders
+                    const order = {
+                        invoiceNumber: invoiceNumber,
+                        date: date,
+                        paymentMethod: paymentData.paymentMethod,
+                        lastFourDigits: paymentData.lastFourDigits,
+                        cardHolder: paymentData.cardHolder,
+                        products: cart,
+                        total: total.toFixed(2)
+                    };
+                    let previousOrders = JSON.parse(localStorage.getItem('previousOrders')) || [];
+                    previousOrders.push(order);
+                    localStorage.setItem('previousOrders', JSON.stringify(previousOrders));
+
+                    // Clear cart and payment data
+                    localStorage.removeItem('cart');
+                    localStorage.removeItem('paymentData');
+
+                    // Redirect to PreviousOrders.html
+                   window.location.href = 'my order.html';
                 }
             }
         });

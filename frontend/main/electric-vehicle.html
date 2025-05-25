@@ -347,20 +347,42 @@
     document.getElementById("orderModal").style.display = "flex";
   }
 
-function confirmOrder() {
-    const orderData = {
-      car: carType.value,
-      charger: chargerType.value,
-      chargeType: chargeType.value,
-      amount: amount.value,
-      price: price.value,
-      location: locationInput.value
+  function confirmOrder() {
+    document.getElementById("orderModal").style.display = "none";
+
+    const priceVal = parseFloat(price.value);
+    if (isNaN(priceVal)) {
+      alert('Error: Invalid price. Please try again.');
+      return;
+    }
+
+    const serviceData = {
+      name: `EV Charging - ${chargeType.value}`,
+      price: priceVal,
+      image: 'EV charging.png'
     };
 
-    localStorage.setItem("evChargingOrder", JSON.stringify(orderData));
+    addToCart(serviceData);
 
-    document.getElementById("orderModal").style.display = "none";
+    // Close the modal/iframe in index.html if opened in an iframe
+    if (window.parent && window.parent.document.getElementById('serviceModal')) {
+      window.parent.document.getElementById('serviceModal').style.display = 'none';
+      window.parent.document.getElementById('modalIframe').src = '';
+    }
+
     alert("✅ Your order has been added to the cart. Thank you 🙌");
+
+    // Reset the form
+    document.getElementById('chargeForm').reset();
+    price.value = '';
+    submitBtn.disabled = true;
+    whatsappBtn.style.display = 'none';
+  }
+
+  function addToCart(service) {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    cart.push(service);
+    localStorage.setItem('cart', JSON.stringify(cart));
   }
 
   function sendWhatsApp() {
