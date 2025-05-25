@@ -1,299 +1,404 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Fuel Refills</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-  </head>
-  <body class="bg-gray-100 font-sans">
-    <div class="container mx-auto p-4">
-      <div
-        class="flex flex-col md:flex-row bg-white rounded-lg shadow-lg overflow-hidden"
-      >
-        <div
-          class="md:w-1/3 bg-blue-100 p-6 flex flex-col items-center justify-center"
-        >
-          <img src="fuel.png" alt="Fuel Icon" class="w-24 mb-4" />
-          <h2 class="text-2xl font-bold text-blue-600">Fuel Refills</h2>
-          <p class="text-gray-600 text-center">
-            Best refueling service in your area.
-          </p>
-        </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Fuel Order Page</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Roboto', sans-serif;
+    }
 
-        <div class="md:w-2/3 p-6">
-          <h3 class="text-xl font-semibold mb-4">Order Fuel</h3>
-          <form id="fuelForm">
-            <div class="mb-4">
-              <label
-                for="carType"
-                class="block text-sm font-medium text-gray-700"
-                >Car Type:</label
-              >
-              <select
-                id="carType"
-                class="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
-                required
-              >
-                <option value="" disabled selected>Select Car Type</option>
-                <option value="Regular Gasoline">Regular Gasoline</option>
-                <option value="Diesel">Diesel</option>
-              </select>
-            </div>
+    body {
+      background-color: #f0f0f0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
 
-            <div class="mb-4">
-              <label
-                for="fuelType"
-                class="block text-sm font-medium text-gray-700"
-                >Fuel Type:</label
-              >
-              <select
-                id="fuelType"
-                class="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
-                onchange="updatePrice()"
-                required
-              >
-                <option value="" disabled selected>Select Fuel Type</option>
-                <option value="Regular">Regular</option>
-                <option value="Premium">Premium</option>
-              </select>
-            </div>
+    .container {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      width: 100%;
+      max-width: 700px; 
+      height: 400px; /* ارتفاع ثابت */
+      background-color: #ffffff;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+      border-radius: 16px;
+      padding: 20px;
+      margin: 20px;
+      overflow: hidden; /* إخفاء التمرير العام */
+    }
 
-            <div class="mb-4">
-              <label
-                for="location"
-                class="block text-sm font-medium text-gray-700"
-                >Your Location</label
-              >
-              <input
-                type="text"
-                id="location"
-                class="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
-                required
-              />
-            </div>
+    .left-side {
+      flex: 1;
+      position: sticky;
+      top: 20px; /* يثبت من الأعلى */
+      align-self: flex-start;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;  
+      align-items: center;      
+      text-align: center;   
+      height: fit-content; /* حتى لا يمتد طوله مع محتويات اليمين */
+    }
 
-            <div class="mb-4">
-              <label class="block text-sm font-medium text-gray-700"
-                >📦 Important Add-ons with the Order:</label
-              >
-              <div class="mt-2 space-y-2">
-                <label class="inline-flex items-center">
-                  <input
-                    type="checkbox"
-                    id="windshieldWater"
-                    class="form-checkbox"
-                    onchange="updatePrice()"
-                  />
-                  <span class="ml-2">Windshield Water</span>
-                </label>
-                <label class="inline-flex items-center">
-                  <input
-                    type="checkbox"
-                    id="fireExtinguisher"
-                    class="form-checkbox"
-                    onchange="updatePrice()"
-                  />
-                  <span class="ml-2">Fire Extinguisher</span>
-                </label>
-                <label class="inline-flex items-center">
-                  <input
-                    type="checkbox"
-                    id="batteryBoost"
-                    class="form-checkbox"
-                    onchange="updatePrice()"
-                  />
-                  <span class="ml-2">Battery Boost</span>
-                </label>
-                <label class="inline-flex items-center">
-                  <input
-                    type="checkbox"
-                    id="warningTriangle"
-                    class="form-checkbox"
-                    onchange="updatePrice()"
-                  />
-                  <span class="ml-2">Warning Triangle</span>
-                </label>
-                <label class="inline-flex items-center">
-                  <input
-                    type="checkbox"
-                    id="basicToolKit"
-                    class="form-checkbox"
-                    onchange="updatePrice()"
-                  />
-                  <span class="ml-2">Basic Tool Kit</span>
-                </label>
-              </div>
-            </div>
+    .right-side {
+      flex: 1.2;
+      max-width: none;
+      height: 100%;       /* نفس ارتفاع الحاوية */
+      overflow-y: auto;   /* تمرير عمودي فقط للقسم اليمين */
+      padding-left: 20px;
+    }
 
-            <div class="mb-4">
-              <label class="block text-sm font-medium text-gray-700"
-                >Price: <span id="price">0 JOD</span></label
-              >
-            </div>
+    .fuel-icon img {
+      width: 100px;
+      height: 100px;
+      margin-bottom: 10px;
+    }
 
-            <div class="flex space-x-4">
-              <button
-                type="button"
-                id="submitBtn"
-                onclick="confirmPopup()"
-                disabled
-                class="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700"
-              >
-                Order Now
-              </button>
-              <a
-                href="https://wa.me/?text=Order%20Fuel"
-                target="_blank"
-                class="w-full bg-green-500 text-white py-2 rounded-md text-center flex items-center justify-center hover:bg-green-600"
-              >
-                📲 Send via WhatsApp
-              </a>
-            </div>
-          </form>
-        </div>
+    .left-side h3 {
+      font-size: 20px;
+      color: #333;
+      font-weight: bold;
+    }
+
+    .left-side p {
+      margin-top: 8px;
+      color: #666;
+      font-size: 13px;
+    }
+
+    .right-side h2 {
+      font-size: 24px;
+      margin-bottom: 15px;
+      color: #333;
+      text-align: center;
+    }
+
+    .right-side label {
+      font-size: 16px;
+      margin-bottom: 5px;
+      display: block;
+      color: #555;
+    }
+
+    .right-side select,
+    .right-side input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 15px;
+    }
+
+    .extras-box {
+      background-color: #e9f7ef;
+      border: 1px solid #c3e6cb;
+      border-radius: 10px;
+      padding: 10px;
+      margin-bottom: 15px;
+    }
+
+    .extras-box h4 {
+      margin-bottom: 8px;
+      font-size: 16px;
+      color: #155724;
+    }
+
+    .extras-box label {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 14px;
+      color: #155724;
+    }
+
+    .price {
+      font-size: 18px;
+      text-align: center;
+      font-weight: bold;
+      color: #28a745;
+      margin-bottom: 10px;
+    }
+
+    #deliveryEstimate {
+      text-align: center;
+      font-size: 14px;
+      margin-bottom: 10px;
+      color: #007BFF;
+    }
+
+    #orderBtn:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+
+    #orderBtn {
+      width: 100%;
+      padding: 12px;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    #orderBtn:hover {
+      background-color: #218838;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.6);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background-color: white;
+      padding: 25px;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    .modal-content p {
+      margin-bottom: 15px;
+      font-size: 16px;
+      color: #333;
+    }
+
+    .modal button {
+      padding: 10px 20px;
+      margin-top: 10px;
+      border: none;
+      background-color: #28a745;
+      color: white;
+      cursor: pointer;
+      font-size: 16px;
+      border-radius: 8px;
+    }
+
+    .modal button:hover {
+      background-color: #218838;
+    }
+
+    #whatsappBtn {
+      display: none;
+      text-align: center;
+      background-color: #25D366;
+      color: white;
+      padding: 10px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 16px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="left-side">
+      <div class="fuel-icon">
+        <img src="fuel.png" alt="Fuel Icon" />
       </div>
+      <h3>Fuel Refills</h3>
+      <p>Best refueling service in your area.</p>
     </div>
 
-    <div
-      class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center"
-      id="popupConfirm"
-    >
-      <div class="bg-white p-6 rounded-lg w-80">
-        <h3 class="text-lg font-semibold mb-4">Fuel Order Summary</h3>
-        <p id="popupDetails" class="text-sm text-gray-600 mb-4"></p>
-        <button
-          onclick="submitFinal()"
-          class="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700"
-        >
-          Confirm Order
-        </button>
+    <div class="right-side">
+      <h2>Order Fuel</h2>
+      <form id="fuelForm">
+        <label for="carType">Car Type:</label>
+        <select id="carType" required>
+          <option value="">Select Car Type</option>
+          <option value="Regular Gasoline">Regular Gasoline</option>
+          <option value="Diesel">Diesel</option>
+        </select>
+
+        <label for="fuelType">Fuel Type:</label>
+        <select id="fuelType" required disabled>
+          <option value="">Select Fuel Type</option>
+        </select>
+
+        <div class="form-group">
+        <label>Your Location</label>
+        <input type="text" id="addressInput" placeholder="Enter your address" oninput="validateForm()" />
+        <div class="map-preview" onclick="openMap()">
+          <iframe src="https://www.google.com/maps?q=Jordan&output=embed" frameborder="0" allowfullscreen></iframe>
+        </div>
       </div>
+
+        <div class="extras-box">
+          <h4>📦 Important Add-ons with the Order:</h4>
+          <label><input type="checkbox" class="extra" value="Windshield Water"> Windshield Water</label>
+          <label><input type="checkbox" class="extra" value="Fire Extinguisher"> Fire Extinguisher</label>
+          <label><input type="checkbox" class="extra" value="Battery Boost"> Battery Boost</label>
+          <label><input type="checkbox" class="extra" value="Warning Triangle"> Warning Triangle</label>
+          <label><input type="checkbox" class="extra" value="Basic Tool Kit"> Basic Tool Kit</label>
+        </div>
+
+        <div class="price">
+          Price: <span id="price">0</span> JOD
+        </div>
+
+        <div id="deliveryEstimate"></div>
+
+        <button type="button" id="orderBtn" disabled>Order Now</button>
+        <a id="whatsappBtn" href="#" target="_blank">📲 Send via WhatsApp</a>
+      </form>
     </div>
+  </div>
 
-    <script>
-      const carType = document.getElementById("carType");
-      const fuelType = document.getElementById("fuelType");
-      const locationInput = document.getElementById("location");
-      const windshieldWater = document.getElementById("windshieldWater");
-      const fireExtinguisher = document.getElementById("fireExtinguisher");
-      const batteryBoost = document.getElementById("batteryBoost");
-      const warningTriangle = document.getElementById("warningTriangle");
-      const basicToolKit = document.getElementById("basicToolKit");
-      const price = document.getElementById("price");
-      const submitBtn = document.getElementById("submitBtn");
+  <div id="confirmationModal" class="modal">
+    <div class="modal-content" id="modalContent"></div>
+  </div>
 
-      function updatePrice() {
-        let basePrice = 0;
-        if (fuelType.value === "Regular") basePrice = 10;
-        else if (fuelType.value === "Premium") basePrice = 12;
+  <script>
+    const carTypeSelect = document.getElementById('carType');
+    const fuelTypeSelect = document.getElementById('fuelType');
+    const priceElement = document.getElementById('price');
+    const orderBtn = document.getElementById('orderBtn');
+    const locationInput = document.getElementById('addressInput'); // Updated to match id="addressInput"
+    const confirmationModal = document.getElementById('confirmationModal');
+    const modalContent = document.getElementById('modalContent');
+    const deliveryEstimate = document.getElementById('deliveryEstimate');
+    const whatsappBtn = document.getElementById('whatsappBtn');
+    const extrasCheckboxes = document.querySelectorAll('.extra');
 
-        let extraPrice = 0;
-        if (windshieldWater.checked) extraPrice += 1;
-        if (fireExtinguisher.checked) extraPrice += 5;
-        if (batteryBoost.checked) extraPrice += 3;
-        if (warningTriangle.checked) extraPrice += 2;
-        if (basicToolKit.checked) extraPrice += 4;
+    const fuelPrices = {
+      "Regular Gasoline": { "95": 2.0, "98": 2.5 },
+      "Diesel": { "Diesel": 2.2 },
+    };
 
-        const total = (basePrice + extraPrice).toFixed(2);
-        price.innerText = `${total} JOD`;
-
-        checkFormValidity();
-      }
-
-      function checkFormValidity() {
-        const carTypeVal = carType.value;
-        const fuelTypeVal = fuelType.value;
-        const locationVal = locationInput.value;
-
-        if (carTypeVal && fuelTypeVal && locationVal) {
-          submitBtn.disabled = false;
-        } else {
-          submitBtn.disabled = true;
+    carTypeSelect.addEventListener('change', () => {
+      const carType = carTypeSelect.value;
+      fuelTypeSelect.innerHTML = `<option value="">Select Fuel Type</option>`;
+      priceElement.textContent = '0';
+      if (carType && fuelPrices[carType]) {
+        fuelTypeSelect.disabled = false;
+        for (const type in fuelPrices[carType]) {
+          const opt = document.createElement('option');
+          opt.value = type;
+          opt.textContent = type;
+          fuelTypeSelect.appendChild(opt);
         }
+      } else {
+        fuelTypeSelect.disabled = true;
       }
+      updateAll();
+    });
 
-      function confirmPopup() {
-        const carTypeVal = carType.value;
-        const fuelTypeVal = fuelType.value;
-        const locationVal = locationInput.value;
-        const extras =
-          [
-            windshieldWater.checked ? "Windshield Water" : "",
-            fireExtinguisher.checked ? "Fire Extinguisher" : "",
-            batteryBoost.checked ? "Battery Boost" : "",
-            warningTriangle.checked ? "Warning Triangle" : "",
-            basicToolKit.checked ? "Basic Tool Kit" : "",
-          ]
-            .filter(Boolean)
-            .join(", ") || "None";
-        const priceVal = parseFloat(price.innerText);
+    fuelTypeSelect.addEventListener('change', updateAll);
+    locationInput.addEventListener('input', updateAll);
+    extrasCheckboxes.forEach(cb => cb.addEventListener('change', updateAll));
 
-        document.getElementById(
-          "popupDetails"
-        ).innerText = `Car Type: ${carTypeVal}\nFuel Type: ${fuelTypeVal}\nLocation: ${locationVal}\nAdd-ons: ${extras}\nPrice: ${priceVal} JOD`;
+    function getSelectedExtras() {
+      return Array.from(extrasCheckboxes)
+        .filter(cb => cb.checked)
+        .map(cb => cb.value)
+        .join(', ') || 'None';
+    }
 
-        document.getElementById("popupConfirm").style.display = "flex";
+    function updateAll() {
+      const car = carTypeSelect.value;
+      const fuel = fuelTypeSelect.value;
+      const loc = locationInput.value;
+      const extras = getSelectedExtras();
+
+      if (car && fuel && loc) {
+        priceElement.textContent = fuelPrices[car][fuel];
+        orderBtn.disabled = false;
+
+        const msg = `Hello, I’d like to request a fuel delivery:\n🚗 Car Type: ${car}\n⛽ Fuel Type: ${fuel}\n📍 Location: ${loc}\n💵 Price: ${priceElement.textContent} JOD\n📦 Add-ons: ${extras}`;
+        whatsappBtn.href = `https://wa.me/962781331072?text=${encodeURIComponent(msg)}`;
+        whatsappBtn.style.display = 'inline-block';
+
+        // Estimated delivery based on location length (dummy example)
+        const estimate = loc.length > 10 ? 'Delivery in 2 hours' : 'Delivery in 30 minutes';
+        deliveryEstimate.textContent = estimate;
+      } else {
+        priceElement.textContent = '0';
+        orderBtn.disabled = true;
+        whatsappBtn.style.display = 'none';
+        deliveryEstimate.textContent = '';
       }
+    }
 
-      function submitFinal() {
-        document.getElementById("popupConfirm").style.display = "none";
+    orderBtn.addEventListener('click', () => {
+      const car = carTypeSelect.value;
+      const fuel = fuelTypeSelect.value;
+      const loc = locationInput.value;
+      const extras = getSelectedExtras();
+      const price = parseFloat(priceElement.textContent);
 
-        const fuelTypeVal = fuelType.value;
-        const priceVal = parseFloat(price.innerText);
+      if (!car || !fuel || !loc) return;
 
-        if (isNaN(priceVal)) {
-          alert("Error: Invalid price. Please try again.");
-          return;
-        }
+      modalContent.innerHTML = `
+        <p><strong>Order Summary</strong></p>
+        <p>Car Type: ${car}</p>
+        <p>Fuel Type: ${fuel}</p>
+        <p>Location: ${loc}</p>
+        <p>Add-ons: ${extras}</p>
+        <p><strong>Total Price:</strong> ${price} JOD</p>
+        <button id="confirmBtn">Confirm Order</button>
+        <button id="cancelBtn" style="margin-left:10px; background-color:#dc3545;">Cancel</button>
+      `;
+      confirmationModal.style.display = 'flex';
 
-        const extras =
-          [
-            windshieldWater.checked ? "Windshield Water" : "",
-            fireExtinguisher.checked ? "Fire Extinguisher" : "",
-            batteryBoost.checked ? "Battery Boost" : "",
-            warningTriangle.checked ? "Warning Triangle" : "",
-            basicToolKit.checked ? "Basic Tool Kit" : "",
-          ]
-            .filter(Boolean)
-            .join(", ") || "None";
+      document.getElementById('confirmBtn').onclick = () => {
+        confirmationModal.style.display = 'none';
 
         const serviceData = {
-          name: `Fuel Delivery - ${fuelTypeVal}${
-            extras !== "None" ? ` (${extras})` : ""
-          }`,
-          price: priceVal,
-          image: "fuel.png",
+          name: `Fuel Delivery - ${fuel}${extras !== 'None' ? ` (${extras})` : ''}`,
+          price: price,
+          image: 'fuel.png'
         };
 
         addToCart(serviceData);
 
-        if (
-          window.parent &&
-          window.parent.document.getElementById("serviceModal")
-        ) {
-          window.parent.document.getElementById("serviceModal").style.display =
-            "none";
-          window.parent.document.getElementById("modalIframe").src = "";
+        // Close the modal/iframe in index.html if opened in an iframe
+        if (window.parent && window.parent.document.getElementById('serviceModal')) {
+          window.parent.document.getElementById('serviceModal').style.display = 'none';
+          window.parent.document.getElementById('modalIframe').src = '';
         }
 
-        alert("✅ Your order has been added to the cart. Thank you 🙌");
-      }
+        alert('✅ Your order has been added to the cart. Thank you 🙌');
 
-      function addToCart(service) {
-        let cart = JSON.parse(localStorage.getItem("cart")) || [];
-        cart.push(service);
-        localStorage.setItem("cart", JSON.stringify(cart));
-      }
+        document.getElementById('fuelForm').reset();
+        updateAll();
+      };
 
-      carType.addEventListener("change", checkFormValidity);
-      fuelType.addEventListener("change", updatePrice);
-      locationInput.addEventListener("input", checkFormValidity);
-      windshieldWater.addEventListener("change", updatePrice);
-      fireExtinguisher.addEventListener("change", updatePrice);
-      batteryBoost.addEventListener("change", updatePrice);
-      warningTriangle.addEventListener("change", updatePrice);
-      basicToolKit.addEventListener("change", updatePrice);
-    </script>
-  </body>
+      document.getElementById('cancelBtn').onclick = () => {
+        confirmationModal.style.display = 'none';
+      };
+    });
+
+    // Close modal if clicked outside content
+    confirmationModal.addEventListener('click', e => {
+      if (e.target === confirmationModal) {
+        confirmationModal.style.display = 'none';
+      }
+    });
+
+    function addToCart(service) {
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      cart.push(service);
+      localStorage.setItem('cart', JSON.stringify(cart));
+    }
+  </script>
+</body>
 </html>
