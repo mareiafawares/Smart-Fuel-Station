@@ -1,4 +1,4 @@
-<html lang="en">
+<html >
 <head>
   <script src="java/home.js"></script>
   <meta charset="UTF-8">
@@ -6,256 +6,8 @@
   <title>Smart Fuel Station</title>
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
   <link href="home.css"  rel="stylesheet">
-<style>
-  body {
-    overflow-x: hidden;
-  }
-
-  .info-box:hover {
-    transform: scale(1.05);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-
-  .team-card {
-    width: calc(16.66% - 20px);
-    background-color: #ffffff;
-    border-radius: 15px;
-    padding: 15px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    cursor: pointer;
-    transition: transform 0.3s;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 40px;
-  }
-
-  .team-card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
-  }
-
-  .team-card img {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-bottom: 12px;
-  }
-
-  .team-card h3 {
-    font-size: 16px;
-    color: #003344;
-    margin: 5px 0;
-    text-align: center;
-  }
-
-  .team-card p {
-    font-size: 14px;
-    color: #555;
-    text-align: center;
-  }
-
-  @media (max-width: 1024px) {
-    .team-card {
-      width: calc(33.33% - 20px);
-    }
-  }
-
-  @media (max-width: 768px) {
-    .team-card {
-      width: calc(50% - 20px);
-    }
-  }
-
-  @media (max-width: 480px) {
-    .team-card {
-      width: 100%;
-    }
-  }
-  
-  
-  .monther-card {
-  width: 40%;
-  margin: 30px auto 0 auto; /* وسط الصفحة */
-  background-color: #ffffff;
-  border-radius: 15px;
-  padding: 15px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  transition: transform 0.3s;
- margin-top: 70px;
-}
-
-.monther-card:hover {
-  transform: scale(1.05);
-}
-
-.monther-card img {
-  width: 140px;
-  height: 140px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin-bottom: 12px;
-}
-
-  .modal {
-  display: none; 
-  position: fixed;
-  z-index: 999;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0,0,0,0.7);
-}
-
-.modal-content {
-  position: relative;
-  background-color: #fff;
-  margin: 5% auto;
-  padding: 0;
-  width: 80%;
-  max-width: 800px;
-  border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-  overflow: hidden;
-}
-
-.modal-content iframe {
-  width: 100%;
-  height: 500px;
-  border: none;
-}
-
-.close-btn {
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  color: #333;
-  font-size: 28px;
-  font-weight: bold;
-  cursor: pointer;
-}
-.popup-overlay {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.5);
-  z-index: 1000;
-}
-
-.popup-content {
-  background: #fff;
-  width: 60%;
-  max-width: 700px;
-  height: 450px;
-  margin: 10% auto;
-  border-radius: 8px;
-  position: relative;
-  padding: 0;
-  overflow: hidden;
-}
-
-.close-btn {
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  font-size: 22px;
-  cursor: pointer;
-  z-index: 1001;
-}
-/*هاي النافذه لا quick*/
-
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 9999;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.6);
-  display: flex;
-  align-items: flex-start;
-  margin-top: 20;
-  justify-content: center;
-}
-
-.modal-content {
-  width: 90%;
-  max-width: 500px;
-  background: white;
-  border-radius: 12px;
-  overflow: hidden;
-  position: relative;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-  animation: fadeIn 0.3s ease-out;
-}
-
-.modal-content iframe {
-  width: 100%;
-  height: 400px;
-  border: none;
-}
-
-.close-btn {
-  position: absolute;
-  top: 10px;
-  right: 14px;
-  font-size: 22px;
-  font-weight: bold;
-  color: #444;
-  cursor: pointer;
-}
-
-/* Optional: Animation */
-@keyframes fadeIn {
-  from { opacity: 0; transform: scale(0.95); }
-  to { opacity: 1; transform: scale(1); }
-}
 
 
-.language-dropdown {
-  position: relative;
-}
-
-.language-menu {
-  display: none;
-  position: absolute;
-  top: 100%;
-  left: 30px;
-  background: #fff;
-  border: 1px solid #ccc;
-  padding: 5px;
-  border-radius: 4px;
-  z-index: 999;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-
-.language-menu button {
-  display: block;
-  width: 100%;
-  background: none;
-  border: none;
-  padding: 6px 10px;
-  text-align: left;
-  cursor: pointer;
-  font-size: 14px;
-}
-
-.language-menu button:hover {
-  background-color: #f0f0f0;
-}
-
-
-
-</style>
 
 </head>
 
@@ -280,52 +32,26 @@
 <div class="sidebar" id="sidebar">
   <button class="sidebar-close" onclick="toggleSidebar()">×</button>
 
-  <a href="javascript:void(0);" onclick="openPopup()">
+  <a href="javascript:void(0);" onclick="openModal('main.html')">
     <i class='bx bx-user'></i>
-    <span data-en="Profile" data-ar="الملف الشخصي">Profile</span>
+    <span  >Profile</span>
   </a>
 
-  <a href="my order.html">
+  <a  href="javascript:void(0);" onclick="openModal('my order.html')">
+    
     <i class='bx bx-list-ul'></i>
-    <span data-en="My Orders" data-ar="طلباتي">My Orders</span>
+    <span  >My Orders</span>
   </a>
 
-  <a href="javascript:void(0);" onclick="openModal()">
+  <a href="javascript:void(0);" onclick="openModal('Shopping.html')">
     <i class='bx bx-cart'></i>
-    <span data-en="Shopping Cart" data-ar="سلة المشتريات">Shopping Cart</span>
+    <span  >Shopping Cart</span>
   </a>
 
-  <!-- 🌐 Language Dropdown -->
-  <div class="language-dropdown">
-    <a href="javascript:void(0);" onclick="toggleLanguageMenu()">
-      <i class='bx bx-globe'></i>
-      <span data-en="Language" data-ar="اللغة">Language</span>
-    </a>
-    <div id="languageMenu" class="language-menu">
-      <button onclick="switchLanguage('en')">English</button>
-      <button onclick="switchLanguage('ar')">العربية</button>
-    </div>
-  </div>
-</div>
-
-<!-- Modal Container -->
-<div id="modalContainer" class="popup-overlay">
-  <div class="popup-content">
-    <span class="close-btn" onclick="closeModal()">&times;</span>
-    <iframe src="shopping.html" frameborder="0" style="width:100%; height:400px;"></iframe>
-  </div>
+  
 </div>
 
 
-
-
-<!-- Modal Container -->
-<div id="modalContainer" class="popup-overlay">
-  <div class="popup-content">
-    <span class="close-btn" onclick="closeModal()">&times;</span>
-    <iframe src="shopping.html" frameborder="0" style="width:100%; height:400px;"></iframe>
-  </div>
-</div>
 
   <!-- Sections -->
    <section>
@@ -360,19 +86,13 @@ Convenience,and giving you back the time </div>
         </video>
         <div class="overlay-content">
           <h3>Quick Order Service</h3>
-          <p>Place an order in minutes by providing your phone number and location. No need to log in or add items to your cart. Pay upon delivery.</p>
+          <p> <br>Place an order in minutes by providing your <br>phone number and location. No need to log in or <br> add items to your cart. Pay upon delivery.</p>
           <br>
-          <a href="#" onclick="openQuickModal()" class="btn">Quick Service</a>
+          <button class="btn service-btn" onclick="openModal('quick.html')">Order Now</button>
         </div>
       </div>
 
-      <!-- Modal for Quick Order -->
-      <div id="quickModal" class="modal">
-        <div class="modal-content">
-          <span class="close-btn" onclick="closeQuickModal()">&times;</span>
-          <iframe id="quickIframe" src="" frameborder="0"></iframe>
-        </div>
-      </div>
+      
 
       <!-- Oil Change -->
       <div class="card">
@@ -381,9 +101,9 @@ Convenience,and giving you back the time </div>
         </video>
         <div class="overlay-content">
           <h3>Oil Change</h3>
-          <p>Keep your engine running smoothly with our mobile oil change.</p>
+          <p> <br>Keep your engine running smoothly<br> with our mobile oil change.</p>
           <br>
-          <a href="#" class="btn service-btn" data-url="Oil change.html">Order Now</a>
+         <button class="btn service-btn" onclick="openModal('Oil Change.html')">Order Now</button>
         </div>
       </div>
 
@@ -396,7 +116,7 @@ Convenience,and giving you back the time </div>
           <h3>Car Wash</h3>
           <p>Get your car washed on demand, hassle-free.</p>
           <br>
-          <a href="#" class="btn service-btn" data-url="car wash.html">Order Now</a>
+          <button class="btn service-btn" onclick="openModal('Car Wash.html')">Order Now</button>
         </div>
       </div>
 
@@ -409,7 +129,8 @@ Convenience,and giving you back the time </div>
           <h3>EV Charging</h3>
           <p>Charge your electric vehicle wherever you are.</p>
           <br>
-          <a href="#" class="btn service-btn" data-url="electric-vehicle.html">Order Now</a>
+          
+<button class="btn service-btn" onclick="openModal('electric-vehicle.html')">Order Now</button>
         </div>
       </div>
 
@@ -422,7 +143,7 @@ Convenience,and giving you back the time </div>
           <h3>Fuel Delivery</h3>
           <p>We bring the fuel to you, anytime, anywhere.</p>
           <br>
-          <a href="#" class="btn service-btn" data-url="fuel.html">Order Now</a>
+          <button class="btn service-btn" onclick="openModal('fuel.html')">Order Now</button>
         </div>
       </div>
 
@@ -431,23 +152,15 @@ Convenience,and giving you back the time </div>
   <div class="indicators" id="indicators"></div>
 </section>
 
-<!-- النافذة المنبثقة -->
-<!-- Modal Window -->
-<!-- Modal Window -->
-<div id="serviceModal" class="modal">
-  <div class="modal-content">
-    <span class="close-btn">&times;</span>
-    <iframe id="modalIframe" src="" frameborder="0"></iframe>
-  </div>
-</div>
-<!-- S Offers Section  by alaa//////////////////////////////-->
+
+<!-- S Offers Section  by alaa-->
 <section id="offers" class="offers-section">
   <div class="offer-card">
     <img src="offer/offer1.jpg" alt="Offer 1" />
     <div class="offer-content">
       <h3 class="offer-title">20% Off on Fuel</h3>
       <p class="offer-description">Get 20% off on every fuel refill! Limited time offer.</p>
-      <a href="javascript:void(0)" class="offer-button" onclick="openOfferPopup('offer1.html')">Claim Offer</a>
+     <button class="offer-button" onclick="openModal('offer1.html')">Claim Offer</button>
     </div>
   </div>
 
@@ -456,7 +169,7 @@ Convenience,and giving you back the time </div>
     <div class="offer-content">
       <h3 class="offer-title">Free Car Wash</h3>
       <p class="offer-description">Get a free car wash with every full tank. Hurry up!</p>
-      <a href="javascript:void(0)" class="offer-button" onclick="openOfferPopup('offer2.html')">Claim Offer</a>
+     <button class="offer-button" onclick="openModal('offer2.html')">Claim Offer</button>
     </div>
   </div>
 
@@ -465,21 +178,14 @@ Convenience,and giving you back the time </div>
     <div class="offer-content">
       <h3 class="offer-title">Buy One, Get One Free</h3>
       <p class="offer-description">Buy one oil change and get another one free. Limited to first 50 customers.</p>
-      <a href="javascript:void(0)" class="offer-button" onclick="openOfferPopup('offer3.html')">Claim Offer</a>
-    </div>
-  </div>
-
-  <!-- Popup Container for Offers -->
-  <div id="offersPopup" class="offers-popup-window">
-    <div class="offers-popup-content">
-      <span class="offers-popup-close" onclick="closeOfferPopup()">&times;</span>
-      <iframe id="offersIframe" src="" width="100%" height="500px" frameborder="0"></iframe>
+     <button class="offer-button" onclick="openModal('offer3.html')">Claim Offer</button>
     </div>
   </div>
 </section>
 
+
 <style>
-  /* Main Offers Section Styling */
+  /* Special Offers Section */
   .offers-section {
     display: flex;
     justify-content: space-around;
@@ -538,70 +244,13 @@ Convenience,and giving you back the time </div>
     background-color: #004d66;
   }
 
+  /* Hover effect */
   .offer-card:hover {
     transform: translateY(-10px);
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
   }
-
-  /* Popup Specific to Offers Section */
-  .offers-popup-window {
-    display: none;
-    position: fixed;
-    z-index: 9999;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.6);
-    justify-content: center;
-    align-items: center;
-  }
-
-  .offers-popup-content {
-    position: relative;
-    background: #fff;
-    width: 80%;
-    max-width: 600px;
-    padding: 20px;
-    border-radius: 10px;
-  }
-
-  .offers-popup-close {
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    font-size: 26px;
-    cursor: pointer;
-    font-weight: bold;
-    color: #333;
-  }
 </style>
-
-<script>
-  // Open the offers popup and load the correct file
-  function openOfferPopup(file) {
-    const popup = document.getElementById("offersPopup");
-    const iframe = document.getElementById("offersIframe");
-    iframe.src = file;
-    popup.style.display = "flex";
-  }
-
-  // Close the offers popup
-  function closeOfferPopup() {
-    const popup = document.getElementById("offersPopup");
-    const iframe = document.getElementById("offersIframe");
-    popup.style.display = "none";
-    iframe.src = "";
-  }
-</script>
-
-
-  
-
-
-<!--///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
-
-<!-- Section About by alaa///////////-->
+<!-- Section About by alaa-->
 <section id="about" style="width: 100vw; min-height: 100vh; background: #f0f8ff; display: flex; flex-direction: column; align-items: center; padding: 40px 20px; box-sizing: border-box;">
 
   <!-- Image and Description Side by Side -->
@@ -679,19 +328,6 @@ Convenience,and giving you back the time </div>
   </div>
 </section>
 
-<div id="modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 999;">
-  <div id="modal-content" style="width: 50%; height: 70%; margin: 0 auto; background-color: white; border-radius: 10px; padding: 20px; position: relative; top: 50%; transform: translateY(-50%); box-shadow: 0 4px 20px rgba(0,0,0,0.2); overflow-y: hidden;">
-    <button onclick="closeModal()" style="position: absolute; top: 10px; right: 10px; background-color: transparent; border: none; font-size: 24px; cursor: pointer; color: #333;">&times;</button>
-    <div id="modal-body" style="padding: 20px;">
-     
-    </div>
-  </div>
-</div>
-<!--////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
-
-
-
-
 <!--section contact by alaa-->
 
 <section id="contact" style="padding: 60px 20px; background: linear-gradient(to right, #f0f4f8, #d9e2ec); font-family: 'Segoe UI', sans-serif;">
@@ -756,259 +392,72 @@ Convenience,and giving you back the time </div>
 
 </section>
 
-<!--////////////////////////////////////////////////////////////////////////////////////////////////////-->
-<script>
-  document.querySelectorAll('.service-btn').forEach(btn => {
-    btn.addEventListener('click', function (event) {
-      event.preventDefault(); // يمنع الانتقال الافتراضي
 
-  
-   function openModal(url) {
-  document.getElementById('modal').style.display = 'block';
-  var modalBody = document.getElementById('modal-body');
-  fetch(url)
-    .then(response => response.text())
-    .then(data => {
-      modalBody.innerHTML = data;
-    });
-    disableModalScroll(); // ✅ منع التمرير عند الفتح
-}
-
-function closeModal() {
-  document.getElementById('modal').style.display = 'none';
-  enableModalScroll(); // ✅ إعادة التمرير عند الإغلاق
-}
-
-    function validateForm() {
-      var name = document.getElementById('name').value.trim();
-      var email = document.getElementById('email').value.trim();
-      var message = document.getElementById('message').value.trim();
-      var emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
-
-      if (!name || !email || !message) {
-        alert("Please fill out all fields.");
-        return false;
-      }
-
-      if (!emailPattern.test(email)) {
-        alert("Please enter a valid email address.");
-        return false;
-      }
-
-      alert("Message sent successfully!");
-      return true;
-    }
-
-    function rateUs(rating) {
-      const stars = document.querySelectorAll("#stars span");
-      stars.forEach((star, index) => {
-        star.style.color = index < rating ? "#FFD700" : "#ccc";
-      });
-
-      const messages = [
-        "Thank you for your feedback!",
-        "We appreciate your opinion!",
-        "Thanks! We're getting better!",
-        "Awesome! You're the best!",
-        "Perfect! We're happy you're happy!"
-      ];
-      document.getElementById('rating-message').innerText = messages[rating - 1];
-    }
-    const serviceButtons = document.querySelectorAll(".service-btn");
-  const modal = document.getElementById("serviceModal");
-  const modalIframe = document.getElementById("modalIframe");
-  const closeBtn = document.querySelector(".close-btn");
-
-  serviceButtons.forEach(button => {
-    button.addEventListener("click", function(e) {
-      e.preventDefault();
-      const url = this.getAttribute("data-url");
-      modalIframe.src = url;
-      modal.style.display = "block";
-      disableModalScroll(); // ✅ هنا منع التمرير
-    });
-  });
-
-  closeBtn.addEventListener("click", () => {
-    modal.style.display = "none";
-    modalIframe.src = "";
-    enableModalScroll(); // ✅ هنا رجع التمرير
-  });
-
-  window.addEventListener("click", function(e) {
-    if (e.target == modal) {
-      modal.style.display = "none";
-      modalIframe.src = "";
-      enableModalScroll(); // ✅ هنا كمان
-    }
-  });
-
-  
-  window.addEventListener("click", function(e) {
-    if (e.target == modal) {
-      modal.style.display = "none";
-      modalIframe.src = "";
-    }
-  });
-  const cards = document.querySelectorAll('.card');
-  const indicatorsContainer = document.getElementById('indicators');
-  let currentIndex = 0;
-  let slideInterval;
-
-  
-  cards.forEach((_, index) => {
-    const dot = document.createElement('span');
-    dot.addEventListener('click', () => {
-      currentIndex = index;
-      highlightCard(currentIndex);
-    });
-    indicatorsContainer.appendChild(dot);
-  });
-
-  function highlightCard(index) {
-    cards.forEach(card => card.classList.remove('active-card'));
-    cards[index].classList.add('active-card');
-
-    cards[index].scrollIntoView({
-      behavior: 'smooth',
-      inline: 'center',
-      block: 'nearest'
-    });
-
-    const indicators = document.querySelectorAll('.indicators span');
-    indicators.forEach(dot => dot.classList.remove('active'));
-    if (indicators[index]) indicators[index].classList.add('active');
-  }
-
-  function autoSlide() {
-    highlightCard(currentIndex);
-    currentIndex = (currentIndex + 1) % cards.length;
-  }
-
-  
-  highlightCard(currentIndex);
-
-  
-  const servicesSection = document.getElementById('services');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        slideInterval = setInterval(autoSlide, 5000);
-      } else {
-        clearInterval(slideInterval);
-      }
-    });
-  }, {
-    threshold: 0.5 
-  });
-
-  
-  observer.observe(servicesSection);
-  function disableModalScroll() {
-    document.body.style.overflow = 'hidden';
-    window.addEventListener('keydown', blockKeys, true);
-  }
-
-  function enableModalScroll() {
-    document.body.style.overflow = '';
-    window.removeEventListener('keydown', blockKeys, true);
-  }
-
-  function blockKeys(e) {
-    const keysToBlock = ['ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', 'Home', 'End', ' '];
-    if (keysToBlock.includes(e.key)) {
-      e.preventDefault();
-    }
-  }
-  function openModal() {
-  document.getElementById("modalContainer").style.display = "block";
-}
-
-function closeModal() {
-  document.getElementById("modalContainer").style.display = "none";
-}
-document.querySelectorAll('.service-btn').forEach(button => {
-  button.addEventListener('click', function(event) {
-    event.preventDefault(); // Prevent default link behavior
-    const url = this.getAttribute('data-url');
-    if (url) {
-      window.location.href = url; // Redirect to the specified URL
-    }
-  });
-});
-   serviceButtons = document.querySelectorAll('.service-btn');
-
-  serviceButtons.forEach(button => {
-    button.addEventListener('click', (e) => {
-      e.preventDefault();
-      const serviceUrl = button.getAttribute('data-url');
-      
-      const token = sessionStorage.getItem('token');
-      console.log('Token:', token); // نطبع التوكن عالكونسول
-      
-      if (token && token.trim() !== "") {
-        window.location.href = serviceUrl;
-      } else {
-        window.location.href = 'index.html';
-      }
-    });
-  });
-
-
-
- //هاي النافذه لا quick
- 
-  function openQuickModal() {
-    document.getElementById('quickIframe').src = "quick.html";
-    document.getElementById('quickModal').style.display = 'block';
-  }
-
-  function closeQuickModal() {
-    document.getElementById('quickModal').style.display = 'none';
-    document.getElementById('quickIframe').src = "";
-  }
-
-
-
-
-function toggleLanguageMenu() {
-  const menu = document.getElementById("languageMenu");
-  menu.style.display = menu.style.display === "block" ? "none" : "block";
-}
-
-function switchLanguage(lang) {
-  localStorage.setItem("lang", lang);
-  applyLanguage(lang);
-  document.getElementById("languageMenu").style.display = "none";
-}
-
-function applyLanguage(lang) {
-  const elements = document.querySelectorAll("[data-en], [data-ar]");
-  elements.forEach(el => {
-   el.innerHTML = el.getAttribute(`data-${lang}`);
-  });
-  document.body.dir = (lang === "ar") ? "rtl" : "ltr";
-}
-
-window.addEventListener("DOMContentLoaded", () => {
-  const savedLang = localStorage.getItem("lang") || "en";
-  applyLanguage(savedLang);
-});
-
-
-
-  </script>
-
-
-<div class="popup" id="popupWindow">
-  <div class="popup-content">
-    <span class="close" onclick="closePopup()">&times;</span>
-    <iframe src="index.html" frameborder="0"></iframe>
+<!-- Modal -->
+<div id="popupModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <iframe src="electric-vehicle.html"></iframe>
   </div>
 </div>
 
- 
+<style>
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+  }
 
+  .modal-content {
+    position: relative;
+    margin: 5% auto;
+    width: 700px;
+    height: 440px;
+    background-color: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  }
+
+  .modal-content iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+
+  .close {
+    position: absolute;
+    top: 10px;
+    right: 16px;
+    font-size: 26px;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+    z-index: 10000;
+  }
+</style>
+
+<script>
+  function openModal(fileName) {
+  const modal = document.getElementById("popupModal");
+  const iframe = modal.querySelector('iframe');
+  iframe.src = fileName; // تحدد مصدر iframe بناءً على الملف المرسل
+  modal.style.display = "block";
+}
+
+function closeModal() {
+  const modal = document.getElementById("popupModal");
+  const iframe = modal.querySelector('iframe');
+  iframe.src = ''; // تفريغ src عند الإغلاق لتجنب استهلاك موارد
+  modal.style.display = "none";
+}
+
+</script>
 
 </body>
 
