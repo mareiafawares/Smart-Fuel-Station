@@ -51,24 +51,6 @@
             text-align: center;
         }
 
-        #searchInput {
-            display: none;
-            margin: 10px auto;
-            padding: 8px;
-            width: 100%;
-            max-width: 400px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-
-        #totalDisplay {
-            display: none;
-            text-align: center;
-            font-weight: bold;
-            margin-top: 10px;
-            color: #004d66;
-        }
-
         .order-list {
             margin-top: 20px;
         }
@@ -132,11 +114,9 @@
 <div class="center-container">
     <div class="order-box">
         <h1>My Orders</h1>
-        <i class="fas fa-shopping-bag"></i>
-        <input type="text" id="searchInput" placeholder="Search orders...">
+        <i id="bagIcon" class="fas fa-shopping-bag"></i>
         <p class="no-orders" id="noOrdersMessage">No previous orders.</p>
         <div id="ordersContainer" class="order-list"></div>
-        <p id="totalDisplay"></p>
     </div>
 </div>
 
@@ -144,115 +124,99 @@
     function loadPreviousOrders() {
         const ordersContainer = document.getElementById("ordersContainer");
         const noOrdersMessage = document.getElementById("noOrdersMessage");
-        const searchInput = document.getElementById("searchInput");
-        const totalDisplay = document.getElementById("totalDisplay");
+        const bagIcon = document.getElementById("bagIcon");
         let orders = JSON.parse(localStorage.getItem("previousOrders")) || [];
 
         if (orders.length === 0) {
             ordersContainer.innerHTML = "";
             noOrdersMessage.style.display = "block";
-            searchInput.style.display = "none";
-            totalDisplay.style.display = "none";
+            bagIcon.style.display = "block";
             return;
         }
 
         noOrdersMessage.style.display = "none";
-        searchInput.style.display = "block";
-        totalDisplay.style.display = "block";
+        bagIcon.style.display = "none";
 
-        const renderOrders = (filter = "") => {
-            ordersContainer.innerHTML = "";
-            let grandTotal = 0;
+        orders.forEach((order, index) => {
+            const item = document.createElement("div");
+            item.className = "order-item";
 
-            orders.forEach((order, index) => {
-                if (filter && !order.products.some(p => p.name.toLowerCase().includes(filter.toLowerCase()))) return;
+            const details = document.createElement("div");
+            details.className = "order-details";
+            details.innerHTML = `
+                <h3>Order #${order.invoiceNumber}</h3>
+                <p><strong>Date:</strong> ${order.date}</p>
+                <p><strong>Time:</strong> ${order.time || 'N/A'}</p>
+                <p><strong>Payment Method:</strong> ${order.paymentMethod === 'wallet' ? 'Wallet' : 'Card'}</p>
+                <p><strong>Card Number:</strong> ${order.lastFourDigits ? '**** **** **** ' + order.lastFourDigits : 'N/A'}</p>
+                <p><strong>Card Holder:</strong> ${order.cardHolder || 'N/A'}</p>
+            `;
 
-                const item = document.createElement("div");
-                item.className = "order-item";
-
-                const details = document.createElement("div");
-                details.className = "order-details";
-                details.innerHTML = `
-                    <h3>Order #${order.invoiceNumber}</h3>
-                    <p><strong>Date:</strong> ${order.date}</p>
-                    <p><strong>Time:</strong> ${order.time || 'N/A'}</p>
-                    <p><strong>Payment Method:</strong> ${order.paymentMethod === 'wallet' ? 'Wallet' : 'Card'}</p>
-                    <p><strong>Card Number:</strong> ${order.lastFourDigits ? `**** **** **** ${order.lastFourDigits}` : 'N/A'}</p>
-                    <p><strong>Card Holder:</strong> ${order.cardHolder || 'N/A'}</p>
-                `;
-
-                const table = document.createElement("table");
-                table.className = "order-table";
-                table.innerHTML = `
-                    <thead>
+            const table = document.createElement("table");
+            table.className = "order-table";
+            table.innerHTML = `
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Price (JD)</th>
+                        <th>Quantity</th>
+                        <th>Total (JD)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${order.products.map(item => `
                         <tr>
-                            <th>Product</th>
-                            <th>Price (JD)</th>
-                            <th>Quantity</th>
-                            <th>Total (JD)</th>
+                            <td>${item.name}</td>
+                            <td>${item.price.toFixed(2)}</td>
+                            <td>${item.quantity || 1}</td>
+                            <td>${(item.price * (item.quantity || 1)).toFixed(2)}</td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        ${order.products.map(item => `
-                            <tr>
-                                <td>${item.name}</td>
-                                <td>${item.price.toFixed(2)}</td>
-                                <td>${item.quantity || 1}</td>
-                                <td>${(item.price * (item.quantity || 1)).toFixed(2)}</td>
-                            </tr>
-                        `).join('')}
-                    </tbody>
-                `;
+                    `).join('')}
+                </tbody>
+            `;
 
-                const total = document.createElement("p");
-                total.className = "order-details";
-                total.innerHTML = `<strong>Total:</strong> ${order.total} JD`;
-                grandTotal += parseFloat(order.total);
+            const total = document.createElement("p");
+            total.className = "order-details";
+            total.innerHTML = `<strong>Total:</strong> ${order.total} JD`;
 
-                const reorderBtn = document.createElement("button");
-                reorderBtn.className = "reorder-btn";
-                reorderBtn.textContent = "Order Again";
-                reorderBtn.onclick = () => {
-                    let cart = JSON.parse(localStorage.getItem("cart")) || [];
-                    order.products.forEach(product => {
-                        const existingProduct = cart.find(p => p.name === product.name);
-                        if (existingProduct) {
-                            existingProduct.quantity = (existingProduct.quantity || 1) + (product.quantity || 1);
-                        } else {
-                            cart.push({ ...product });
-                        }
-                    });
-                    localStorage.setItem("cart", JSON.stringify(cart));
-                    alert(`Order #${order.invoiceNumber} has been added to your cart.`);
-                    window.location.href = 'index.html';
-                };
-
-                const deleteBtn = document.createElement("button");
-                deleteBtn.className = "reorder-btn";
-                deleteBtn.style.background = "#e74c3c";
-                deleteBtn.style.marginLeft = "10px";
-                deleteBtn.textContent = "Delete";
-                deleteBtn.onclick = () => {
-                    if (confirm(`Are you sure you want to delete Order #${order.invoiceNumber}?`)) {
-                        orders.splice(index, 1);
-                        localStorage.setItem("previousOrders", JSON.stringify(orders));
-                        renderOrders(searchInput.value);
+            const reorderBtn = document.createElement("button");
+            reorderBtn.className = "reorder-btn";
+            reorderBtn.textContent = "Order Again";
+            reorderBtn.onclick = () => {
+                let cart = JSON.parse(localStorage.getItem("cart")) || [];
+                order.products.forEach(product => {
+                    const existingProduct = cart.find(p => p.name === product.name);
+                    if (existingProduct) {
+                        existingProduct.quantity = (existingProduct.quantity || 1) + (product.quantity || 1);
+                    } else {
+                        cart.push({ ...product });
                     }
-                };
+                });
+                localStorage.setItem("cart", JSON.stringify(cart));
+                alert(`Order #${order.invoiceNumber} has been added to your cart.`);
+                window.location.href = 'index.html';
+            };
 
-                item.appendChild(details);
-                item.appendChild(table);
-                item.appendChild(total);
-                item.appendChild(reorderBtn);
-                item.appendChild(deleteBtn);
-                ordersContainer.appendChild(item);
-            });
+            const deleteBtn = document.createElement("button");
+            deleteBtn.className = "reorder-btn";
+            deleteBtn.style.background = "#e74c3c";
+            deleteBtn.style.marginLeft = "10px";
+            deleteBtn.textContent = "Delete";
+            deleteBtn.onclick = () => {
+                if (confirm(`Are you sure you want to delete Order #${order.invoiceNumber}?`)) {
+                    orders.splice(index, 1);
+                    localStorage.setItem("previousOrders", JSON.stringify(orders));
+                    loadPreviousOrders();
+                }
+            };
 
-            totalDisplay.textContent = `Total of All Orders: ${grandTotal.toFixed(2)} JD`;
-        }
-
-        searchInput.addEventListener("input", () => renderOrders(searchInput.value));
-        renderOrders();
+            item.appendChild(details);
+            item.appendChild(table);
+            item.appendChild(total);
+            item.appendChild(reorderBtn);
+            item.appendChild(deleteBtn);
+            ordersContainer.appendChild(item);
+        });
     }
 
     window.onload = loadPreviousOrders;
