@@ -2,66 +2,93 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Quick Service</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quick Service Request</title>
   <style>
     body {
+      font-family: Arial, sans-serif;
+      background-color: #eaf6fb;
       margin: 0;
       padding: 0;
-      font-family: Arial, sans-serif;
-      background: transparent;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
     }
 
-    .quick-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh; /* يجعل الحاوية تأخذ عرض وارتفاع كاملين */
-  text-align: center;
-}
+    .container {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      width: 100%;
+      max-width: 700px;
+      height: 400px;
+      background-color: #ffffff;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+      border-radius: 16px;
+      padding: 20px;
+    }
 
-    .quick-icon {
-      font-size: 40px;
+    .left-side {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding-right: 10px;
+    }
+
+    .left-side .icon {
+      font-size: 50px;
       margin-bottom: 10px;
     }
 
-    .quick-title {
-      font-size: 20px;
-      font-weight: bold;
-      margin-bottom: 8px;
-      text-align: center;
+    .left-side h2 {
+      margin: 10px 0 5px;
     }
 
-    .quick-desc {
-      font-size: 20px;
+    .left-side p {
       color: #555;
-      margin-bottom: 16px;
-      text-align: center;
     }
 
-    input, select {
-      width: 90%;
+    .right-side {
+      flex: 1.2;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    label {
+      font-weight: bold;
+      margin-top: 10px;
+      display: block;
+    }
+
+    select, input {
+      width: 100%;
       padding: 8px;
-      margin-bottom: 10px;
-      border: 1px solid #ccc;
+      margin-top: 6px;
       border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 14px;
     }
-    .btn {
-  padding: 14px 28px;
-  font-size: 20px;
-  font-weight: bold;
-  background: linear-gradient(135deg, #00aabb, #004d66);
-  color: #fff;
-  border: none;
-  border-radius: 50px;
-  text-decoration: none;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-}
-الشرح:
 
-    .submit-btn:hover {
-      background: #0056b3;
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 15px;
+      font-size: 16px;
+      border-radius: 6px;
+      border: none;
+      background-color: #0288d1;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background-color: #0274b0;
     }
 
     .success-message {
@@ -72,32 +99,47 @@
       padding: 10px;
       border: 1px solid #c3e6cb;
       border-radius: 6px;
-      font-size: 13px;
+      font-size: 14px;
       text-align: center;
     }
   </style>
 </head>
 <body>
-  <div class="quick-container">
-    <div class="quick-icon">⏱️🚗</div>
-    <div class="quick-title">Quick Service Request</div>
-    <div class="quick-desc">
-      No login required. Just enter your phone number and select your governorate.<br>
-      Pay upon delivery.
+  <div class="container">
+    <div class="left-side">
+      <div class="icon">⏱️🚗</div>
+      <h2>Quick Service</h2>
+      <p>No login required. Just select your service.</p>
     </div>
-    <form id="quickForm">
-      <input type="tel" id="phone" placeholder="Phone Number" required />
-      <select id="governorate" required>
-        <option value="" disabled selected>Select Governorate</option>
-        <option value="Amman">Amman</option>
-        <option value="Irbid">Irbid</option>
-        <option value="Mafraq">Mafraq</option>
-      </select>
-      <button class="btn" type="submit">Confirm Order</button>
-    </form>
-    <div id="successMsg" class="success-message">
-      ✅ We will contact you shortly at: <span id="userPhone"></span><br>
-      🏙️ Governorate: <span id="userGov"></span>
+
+    <div class="right-side">
+      <form id="quickForm">
+        <label for="phone">Phone Number:</label>
+        <input type="tel" id="phone" placeholder="Enter phone number" required />
+
+        <label for="governorate">Governorate:</label>
+        <select id="governorate" required>
+          <option value="" disabled selected>Select Governorate</option>
+          <option value="Amman">Amman</option>
+          <option value="Irbid">Irbid</option>
+          <option value="Mafraq">Mafraq</option>
+        </select>
+
+        <label for="service">Service Type:</label>
+        <select id="service" required>
+          <option value="" disabled selected>Select Service</option>
+          <option value="Fuel Delivery">Fuel Delivery</option>
+          <option value="Oil Change">Oil Change</option>
+          <option value="EV Charging">EV Charging</option>
+        </select>
+
+        <button type="submit">Confirm Order</button>
+      </form>
+      <div id="successMsg" class="success-message">
+        ✅ We will contact you shortly at: <span id="userPhone"></span><br>
+        🏙️ Governorate: <span id="userGov"></span><br>
+        🔧 Service: <span id="userService"></span>
+      </div>
     </div>
   </div>
 
@@ -106,18 +148,21 @@
     const successMsg = document.getElementById('successMsg');
     const userPhone = document.getElementById('userPhone');
     const userGov = document.getElementById('userGov');
+    const userService = document.getElementById('userService');
 
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       const phone = document.getElementById('phone').value.trim();
       const gov = document.getElementById('governorate').value;
-      if (phone && gov) {
+      const service = document.getElementById('service').value;
+
+      if (phone && gov && service) {
         userPhone.textContent = phone;
         userGov.textContent = gov;
+        userService.textContent = service;
         successMsg.style.display = 'block';
       }
     });
   </script>
 </body>
 </html>
-

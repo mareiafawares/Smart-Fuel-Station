@@ -1,11 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+
+  <meta charset="UTF-8">
+  <title>My Previous Orders</title>
+  <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Previous Orders</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <style>
+ 
+  <style>
+    body {
+      margin: 0;
+      background-color: #e6f2ff;
+      font-family: Arial, sans-serif;
+      
+    }
+
+    .center-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      
+    }
+
+    .order-box {
+      background-color: white;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+      text-align: center;
+     width: 680px;
+      height: 360px;
+    }
+
+    
+    
         body {
             margin: 0;
             background-color: #e6f2ff;
@@ -30,11 +60,25 @@
             max-width: 800px;
         }
 
+
         .order-box h1 {
             color: #004d66;
             margin-bottom: 15px;
             text-align: center;
         }
+
+
+    .order-box i {
+      font-size: 80px;
+      color: black;
+      margin-bottom: 10px;
+    }
+
+    .no-orders {
+      color: #555;
+      font-size: 35px;
+      margin-bottom: 20px;
+    }
 
         .order-box i {
             font-size: 60px;
@@ -50,6 +94,7 @@
             margin-bottom: 20px;
             text-align: center;
         }
+
 
         .search-container {
             margin: 10px auto;

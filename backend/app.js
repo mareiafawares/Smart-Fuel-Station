@@ -4,11 +4,14 @@ const cors = require('cors');
 const connectDB = require('./config/db'); 
 const userRouters = require('./routers/userRouters');
 dotenv.config();
+console.log('JWT Secret =', process.env.SECRET_KEY);
 connectDB();
 const app = express();
 app.use(cors());
 app.use(express.json());
 app.use('/api', userRouters);
+const orderRoutes = require('./routers/orderRoutes');
+app.use('/api/orders', orderRoutes);
 
 // دالة للتحقق من التوكن
 const verifyToken = (req, res, next) => {
@@ -18,7 +21,7 @@ const verifyToken = (req, res, next) => {
     }
 
     try {
-      const decoded = jwt.verify(token, process.env.JWT_SECRET);  // التحقق من التوكن باستخدام JWT_SECRET
+      const decoded = jwt.verify(token, process.env.SECRET_KEY);  // التحقق من التوكن باستخدام JWT_SECRET
       req.user = decoded;  // حفظ بيانات المستخدم في `req.user`
       next();  // إذا كان التوكن صالحًا، استمر في المسار التالي
     } catch (error) {
@@ -42,7 +45,7 @@ app.post("/signup/google", async (req, res) => {
         // إذا كان المستخدم موجودًا، أصدر توكن بدلاً من إرجاع "User already exists"
         const token = jwt.sign(
           { userId: user._id, email: user.email, role: user.role },
-          process.env.JWT_SECRET,
+          process.env.SECRET_KEY,
           { expiresIn: "2h" }
         );
         return res.status(200).json({
@@ -69,7 +72,7 @@ app.post("/signup/google", async (req, res) => {
       // إصدار توكن بعد التسجيل
       const token = jwt.sign(
         { userId: user._id, email: user.email, role: user.role },
-        process.env.JWT_SECRET,
+        process.env.SECRET_KEY,
         { expiresIn: "2h" }
       );
   
