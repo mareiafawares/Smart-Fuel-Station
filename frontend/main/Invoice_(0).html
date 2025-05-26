@@ -141,12 +141,13 @@
 
         // Load invoice details
         function loadInvoice() {
-            // Load payment data from localStorage
+            // Load payment data and cart from localStorage
             const paymentData = JSON.parse(localStorage.getItem('paymentData')) || {};
             const cart = JSON.parse(localStorage.getItem('cart')) || [];
 
             // Invoice details
-            document.getElementById('invoiceNumber').textContent = generateInvoiceNumber();
+            const invoiceNumber = generateInvoiceNumber();
+            document.getElementById('invoiceNumber').textContent = invoiceNumber;
             document.getElementById('invoiceDate').textContent = formatDate();
             document.getElementById('paymentMethod').textContent = paymentData.paymentMethod === 'wallet' ? 'Wallet' : 'Card';
             document.getElementById('cardNumber').textContent = paymentData.lastFourDigits ? `**** **** **** ${paymentData.lastFourDigits}` : 'N/A';
@@ -171,6 +172,20 @@
             // Total amount
             document.getElementById('totalAmount').textContent = `${total.toFixed(2)} JD`;
 
+            // Save order to previousOrders
+            const order = {
+                invoiceNumber: invoiceNumber,
+                date: formatDate(),
+                paymentMethod: paymentData.paymentMethod || 'card',
+                lastFourDigits: paymentData.lastFourDigits || 'N/A',
+                cardHolder: paymentData.cardHolder || 'N/A',
+                products: cart,
+                total: total.toFixed(2)
+            };
+            let previousOrders = JSON.parse(localStorage.getItem('previousOrders')) || [];
+            previousOrders.push(order);
+            localStorage.setItem('previousOrders', JSON.stringify(previousOrders));
+
             // Clear cart and payment data
             localStorage.removeItem('cart');
             localStorage.removeItem('paymentData');
@@ -191,12 +206,14 @@
             doc.text(`Card Number: ${document.getElementById('cardNumber').textContent}`, 20, 60);
             doc.text(`Card Holder: ${document.getElementById('cardHolder').textContent}`, 20, 70);
 
+            // Use products from the displayed table
+            const productList = document.querySelectorAll('#productList tr');
             doc.text('Products:', 20, 90);
-            const cart = JSON.parse(localStorage.getItem('cart') || '[]');
             let y = 100;
-            cart.forEach(item => {
-                const itemTotal = (item.price * (item.quantity || 1)).toFixed(2);
-                doc.text(`${item.name} - ${item.quantity || 1} x ${item.price.toFixed(2)} JD = ${itemTotal} JD`, 20, y);
+            productList.forEach(row => {
+                const cells = row.querySelectorAll('td');
+                const productText = `${cells[0].textContent} - ${cells[2].textContent} x ${cells[1].textContent} JD = ${cells[3].textContent} JD`;
+                doc.text(productText, 20, y);
                 y += 10;
             });
 

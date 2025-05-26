@@ -284,7 +284,7 @@
       </div>
 
       <button id="submitBtn" onclick="confirmOrder()" disabled>Submit Order</button>
-      <a href="#" id="whatsappBtn" target="_blank">Send via WhatsApp</a>
+      <a href="#" id="whatsappBtn" target="_blank">📲 Send via WhatsApp</a>
     </div>
   </div>
 
@@ -296,108 +296,150 @@
     </div>
   </div>
 
-  <script>
-    const priceDisplay = document.getElementById('priceDisplay');
-    const washType = document.getElementById('washType');
-    const addressInput = document.getElementById('addressInput');
-    const submitBtn = document.getElementById('submitBtn');
-    const orderModal = document.getElementById('orderModal');
-    const orderDetails = document.getElementById('orderDetails');
-    const whatsappBtn = document.getElementById('whatsappBtn');
-    const carType = document.getElementById('carType');
-    const washDateTime = document.getElementById('washDateTime');
 
-    function showPrice() {
-      const type = washType.value;
-      let price = '';
+<script>
+  const priceDisplay = document.getElementById('priceDisplay');
+  const washType = document.getElementById('washType');
+  const addressInput = document.getElementById('addressInput');
+  const submitBtn = document.getElementById('submitBtn');
+  const orderModal = document.getElementById('orderModal');
+  const orderDetails = document.getElementById('orderDetails');
+  const whatsappBtn = document.getElementById('whatsappBtn');
+  const carType = document.getElementById('carType');
+  const washDateTime = document.getElementById('washDateTime');
 
-      if (type === 'Internal Wash') {
-        price = 'Price: 5 JD';
-      } else if (type === 'External Wash') {
-        price = 'Price: 4 JD';
-      } else if (type === 'Full Wash') {
-        price = 'Price: 8 JD';
-      }
+  function showPrice() {
+    const type = washType.value;
+    let price = '';
 
-      priceDisplay.textContent = price;
+    if (type === 'Internal Wash') {
+      price = 'Price: 5 JD';
+    } else if (type === 'External Wash') {
+      price = 'Price: 4 JD';
+    } else if (type === 'Full Wash') {
+      price = 'Price: 8 JD';
     }
 
-    function openMap() {
-      window.open("https://www.google.com/maps?q=Jordan", "_blank");
-    }
+    priceDisplay.textContent = price;
+  }
 
-    function validateForm() {
-      const wash = washType.value;
-      const address = addressInput.value.trim();
-      const car = carType.value;
-      const dateTime = washDateTime.value;
+  function openMap() {
+    window.open("https://www.google.com/maps?q=Jordan", "_blank");
+  }
 
-      submitBtn.disabled = !(wash && address && car && dateTime);
-      whatsappBtn.style.display = "none"; // إخفاء واتساب قبل تأكيد الطلب
-    }
+  function validateForm() {
+    const wash = washType.value;
+    const address = addressInput.value.trim();
+    const car = carType.value;
+    const dateTime = washDateTime.value;
 
-    function confirmOrder() {
-      const wash = washType.value;
-      const address = addressInput.value.trim();
-      const price = priceDisplay.textContent;
-      const car = carType.value;
-      const dateTime = washDateTime.value;
+    const formIsComplete = wash && address && car && dateTime;
 
-      // Services selected
+    submitBtn.disabled = !formIsComplete;
+
+    if (formIsComplete) {
       const extras = [...document.querySelectorAll('.extras:checked')]
         .map(el => el.value)
         .join(', ') || "None";
 
-      let details = `
-نوع الغسيل: ${wash}
-نوع السيارة: ${car}
-تاريخ ووقت الغسيل: ${dateTime}
-الموقع: ${address}
-الخدمات الإضافية: ${extras}
-${price}
-      `;
-
-      orderDetails.textContent = details.trim();
-      orderModal.style.display = 'block';
-    }
-
-    function finalizeOrder() {
-      orderModal.style.display = 'none';
-
-      // بيانات الطلب لرسالة الواتساب
-      const wash = washType.value;
-      const address = addressInput.value.trim();
       const price = priceDisplay.textContent;
-      const car = carType.value;
-      const dateTime = washDateTime.value;
-
-      const extras = [...document.querySelectorAll('.extras:checked')]
-        .map(el => el.value)
-        .join(', ') || "None";
 
       const message = encodeURIComponent(
-        `طلب غسيل سيارة:\n` +
-        `نوع الغسيل: ${wash}\n` +
-        `نوع السيارة: ${car}\n` +
-        `تاريخ ووقت الغسيل: ${dateTime}\n` +
-        `الموقع: ${address}\n` +
-        `الخدمات الإضافية: ${extras}\n` +
+        `Car Wash Request:\n` +
+        `Wash Type: ${wash}\n` +
+        `Car Type: ${car}\n` +
+        `Date & Time: ${dateTime}\n` +
+        `Location: ${address}\n` +
+        `Extra Services: ${extras}\n` +
         `${price}`
       );
 
-      // رقم الواتساب
       const whatsappNumber = "962781331072";
-
       whatsappBtn.href = `https://wa.me/${whatsappNumber}?text=${message}`;
       whatsappBtn.style.display = "block";
+    } else {
+      whatsappBtn.style.display = "none";
+    }
+  }
+
+  function confirmOrder() {
+    const wash = washType.value;
+    const address = addressInput.value.trim();
+    const price = priceDisplay.textContent;
+    const car = carType.value;
+    const dateTime = washDateTime.value;
+
+    const extras = [...document.querySelectorAll('.extras:checked')]
+      .map(el => el.value)
+      .join(', ') || "None";
+
+    let details = `
+Wash Type: ${wash}
+Car Type: ${car}
+Date & Time: ${dateTime}
+Location: ${address}
+Extra Services: ${extras}
+${price}
+`;
+
+    orderDetails.textContent = details.trim();
+    orderModal.style.display = 'block';
+  }
+
+  function finalizeOrder() {
+    const wash = washType.value;
+    const extras = [...document.querySelectorAll('.extras:checked')]
+      .map(el => el.value)
+      .join(', ') || "None";
+    const priceText = priceDisplay.textContent; // e.g., "Price: 5 JD"
+    const priceMatch = priceText.match(/(\d+)/); // Extract number (e.g., "5")
+    const price = priceMatch ? parseFloat(priceMatch[0]) : 0;
+
+    if (!wash || price === 0) {
+      alert('Error: Invalid order details. Please try again.');
+      return;
     }
 
-    // اغلاق النافذة بالضغط خارجها
-    window.onclick = function(event) {
-      if (event.target == orderModal) {
-        orderModal.style.display = "none";
-      }
+    const serviceData = {
+      name: `Car Wash - ${wash}${extras !== 'None' ? ` (${extras})` : ''}`,
+      price: price,
+      image: 'icon car.png'
+    };
+
+    addToCart(serviceData);
+
+    orderModal.style.display = 'none';
+
+    // Close the modal/iframe in index.html if opened in an iframe
+    if (window.parent && window.parent.document.getElementById('serviceModal')) {
+      window.parent.document.getElementById('serviceModal').style.display = 'none';
+      window.parent.document.getElementById('modalIframe').src = '';
     }
-  </script>
+
+    alert('✅ Your order has been added to the cart. Thank you 🙌');
+
+    // Reset the form
+    washType.value = '';
+    carType.value = '';
+    washDateTime.value = '';
+    addressInput.value = '';
+    document.querySelectorAll('.extras').forEach(el => el.checked = false);
+    priceDisplay.textContent = '';
+    submitBtn.disabled = true;
+    whatsappBtn.style.display = 'none';
+  }
+
+  function addToCart(service) {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    cart.push(service);
+    localStorage.setItem('cart', JSON.stringify(cart));
+  }
+
+  window.onclick = function(event) {
+    if (event.target == orderModal) {
+      orderModal.style.display = "none";
+    }
+  }
+</script>
 </body>
 </html>

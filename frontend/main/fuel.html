@@ -234,8 +234,13 @@
           <option value="">Select Fuel Type</option>
         </select>
 
-        <label for="location">Location:</label>
-        <input type="text" id="location" placeholder="Enter your location" required />
+        <div class="form-group">
+        <label>Your Location</label>
+        <input type="text" id="addressInput" placeholder="Enter your address" oninput="validateForm()" />
+        <div class="map-preview" onclick="openMap()">
+          <iframe src="https://www.google.com/maps?q=Jordan&output=embed" frameborder="0" allowfullscreen></iframe>
+        </div>
+      </div>
 
         <div class="extras-box">
           <h4>📦 Important Add-ons with the Order:</h4>
@@ -267,7 +272,7 @@
     const fuelTypeSelect = document.getElementById('fuelType');
     const priceElement = document.getElementById('price');
     const orderBtn = document.getElementById('orderBtn');
-    const locationInput = document.getElementById('location');
+    const locationInput = document.getElementById('addressInput'); // Updated to match id="addressInput"
     const confirmationModal = document.getElementById('confirmationModal');
     const modalContent = document.getElementById('modalContent');
     const deliveryEstimate = document.getElementById('deliveryEstimate');
@@ -305,7 +310,7 @@
       return Array.from(extrasCheckboxes)
         .filter(cb => cb.checked)
         .map(cb => cb.value)
-        .join(', ');
+        .join(', ') || 'None';
     }
 
     function updateAll() {
@@ -318,7 +323,7 @@
         priceElement.textContent = fuelPrices[car][fuel];
         orderBtn.disabled = false;
 
-        const msg = `Hello, I’d like to request a fuel delivery:\n🚗 Car Type: ${car}\n⛽ Fuel Type: ${fuel}\n📍 Location: ${loc}\n💵 Price: ${priceElement.textContent} JOD\n📦 Add-ons: ${extras || "None"}`;
+        const msg = `Hello, I’d like to request a fuel delivery:\n🚗 Car Type: ${car}\n⛽ Fuel Type: ${fuel}\n📍 Location: ${loc}\n💵 Price: ${priceElement.textContent} JOD\n📦 Add-ons: ${extras}`;
         whatsappBtn.href = `https://wa.me/962781331072?text=${encodeURIComponent(msg)}`;
         whatsappBtn.style.display = 'inline-block';
 
@@ -338,7 +343,7 @@
       const fuel = fuelTypeSelect.value;
       const loc = locationInput.value;
       const extras = getSelectedExtras();
-      const price = priceElement.textContent;
+      const price = parseFloat(priceElement.textContent);
 
       if (!car || !fuel || !loc) return;
 
@@ -347,7 +352,7 @@
         <p>Car Type: ${car}</p>
         <p>Fuel Type: ${fuel}</p>
         <p>Location: ${loc}</p>
-        <p>Add-ons: ${extras || 'None'}</p>
+        <p>Add-ons: ${extras}</p>
         <p><strong>Total Price:</strong> ${price} JOD</p>
         <button id="confirmBtn">Confirm Order</button>
         <button id="cancelBtn" style="margin-left:10px; background-color:#dc3545;">Cancel</button>
@@ -355,8 +360,24 @@
       confirmationModal.style.display = 'flex';
 
       document.getElementById('confirmBtn').onclick = () => {
-        alert('Order confirmed! We will contact you soon.');
         confirmationModal.style.display = 'none';
+
+        const serviceData = {
+          name: `Fuel Delivery - ${fuel}${extras !== 'None' ? ` (${extras})` : ''}`,
+          price: price,
+          image: 'fuel.png'
+        };
+
+        addToCart(serviceData);
+
+        // Close the modal/iframe in index.html if opened in an iframe
+        if (window.parent && window.parent.document.getElementById('serviceModal')) {
+          window.parent.document.getElementById('serviceModal').style.display = 'none';
+          window.parent.document.getElementById('modalIframe').src = '';
+        }
+
+        alert('✅ Your order has been added to the cart. Thank you 🙌');
+
         document.getElementById('fuelForm').reset();
         updateAll();
       };
@@ -372,6 +393,12 @@
         confirmationModal.style.display = 'none';
       }
     });
+
+    function addToCart(service) {
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      cart.push(service);
+      localStorage.setItem('cart', JSON.stringify(cart));
+    }
   </script>
 </body>
 </html>

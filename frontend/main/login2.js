@@ -5,32 +5,34 @@ form.addEventListener('submit', async (e) => {
 
   const email = document.getElementById('Email').value;
   const password = document.getElementById('password').value;
-  const selectedRole = document.getElementById('role').value; // من اختيار المستخدم
 
   try {
-    const response = await fetch('http://127.0.0.1:5500/api/login', {
+    const response = await fetch('http://localhost:5500/api/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ email, password }) // نرسل فقط الإيميل والباسورد
+      body: JSON.stringify({ email, password })
     });
 
     const data = await response.json();
 
     if (response.ok) {
       sessionStorage.setItem('token', data.token);
+      sessionStorage.setItem('name', data.user?.name || 'Unknown');
+      sessionStorage.setItem('email', data.user?.email || email);
+      sessionStorage.setItem('role', data.user?.role || 'User');
 
-      // manager يعتمد على الدور الحقيقي من قاعدة البيانات
-      if (data.user && data.user.role === 'manager') {
+      
+      const role = data.user?.role?.toLowerCase();
+       console.log('Redirecting as role:', role);
+  window.location.href = role === 'admin' ? 'admin.html' : 'home1.html';
+
+      if (role === 'admin') {
         window.location.href = 'admin.html';
-      }
-      // employee بناءً على اختيار المستخدم من القائمة
-      else if (selectedRole === 'employee') {
+      } else if (role === 'employee') {
         window.location.href = 'employee.html';
-      }
-      // الباقي (default) إلى customer page
-      else {
+      } else {
         window.location.href = 'home1.html';
       }
 
