@@ -351,17 +351,14 @@
 
         
         function openCheckoutPopup() {
-             const token = sessionStorage.getItem('token');
-    if (!token || token.trim() === "") {
-          alert("You need to sign up or log in before placing an order.");
-        window.location.href = 'signup.html';
-        return;
-    }
-            document.getElementById('checkoutPopup').style.display = 'block';
-            document.getElementById('overlay').style.display = 'block';
-        }
+    document.getElementById('checkoutPopup').style.display = 'block';
+    document.getElementById('overlay').style.display = 'block';
+}
+            //document.getElementById('checkoutPopup').style.display = 'block';
+           // document.getElementById('overlay').style.display = 'block';
+        
 
-        // Close checkout popup
+     
         function closeCheckoutPopup() {
             document.getElementById('checkoutPopup').style.display = 'none';
             document.getElementById('overlay').style.display = 'none';
