@@ -1,144 +1,250 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>My Previous Orders</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
-  <style>
-    body {
-      margin: 0;
-      background-color: #e6f2ff;
-      font-family: 'Poppins', sans-serif;
-      color: #2c3e50;
-    }
-    .center-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      padding: 20px;
-    }
-    .order-box {
-      background-color: white;
-      padding: 40px;
-      border-radius: 20px;
-      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
-      width: 90%;
-      max-width: 800px;
-    }
-    .order-box h1 {
-      color: #004d66;
-      margin-bottom: 15px;
-      text-align: center;
-    }
-    .order-box i {
-      font-size: 60px;
-      color: #004d66;
-      margin-bottom: 10px;
-      display: block;
-      text-align: center;
-    }
-    .no-orders {
-      color: #555;
-      font-size: 16px;
-      margin-bottom: 20px;
-      text-align: center;
-    }
-    .search-container {
-      margin: 10px auto;
-      padding: 8px;
-      width: 100%;
-      max-width: 400px;
-      display: none;
-    }
-    .search-container.visible {
-      display: block;
-    }
-    #searchInput {
-      width: 100%;
-      padding: 8px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      font-size: 14px;
-    }
-    #resultsCount {
-      text-align: center;
-      font-size: 14px;
-      margin-top: 10px;
-      color: #555;
-    }
-    #totalDisplay {
-      text-align: center;
-      font-weight: bold;
-      margin-top: 10px;
-      color: #004d66;
-      display: none;
-    }
-    .order-list {
-      margin-top: 20px;
-    }
-    .order-item {
-      background-color: #f0f0f0;
-      padding: 15px;
-      margin: 10px 0;
-      border-radius: 8px;
-    }
-    .order-item h3 {
-      margin: 0 0 10px;
-      color: #004d66;
-      font-size: 18px;
-    }
-    .order-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 10px 0;
-      overflow-x: auto;
-    }
-    .order-table th, .order-table td {
-      border: 1px solid #90caf9;
-      padding: 8px;
-      text-align: left;
-      font-size: 14px;
-    }
-    .order-table th {
-      background: #bbdefb;
-      color: #004d66;
-    }
-    .order-details p {
-      margin: 5px 0;
-      font-size: 14px;
-      color: #455a64;
-    }
-    .reorder-btn, .delete-btn {
-      margin-top: 10px;
-      padding: 8px 16px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 14px;
-      font-weight: bold;
-    }
-    .reorder-btn {
-      background: linear-gradient(135deg, #00aabb, #004d66);
-      color: white;
-    }
-    .reorder-btn:hover {
-      background: linear-gradient(135deg, #008899, #003d55);
-      transform: scale(1.05);
-    }
-    .delete-btn {
-      background: #e74c3c;
-      color: white;
-      margin-left: 10px;
-    }
-    .delete-btn:hover {
-      background: #c0392b;
-      transform: scale(1.05);
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Previous Orders</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            background-color: #e6f2ff;
+            font-family: 'Poppins', sans-serif;
+            color: #2c3e50;
+        }
+
+        .center-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .order-box {
+            background-color: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            width: 90%;
+            max-width: 800px;
+        }
+
+        .order-box h1 {
+            color: #004d66;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .order-box i {
+            font-size: 60px;
+            color: #004d66;
+            margin-bottom: 10px;
+            display: block;
+            text-align: center;
+        }
+
+        .no-orders {
+            color: #555;
+            font-size: 16px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        #totalDisplay {
+            display: none;
+            text-align: center;
+            font-weight: bold;
+            margin-top: 10px;
+            color: #004d66;
+        }
+
+        .order-list {
+            margin-top: 20px;
+        }
+
+        .order-item {
+            background-color: #f0f0f0;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+        }
+
+        .order-item h3 {
+            margin: 0 0 10px;
+            color: #004d66;
+            font-size: 18px;
+        }
+
+        .order-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+        }
+
+        .order-table th, .order-table td {
+            border: 1px solid #90caf9;
+            padding: 8px;
+            text-align: left;
+            font-size: 14px;
+        }
+
+        .order-table th {
+            background: #bbdefb;
+            color: #004d66;
+        }
+
+        .order-details p {
+            margin: 5px 0;
+            font-size: 14px;
+            color: #455a64;
+        }
+
+        .reorder-btn {
+            margin-top: 10px;
+            background: linear-gradient(135deg, #00aabb, #004d66);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .reorder-btn:hover {
+            background: linear-gradient(135deg, #008899, #003d55);
+            transform: scale(1.05);
+        }
+    </style>
 </head>
 <body>
 <div class="center-container">
-  <div class="order-box
+    <div class="order-box">
+        <h1>My Orders</h1>
+        <i class="fas fa-shopping-bag" id="orderIcon"></i>
+        <p class="no-orders" id="noOrdersMessage">No previous orders.</p>
+        <div id="ordersContainer" class="order-list"></div>
+        <p id="totalDisplay"></p>
+    </div>
+</div>
 
+<script>
+    function loadPreviousOrders() {
+        const ordersContainer = document.getElementById("ordersContainer");
+        const noOrdersMessage = document.getElementById("noOrdersMessage");
+        const totalDisplay = document.getElementById("totalDisplay");
+        const icon = document.getElementById("orderIcon");
+        let orders = JSON.parse(localStorage.getItem("previousOrders")) || [];
+
+        function renderOrders() {
+            ordersContainer.innerHTML = "";
+
+            if (orders.length === 0) {
+                noOrdersMessage.style.display = "block";
+                icon.style.display = "block";
+                totalDisplay.style.display = "none";
+                return;
+            }
+
+            noOrdersMessage.style.display = "none";
+            icon.style.display = "none";
+            totalDisplay.style.display = "block";
+
+            let grandTotal = 0;
+
+            orders.forEach((order) => {
+                const item = document.createElement("div");
+                item.className = "order-item";
+
+                const details = document.createElement("div");
+                details.className = "order-details";
+                details.innerHTML = `
+                    <h3>Order #${order.invoiceNumber}</h3>
+                    <p><strong>Date:</strong> ${order.date}</p>
+                    <p><strong>Payment Method:</strong> ${
+                        order.paymentMethod === 'wallet' ? 'Wallet' :
+                        order.paymentMethod === 'card' ? 'Card' :
+                        order.paymentMethod === 'cash' ? 'Cash on Delivery' : 'Unknown'
+                    }</p>
+                    <p><strong>Card Number:</strong> ${order.lastFourDigits ? '**** **** **** ' + order.lastFourDigits : 'N/A'}</p>
+                    <p><strong>Card Holder:</strong> ${order.cardHolder || 'N/A'}</p>
+                `;
+
+                const table = document.createElement("table");
+                table.className = "order-table";
+                table.innerHTML = `
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Price (JD)</th>
+                            <th>Quantity</th>
+                            <th>Total (JD)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${order.products.map(item => `
+                            <tr>
+                                <td>${item.name}</td>
+                                <td>${item.price.toFixed(2)}</td>
+                                <td>${item.quantity || 1}</td>
+                                <td>${(item.price * (item.quantity || 1)).toFixed(2)}</td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                `;
+
+                const total = document.createElement("p");
+                total.className = "order-details";
+                total.innerHTML = `<strong>Total:</strong> ${order.total} JD`;
+                grandTotal += parseFloat(order.total);
+
+                const reorderBtn = document.createElement("button");
+                reorderBtn.className = "reorder-btn";
+                reorderBtn.textContent = "Order Again";
+                reorderBtn.onclick = () => {
+                    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+                    order.products.forEach(product => {
+                        const existingProduct = cart.find(p => p.name === product.name);
+                        if (existingProduct) {
+                            existingProduct.quantity = (existingProduct.quantity || 1) + (product.quantity || 1);
+                        } else {
+                            cart.push({ ...product });
+                        }
+                    });
+                    localStorage.setItem("cart", JSON.stringify(cart));
+                    alert(`Order #${order.invoiceNumber} has been added to your cart.`);
+                    window.location.href = 'index.html';
+                };
+
+                const deleteBtn = document.createElement("button");
+                deleteBtn.className = "reorder-btn";
+                deleteBtn.style.background = "#e74c3c";
+                deleteBtn.style.marginLeft = "10px";
+                deleteBtn.textContent = "Delete";
+                deleteBtn.onclick = () => {
+                    if (confirm(`Are you sure you want to delete Order #${order.invoiceNumber}?`)) {
+                        orders = orders.filter(o => o.invoiceNumber !== order.invoiceNumber);
+                        localStorage.setItem("previousOrders", JSON.stringify(orders));
+                        renderOrders();
+                    }
+                };
+
+                item.appendChild(details);
+                item.appendChild(table);
+                item.appendChild(total);
+                item.appendChild(reorderBtn);
+                item.appendChild(deleteBtn);
+                ordersContainer.appendChild(item);
+            });
+
+            totalDisplay.textContent = `Total of All Orders: ${grandTotal.toFixed(2)} JD`;
+        }
+
+        renderOrders();
+    }
+
+    window.onload = loadPreviousOrders;
+</script>
+</body>
+</html>
