@@ -15,7 +15,7 @@
 
   <!-- Navbar -->
   <header>
-    <div class="logo">SMART FUEL STATION</div>
+    <div class="logo"><img src="l1.png" width="80"height="60"></div>
     <nav>
       <a href="#services">SERVICES</a>
       <a href="#about">ABOUT</a>
@@ -46,8 +46,13 @@
   <a href="javascript:void(0);" onclick="openModal('Shopping.html')">
     <i class='bx bx-cart'></i>
     <span  >Shopping Cart</span>
+  
   </a>
-
+<a  href="javascript:void(0);" onclick="openModal('offer/offer.html')">
+    
+    <i class='bx  bx-gift'  ></i> 
+    <span  >Offers</span>
+  </a>
   
 </div>
 
@@ -153,103 +158,7 @@ Convenience,and giving you back the time </div>
 </section>
 
 
-<!-- S Offers Section  by alaa-->
-<section id="offers" class="offers-section">
-  <div class="offer-card">
-    <img src="offer/offer1.jpg" alt="Offer 1" />
-    <div class="offer-content">
-      <h3 class="offer-title">20% Off on Fuel</h3>
-      <p class="offer-description">Get 20% off on every fuel refill! Limited time offer.</p>
-     <button class="offer-button" onclick="openModal('offer1.html')">Claim Offer</button>
-    </div>
-  </div>
 
-  <div class="offer-card">
-    <img src="offer/offer2.jpg" alt="Offer 2" />
-    <div class="offer-content">
-      <h3 class="offer-title">Free Car Wash</h3>
-      <p class="offer-description">Get a free car wash with every full tank. Hurry up!</p>
-     <button class="offer-button" onclick="openModal('offer2.html')">Claim Offer</button>
-    </div>
-  </div>
-
-  <div class="offer-card">
-    <img src="offer/offer3.jpg" alt="Offer 3" />
-    <div class="offer-content">
-      <h3 class="offer-title">Buy One, Get One Free</h3>
-      <p class="offer-description">Buy one oil change and get another one free. Limited to first 50 customers.</p>
-     <button class="offer-button" onclick="openModal('offer3.html')">Claim Offer</button>
-    </div>
-  </div>
-</section>
-
-
-<style>
-  /* Special Offers Section */
-  .offers-section {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    gap: 20px;
-    padding: 50px 10px;
-    background-color: #fff;
-  }
-
-  .offer-card {
-    width: 300px;
-    background: #f9f9f9;
-    border-radius: 12px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    overflow: hidden;
-  }
-
-  .offer-card img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-  }
-
-  .offer-content {
-    padding: 20px;
-    text-align: center;
-  }
-
-  .offer-title {
-    font-size: 24px;
-    font-weight: bold;
-    color: #004d66;
-    margin-bottom: 10px;
-  }
-
-  .offer-description {
-    font-size: 16px;
-    color: #555;
-    margin-bottom: 20px;
-  }
-
-  .offer-button {
-    padding: 12px 20px;
-    font-size: 16px;
-    color: #fff;
-    background-color: #00aabb;
-    border: none;
-    border-radius: 6px;
-    text-decoration: none;
-    display: inline-block;
-    transition: background-color 0.3s ease;
-  }
-
-  .offer-button:hover {
-    background-color: #004d66;
-  }
-
-  /* Hover effect */
-  .offer-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-  }
-</style>
 <!-- Section About by alaa-->
 <section id="about" style="width: 100vw; min-height: 100vh; background: #f0f8ff; display: flex; flex-direction: column; align-items: center; padding: 40px 20px; box-sizing: border-box;">
 
@@ -275,9 +184,11 @@ Convenience,and giving you back the time </div>
       <h3 style="font-size: 20px;">Offered Services</h3>
       <p>On-site fuel refilling, electric vehicle charging, and premium car cleaning—bringing convenience and quality to your doorstep.</p>
     </div>
-    <div class="info-box" style="flex: 1; min-width: 250px; background: linear-gradient(135deg, #004d66, #00aabb); color: white; padding: 20px; border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); transition: 0.3s; margin-top: 30px;">
-      <h3 style="font-size: 20px;">Project Features</h3>
-      <p>Mobile unit with smart tech, real-time tracking, eco-friendly solutions, and 24/7 service availability for customers’ convenience.</p>
+   <div class="info-box" style="flex: 1; min-width: 250px; background: linear-gradient(135deg, #004d66, #00aabb); color: white; padding: 20px; border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);transition: 0.3s;margin-top: 30px;">
+  <h3 style="font-size: 20px;">Key Features</h3>
+  <p>Fast, mobile, reliable service at your doorstep. Supporting eco-friendly tech.</p>
+</div>
+ 
     </div>
   </div>
 </section>
@@ -458,6 +369,8 @@ function closeModal() {
 }
 
 </script>
+
+
 
 </body>
 

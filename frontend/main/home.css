@@ -25,26 +25,12 @@ header {
   padding: 10px 30px;
   z-index: 1000;
 }
-.logo {
-  font-family: 'Courier New', monospace;
-  font-size: 30px;
-  color: #00f7ff;
-  white-space: nowrap;
-  overflow: hidden;
-  width: 0;
-  animation: typing 3s steps(20, end) 1 forwards;
-  border-right: 2px solid #00f7ff;
-}
 
 @keyframes typing {
   from { width: 0 }
   to { width: 18ch }
 }
 
-/* بعد انتهاء الكتابة نخفي المؤشر */
-.logo.finished {
-  border-right: none;
-}
 
 nav {
   display: flex;
