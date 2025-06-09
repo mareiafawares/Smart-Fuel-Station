@@ -4,8 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Mobile Oil Change Service</title>
-  <style>
-/* الكل مثل ما عندك */
+<style>
 * {
   box-sizing: border-box;
 }
@@ -20,6 +19,8 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 20px;
+  overflow-x: hidden;
 }
 
 .container {
@@ -31,9 +32,9 @@ body {
   background-color: #ffffff;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
   border-radius: 16px;
-  padding: 0;
-  margin: 20px;
   overflow: hidden;
+  transform-origin: top center;
+  transition: transform 0.3s ease;
 }
 
 .left-side {
@@ -211,51 +212,25 @@ iframe {
   }
 }
 
-/* التجاوب */
+/* الريسبونسف بدون تغيير الشكل، فقط تصغير الحجم */
 @media (max-width: 768px) {
   .container {
-    flex-direction: column;
-    height: auto; /* عشان الارتفاع يتغير حسب المحتوى */
+    transform: scale(1);
   }
+}
 
-  .left-side,
-  .right-side {
-    width: 100% !important; /* نرغم العرض 100% */
-    border-right: none; /* نلغي الخط الفاصل */
-    padding: 15px 20px;
-  }
-  
-  h1 {
-    text-align: center;
+@media (max-width: 600px) {
+  .container {
+    transform: scale(0.8);
   }
 }
 
 @media (max-width: 480px) {
-  body {
-    font-size: 16px;
-  }
-
   .container {
-    margin: 10px;
-  }
-
-  .modal-content {
-    width: 95% !important;
-    margin-top: 40%;
-  }
-
-  form input,
-  form select,
-  form textarea,
-  button,
-  #whatsappBtn {
-    width: 100%;
-    margin-bottom: 10px;
-    font-size: 14px;
-    padding: 10px;
+    transform: scale(0.7);
   }
 }
-  </style>
+</style>
 </head>
 <body>
 
@@ -290,7 +265,7 @@ iframe {
 
         <div class="form-group">
           <label for="mileage">Current Mileage (km)</label>
-          <input type="number" id="mileage" placeholder="Enter current mileage" required />
+          <input type="number" id="mileage" placeholder="Enter current mileage"/>
         </div>
 
         <div class="form-group">
@@ -517,6 +492,9 @@ locationInput.addEventListener("input", () => {
 });
 
 mileageInput.addEventListener("input", () => {
+  if (parseInt(mileageInput.value) < 0) {
+    mileageInput.value = 0;
+  }
   checkFormFilled();
   updateWhatsAppLink();
 });
