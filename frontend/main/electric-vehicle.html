@@ -110,7 +110,7 @@
     display: none;
   }
 
-  /* Modal styles */
+  
   #orderModal {
     display: none;
     position: fixed;
@@ -338,7 +338,7 @@
 
     addToCart(serviceData);
 
-    // Close the modal/iframe in index.html if opened in an iframe
+    
     if (window.parent && window.parent.document.getElementById('serviceModal')) {
       window.parent.document.getElementById('serviceModal').style.display = 'none';
       window.parent.document.getElementById('modalIframe').src = '';
@@ -346,7 +346,7 @@
 
     alert("✅ Your order has been added to the cart. Thank you 🙌");
 
-    // Reset the form
+    
     document.getElementById('chargeForm').reset();
     price.value = '';
     submitBtn.disabled = true;
