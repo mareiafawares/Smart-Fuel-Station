@@ -128,6 +128,9 @@
       <button class="btn" onclick="showSection('services')">SERVICES</button>
       <button class="btn" onclick="showSection('offers')">OFFER</button>
       <button class="btn" onclick="showSection('complaints')">COMPLAINTS</button>
+      <button class="btn" onclick="showSection('employee')">EMPLOYEE</button>
+    
+
     </nav>
   </header>
 
@@ -161,6 +164,41 @@
     </table>
   </section>
 
+
+<!-- Employee Section -->
+<section id="employee">
+
+  <h2 style="color:#004d66; margin-bottom: 30px; text-align:center;">Employee List</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+      </tr>
+    </thead>
+    <tbody id="employee-tbody">
+      <!-- بيانات الموظفين سترتبط من قاعدة البيانات -->
+    </tbody>
+  </table>
+
+  <h2 style="color:#004d66; margin-bottom: 20px; margin-top: 50px; text-align:center;">Send Task To Employee</h2>
+
+  <form id="taskForm" style="margin-bottom: 30px;">
+    <label for="email" style="display:block; margin-bottom:8px;">Select Employee Email:</label>
+    <select id="email" required style="padding:10px; width:100%; margin-bottom:20px;">
+      <option value="">-- Select Email --</option>
+      <!-- يتم تعبئة الإيميلات من قاعدة البيانات لاحقاً -->
+    </select>
+
+    <label for="task" style="display:block; margin-bottom:8px;">Task:</label>
+    <textarea id="task" rows="4" required style="padding:10px; width:100%; margin-bottom:20px;"></textarea>
+
+    <button type="submit" class="btn">Send Task</button>
+  </form>
+
+</section>
+
+
   <script>
     // تبديل العرض بين الأقسام
     function showSection(sectionId) {
@@ -182,5 +220,33 @@
       }
     });
   </script>
+
+  <script>
+  // تبديل العرض بين الأقسام
+  function showSection(sectionId) {
+    document.querySelectorAll('section').forEach(section => {
+      section.classList.remove('active');
+    });
+    document.getElementById(sectionId).classList.add('active');
+  }
+
+  // إرسال المهمة (حاليا فقط وهمي)
+  document.getElementById('taskForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const email = document.getElementById('email').value;
+    const task = document.getElementById('task').value;
+
+    if(email && task) {
+      alert(`Task sent to ${email}:\n\n${task}`);
+      
+      // هون بالمستقبل بتحط كود الإرسال الحقيقي للسيرفر أو الإيميل
+      // مثل استخدام backend: Django, PHP mailer, NodeJS, إلخ
+    }
+  });
+</script>
+
+</script>
 </body>
 </html>
+
