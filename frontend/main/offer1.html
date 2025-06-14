@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Fuel Order Page</title>
+  <title>Fuel Order Page with 20% Discount</title>
   <style>
     * {
       margin: 0;
@@ -22,25 +23,38 @@
 
     .container {
       display: flex;
+      flex-direction: row;
       justify-content: space-between;
-      width: 700px;
+      width: 100%;
+      max-width: 700px;
       height: 400px;
       background-color: #ffffff;
       box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-      border-radius: 10px;
-      padding: 15px;
+      border-radius: 16px;
+      padding: 20px;
+      margin: 20px;
+      overflow: hidden;
     }
 
     .left-side {
-      width: 30%;
-      background-color: #f7f7f7;
-      border-radius: 10px;
-      padding: 15px;
-      text-align: center;
+      flex: 1;
+      position: sticky;
+      top: 20px;
+      align-self: flex-start;
       display: flex;
       flex-direction: column;
-      align-items: center;
-      justify-content: center;
+      justify-content: center;  
+      align-items: center;      
+      text-align: center;   
+      height: fit-content;
+    }
+
+    .right-side {
+      flex: 1.2;
+      max-width: none;
+      height: 100%;
+      overflow-y: auto;
+      padding-left: 20px;
     }
 
     .fuel-icon img {
@@ -52,19 +66,13 @@
     .left-side h3 {
       font-size: 20px;
       color: #333;
+      font-weight: bold;
     }
 
     .left-side p {
       margin-top: 8px;
       color: #666;
       font-size: 13px;
-    }
-
-    .right-side {
-      width: 65%;
-      padding: 15px;
-      background-color: #f9f9f9;
-      border-radius: 10px;
     }
 
     .right-side h2 {
@@ -91,10 +99,37 @@
       font-size: 15px;
     }
 
-    .right-side select:focus,
-    .right-side input:focus {
-      border-color: #007BFF;
-      outline: none;
+    .extras-box {
+      background-color: #e9f7ef;
+      border: 1px solid #c3e6cb;
+      border-radius: 10px;
+      padding: 10px;
+      margin-bottom: 15px;
+    }
+
+    .extras-box h4 {
+      margin-bottom: 8px;
+      font-size: 16px;
+      color: #155724;
+    }
+
+    .extras-box label {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 14px;
+      color: #155724;
+    }
+
+    .discount-banner {
+      background-color: #ffeeba;
+      border: 1px solid #f5c06f;
+      padding: 10px;
+      text-align: center;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      color: #856404;
+      font-weight: bold;
+      font-size: 15px;
     }
 
     .price {
@@ -102,24 +137,21 @@
       text-align: center;
       font-weight: bold;
       color: #28a745;
+      margin-bottom: 5px;
+    }
+
+    .price-discount {
+      text-align: center;
+      margin-top: -10px;
+      color: #dc3545;
+      font-size: 14px;
+    }
+
+    #deliveryEstimate {
+      text-align: center;
+      font-size: 14px;
       margin-bottom: 10px;
-    }
-
-    .original-price {
-      text-decoration: line-through;
-      color: #888;
-      margin-right: 10px;
-    }
-
-    .discounted-price {
-      color: #e60000;
-    }
-
-    .map iframe {
-      width: 100%;
-      height: 120px;
-      border: 0;
-      border-radius: 8px;
+      color: #007BFF;
     }
 
     #orderBtn:disabled {
@@ -140,6 +172,19 @@
 
     #orderBtn:hover {
       background-color: #218838;
+    }
+
+    #whatsappBtn {
+      display: none;
+      text-align: center;
+      background-color: #25D366;
+      color: white;
+      padding: 10px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 16px;
+      margin-top: 10px;
+      display: inline-block;
     }
 
     .modal {
@@ -197,6 +242,11 @@
 
     <div class="right-side">
       <h2>Order Fuel</h2>
+
+      <div class="discount-banner">
+        🎉 Special Offer: Get 20% OFF on all fuel orders!
+      </div>
+
       <form id="fuelForm">
         <label for="carType">Car Type:</label>
         <select id="carType" required>
@@ -210,19 +260,32 @@
           <option value="">Select Fuel Type</option>
         </select>
 
-        <label for="location">Location:</label>
-        <input type="text" id="location" placeholder="Enter your location" required />
+        <div class="form-group">
+          <label>Your Location</label>
+          <input type="text" id="addressInput" placeholder="Enter your address" oninput="validateForm()" />
+          <div class="map-preview" onclick="openMap()">
+            <iframe src="https://www.google.com/maps?q=Jordan&output=embed" frameborder="0" allowfullscreen></iframe>
+          </div>
+        </div>
 
-        <div class="map">
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18..." loading="lazy"></iframe>
+        <div class="extras-box">
+          <h4>📦 Important Add-ons with the Order:</h4>
+          <label><input type="checkbox" class="extra" value="Windshield Water"> Windshield Water</label>
+          <label><input type="checkbox" class="extra" value="Fire Extinguisher"> Fire Extinguisher</label>
+          <label><input type="checkbox" class="extra" value="Battery Boost"> Battery Boost</label>
+          <label><input type="checkbox" class="extra" value="Warning Triangle"> Warning Triangle</label>
+          <label><input type="checkbox" class="extra" value="Basic Tool Kit"> Basic Tool Kit</label>
         </div>
 
         <div class="price">
-          <span class="original-price" id="originalPrice">0</span>
-          <span class="discounted-price" id="discountedPrice">0</span> JOD
+          Price After Discount: <span id="price">0</span> JOD
         </div>
+        <div id="priceNote" class="price-discount"></div>
+
+        <div id="deliveryEstimate"></div>
 
         <button type="button" id="orderBtn" disabled>Order Now</button>
+        <a id="whatsappBtn" href="#" target="_blank">📲 Send via WhatsApp</a>
       </form>
     </div>
   </div>
@@ -234,23 +297,26 @@
   <script>
     const carTypeSelect = document.getElementById('carType');
     const fuelTypeSelect = document.getElementById('fuelType');
-    const originalPriceElement = document.getElementById('originalPrice');
-    const discountedPriceElement = document.getElementById('discountedPrice');
+    const priceElement = document.getElementById('price');
     const orderBtn = document.getElementById('orderBtn');
-    const locationInput = document.getElementById('location');
+    const locationInput = document.getElementById('addressInput');
     const confirmationModal = document.getElementById('confirmationModal');
     const modalContent = document.getElementById('modalContent');
+    const deliveryEstimate = document.getElementById('deliveryEstimate');
+    const whatsappBtn = document.getElementById('whatsappBtn');
+    const extrasCheckboxes = document.querySelectorAll('.extra');
+    const priceNote = document.getElementById('priceNote');
 
     const fuelPrices = {
       "Regular Gasoline": { "95": 2.0, "98": 2.5 },
       "Diesel": { "Diesel": 2.2 },
     };
 
-    carTypeSelect.addEventListener('change', (e) => {
-      const carType = e.target.value;
+    carTypeSelect.addEventListener('change', () => {
+      const carType = carTypeSelect.value;
       fuelTypeSelect.innerHTML = `<option value="">Select Fuel Type</option>`;
-      originalPriceElement.textContent = '0';
-      discountedPriceElement.textContent = '0';
+      priceElement.textContent = '0';
+      priceNote.textContent = '';
       if (carType && fuelPrices[carType]) {
         fuelTypeSelect.disabled = false;
         for (const type in fuelPrices[carType]) {
@@ -262,63 +328,102 @@
       } else {
         fuelTypeSelect.disabled = true;
       }
-      checkInputs();
+      updateAll();
     });
 
-    fuelTypeSelect.addEventListener('change', () => {
-      const fuelType = fuelTypeSelect.value;
-      const carType = carTypeSelect.value;
-      if (fuelType && carType) {
-        const originalPrice = fuelPrices[carType][fuelType];
-        const discountedPrice = (originalPrice * 0.8).toFixed(2);
-        originalPriceElement.textContent = originalPrice;
-        discountedPriceElement.textContent = discountedPrice;
+    fuelTypeSelect.addEventListener('change', updateAll);
+    locationInput.addEventListener('input', updateAll);
+    extrasCheckboxes.forEach(cb => cb.addEventListener('change', updateAll));
+
+    function getSelectedExtras() {
+      return Array.from(extrasCheckboxes)
+        .filter(cb => cb.checked)
+        .map(cb => cb.value)
+        .join(', ') || 'None';
+    }
+
+    function updateAll() {
+      const car = carTypeSelect.value;
+      const fuel = fuelTypeSelect.value;
+      const loc = locationInput.value;
+      const extras = getSelectedExtras();
+
+      if (car && fuel && loc) {
+        const basePrice = fuelPrices[car][fuel];
+        const discountPrice = (basePrice * 0.8).toFixed(2); // خصم 20%
+
+        priceElement.textContent = discountPrice;
+        priceNote.textContent = `Original Price: ${basePrice} JOD — You Save 20%!`;
+
+        orderBtn.disabled = false;
+
+        const msg = `Hello, I’d like to request a fuel delivery:\n🚗 Car Type: ${car}\n⛽ Fuel Type: ${fuel}\n📍 Location: ${loc}\n💵 Price after 20% discount: ${discountPrice} JOD\n📦 Add-ons: ${extras}`;
+        whatsappBtn.href = `https://wa.me/962781331072?text=${encodeURIComponent(msg)}`;
+        whatsappBtn.style.display = 'inline-block';
+
+        const estimate = loc.length > 10 ? 'Delivery in 2 hours' : 'Delivery in 30 minutes';
+        deliveryEstimate.textContent = estimate;
       } else {
-        originalPriceElement.textContent = '0';
-        discountedPriceElement.textContent = '0';
+        priceElement.textContent = '0';
+        priceNote.textContent = '';
+        orderBtn.disabled = true;
+        whatsappBtn.style.display = 'none';
+        deliveryEstimate.textContent = '';
       }
-      checkInputs();
-    });
-
-    locationInput.addEventListener('input', checkInputs);
-
-    function checkInputs() {
-      const allFilled =
-        carTypeSelect.value &&
-        fuelTypeSelect.value &&
-        locationInput.value;
-      orderBtn.disabled = !allFilled;
     }
 
     orderBtn.addEventListener('click', () => {
       const car = carTypeSelect.value;
       const fuel = fuelTypeSelect.value;
       const loc = locationInput.value;
-      const originalPrice = parseFloat(originalPriceElement.textContent);
-      const discountedPrice = parseFloat(discountedPriceElement.textContent);
+      const extras = getSelectedExtras();
+      const price = parseFloat(priceElement.textContent);
+
+      if (!car || !fuel || !loc) return;
 
       modalContent.innerHTML = `
-        <p><strong>Car Type:</strong> ${car}</p>
-        <p><strong>Fuel Type:</strong> ${fuel}</p>
-        <p><strong>Location:</strong> ${loc}</p>
-        <p><strong>Original Price:</strong> <span style="text-decoration:line-through;">${originalPrice}</span> JOD</p>
-        <p><strong>Discounted Price:</strong> <span style="color:red;">${discountedPrice}</span> JOD</p>
-        <button id="confirmOrder">Confirm Order</button>
+        <p><strong>Order Summary</strong></p>
+        <p>Car Type: ${car}</p>
+        <p>Fuel Type: ${fuel}</p>
+        <p>Location: ${loc}</p>
+        <p>Add-ons: ${extras}</p>
+        <p><strong>Total Price (after 20% discount):</strong> ${price} JOD</p>
+        <button id="confirmBtn">Confirm Order</button>
+        <button id="cancelBtn" style="margin-left:10px; background-color:#dc3545;">Cancel</button>
       `;
       confirmationModal.style.display = 'flex';
 
-      document.getElementById('confirmOrder').addEventListener('click', () => {
+      document.getElementById('confirmBtn').onclick = () => {
         confirmationModal.style.display = 'none';
+
         const serviceData = {
-          name: `Fuel Delivery - ${car} (${fuel})`,
-          originalPrice: originalPrice,
-          price: discountedPrice,
-          image: 'fuel.png',
-          discounted: true
+          name: `Fuel Delivery - ${fuel}${extras !== 'None' ? ` (${extras})` : ''}`,
+          price: price,
+          image: 'fuel.png'
         };
+
         addToCart(serviceData);
-        alert('✅ Your order has been added to the cart with discount!');
-      });
+
+        if (window.parent && window.parent.document.getElementById('serviceModal')) {
+          window.parent.document.getElementById('serviceModal').style.display = 'none';
+          window.parent.document.getElementById('modalIframe').src = '';
+        }
+
+        alert('✅ Your order has been added to the cart. Thank you 🙌');
+
+        document.getElementById('fuelForm').reset();
+        updateAll();
+      };
+
+      document.getElementById('cancelBtn').onclick = () => {
+        confirmationModal.style.display = 'none';
+      };
+    });
+
+    confirmationModal.addEventListener('click', e => {
+      if (e.target === confirmationModal) {
+        confirmationModal.style.display = 'none';
+      }
     });
 
     function addToCart(service) {
@@ -326,12 +431,6 @@
       cart.push(service);
       localStorage.setItem('cart', JSON.stringify(cart));
     }
-
-    window.addEventListener('click', (e) => {
-      if (e.target === confirmationModal) {
-        confirmationModal.style.display = 'none';
-      }
-    });
   </script>
 </body>
 </html>

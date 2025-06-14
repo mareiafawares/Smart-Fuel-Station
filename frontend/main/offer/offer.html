@@ -1,107 +1,133 @@
-<!-- S Offers Section by alaa -->
-<section id="offers" class="offers-section">
-  <div class="offers-container">
-    <div class="offer-card">
-      <img src="offer1.jpg" alt="Offer 1" />
-      <div class="offer-content">
-        <h3 class="offer-title">20% Off on Fuel</h3>
-        <p class="offer-description">Get 20% off on every fuel refill! Limited time offer.</p>
-        <button class="offer-button" onclick="openModal('offer1.html')">Claim Offer</button>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Offers</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background: #fff;
+      overflow-y: auto; /* يسمح بالتمرير داخل iframe فقط */
+    }
+
+    .offers-section {
+      padding: 40px 20px;
+      background-color: #fff;
+      display: flex;
+      justify-content: center;
+    }
+
+    .offers-container {
+      width: 100%;
+      max-width: 800px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      padding: 20px;
+      border-radius: 12px;
+      background: #f4f4f4;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    }
+
+    .offer-card {
+      display: flex;
+      background: #f9f9f9;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+      min-height: 180px;
+    }
+
+    .offer-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .offer-card img {
+      width: 200px;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .offer-content {
+      padding: 20px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .offer-title {
+      font-size: 20px;
+      font-weight: bold;
+      color: #004d66;
+      margin-bottom: 10px;
+    }
+
+    .offer-description {
+      font-size: 16px;
+      color: #555;
+      margin-bottom: 20px;
+    }
+
+    .offer-button {
+      padding: 10px 16px;
+      font-size: 14px;
+      color: #fff;
+      background-color: #00aabb;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      align-self: flex-start;
+    }
+
+    .offer-button:hover {
+      background-color: #004d66;
+    }
+  </style>
+</head>
+<body>
+
+  <section id="offers" class="offers-section">
+    <div class="offers-container">
+      <div class="offer-card">
+        <img src="offer1.jpg" alt="Offer 1" />
+        <div class="offer-content">
+          <h3 class="offer-title">20% Off on Fuel</h3>
+          <p class="offer-description">Get 20% off on every fuel refill! Limited time offer.</p>
+          <button class="offer-button" onclick="openModal('offer1.html')">Claim Offer</button>
+        </div>
+      </div>
+
+      <div class="offer-card">
+        <img src="offer2.jpg" alt="Offer 2" />
+        <div class="offer-content">
+          <h3 class="offer-title">Free Car Wash</h3>
+          <p class="offer-description">Get a free car wash with every full tank. Hurry up!</p>
+          <button class="offer-button" onclick="openModal('offer2.html')">Claim Offer</button>
+        </div>
+      </div>
+
+      <div class="offer-card">
+        <img src="offer3.jpg" alt="Offer 3" />
+        <div class="offer-content">
+          <h3 class="offer-title">Buy One, Get One Free</h3>
+          <p class="offer-description">Buy one oil change and get another one free. Limited to first 50 customers.</p>
+          <button class="offer-button" onclick="openModal('offer3.html')">Claim Offer</button>
+        </div>
       </div>
     </div>
+  </section>
 
-    <div class="offer-card">
-      <img src="offer2.jpg" alt="Offer 2" />
-      <div class="offer-content">
-        <h3 class="offer-title">Free Car Wash</h3>
-        <p class="offer-description">Get a free car wash with every full tank. Hurry up!</p>
-        <button class="offer-button" onclick="openModal('offer2.html')">Claim Offer</button>
-      </div>
-    </div>
+  <script>
+    function openModal(url) {
+      window.open(url, '_blank'); // يمكنك تعديله لفتح داخل modal حسب حاجتك
+    }
+  </script>
 
-    <div class="offer-card">
-      <img src="offer3.jpg" alt="Offer 3" />
-      <div class="offer-content">
-        <h3 class="offer-title">Buy One, Get One Free</h3>
-        <p class="offer-description">Buy one oil change and get another one free. Limited to first 50 customers.</p>
-        <button class="offer-button" onclick="openModal('offer3.html')">Claim Offer</button>
-      </div>
-    </div>
-  </div>
-</section>
-
-<style>
-  /* Offers Section Container */
-  .offers-section {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh; /* Full page height */
-    background-color: #fff;
-  }
-
-  .offers-container {
-    width: 700px;
-    height: 400px;
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    padding: 20px;
-    border-radius: 12px;
-    background: #f4f4f4;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-  }
-
-  .offer-card {
-    display: flex;
-    background: #f9f9f9;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
-  }
-
-  .offer-card:hover {
-    transform: translateY(-5px);
-  }
-
-  .offer-card img {
-    width: 200px;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .offer-content {
-    padding: 20px;
-    flex: 1;
-  }
-
-  .offer-title {
-    font-size: 20px;
-    font-weight: bold;
-    color: #004d66;
-    margin-bottom: 10px;
-  }
-
-  .offer-description {
-    font-size: 16px;
-    color: #555;
-    margin-bottom: 20px;
-  }
-
-  .offer-button {
-    padding: 10px 16px;
-    font-size: 14px;
-    color: #fff;
-    background-color: #00aabb;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-
-  .offer-button:hover {
-    background-color: #004d66;
-  }
-</style>
+</body>
+</html>
