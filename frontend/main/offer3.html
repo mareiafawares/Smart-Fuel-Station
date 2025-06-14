@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Mobile Oil Change Service - Buy 1 Get 1 Free</title>
+  <title>Free Mobile Oil Change</title>
 <style>
 * {
   box-sizing: border-box;
@@ -27,19 +27,18 @@ body {
   display: flex;
   flex-direction: row;
   width: 100%;
-  max-width: 850px;
-  height: 420px;
+  max-width: 700px;
+  height: 400px;
   background-color: #ffffff;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
   border-radius: 16px;
   overflow: hidden;
   transform-origin: top center;
   transition: transform 0.3s ease;
-  position: relative;
 }
 
 .left-side {
-  width: 40%;
+  width: 45%;
   padding: 20px;
   background-color: #ffffff;
   display: flex;
@@ -50,32 +49,10 @@ body {
 }
 
 .right-side {
-  width: 40%;
+  width: 55%;
   height: 100%;
   overflow-y: auto;
   padding: 20px;
-}
-
-/* العرض الخاص بين القسمين */
-.special-offer {
-  position: absolute;
-  top: 50%;
-  left: 42%;
-  transform: translate(-50%, -50%);
-  background-color: #00796b;
-  color: white;
-  padding: 20px 25px;
-  border-radius: 20px;
-  font-size: 20px;
-  font-weight: bold;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-  width: 180px;
-  text-align: center;
-  user-select: none;
-  pointer-events: none;
-  z-index: 10;
-  white-space: nowrap;
-  letter-spacing: 0.5px;
 }
 
 .oil-icon img {
@@ -235,24 +212,21 @@ iframe {
   }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 768px) {
   .container {
-    max-width: 600px;
-    height: auto;
-    flex-wrap: wrap;
-    padding-bottom: 50px;
+    transform: scale(1);
   }
-  .left-side, .right-side {
-    width: 100%;
-    border-right: none;
+}
+
+@media (max-width: 600px) {
+  .container {
+    transform: scale(0.8);
   }
-  .special-offer {
-    position: relative;
-    top: auto;
-    left: auto;
-    transform: none;
-    margin: 20px auto;
-    width: fit-content;
+}
+
+@media (max-width: 480px) {
+  .container {
+    transform: scale(0.7);
   }
 }
 </style>
@@ -264,15 +238,11 @@ iframe {
       <div class="oil-icon">
         <img src="car-oil.png" alt="oil" >
       </div>
-      <h1>Mobile Oil Change</h1>
+      <h1>Free Mobile Oil Change</h1>
       <div class="service-info">
-        <h3>Fast & Reliable Service to Your Location</h3>
-        <p>Choose your car details and get your oil changed without leaving home.</p>
+        <h3>Free Service with Buy One, Get One Free Offer</h3>
+        <p>Claim your free oil change now! Fast and reliable service at your location.</p>
       </div>
-    </div>
-
-    <div class="special-offer">
-      اشترِ واحدة واحصل على الثانية مجاناً!
     </div>
 
     <div class="right-side">
@@ -316,10 +286,10 @@ iframe {
 
         <div id="price" class="price-display"></div>
 
-       <div class="form-group" style="display: flex; gap: 10px; flex-direction: column;">
-         <button id="submitBtn" type="submit" disabled>Submit Order</button>
-         <a id="whatsappBtn" href="#" target="_blank" style="background-color: #25D366; text-align: center; padding: 12px; border-radius: 12px; color: white; font-weight: bold; font-size: 16px; text-decoration: none; display: none;">📲Order via WhatsApp</a>
-       </div>
+        <div class="form-group" style="display: flex; gap: 10px; flex-direction: column;">
+          <button id="submitBtn" type="submit" disabled>Submit Order</button>
+          <a id="whatsappBtn" href="#" target="_blank" style="background-color: #25D366; text-align: center; padding: 12px; border-radius: 12px; color: white; font-weight: bold; font-size: 16px; text-decoration: none; display: none;">📲 Order via WhatsApp</a>
+        </div>
       </form>
     </div>
   </div>
@@ -327,7 +297,7 @@ iframe {
   <div id="orderModal" class="modal">
     <div class="modal-content">
       <div class="modal-header">
-        <h2>Order Confirmation</h2>
+        <h2>Confirm Your Free Oil Change</h2>
       </div>
       <div class="modal-body">
         <p id="modalContent"></p>
@@ -357,14 +327,14 @@ iframe {
     };
 
     const oilTypes = {
-      electric: [{ name: "Synthetic EV Oil 0W-20 ($40)", value: "ev_oil", price: 40 }],
+      electric: [{ name: "Synthetic EV Oil 0W-20", value: "ev_oil", price: 0 }],
       gasoline: [
-        { name: "Castrol 5W-30 ($30)", value: "castrol", price: 30 },
-        { name: "Mobil 1 10W-40 ($35)", value: "mobil", price: 35 }
+        { name: "Castrol 5W-30", value: "castrol", price: 0 },
+        { name: "Mobil 1 10W-40", value: "mobil", price: 0 }
       ],
       diesel: [
-        { name: "Shell Helix 0W-20 ($28)", value: "shell", price: 28 },
-        { name: "Diesel Pro 15W-40 ($33)", value: "diesel_pro", price: 33 }
+        { name: "Shell Helix 0W-20", value: "shell", price: 0 },
+        { name: "Diesel Pro 15W-40", value: "diesel_pro", price: 0 }
       ]
     };
 
@@ -433,7 +403,7 @@ iframe {
       const type = carTypeSelect.value;
       const selectedOil = oilTypes[type]?.find(o => o.value === oilTypeSelect.value);
       if (selectedOil) {
-        priceDisplay.innerText = `Total Price: $${selectedOil.price}`;
+        priceDisplay.innerText = `Total Price: $0`; // السعر دائمًا 0 للعرض المجاني
         priceDisplay.style.display = 'block';
       } else {
         priceDisplay.style.display = 'none';
@@ -482,14 +452,13 @@ iframe {
       const type = carTypeSelect.value;
       const selectedOil = oilTypes[type].find(o => o.value === oilTypeSelect.value);
       const oilName = selectedOil.name;
-      const oilPrice = selectedOil.price;
       const serviceData = {
-        name: `Oil Change - ${type} (${oilName})`,
-        price: oilPrice,
+        name: `Free Oil Change - ${type} (${oilName})`,
+        price: 0, // السعر دائمًا 0
         image: 'car-oil.png'
       };
       addToCart(serviceData);
-      alert("✅ Your order has been added to the cart. Thank you 🙌");
+      alert("✅ Your free oil change order has been added to the cart. Thank you 🙌");
     }
 
     function addToCart(service) {
@@ -537,19 +506,16 @@ iframe {
       e.preventDefault();
       const selectedOil = oilTypes[carTypeSelect.value].find(o => o.value === oilTypeSelect.value);
       const oilName = selectedOil.name;
-      const oilPrice = selectedOil.price;
 
       const message =
-`Your order has been received!
+`Your free oil change order has been received!
 Car Type: ${carTypeSelect.value}
 Car Model: ${carModelSelect.value}
 Mileage: ${mileageInput.value} km
 Last Change: ${lastChangeInput.value}
 Oil Type: ${oilName}
 Location: ${locationInput.value}
-Total Price: $${oilPrice}
-
-🎉 Congratulations! You will get the second oil change for FREE! 🎉`;
+Total Price: $0`;
 
       openModal(message);
     });
@@ -570,30 +536,24 @@ Total Price: $${oilPrice}
 
       if (type && model && mileage && lastChange && oil && location) {
         const message = 
-`Hello, I would like to order an oil change service:
+`Hello, I would like to claim a free oil change service (Buy One, Get One Free offer):
 - Car Type: ${type}
 - Model: ${model}
 - Mileage: ${mileage} km
 - Last Change Date: ${lastChange}
 - Oil Type: ${oil.name}
 - Location: ${location}
-- Total Price: $${oil.price}
+- Total Price: $0`;
 
-And I am excited about your Buy 1 Get 1 Free offer!`;
-
-        const url = `https://wa.me/962XXXXXXXXX?text=${encodeURIComponent(message)}`;
+        const encodedMsg = encodeURIComponent(message);
+        const whatsappLink = `https://wa.me/962781331072?text=${encodedMsg}`;
         const whatsappBtn = document.getElementById("whatsappBtn");
-        whatsappBtn.href = url;
+        whatsappBtn.href = whatsappLink;
         whatsappBtn.style.display = "block";
       } else {
         document.getElementById("whatsappBtn").style.display = "none";
       }
     }
-
-    // Initialize form
-    updateFormOptions();
-
   </script>
-
 </body>
 </html>
