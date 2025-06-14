@@ -10,7 +10,6 @@
       padding: 0;
       font-family: Arial, sans-serif;
       background: #fff;
-      overflow-y: auto; /* يسمح بالتمرير داخل iframe فقط */
     }
 
     .offers-section {
@@ -88,6 +87,11 @@
     .offer-button:hover {
       background-color: #004d66;
     }
+    a {
+  text-decoration: none;
+}
+
+    
   </style>
 </head>
 <body>
@@ -99,7 +103,9 @@
         <div class="offer-content">
           <h3 class="offer-title">20% Off on Fuel</h3>
           <p class="offer-description">Get 20% off on every fuel refill! Limited time offer.</p>
-          <button class="offer-button" onclick="openModal('offer1.html')">Claim Offer</button>
+          <a href='../offer1.html' class="offer-button">Claim Offer</a>
+           
+
         </div>
       </div>
 
@@ -108,7 +114,7 @@
         <div class="offer-content">
           <h3 class="offer-title">Free Car Wash</h3>
           <p class="offer-description">Get a free car wash with every full tank. Hurry up!</p>
-          <button class="offer-button" onclick="openModal('offer2.html')">Claim Offer</button>
+          <a href='../offer2.html' class="offer-button">Claim Offer</a>
         </div>
       </div>
 
@@ -117,17 +123,12 @@
         <div class="offer-content">
           <h3 class="offer-title">Buy One, Get One Free</h3>
           <p class="offer-description">Buy one oil change and get another one free. Limited to first 50 customers.</p>
-          <button class="offer-button" onclick="openModal('offer3.html')">Claim Offer</button>
+          <a href='../offer3.html' class="offer-button">Claim Offer</a>
         </div>
       </div>
     </div>
   </section>
 
-  <script>
-    function openModal(url) {
-      window.open(url, '_blank'); // يمكنك تعديله لفتح داخل modal حسب حاجتك
-    }
-  </script>
-
+  
 </body>
 </html>
