@@ -9,7 +9,7 @@ const UserSchema = new mongoose.Schema({
     type: String, 
     enum: ['user', 'admin', 'employee'], 
     default: 'User', 
-    required: true 
+    
   }
 });
 

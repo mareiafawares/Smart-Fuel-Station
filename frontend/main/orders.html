@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Orders - Smart Fuel Station</title>
-  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet' />
   <style>
     body {
       margin: 0;
@@ -15,7 +15,6 @@
       align-items: center;
       height: 100vh;
     }
-
     .content-box {
       background: #fff;
       padding: 30px;
@@ -25,110 +24,14 @@
       max-width: 600px;
       text-align: center;
     }
-
-    .content-box h2 {
-      color: #004d66;
-      margin-bottom: 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .edit-icon {
-      color: #00aabb;
-      cursor: pointer;
-      font-size: 20px;
-      transition: color 0.3s ease;
-    }
-
-    .edit-icon:hover {
-      color: #004d66;
-    }
-
-    .info-item {
-      font-size: 15px;
-      color: #333;
-      margin: 10px 0;
-      text-align: left;
-    }
-
-    .info-item strong {
-      color: #004d66;
-    }
-
-    .edit-form {
-      display: none;
-      margin-top: 20px;
-      padding: 20px;
-      background: linear-gradient(145deg, #ffffff, #e6f4ff);
-      border: 1px solid #d0e6ff;
-      border-radius: 12px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-      transition: transform 0.3s ease;
-    }
-
-    .edit-form.active {
-      display: block;
-      transform: scale(1.02);
-    }
-
-    .edit-form label {
-      display: block;
-      margin: 12px 0 6px;
-      color: #004d66;
-      font-weight: 600;
-      font-size: 15px;
-      text-align: left;
-    }
-
-    .edit-form input {
-      width: 100%;
-      padding: 10px;
+    .order-item {
+      background: #e6f4ff;
       margin-bottom: 15px;
-      border: 1px solid #b3d9ff;
-      border-radius: 8px;
-      font-size: 14px;
-      background: #f9fbff;
-      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      padding: 15px;
+      border-radius: 12px;
+      text-align: left;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
     }
-
-    .edit-form input:focus {
-      border-color: #00aabb;
-      box-shadow: 0 0 5px rgba(0, 170, 187, 0.3);
-      outline: none;
-    }
-
-    .edit-form button {
-      padding: 10px 20px;
-      margin-right: 10px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 14px;
-      font-weight: 500;
-      transition: background 0.3s ease, transform 0.2s ease;
-    }
-
-    .edit-form button.save {
-      background: #00aabb;
-      color: white;
-    }
-
-    .edit-form button.save:hover {
-      background: #008c99;
-      transform: translateY(-2px);
-    }
-
-    .edit-form button.cancel {
-      background: #ff4444;
-      color: white;
-    }
-
-    .edit-form button.cancel:hover {
-      background: #cc3333;
-      transform: translateY(-2px);
-    }
-
     .back-btn {
       padding: 8px 15px;
       background: #004d66;
@@ -139,80 +42,73 @@
       margin-top: 20px;
       transition: background 0.3s ease;
     }
-
     .back-btn:hover {
       background: #00334d;
-    }
-
-    @media (max-width: 480px) {
-      .content-box {
-        padding: 20px;
-        max-width: 90%;
-      }
     }
   </style>
 </head>
 <body>
   <div class="content-box">
-    <h2>Orders <i class='bx bx-edit edit-icon' onclick="showEditForm('orders')"></i></h2>
-    <div class="info-item"><strong>Order #1:</strong> <span id="order1">Fuel Refill - 50 Liters - 2025-05-01</span></div>
-    <div class="info-item"><strong>Order #2:</strong> <span id="order2">Car Wash - 2025-05-03</span></div>
-    <div class="info-item"><strong>Order #3:</strong> <span id="order3">Electric Charge - 2025-05-07</span></div>
-    <div class="edit-form" id="ordersEditForm">
-      <label for="editOrder1">Order #1:</label>
-      <input type="text" id="editOrder1" value="Fuel Refill - 50 Liters - 2025-05-01">
-      <label for="editOrder2">Order #2:</label>
-      <input type="text" id="editOrder2" value="Car Wash - 2025-05-03">
-      <label for="editOrder3">Order #3:</label>
-      <input type="text" id="editOrder3" value="Electric Charge - 2025-05-07">
-      <button class="save" onclick="saveEdit('orders')">Save</button>
-      <button class="cancel" onclick="cancelEdit('orders')">Cancel</button>
+    <h2>Orders</h2>
+    <div id="ordersContainer">
+      <!-- الطلبات هنا رح تظهر -->
     </div>
-    <button class="back-btn" onclick="window.location.href='index.html'">Back</button>
+    <button class="back-btn" onclick="window.location.href='shopping.html'">Back to Shopping</button>
   </div>
 
   <script>
-    function showEditForm(section) {
-      const form = document.getElementById(section + 'EditForm');
-      form.classList.add('active');
-    }
+    async function loadUserOrders() {
+      const token = sessionStorage.getItem("token");
+      const ordersContainer = document.getElementById("ordersContainer");
 
-    function cancelEdit(section) {
-      const form = document.getElementById(section + 'EditForm');
-      form.classList.remove('active');
-    }
-
-    function saveEdit(section) {
-      if (section === 'orders') {
-        const order1 = document.getElementById('editOrder1').value;
-        const order2 = document.getElementById('editOrder2').value;
-        const order3 = document.getElementById('editOrder3').value;
-
-        document.getElementById('order1').textContent = order1;
-        document.getElementById('order2').textContent = order2;
-        document.getElementById('order3').textContent = order3;
-
-        localStorage.setItem('order1', order1);
-        localStorage.setItem('order2', order2);
-        localStorage.setItem('order3', order3);
+      if (!token) {
+        alert("You must be logged in to view your orders.");
+        window.location.href = "login.html";
+        return;
       }
 
-      cancelEdit(section);
+      try {
+        const response = await fetch("http://localhost:3000/api/orders", {
+          headers: {
+            "Authorization": "Bearer " + token,
+            "Content-Type": "application/json"
+          }
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch orders.");
+        }
+
+        const orders = await response.json();
+
+        ordersContainer.innerHTML = "";
+
+        if (!orders.length) {
+          ordersContainer.innerHTML = "<p>No orders found.</p>";
+          return;
+        }
+
+        orders.forEach((order, index) => {
+          const item = document.createElement("div");
+          item.className = "order-item";
+
+          item.innerHTML = `
+            <h3>Order #${index + 1}</h3>
+            <p><strong>Service:</strong> ${order.service}</p>
+            <p><strong>Status:</strong> ${order.status}</p>
+            <p><strong>Date:</strong> ${new Date(order.createdAt).toLocaleString()}</p>
+          `;
+
+          ordersContainer.appendChild(item);
+        });
+      } catch (error) {
+        console.error(error);
+        ordersContainer.innerHTML = "<p>Failed to load orders. Please try again later.</p>";
+      }
     }
+    console.log(sessionStorage.getItem("token"));
 
-    document.addEventListener('DOMContentLoaded', () => {
-      const order1 = localStorage.getItem('order1') || 'Fuel Refill - 50 Liters - 2025-05-01';
-      const order2 = localStorage.getItem('order2') || 'Car Wash - 2025-05-03';
-      const order3 = localStorage.getItem('order3') || 'Electric Charge - 2025-05-07';
-
-      document.getElementById('order1').textContent = order1;
-      document.getElementById('order2').textContent = order2;
-      document.getElementById('order3').textContent = order3;
-
-      document.getElementById('editOrder1').value = order1;
-      document.getElementById('editOrder2').value = order2;
-      document.getElementById('editOrder3').value = order3;
-    });
+    window.onload = loadUserOrders;
   </script>
 </body>
 </html>

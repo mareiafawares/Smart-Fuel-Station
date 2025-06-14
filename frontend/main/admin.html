@@ -2,266 +2,186 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Admin Dashboard - Smart Fuel Station</title>
-  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Admin Alaa</title>
   <style>
+    /* Reset some defaults */
     * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
-      font-family: "Poppins", sans-serif;
     }
 
     body {
-      background: #f0f4f8;
-      color: #2c3e50;
+      font-family: Arial, sans-serif;
+      background-color: #f4f6f8;
+      padding-top: 80px; /* to avoid content behind fixed header */
     }
 
     header {
-      background: #004d66;
-      padding: 20px;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background-color: #004d66;
       color: white;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      flex-wrap: wrap;
+      padding: 10px 30px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+      z-index: 1000;
     }
 
-    header .logo {
-      font-size: 24px;
-      font-weight: bold;
+    .logo img {
+      width: 80px;
+      height: 60px;
+      object-fit: contain;
     }
 
     nav {
       display: flex;
-      flex-wrap: wrap;
-      margin-top: 10px;
-    }
-
-    nav a {
-      color: white;
-      margin-left: 15px;
-      text-decoration: none;
-      font-size: 16px;
-    }
-
-    nav a:hover {
-      color: #a6e0f5;
-    }
-
-    main {
-      padding: 20px;
-      max-width: 1200px;
-      margin: auto;
-    }
-
-    .section {
-      background: white;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-      margin-bottom: 30px;
-    }
-
-    .section h2 {
-      margin-bottom: 20px;
-      color: #004d66;
-      font-size: 22px;
-    }
-
-    .order-item, .employee-item, .service-item {
-      background: #e3f2fd;
-      padding: 15px;
-      margin-bottom: 10px;
-      border-radius: 8px;
-      display: flex;
-      justify-content: space-between;
+      gap: 20px;
       align-items: center;
-      flex-wrap: wrap;
-    }
-
-    .order-item select, .employee-item select {
-      padding: 6px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-      margin-top: 10px;
-    }
-
-    .add-form {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .add-form input,
-    .add-form select,
-    .add-form textarea {
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      width: 100%;
     }
 
     .btn {
-      background: #004d66;
-      color: white;
-      padding: 10px 20px;
+      padding: 12px 24px;
+      font-size: 15px;
+      font-weight: bold;
+      background: linear-gradient(135deg, #00aabb, #004d66);
+      color: #fff;
       border: none;
-      border-radius: 6px;
+      border-radius: 50px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
       cursor: pointer;
-      align-self: flex-start;
     }
 
     .btn:hover {
-      background: #007c91;
+      background: linear-gradient(135deg, #004d66, #00aabb);
+      transform: scale(1.05);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
     }
 
-    @media (max-width: 768px) {
-      header {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      nav {
-        margin-top: 10px;
-        flex-direction: column;
-      }
-
-      nav a {
-        margin: 5px 0;
-      }
-
-      .order-item, .employee-item, .service-item {
-        flex-direction: column;
-        align-items: flex-start;
-      }
+    /* Content sections */
+    section {
+      max-width: 900px;
+      margin: 40px auto;
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      display: none; /* hide all sections initially */
+      font-family: Arial, sans-serif;
     }
 
-    @media (max-width: 480px) {
-      .section h2 {
-        font-size: 18px;
-      }
+    section.active {
+      display: block;
+    }
 
-      .btn {
-        width: 100%;
-        text-align: center;
-      }
+    /* Complaints Table */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    table thead tr {
+      background: #00aabb;
+      color: white;
+    }
+
+    table th, table td {
+      padding: 12px;
+      border: 1px solid #ddd;
+      text-align: left;
+    }
+
+    table td.action {
+      text-align: center;
+      width: 100px;
+    }
+
+    button.delete-btn {
+      background-color: #d9534f;
+      border: none;
+      color: white;
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button.delete-btn:hover {
+      background-color: #c9302c;
     }
   </style>
 </head>
 <body>
 
   <header>
-    <div class="logo">Smart Fuel Admin</div>
+    <div class="logo">
+      <img src="l1.png" alt="Logo" />
+    </div>
+
     <nav>
-      <a href="#">Home</a>
-      <a href="#">Profile</a>
-      <a href="#">Logout</a>
+      <button class="btn" onclick="showSection('services')">SERVICES</button>
+      <button class="btn" onclick="showSection('offers')">OFFER</button>
+      <button class="btn" onclick="showSection('complaints')">COMPLAINTS</button>
     </nav>
   </header>
 
-  <main>
-    <!-- Orders Section -->
-    <section class="section" id="ordersSection">
-      <h2>Order Management</h2>
-      <div id="ordersList"></div>
-    </section>
+  <!-- Services Section -->
+  <section id="services" class="active">
+    <h2 style="color:#004d66; margin-bottom: 20px;">Manage Services</h2>
+    
+  </section>
 
-    <!-- Services Management -->
-    <section class="section" id="servicesSection">
-      <h2>Manage Services</h2>
-      <form class="add-form" id="serviceForm">
-        <input type="text" id="serviceName" placeholder="Service Name" required />
-        <textarea id="serviceDesc" placeholder="Description..." rows="2"></textarea>
-        <button type="submit" class="btn">Add Service</button>
-      </form>
-      <div id="serviceList"></div>
-    </section>
+  <!-- Offers Section -->
+  <section id="offers">
+    <h2 style="color:#004d66; margin-bottom: 20px;">Manage Offers</h2>
+    
+  </section>
 
-    <!-- Employees Management -->
-    <section class="section" id="employeesSection">
-      <h2>Assign Employee Tasks</h2>
-      <form class="add-form" id="employeeForm">
-        <input type="text" id="employeeName" placeholder="Employee Name" required />
-        <select id="employeeRole" required>
-          <option value="" disabled selected>Select Role</option>
-          <option>Manager</option>
-          <option>Technician</option>
-          <option>Driver</option>
-        </select>
-        <textarea id="employeeTask" placeholder="Task..." rows="2"></textarea>
-        <button type="submit" class="btn">Add Employee</button>
-      </form>
-      <div id="employeeList"></div>
-    </section>
-  </main>
+  <!-- Complaints Section -->
+  <section id="complaints">
+    <h2 style="color:#004d66; margin-bottom: 30px; text-align:center;">Received Complaints</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Message</th>
+          <th class="action">Action</th>
+        </tr>
+      </thead>
+      <tbody id="complaints-tbody">
+        <!-- بيانات الرسائل سترتبط من قاعدة البيانات -->
+      </tbody>
+    </table>
+  </section>
 
   <script>
-    const loggedInName = sessionStorage.getItem('name') || 'User';
+    // تبديل العرض بين الأقسام
+    function showSection(sectionId) {
+      document.querySelectorAll('section').forEach(section => {
+        section.classList.remove('active');
+      });
+      document.getElementById(sectionId).classList.add('active');
+    }
 
-const sampleOrders = [
-  { id: 1, service: "Fuel Delivery", customer: loggedInName, status: "Pending" },
-  { id: 2, service: "Car Wash", customer: loggedInName, status: "In Progress" },
-];
-
-const ordersList = document.getElementById("ordersList");
-
-function renderOrders() {
-  ordersList.innerHTML = "";
-  sampleOrders.forEach(order => {
-    const item = document.createElement("div");
-    item.className = "order-item";
-    item.innerHTML = `
-      <div>
-        <strong>${order.service}</strong><br>
-        Customer: ${order.customer}
-      </div>
-      <select onchange="updateOrderStatus(${order.id}, this.value)">
-        <option ${order.status === "Pending" ? "selected" : ""}>Pending</option>
-        <option ${order.status === "In Progress" ? "selected" : ""}>In Progress</option>
-        <option ${order.status === "Completed" ? "selected" : ""}>Completed</option>
-      </select>
-    `;
-    ordersList.appendChild(item);
-  });
-}
-
-function updateOrderStatus(orderId, newStatus) {
-  const order = sampleOrders.find(o => o.id === orderId);
-  if (order) {
-    order.status = newStatus;
-    renderOrders();
-  }
-}
-
-renderOrders();
-
-    document.getElementById("serviceForm").addEventListener("submit", function(e) {
-      e.preventDefault();
-      const name = document.getElementById("serviceName").value;
-      const desc = document.getElementById("serviceDesc").value;
-      const item = document.createElement("div");
-      item.className = "service-item";
-      item.innerHTML = `<strong>${name}</strong><br><small>${desc}</small>`;
-      serviceList.appendChild(item);
-      this.reset();
+    // زر حذف - حاليا فقط يظهر تنبيه (يتم تعديلها مع الربط بالداتا لاحقاً)
+    document.getElementById('complaints-tbody').addEventListener('click', function(e) {
+      if(e.target.classList.contains('delete-btn')) {
+        const confirmed = confirm('Are you sure you want to delete this complaint?');
+        if(confirmed) {
+          // هنا تضع كود الحذف الفعلي مع قاعدة البيانات
+          e.target.closest('tr').remove();
+          alert('Complaint deleted (dummy action)');
+        }
+      }
     });
-
-    document.getElementById("employeeForm").addEventListener("submit", function(e) {
-      e.preventDefault();
-      const name = document.getElementById("employeeName").value;
-      const role = document.getElementById("employeeRole").value;
-      const task = document.getElementById("employeeTask").value;
-      const item = document.createElement("div");
-      item.className = "employee-item";
-      item.innerHTML = `<strong>${name}</strong> - ${role}<br><small>${task}</small>`;
-      employeeList.appendChild(item);
-      this.reset();
-    });
-
-    renderOrders();
   </script>
-
+  <script src="admin.js"></script>
 </body>
 </html>

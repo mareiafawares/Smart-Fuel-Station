@@ -23,11 +23,10 @@ form.addEventListener('submit', async (e) => {
       sessionStorage.setItem('email', data.user?.email || email);
       sessionStorage.setItem('role', data.user?.role || 'User');
 
-      
       const role = data.user?.role?.toLowerCase();
-       console.log('Redirecting as role:', role);
-  window.location.href = role === 'admin' ? 'admin.html' : 'home1.html';
+      console.log('Redirecting as role:', role);
 
+      // ✅ التوجيه حسب الدور فقط هنا
       if (role === 'admin') {
         window.location.href = 'admin.html';
       } else if (role === 'employee') {

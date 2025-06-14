@@ -13,7 +13,7 @@ app.use('/api', userRouters);
 const orderRoutes = require('./routers/orderRoutes');
 app.use('/api/orders', orderRoutes);
 
-// دالة للتحقق من التوكن
+
 const verifyToken = (req, res, next) => {
     const token = req.header('Authorization')?.replace('Bearer ', '');  // استخراج التوكن من الهيدر
     if (!token) {
