@@ -111,7 +111,7 @@ z-index: 1100;
 
 /* Sections */
 section {
-  padding: 120px 30px;
+  padding: 0px ;
   min-height: 100vh;
   text-align: center;
 }
@@ -472,7 +472,6 @@ cursor: pointer;
   cursor: pointer;
   z-index: 10;
 }
-
 
 
 

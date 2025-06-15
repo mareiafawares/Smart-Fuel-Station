@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Free Car Wash Service</title>
+  <link href="https://fonts.googleapis.com/css2?family=Segoe+UI&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #e0f7fa, #ffffff);
+      margin: 0;
+      padding: 0;
+      color: #131212;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .container {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      width: 900px; 
+      height: 400px;
+      overflow-y: auto;
+      background-color: #ffffff;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+      border-radius: 16px;
+      padding: 20px;
+      margin: 20px;
+    }
+    .left-side {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      position: sticky;
+      top: 20px;
+      height: fit-content;
+      padding-right: 15px;
+      border-right: 1px solid #dbe2ea;
+    }
+    .left-side img {
+      width: 120px;
+      margin-bottom: 20px;
+    }
+    .left-side h2 {
+      color: #2b6cb0;
+      font-size: 26px;
+      margin-bottom: 10px;
+    }
+    .left-side p {
+      color: #050505;
+      font-size: 15px;
+    }
+    .right-side {
+      flex: 1.2;
+      max-width: none;
+      padding-left: 20px;
+      overflow-y: auto;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    label {
+      font-weight: 600;
+      display: block;
+      margin-bottom: 8px;
+    }
+    select, input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #cbd5e0;
+      border-radius: 8px;
+      font-size: 14px;
+      box-sizing: border-box;
+    }
+    . map-preview {
+      width: 100%;
+      height: 180px;
+      border-radius: 10px;
+      margin-top: 10px;
+      cursor: pointer;
+      border: 2px solid #ccc;
+      overflow: hidden;
+    }
+    .map-preview iframe {
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+    .price-display {
+      margin-top: 10px;
+      font-size: 16px;
+      color: #2b6cb0;
+      font-weight: bold;
+    }
+    button {
+      background-color: #2b6cb0;
+      color: white;
+      padding: 14px;
+      width: 100%;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+    button:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+    button:hover:enabled {
+      background-color: #1a4f90;
+    }
+    .custom-checkbox {
+      position: relative;
+      display: flex;
+      align-items: center;
+      margin-bottom: 8px;
+      cursor: pointer;
+    }
+    .custom-checkbox input[type="checkbox"] {
+      display: none;
+    }
+    .custom-checkbox label {
+      position: relative;
+      padding-left: 30px;
+      cursor: pointer;
+      font-size: 14px;
+      color: #333;
+      user-select: none;
+    }
+    .custom-checkbox label::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 2px;
+      width: 18px;
+      height: 18px;
+      border: 2px solid #2b6cb0;
+      border-radius: 4px;
+      background-color: white;
+      box-sizing: border-box;
+      transition: background-color 0.2s ease;
+    }
+    .custom-checkbox input[type="checkbox"]:checked + label::before {
+      background-color: #2b6cb0;
+    }
+    .custom-checkbox label::after {
+      content: "✔";
+      position: absolute;
+      left: 3px;
+      top: -1px;
+      font-size: 16px;
+      color: white;
+      display: none;
+    }
+    .custom-checkbox input[type="checkbox"]:checked + label::after {
+      display: block;
+    }
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 10;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.4);
+    }
+    .modal-content {
+      background-color: #fff;
+      margin: 10% auto;
+      padding: 20px;
+      border-radius: 15px;
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+    }
+    .modal-content h3 {
+      color: #2b6cb0;
+      margin-bottom: 10px;
+    }
+    .modal-content p {
+      color: #444;
+      margin: 10px 0;
+      white-space: pre-line;
+    }
+    .modal-content button {
+      background-color: #2b6cb0;
+      color: white;
+      padding: 10px 20px;
+      margin-top: 15px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .modal-content button:hover {
+      background-color: #1a4f90;
+    }
+    #whatsappBtn {
+      display: none;
+      background-color: #25d366;
+      margin-top: 10px;
+      padding: 12px;
+      border-radius: 8px;
+      color: white;
+      font-weight: bold;
+      font-size: 16px;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+    }
+    #whatsappBtn:hover {
+      background-color: #1ebe57;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="left-side">
+      <img src="icon car.png" alt="Car Wash Icon" />
+      <h2>Free Car Wash</h2>
+      <p>Claim your free car wash now with just one click! Reliable, fast, and at your doorstep.</p>
+    </div>
+    <div class="right-side">
+      <div class="form-group">
+        <label>Wash Type</label>
+        <select id="washType" onchange="showPrice(); validateForm();">
+          <option value="">Select Wash Type</option>
+          <option value="Internal Wash">Internal Wash</option>
+          <option value="External Wash">External Wash</option>
+          <option value="Full Wash">Full Wash</option>
+        </select>
+        <div id="priceDisplay" class="price-display"></div>
+      </div>
+
+      <div class="form-group">
+        <label>Car Type</label>
+        <select id="carType" onchange="validateForm()">
+          <option value="">Select Car Type</option>
+          <option value="Sedan">Sedan</option>
+          <option value="SUV">SUV</option>
+          <option value="Truck">Truck</option>
+          <option value="Coupe">Coupe</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Wash Date & Time</label>
+        <input type="datetime-local" id="washDateTime" onchange="validateForm()" />
+      </div>
+
+      <div class="form-group">
+        <label>Your Location</label>
+        <input type="text" id="addressInput" placeholder="Enter your address" oninput="validateForm()" />
+        <div class="map-preview" onclick="openMap()">
+          <iframe src="https://www.google.com/maps?q=Jordan&output=embed" frameborder="0" allowfullscreen></iframe>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Extra Services</label>
+        <div class="custom-checkbox">
+          <input type="checkbox" id="tire" class="extras" value="Tire Cleaning" />
+          <label for="tire">Tire Cleaning</label>
+        </div>
+        <div class="custom-checkbox">
+          <input type="checkbox" id="window" class="extras" value="Window Polishing" />
+          <label for="window">Window Polishing</label>
+        </div>
+        <div class="custom-checkbox">
+          <input type="checkbox" id="engine" class="extras" value="Engine Cleaning" />
+          <label for="engine">Engine Cleaning</label>
+        </div>
+      </div>
+
+      <button id="submitBtn" onclick="confirmOrder()" disabled>Submit Order</button>
+      <a href="#" id="whatsappBtn" target="_blank">📲 Send via WhatsApp</a>
+    </div>
+  </div>
+
+  <div id="orderModal" class="modal">
+    <div class="modal-content">
+      <h3>Confirm Your Free Order</h3>
+      <p id="orderDetails"></p>
+      <button onclick="finalizeOrder()">Confirm Order</button>
+    </div>
+  </div>
+
+<script>
+  const priceDisplay = document.getElementById('priceDisplay');
+  const washType = document.getElementById('washType');
+  const addressInput = document.getElementById('addressInput');
+  const submitBtn = document.getElementById('submitBtn');
+  const orderModal = document.getElementById('orderModal');
+  const orderDetails = document.getElementById('orderDetails');
+  const whatsappBtn = document.getElementById('whatsappBtn');
+  const carType = document.getElementById('carType');
+  const washDateTime = document.getElementById('washDateTime');
+
+  function showPrice() {
+    const type = washType.value;
+    let price = 'Price: 0 JD'; // السعر دائمًا 0 لأن هذا عرض مجاني
+
+    priceDisplay.textContent = price;
+  }
+
+  function openMap() {
+    window.open("https://www.google.com/maps?q=Jordan", "_blank");
+  }
+
+  function validateForm() {
+    const wash = washType.value;
+    const address = addressInput.value.trim();
+    const car = carType.value;
+    const dateTime = washDateTime.value;
+
+    const formIsComplete = wash && address && car && dateTime;
+
+    submitBtn.disabled = !formIsComplete;
+
+    if (formIsComplete) {
+      const extras = [...document.querySelectorAll('.extras:checked')]
+        .map(el => el.value)
+        .join(', ') || "None";
+
+      const price = priceDisplay.textContent;
+
+      const message = encodeURIComponent(
+        `Free Car Wash Request:\n` +
+        `Wash Type: ${wash}\n` +
+        `Car Type: ${car}\n` +
+        `Date & Time: ${dateTime}\n` +
+        `Location: ${address}\n` +
+        `Extra Services: ${extras}\n` +
+        `${price}`
+      );
+
+      const whatsappNumber = "962781331072";
+      whatsappBtn.href = `https://wa.me/${whatsappNumber}?text=${message}`;
+      whatsappBtn.style.display = "block";
+    } else {
+      whatsappBtn.style.display = "none";
+    }
+  }
+
+  function confirmOrder() {
+    const wash = washType.value;
+    const address = addressInput.value.trim();
+    const price = priceDisplay.textContent;
+    const car = carType.value;
+    const dateTime = washDateTime.value;
+
+    const extras = [...document.querySelectorAll('.extras:checked')]
+      .map(el => el.value)
+      .join(', ') || "None";
+
+    let details = `
+Wash Type: ${wash}
+Car Type: ${car}
+Date & Time: ${dateTime}
+Location: ${address}
+Extra Services: ${extras}
+${price}
+`;
+
+    orderDetails.textContent = details.trim();
+    orderModal.style.display = 'block';
+  }
+
+  function finalizeOrder() {
+    const wash = washType.value;
+    const extras = [...document.querySelectorAll('.extras:checked')]
+      .map(el => el.value)
+      .join(', ') || "None";
+    const priceText = priceDisplay.textContent;
+    const priceMatch = priceText.match(/(\d+)/);
+    const price = priceMatch ? parseFloat(priceMatch[0]) : 0;
+
+    if (!wash) {
+      alert('Error: Invalid order details. Please try again.');
+      return;
+    }
+
+    const serviceData = {
+      name: `Free Car Wash - ${wash}${extras !== 'None' ? ` (${extras})` : ''}`,
+      price: 0, // السعر دائمًا 0
+      image: 'icon car.png'
+    };
+
+    addToCart(serviceData);
+
+    orderModal.style.display = 'none';
+
+    if (window.parent && window.parent.document.getElementById('serviceModal')) {
+      window.parent.document.getElementById('serviceModal').style.display = 'none';
+      window.parent.document.getElementById('modalIframe').src = '';
+    }
+
+    alert('✅ Your free car wash order has been added to the cart. Thank you 🙌');
+
+    washType.value = '';
+    carType.value = '';
+    washDateTime.value = '';
+    addressInput.value = '';
+    document.querySelectorAll('.extras').forEach(el => el.checked = false);
+    priceDisplay.textContent = '';
+    submitBtn.disabled = true;
+    whatsappBtn.style.display = 'none';
+  }
+
+  function addToCart(service) {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    cart.push(service);
+    localStorage.setItem('cart', JSON.stringify(cart));
+  }
+
+  window.onclick = function(event) {
+    if (event.target == orderModal) {
+      orderModal.style.display = "none";
+    }
+  }
+</script>
+</body>
+</html>
