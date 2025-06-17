@@ -6,262 +6,243 @@
   <title>Employee Dashboard</title>
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Poppins', sans-serif;
-    }
+ body {
+  font-family: 'Poppins', sans-serif;
+  background: #e3f2fd;
+  margin: 0; 
+  padding: 0;
+}
 
-    body {
-      background-color: #e3f2fd;
-      color: #2c3e50;
-    }
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: #004d66;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 9px 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}
 
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      padding: 20px;
-      background-color: #004d66;
-      color: white;
-    }
+.logo img {
+  width: 80px;
+  height: 60px;
+  object-fit: contain;
+}
 
-    .logo {
-      font-size: 24px;
-      font-weight: bold;
-    }
+nav a, .profile-btn {
+  color: #fff;
+  margin-left: 15px;
+  text-decoration: none;
+  cursor: pointer;
+}
 
-    nav {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      align-items: center;
-    }
+main {
+  padding: 20px;
+  min-height: calc(100vh - 80px); /* يأخذ الهيدر بالحسبان تقريبًا */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-    nav a, .profile-btn {
-      text-decoration: none;
-      background: none;
-      border: none;
-      color: white;
-      font-size: 16px;
-      cursor: pointer;
-      transition: color 0.3s ease;
-    }
+.card {
+  background: #fff;
+  border-radius: 8px;
+  padding: 30px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  width: 100%;
+  max-width: 800px;
+}
 
-    nav a:hover, .profile-btn:hover {
-      color: #a6e0f5;
-    }
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
 
-    main {
-      padding: 20px;
-    }
+th, td {
+  padding: 12px 15px;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+}
 
-    .card {
-      background-color: white;
-      border-radius: 12px;
-      padding: 20px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      margin-bottom: 20px;
-    }
+th {
+  background: #004d66;
+  color: #fff;
+}
 
-    .card h3 {
-      font-size: 22px;
-      margin-bottom: 15px;
-      color: #004d66;
-    }
+tr.accepted { background: #c8e6c9; }
+tr.rejected { background: #ffcdd2; }
 
-    .task-list {
-      list-style: none;
-      padding: 0;
-    }
+.action-btn {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-right: 8px;
+  color: #fff;
+}
 
-    .task-item {
-      background-color: #bbdefb;
-      border-radius: 10px;
-      padding: 15px;
-      margin-bottom: 10px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      transition: all 0.3s ease;
-      flex-wrap: wrap;
-    }
+.accept { background: #2e7d32; }
+.reject { background: #c62828; }
 
-    .task-item.completed {
-      background-color: #c8e6c9;
-      color: #1b5e20;
-    }
+.disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
 
-    .task-item span {
-      flex-grow: 1;
-    }
+.no-tasks {
+  text-align: center;
+  padding: 40px;
+  font-size: 18px;
+  color: #555;
+}
 
-    .task-status {
-      font-size: 20px;
-      margin-left: 10px;
-    }
+/* Modal styles */
+.modal {
+  display: none;
+  position: fixed; 
+  top: 0; 
+  left: 0;
+  width: 100%; 
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  justify-content: center;
+  align-items: center;
+}
 
-    .complete-btn {
-      background-color: #004d66;
-      color: white;
-      padding: 8px 14px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background 0.3s ease;
-      margin-left: 10px;
-    }
+.modal-content {
+  background: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  position: relative;
+  width: 400px;
+  max-width: 90%;
+  text-align: center;
+}
 
-    .complete-btn:hover {
-      background-color: #007c99;
-    }
+.close-modal {
+  position: absolute; 
+  top: 10px; 
+  right: 15px;
+  font-size: 24px;
+  cursor: pointer;
+}
 
-    /* Responsive */
-    @media (max-width: 600px) {
-      .task-item {
-        flex-direction: column;
-        align-items: flex-start;
-      }
+.modal img {
+  width: 100px; 
+  height: 100px;
+  border-radius: 50%; 
+  margin-bottom: 10px;
+  border: 3px solid #004d66;
+}
 
-      .complete-btn {
-        margin-top: 10px;
-        margin-left: 0;
-      }
-    }
+.info { 
+  text-align: left; 
+  margin-top: 15px; 
+}
 
-    /* Modal styles - kept from previous */
-    .modal {
-      display: none;
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background-color: rgba(0,0,0,0.5);
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
-    }
+.info div { 
+  margin-bottom: 8px; 
+}
 
-    .modal-content {
-      background: white;
-      padding: 20px;
-      border-radius: 12px;
-      width: 400px;
-      max-width: 90%;
-      text-align: center;
-      position: relative;
-    }
-
-    .modal img {
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      border: 3px solid #004d66;
-      margin-bottom: 10px;
-    }
-
-    .close-modal {
-      position: absolute;
-      right: 15px;
-      top: 10px;
-      font-size: 24px;
-      cursor: pointer;
-      color: #004d66;
-    }
-
-    .info {
-      margin-top: 15px;
-      text-align: left;
-    }
-
-    .info div {
-      margin-bottom: 10px;
-      display: flex;
-      align-items: center;
-    }
-
-    .info i {
-      margin-right: 8px;
-      color: #004d66;
-    }
-
-  </style>
+.info i { 
+  margin-right: 8px; 
+  color: #004d66; 
+}
+</style>
 </head>
 <body>
 
-<header>
-  <div class="logo">Employee Dashboard</div>
-  <nav>
-    <button class="profile-btn" onclick="openModal()">Profile</button>
-    <a href="#"><i class='bx bx-bell'></i> Notifications</a>
-    <a href="#"><i class='bx bx-log-out'></i> Logout</a>
-  </nav>
-</header>
+ <header>
+    <div class="logo">
+      <img src="l1.png" alt="Logo" />
+    </div>
+
+    
+  </header>
+
 
 <main>
   <div class="card">
-    <h3>Assigned Tasks</h3>
-    <ul class="task-list" id="taskList">
-      <!-- Sample Tasks -->
-      <li class="task-item">
-        <span>Deliver fuel to location A</span>
-        <span class="task-status">⏳</span>
-        <button class="complete-btn" onclick="markComplete(this)">Mark as Done</button>
-      </li>
-      <li class="task-item">
-        <span>Oil change for customer B</span>
-        <span class="task-status">⏳</span>
-        <button class="complete-btn" onclick="markComplete(this)">Mark as Done</button>
-      </li>
-      <li class="task-item">
-        <span>Clean mobile station</span>
-        <span class="task-status">⏳</span>
-        <button class="complete-btn" onclick="markComplete(this)">Mark as Done</button>
-      </li>
-    </ul>
+    
+    <div id="noTasks" class="no-tasks">No tasks assigned at the moment.</div>
+    <table id="tasksTable" style="display: none;">
+      <thead>
+        <tr>
+          <th>Task</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody id="taskBody">
+        <!-- Tasks will be loaded here dynamically -->
+      </tbody>
+    </table>
   </div>
 </main>
 
-<!-- Profile Modal -->
-<div class="modal" id="profileModal">
-  <div class="modal-content">
-    <span class="close-modal" onclick="closeModal()">&times;</span>
-    <img src="alaa.jpg" alt="Profile">
-    <h2>Alaa Shorman</h2>
-    <p><strong>Mobile Station Supervisor</strong></p>
-    <div class="info">
-      <div><i class='bx bxs-phone'></i> +962 79 123 4567</div>
-      <div><i class='bx bxs-envelope'></i> alaa.shorman@yahoo.com</div>
-      <div><i class='bx bxs-map'></i> Amman, Jordan</div>
-    </div>
-  </div>
-</div>
+
 
 <script>
-  function openModal() {
-    document.getElementById("profileModal").style.display = "flex";
-  }
+  // لاحقاً هنا ستستدعي البيانات من قاعدة بيانات الأدمن
+  // هنا مثال فارغ جاهز لاستبداله ب API أو Firebase أو AJAX
+  const tasksFromAdmin = []; // في حالة لا توجد Tasks 
+  // const tasksFromAdmin = [ ... ]; // في حالة يوجد Tasks
 
-  function closeModal() {
-    document.getElementById("profileModal").style.display = "none";
-  }
+  const noTasksDiv = document.getElementById('noTasks');
+  const tasksTable = document.getElementById('tasksTable');
+  const taskBody = document.getElementById('taskBody');
 
-  window.onclick = function (e) {
-    if (e.target === document.getElementById("profileModal")) {
-      closeModal();
+  // دالة تعرض الـ Tasks إذا وجدت
+  function loadTasks(tasks) {
+    if (tasks.length === 0) {
+      noTasksDiv.style.display = 'block';
+      tasksTable.style.display = 'none';
+    } else {
+      noTasksDiv.style.display = 'none';
+      tasksTable.style.display = 'table';
+
+      tasks.forEach(task => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${task.description}</td>
+          <td>
+            <button class="action-btn accept" onclick="acceptTask(this)">Accept</button>
+            <button class="action-btn reject" onclick="rejectTask(this)">Reject</button>
+          </td>
+        `;
+        taskBody.appendChild(row);
+      });
     }
-  };
-
-  function markComplete(button) {
-    const taskItem = button.closest('.task-item');
-    const statusIcon = taskItem.querySelector('.task-status');
-    taskItem.classList.add('completed');
-    statusIcon.textContent = '✅';
-    button.disabled = true;
-    button.textContent = 'Completed';
-    button.style.backgroundColor = '#1b5e20';
   }
+
+  function acceptTask(btn) {
+    const row = btn.closest('tr');
+    row.classList.add('accepted');
+    disableActions(row, 'Accepted');
+  }
+
+  function rejectTask(btn) {
+    const row = btn.closest('tr');
+    row.classList.add('rejected');
+    disableActions(row, 'Rejected');
+  }
+
+  function disableActions(row, statusText) {
+    const buttons = row.querySelectorAll('button');
+    buttons.forEach(btn => {
+      btn.disabled = true;
+      btn.classList.add('disabled');
+      btn.textContent = statusText;
+    });
+  }
+
+  
+
+  // ⚡ تحميل المهام (من الـ API مستقبلاً)
+  loadTasks(tasksFromAdmin);
 </script>
 
 </body>
