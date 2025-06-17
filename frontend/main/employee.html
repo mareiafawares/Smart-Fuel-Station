@@ -33,6 +33,24 @@ header {
   object-fit: contain;
 }
 
+/* زر logout مشابه لتصميم أزرار المهام */
+.logout-btn {
+  background-color: #c62828;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+  font-weight: 600;
+  padding: 8px 16px;
+  margin-left: 20px; /* إزاحة شوي لليسار داخل الهيدر */
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.logout-btn:hover {
+  background-color: #a81f1f;
+}
+
 nav a, .profile-btn {
   color: #fff;
   margin-left: 15px;
@@ -42,10 +60,11 @@ nav a, .profile-btn {
 
 main {
   padding: 20px;
-  min-height: calc(100vh - 80px); /* يأخذ الهيدر بالحسبان تقريبًا */
+  min-height: calc(100vh - 80px);
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 80px; /* عشان ما يختفي تحت الهيدر */
 }
 
 .card {
@@ -57,6 +76,7 @@ main {
   max-width: 800px;
 }
 
+/* جدول المهام */
 table {
   width: 100%;
   border-collapse: collapse;
@@ -98,6 +118,32 @@ tr.rejected { background: #ffcdd2; }
   padding: 40px;
   font-size: 18px;
   color: #555;
+}
+
+/* قسم الاسم والايميل والمهام فوق الجملة */
+#userInfo {
+  margin-bottom: 25px;
+  font-size: 1.1rem;
+  color: #004d66;
+}
+
+#userInfo div {
+  margin-bottom: 8px;
+  display: flex;
+  gap: 12px;
+}
+
+#userInfo label {
+  font-weight: 700;
+  width: 80px;
+}
+
+#userInfo input {
+  flex: 1;
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
 }
 
 /* Modal styles */
@@ -152,7 +198,7 @@ tr.rejected { background: #ffcdd2; }
   margin-right: 8px; 
   color: #004d66; 
 }
-</style>
+  </style>
 </head>
 <body>
 
@@ -161,12 +207,18 @@ tr.rejected { background: #ffcdd2; }
       <img src="l1.png" alt="Logo" />
     </div>
 
-    
-  </header>
+    <button class="logout-btn" onclick="logout()">Logout</button>
 
+  </header>
 
 <main>
   <div class="card">
+
+    <div id="userInfo">
+      <div><label>Name:</label><input type="text" placeholder="Enter name" /></div>
+      <div><label>Email:</label><input type="email" placeholder="Enter email" /></div>
+      <div><label>Task:</label><input type="text" placeholder="Enter task" /></div>
+    </div>
     
     <div id="noTasks" class="no-tasks">No tasks assigned at the moment.</div>
     <table id="tasksTable" style="display: none;">
@@ -181,25 +233,15 @@ tr.rejected { background: #ffcdd2; }
       </tbody>
     </table>
   </div>
-
-
-
-
 </main>
 
-
-
 <script>
-  // لاحقاً هنا ستستدعي البيانات من قاعدة بيانات الأدمن
-  // هنا مثال فارغ جاهز لاستبداله ب API أو Firebase أو AJAX
-  const tasksFromAdmin = []; // في حالة لا توجد Tasks 
-  // const tasksFromAdmin = [ ... ]; // في حالة يوجد Tasks
+  const tasksFromAdmin = [];
 
   const noTasksDiv = document.getElementById('noTasks');
   const tasksTable = document.getElementById('tasksTable');
   const taskBody = document.getElementById('taskBody');
 
-  // دالة تعرض الـ Tasks إذا وجدت
   function loadTasks(tasks) {
     if (tasks.length === 0) {
       noTasksDiv.style.display = 'block';
@@ -243,14 +285,12 @@ tr.rejected { background: #ffcdd2; }
     });
   }
 
-  
-
-  // ⚡ تحميل المهام (من الـ API مستقبلاً)
   loadTasks(tasksFromAdmin);
+
+  function logout() {
+    alert('You have been logged out.');
+  }
 </script>
-
-
-
 
 </body>
 </html>

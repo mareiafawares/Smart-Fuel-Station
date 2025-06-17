@@ -182,7 +182,7 @@
       <button class="btn" onclick="showSection('offers')">OFFER</button>
       <button class="btn" onclick="showSection('complaints')">COMPLAINTS</button>
       <button class="btn" onclick="showSection('employee')">EMPLOYEE</button>
-      <button class="btn" onclick="showSection('profile')">ADMIN</button>
+      <button class="btn" onclick="showSection('profile')">LOGOUT</button>
     </nav>
   </header>
 
@@ -247,30 +247,7 @@
     </form>
   </section>
 
-  <!-- Profile Section -->
-  <section id="profile">
-    <h2 style="color:#004d66; margin-bottom: 30px; text-align:center;">Admin</h2>
-
-    <div class="input-row">
-      <label for="profile-name">Name:</label>
-      <input id="profile-name" type="text" placeholder="Enter your name" />
-    </div>
-
-    <div class="input-row">
-      <label for="profile-email">Email:</label>
-      <input id="profile-email" type="email" placeholder="Enter your email" />
-    </div>
-
-    <div class="input-row">
-      <label for="profile-tasks">Tasks:</label>
-      <textarea id="profile-tasks" rows="4" placeholder="Enter your tasks here"></textarea>
-    </div>
-
-    <div class="logout-container">
-      <button class="btn logout-btn" onclick="logout()">Logout</button>
-    </div>
-  </section>
-
+  
   <script>
     // تبديل العرض بين الأقسام
     function showSection(sectionId) {
