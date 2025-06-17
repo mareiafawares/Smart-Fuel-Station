@@ -1,162 +1,163 @@
-<!DOCTYPE html> 
-<html lang="en" dir="ltr"> 
-<head> 
-  <meta charset="UTF-8"> 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-  <title>Main Menu - Smart Fuel Station</title> 
-  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'> 
-  <style> 
-    body { 
-      margin: 0; 
-      font-family: 'Segoe UI', sans-serif; 
-      background: #f0f8ff; 
-      display: flex; 
-      justify-content: center; 
-      align-items: center; 
-      height: 100vh; 
-    } 
- 
-    .menu-box { 
-      background: white; 
-      padding: 30px; 
-      border-radius: 15px; 
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); 
-      width: 100%; 
-      max-width: 400px; 
-      text-align: center; 
-    } 
- 
-    .menu-box h2 { 
-      color: #004d66; 
-      margin-bottom: 20px; 
-    } 
- 
-    .menu-item { 
-      padding: 15px 20px; 
-      color: #333; 
-      font-size: 16px; 
-      cursor: pointer; 
-      display: flex; 
-      justify-content: space-between; 
-      align-items: center; 
-      transition: background 0.3s ease, color 0.3s ease; 
-      border-bottom: 1px solid #eee; 
-    } 
- 
-    .menu-item i { 
-      color: #004d66; 
-      font-size: 20px; 
-    } 
- 
-    .icon-container { 
-      display: flex; 
-      gap: 5px; /* المسافة بين الأيقونات */ 
-      align-items: center; 
-    } 
- 
-    .menu-item:hover { 
-      background: #f0f8ff; 
-      color: #004d66; 
-    } 
- 
-    .menu-item.active { 
-      background: #e6f4ff; 
-      font-weight: bold; 
-      color: #004d66; 
-    } 
- 
-    .footer { 
-      display: flex; 
-      justify-content: center; /* لتوسيط الأزرار */ 
-      gap: 40px; /* المسافة بين الزرين */ 
-      padding: 12px; 
-      background: white; 
-      border-top: 1px solid #eee; 
-      box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05); 
-    } 
- 
-    .footer a { 
-      color: #004d66; 
-      text-align: center; 
-      text-decoration: none; 
-      transition: color 0.3s ease; 
-    } 
- 
-    .footer a.logout { 
-      color: #ff4444; /* لون خاص لـ Logout */ 
-    } 
- 
-    .footer a:hover { 
-      color: #00aabb; 
-    } 
- 
-    .footer a.logout:hover { 
-      color: #cc3333; /* لون hover لـ Logout */ 
-    } 
- 
-    .footer i { 
-      font-size: 26px; 
-      display: block; /* لجعل الأيقونة والنص في أسطر منفصلة */ 
-      margin-bottom: 5px; 
-    } 
- 
-    @media (max-width: 480px) { 
-      .menu-box { 
-        padding: 20px; 
-        max-width: 90%; 
-      } 
- 
-      .menu-item { 
-        font-size: 14px; 
-        padding: 12px 15px; 
-      } 
- 
-      .footer { 
-        gap: 30px; /* تقليل المسافة على الشاشات الصغيرة */ 
-      } 
- 
-      .footer i { 
-        font-size: 22px; 
-      } 
-    } 
-  </style> 
-</head> 
-<body> 
-  <div class="menu-box"> 
-    <h2>Main Menu</h2> 
-    <div class="menu-item" onclick="window.location.href='profile.html'"> 
-      <span>Profile</span> 
-      <div class="icon-container"> 
-        <i class='bx bx-user'></i> 
-        <i class='bx bx-right-arrow-alt'></i> 
-      </div> 
-    </div> 
-    <div class="menu-item" onclick="window.location.href='vehicles.html'"> 
-      <span>Vehicles</span> 
-      <div class="icon-container"> 
-        <i class='bx bx-car'></i> 
-        <i class='bx bx-right-arrow-alt'></i> 
-      </div> 
-    </div> 
- 
-     
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Main Menu - Smart Fuel Station</title>
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f0f8ff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
 
-    <div class="menu-item" onclick="window.location.href='delivery-addresses.html'"> 
-      <span>Delivery Addresses</span> 
-      <div class="icon-container"> 
-        <i class='bx bx-map'></i> 
-        <i class='bx bx-right-arrow-alt'></i> 
-      </div> 
-    </div> 
+    .menu-box {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+    }
 
-  </div> 
- 
-  <script> 
-    function logout() { 
-      if (confirm('Are you sure you want to logout?')) { 
-        window.location.href = '/login'; // Replace with actual login page URL 
-      } 
-    } 
-  </script> 
-</body> 
+    .menu-box h2 {
+      color: #004d66;
+      margin-bottom: 20px;
+    }
+
+    .menu-item {
+      padding: 15px 20px;
+      color: #333;
+      font-size: 16px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background 0.3s ease, color 0.3s ease;
+      border-bottom: 1px solid #eee;
+    }
+
+    .menu-item i {
+      color: #004d66;
+      font-size: 20px;
+    }
+
+    .icon-container {
+      display: flex;
+      gap: 5px; /* المسافة بين الأيقونات */
+      align-items: center;
+    }
+
+    .menu-item:hover {
+      background: #f0f8ff;
+      color: #004d66;
+    }
+
+    .menu-item.active {
+      background: #e6f4ff;
+      font-weight: bold;
+      color: #004d66;
+    }
+
+    .footer {
+      display: flex;
+      justify-content: center; /* لتوسيط الأزرار */
+      gap: 40px; /* المسافة بين الزرين */
+      padding: 12px;
+      background: white;
+      border-top: 1px solid #eee;
+      box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    .footer a {
+      color: #004d66;
+      text-align: center;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer a.logout {
+      color: #ff4444; /* لون خاص لـ Logout */
+    }
+
+    .footer a:hover {
+      color: #00aabb;
+    }
+
+    .footer a.logout:hover {
+      color: #cc3333; /* لون hover لـ Logout */
+    }
+
+    .footer i {
+      font-size: 26px;
+      display: block; /* لجعل الأيقونة والنص في أسطر منفصلة */
+      margin-bottom: 5px;
+    }
+
+    @media (max-width: 480px) {
+      .menu-box {
+        padding: 20px;
+        max-width: 90%;
+      }
+
+      .menu-item {
+        font-size: 14px;
+        padding: 12px 15px;
+      }
+
+      .footer {
+        gap: 30px; /* تقليل المسافة على الشاشات الصغيرة */
+      }
+
+      .footer i {
+        font-size: 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="menu-box">
+    <h2>Main Menu</h2>
+    <div class="menu-item" onclick="window.location.href='profile.html'">
+      <span>Profile</span>
+      <div class="icon-container">
+        <i class='bx bx-user'></i>
+        <i class='bx bx-right-arrow-alt'></i>
+      </div>
+    </div>
+    <div class="menu-item" onclick="window.location.href='vehicles.html'">
+      <span>Vehicles</span>
+      <div class="icon-container">
+        <i class='bx bx-car'></i>
+        <i class='bx bx-right-arrow-alt'></i>
+      </div>
+    </div>
+
+    <div class="menu-item" onclick="window.location.href='delivery-addresses.html'">
+      <span>Delivery Addresses</span>
+      <div class="icon-container">
+        <i class='bx bx-map'></i>
+        <i class='bx bx-right-arrow-alt'></i>
+      </div>
+    </div>
+    <div class="footer">
+      
+      <a href="#" class="logout" onclick="logout()"><i class='bx bx-log-out'></i>Logout</a>
+    </div>
+  </div>
+
+  <script>
+    function logout() {
+      if (confirm('Are you sure you want to logout?')) {
+        window.location.href = '/login'; // Replace with actual login page URL
+      }
+    }
+  </script>
+</body>
 </html>
