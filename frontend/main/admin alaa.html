@@ -115,6 +115,59 @@
     button.delete-btn:hover {
       background-color: #c9302c;
     }
+
+    /* Profile Section Inputs */
+    .input-row {
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .input-row label {
+      min-width: 80px;
+      font-weight: bold;
+      color: #004d66;
+    }
+
+    .input-row input,
+    .input-row textarea {
+      flex: 1;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 14px;
+      font-family: Arial, sans-serif;
+    }
+
+    /* Logout button styled same as other buttons */
+    .logout-btn {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 12px 24px;
+      font-size: 15px;
+      font-weight: bold;
+      background: linear-gradient(135deg, #00aabb, #004d66);
+      color: #fff;
+      border: none;
+      border-radius: 50px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+    }
+
+    .logout-btn:hover {
+      background: linear-gradient(135deg, #004d66, #00aabb);
+      transform: scale(1.05);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Center logout button */
+    .logout-container {
+      text-align: center;
+    }
+
   </style>
 </head>
 <body>
@@ -129,21 +182,20 @@
       <button class="btn" onclick="showSection('offers')">OFFER</button>
       <button class="btn" onclick="showSection('complaints')">COMPLAINTS</button>
       <button class="btn" onclick="showSection('employee')">EMPLOYEE</button>
-    
-
+      <button class="btn" onclick="showSection('profile')">LOGOUT</button>
     </nav>
   </header>
 
   <!-- Services Section -->
   <section id="services" class="active">
     <h2 style="color:#004d66; margin-bottom: 20px;">Manage Services</h2>
-    
+    <!-- محتوى الخدمات -->
   </section>
 
   <!-- Offers Section -->
   <section id="offers">
     <h2 style="color:#004d66; margin-bottom: 20px;">Manage Offers</h2>
-    
+    <!-- محتوى العروض -->
   </section>
 
   <!-- Complaints Section -->
@@ -164,41 +216,38 @@
     </table>
   </section>
 
+  <!-- Employee Section -->
+  <section id="employee">
+    <h2 style="color:#004d66; margin-bottom: 30px; text-align:center;">Employee List</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+        </tr>
+      </thead>
+      <tbody id="employee-tbody">
+        <!-- بيانات الموظفين سترتبط من قاعدة البيانات -->
+      </tbody>
+    </table>
 
-<!-- Employee Section -->
-<section id="employee">
+    <h2 style="color:#004d66; margin-bottom: 20px; margin-top: 50px; text-align:center;">Send Task To Employee</h2>
 
-  <h2 style="color:#004d66; margin-bottom: 30px; text-align:center;">Employee List</h2>
-  <table>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Email</th>
-      </tr>
-    </thead>
-    <tbody id="employee-tbody">
-      <!-- بيانات الموظفين سترتبط من قاعدة البيانات -->
-    </tbody>
-  </table>
+    <form id="taskForm" style="margin-bottom: 30px;">
+      <label for="email" style="display:block; margin-bottom:8px;">Select Employee Email:</label>
+      <select id="email" required style="padding:10px; width:100%; margin-bottom:20px;">
+        <option value="">-- Select Email --</option>
+        <!-- يتم تعبئة الإيميلات من قاعدة البيانات لاحقاً -->
+      </select>
 
-  <h2 style="color:#004d66; margin-bottom: 20px; margin-top: 50px; text-align:center;">Send Task To Employee</h2>
+      <label for="task" style="display:block; margin-bottom:8px;">Task:</label>
+      <textarea id="task" rows="4" required style="padding:10px; width:100%; margin-bottom:20px;"></textarea>
 
-  <form id="taskForm" style="margin-bottom: 30px;">
-    <label for="email" style="display:block; margin-bottom:8px;">Select Employee Email:</label>
-    <select id="email" required style="padding:10px; width:100%; margin-bottom:20px;">
-      <option value="">-- Select Email --</option>
-      <!-- يتم تعبئة الإيميلات من قاعدة البيانات لاحقاً -->
-    </select>
+      <button type="submit" class="btn">Send Task</button>
+    </form>
+  </section>
 
-    <label for="task" style="display:block; margin-bottom:8px;">Task:</label>
-    <textarea id="task" rows="4" required style="padding:10px; width:100%; margin-bottom:20px;"></textarea>
-
-    <button type="submit" class="btn">Send Task</button>
-  </form>
-
-</section>
-
-
+  
   <script>
     // تبديل العرض بين الأقسام
     function showSection(sectionId) {
@@ -219,34 +268,28 @@
         }
       }
     });
+
+    // إرسال المهمة (حاليا فقط وهمي)
+    document.getElementById('taskForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const email = document.getElementById('email').value;
+      const task = document.getElementById('task').value;
+
+      if(email && task) {
+        alert(`Task sent to ${email}:\n\n${task}`);
+
+        // هون بالمستقبل بتحط كود الإرسال الحقيقي للسيرفر أو الإيميل
+        // مثل استخدام backend: Django, PHP mailer, NodeJS, إلخ
+      }
+    });
+
+    // وظيفة تسجيل الخروج (dummy)
+    function logout() {
+      alert('You have been logged out.');
+      // هنا يمكن إضافة كود تسجيل الخروج الفعلي
+    }
   </script>
 
-  <script>
-  // تبديل العرض بين الأقسام
-  function showSection(sectionId) {
-    document.querySelectorAll('section').forEach(section => {
-      section.classList.remove('active');
-    });
-    document.getElementById(sectionId).classList.add('active');
-  }
-
-  // إرسال المهمة (حاليا فقط وهمي)
-  document.getElementById('taskForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    const email = document.getElementById('email').value;
-    const task = document.getElementById('task').value;
-
-    if(email && task) {
-      alert(`Task sent to ${email}:\n\n${task}`);
-      
-      // هون بالمستقبل بتحط كود الإرسال الحقيقي للسيرفر أو الإيميل
-      // مثل استخدام backend: Django, PHP mailer, NodeJS, إلخ
-    }
-  });
-</script>
-
-</script>
 </body>
 </html>
-

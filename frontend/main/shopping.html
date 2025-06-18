@@ -5,19 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Shopping Cart</title>
     <style>
-      /* General Styles */
       body {
         font-family: "Poppins", sans-serif;
-        background-color: #e3f2fd; /* Light blue gradient */
+        background-color: #e3f2fd;
         margin: 0;
         padding: 0;
-        color: #2c3e50; /* Dark blue text */
+        color: #2c3e50;
       }
 
       .cart-container {
         max-width: 600px;
         margin: 50px auto;
-        background: #ffffff; /* White background */
+        background: #ffffff;
         padding: 30px;
         box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         border-radius: 12px;
@@ -26,14 +25,8 @@
 
       h1 {
         font-size: 24px;
-        color: #004d66; /* Medium blue for heading */
+        color: #004d66;
         margin-bottom: 20px;
-      }
-
-      p.empty-cart {
-        font-size: 16px;
-        color: #455a64; /* Slightly darker blue-grey */
-        margin-top: 20px;
       }
 
       .empty-cart img {
@@ -41,21 +34,16 @@
         margin-top: 20px;
       }
 
-      /* Product Card Design */
       .product-card {
         display: flex;
         justify-content: space-between;
         align-items: center;
         padding: 15px;
-        background: linear-gradient(
-          135deg,
-          #e3f2fd,
-          #bbdefb
-        ); /* Gradient background */
+        background: linear-gradient(135deg, #e3f2fd, #bbdefb);
         border-radius: 8px;
         margin-bottom: 15px;
         position: relative;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
       }
 
       .product-card img {
@@ -74,12 +62,12 @@
       .product-details h3 {
         font-size: 16px;
         margin: 0;
-        color: #004d66; /* Medium blue */
+        color: #004d66;
       }
 
       .product-details p {
         font-size: 14px;
-        color: #455a64; /* Slightly darker blue-grey */
+        color: #455a64;
         margin: 5px 0 0;
       }
 
@@ -98,68 +86,39 @@
         color: #d32f2f;
       }
 
-      .quantity-control {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        margin-top: 10px;
-      }
-
-      .quantity-control button {
-        background: #004d66; /* Medium blue */
-        color: white;
-        border: none;
-        padding: 5px 10px;
-        cursor: pointer;
-        border-radius: 4px;
-        font-size: 14px;
-      }
-
-      .quantity-control input {
-        width: 50px;
-        text-align: center;
-        border: 1px solid #90caf9; /* Light blue border */
-        border-radius: 4px;
-        background: #ffffff; /* White background */
-        color: #004d66; /* Medium blue text */
-      }
-
-      /* Total Price Section */
       .total-price {
         display: flex;
         justify-content: space-between;
         align-items: center;
         margin-bottom: 20px;
         font-size: 18px;
-        color: #004d66; /* Medium blue */
+        color: #004d66;
       }
 
       .total-price span {
         font-weight: bold;
       }
 
-      /* Place Order Button */
       .place-order-btn {
-        display: none; /* Hidden by default */
-        width: 150px; /* Smaller size */
+        display: none;
+        width: 150px;
         padding: 10px;
-        background: linear-gradient(135deg, #00aabb, #004d66); /* Gradient */
+        background: linear-gradient(135deg, #00aabb, #004d66);
         color: white;
         border: none;
-        border-radius: 25px; /* Rounded corners */
+        border-radius: 25px;
         font-size: 16px;
         font-weight: bold;
         cursor: pointer;
         transition: transform 0.3s ease, box-shadow 0.3s ease;
-        margin: 20px auto; /* Centered */
+        margin: 20px auto;
       }
 
       .place-order-btn:hover {
-        transform: scale(1.1); /* Scale up on hover */
+        transform: scale(1.1);
         box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
       }
 
-      /* Checkout Popup */
       .popup {
         display: none;
         position: fixed;
@@ -224,37 +183,23 @@
     <div class="cart-container">
       <h1>Shopping Cart</h1>
 
-      <!-- Empty Cart Message -->
       <div class="empty-cart-message" id="emptyCartMessage">
-        <img
-          src="https://img.icons8.com/ios-filled/100/shopping-cart.png"
-          alt="Empty Cart"
-        />
+        <img src="https://img.icons8.com/ios-filled/100/shopping-cart.png" alt="Empty Cart" />
         <p>Your cart is empty. Add products to get started!</p>
       </div>
 
-      <!-- Cart Items Section -->
-      <div class="cart-items" id="cartItems" style="display: none">
-        <!-- Products will be dynamically added here -->
-      </div>
+      <div class="cart-items" id="cartItems" style="display: none"></div>
 
-      <!-- Total Price -->
       <div class="total-price" id="totalPriceSection" style="display: none">
         <span>Total:</span>
         <span id="totalPrice">0 JD</span>
       </div>
 
-      <!-- Place Order Button -->
-      <button
-        class="place-order-btn"
-        id="placeOrderBtn"
-        onclick="openCheckoutPopup()"
-      >
+      <button class="place-order-btn" id="placeOrderBtn" onclick="openCheckoutPopup()">
         Place Order
       </button>
     </div>
 
-    <!-- Checkout Popup -->
     <div class="overlay" id="overlay"></div>
     <div class="popup" id="checkoutPopup">
       <h2>Select Payment Method</h2>
@@ -275,7 +220,6 @@
     </div>
 
     <script>
-      // Load cart items from localStorage
       function loadCart() {
         const cartItems = document.getElementById("cartItems");
         const emptyCartMessage = document.getElementById("emptyCartMessage");
@@ -288,14 +232,14 @@
           emptyCartMessage.style.display = "block";
           cartItems.style.display = "none";
           totalPriceSection.style.display = "none";
-          placeOrderBtn.style.display = "none"; // Hide the button
+          placeOrderBtn.style.display = "none";
           return;
         }
 
         emptyCartMessage.style.display = "none";
         cartItems.style.display = "block";
         totalPriceSection.style.display = "flex";
-        placeOrderBtn.style.display = "block"; // Show the button
+        placeOrderBtn.style.display = "block";
         cartItems.innerHTML = "";
 
         let total = 0;
@@ -304,57 +248,21 @@
           const cartItem = document.createElement("div");
           cartItem.classList.add("product-card");
           cartItem.innerHTML = `
-                    <img src="${item.image}" alt="${item.name}">
-                    <div class="product-details">
-                        <h3>${item.name}</h3>
-                        <p>Price: ${item.price} JD</p>
-                        <div class="quantity-control">
-                            <button onclick="changeQuantity(${index}, -1)">-</button>
-                            <input type="number" value="${
-                              item.quantity || 1
-                            }" min="1" onchange="updateQuantity(${index}, this.value)">
-                            <button onclick="changeQuantity(${index}, 1)">+</button>
-                        </div>
-                        <p>Total: <span id="total-${index}">${(
-            item.price * (item.quantity || 1)
-          ).toFixed(2)} JD</span></p>
-                    </div>
-                    <button class="delete-btn" onclick="deleteItem(${index})" aria-label="Delete ${
-            item.name
-          }">×</button>
-                `;
+            <img src="${item.image}" alt="${item.name}">
+            <div class="product-details">
+              <h3>${item.name}</h3>
+              <p>Price: ${item.price} JD</p>
+              <p>Quantity: ${item.quantity || 1}</p>
+              <p>Total: ${(item.price * (item.quantity || 1)).toFixed(2)} JD</p>
+            </div>
+            <button class="delete-btn" onclick="deleteItem(${index})" aria-label="Delete ${item.name}">×</button>
+          `;
           cartItems.appendChild(cartItem);
 
           total += item.price * (item.quantity || 1);
         });
 
         totalPriceElement.textContent = `${total.toFixed(2)} JD`;
-      }
-
-      // Change quantity of a product
-      function changeQuantity(index, amount) {
-        let cart = JSON.parse(localStorage.getItem("cart")) || [];
-        if (cart[index].quantity + amount > 0) {
-          cart[index].quantity += amount;
-          localStorage.setItem("cart", JSON.stringify(cart));
-          updateTotal(index, cart[index].price, cart[index].quantity);
-        }
-        loadCart();
-      }
-
-      function updateQuantity(index, value) {
-        let cart = JSON.parse(localStorage.getItem("cart")) || [];
-        cart[index].quantity = parseInt(value);
-        localStorage.setItem("cart", JSON.stringify(cart));
-        updateTotal(index, cart[index].price, cart[index].quantity);
-        loadCart();
-      }
-
-      function updateTotal(index, price, quantity) {
-        const totalElement = document.getElementById(`total-${index}`);
-        if (totalElement) {
-          totalElement.textContent = `${(price * quantity).toFixed(2)} JD`;
-        }
       }
 
       function deleteItem(index) {
@@ -383,18 +291,14 @@
         }
 
         if (method === "cash") {
-          // Calculate total
           let total = 0;
           cart.forEach((item) => {
             total += item.price * (item.quantity || 1);
           });
 
-          // Generate invoice number and date
-          const invoiceNumber =
-            "INV-" + Math.floor(100000 + Math.random() * 900000);
+          const invoiceNumber = "INV-" + Math.floor(100000 + Math.random() * 900000);
           const date = new Date().toLocaleString();
 
-          // Create order object
           const order = {
             invoiceNumber: invoiceNumber,
             date: date,
@@ -405,34 +309,18 @@
             total: total.toFixed(2),
           };
 
-          // Save to previousOrders
-          let previousOrders =
-            JSON.parse(localStorage.getItem("previousOrders")) || [];
+          let previousOrders = JSON.parse(localStorage.getItem("previousOrders")) || [];
           previousOrders.push(order);
-          localStorage.setItem(
-            "previousOrders",
-            JSON.stringify(previousOrders)
-          );
+          localStorage.setItem("previousOrders", JSON.stringify(previousOrders));
 
-          // Clear cart
           localStorage.removeItem("cart");
 
-          // Show alert and close popup
-          alert(
-            "Your order has been successfully placed with Cash on Delivery!"
-          );
+          alert("Your order has been successfully placed with Cash on Delivery!");
           closeCheckoutPopup();
-          // Removed: window.location.href = 'my order.html';
-          loadCart(); // Refresh cart display
+          loadCart();
         } else {
-          // For wallet or card, redirect to Payment.html with method
           window.location.href = `Payment.html?method=${method}`;
         }
-      }
-
-      function clearCart() {
-        localStorage.removeItem("cart");
-        loadCart();
       }
 
       window.addEventListener("storage", (event) => {
